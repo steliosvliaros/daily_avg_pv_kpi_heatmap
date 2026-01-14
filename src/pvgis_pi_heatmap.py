@@ -191,13 +191,18 @@ def compute_pi_anomaly(
     # If data is outside this range, map to the nearest supported year
     year_offset = 0
     if end_year > 2023:
-        # Data is in future/recent years, map to 2023
-        year_offset = start_year - 2023
-        start_year, end_year = 2023, 2023
+        # Data is in future/recent years, map back to PVGIS range
+        year_offset = start_year - 2005  # Map start to 2005
+        start_year = 2005
+        # Calculate how many years of data we need
+        data_span = end_year - date_min.year
+        end_year = min(2023, start_year + data_span)
     elif start_year < 2005:
         # Data is too old, map to 2005
         year_offset = start_year - 2005
-        start_year, end_year = 2005, 2005
+        data_span = end_year - date_min.year
+        start_year = 2005
+        end_year = min(2023, start_year + data_span)
     
     # Adjust date_min and date_max for PVGIS queries (make them UTC aware for slicing)
     pvgis_date_min = pd.to_datetime(date_min - pd.DateOffset(years=year_offset)).tz_localize('UTC')
