@@ -11,3 +11,5 @@ pvgis_cache/
 # OS/editor
 .vscode/
 .DS_Store
+
+.pdf
