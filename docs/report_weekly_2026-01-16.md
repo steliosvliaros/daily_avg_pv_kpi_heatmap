@@ -89,12 +89,34 @@ Detailed view of recent performance for January 2026.
 
 ---
 
+## 5. Month-to-Date Revenue Analysis by Year
+
+Year-over-year revenue comparison for January 1-16 (current month-to-date period).
+
+![Month-to-Date Revenue by Year](../plots/revenue_by_year.png)
+
+**Key Observations:**
+- 2023 shows the highest month-to-date revenue (€1,890)
+- 2021 and 2024 performed consistently above average
+- 2020 shows lowest performance (€928) - early year ramp-up period
+- Average revenue: €1,330 per month-to-date period
+- Overall growth trend: 36.72% from 2020 to 2025 (€927 → €1,268)
+
+**Financial Metrics (at €0.2/kWh):**
+- Total Historical Revenue: €7,981.12
+- Average Annual Revenue: €45,036.52
+- Revenue Volatility (Std Dev): €317.12
+- Coefficient of Variation: 23.84% (moderate consistency)
+
+---
+
 ## Next Steps
 
 - [ ] Detailed root cause analysis for underperforming parks
 - [ ] Validation of data quality issues
 - [ ] Update metadata with actual park configurations
 - [ ] Implement automated alerting for PI < threshold
+- [ ] Continue monitoring revenue trends for seasonal patterns
 
 ---
 
