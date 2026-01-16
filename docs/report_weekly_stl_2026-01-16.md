@@ -94,3 +94,23 @@ This report presents a comprehensive time series decomposition and degradation a
 
 ### Model Parameters
 - Seasonal Period: 365 days
+- Robust Fitting: Enabled
+- Anomaly Threshold: -3.0 (Z-score)
+- Minimum Consecutive Days: 2
+- Log Transformation: Not applied
+
+### Statistical Metrics
+- **Trend Slope:** 1.263592e-02 kWh/day
+- **Trend Intercept:** 733.17 kWh
+- **R² (Trend Fit):** 0.0769
+- **Median Residual:** 0 (by definition)
+- **MAD (Residuals):** 48.44 kWh
+
+---
+
+### References
+
+- Cleveland, R. B., Cleveland, W. S., McRae, J. E., & Terpenning, I. (1990). STL: A seasonal-trend decomposition procedure based on loess. *Journal of Official Statistics*, 6(1), 3-73.
+- Leys, C., Ley, C., Klein, O., Bernard, P., & Licata, L. (2013). Detecting outliers: Do not use standard deviation around the mean, use absolute deviation around the median. *Journal of Experimental Social Psychology*, 49(4), 764-766.
+
+*Report generated on 2026-01-16 10:12:57*
