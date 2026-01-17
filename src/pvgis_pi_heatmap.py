@@ -13,13 +13,14 @@ from tqdm import tqdm
 
 # ----------------------------
 # Header parsing: extract kWp from your park column header
-# Supports: "4866kWp", "176 KWp", "0,45MW", "993 Kwp", "993 KWP", etc.
+# Supports: "4866kWp", "176 KWp", "0,45MW", "993 Kwp", "993 KWP", "176_kWp", etc.
 # ----------------------------
-_KWP_RE = re.compile(r"(?P<num>\d+(?:[.,]\d+)?)\s*(?P<unit>mw|kw(?:p)?)\b", re.IGNORECASE)
+_KWP_RE = re.compile(r"(?P<num>\d+(?:[.,]\d+)?)[\s_]*(?P<unit>mw|kw(?:p)?)(?=_|\s|$|\]|[^\w])", re.IGNORECASE)
 
 def parse_kwp_from_header(col: str, default: float = 100.0) -> float:
     """
     Extract kWp/kW/MW from column header.
+    Handles both space-separated and underscore-separated formats.
     If parsing fails, returns default value (100.0 kWp).
     """
     bracket = re.search(r"\[(.*?)\]", col)
