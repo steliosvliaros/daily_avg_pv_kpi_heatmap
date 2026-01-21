@@ -231,10 +231,15 @@ def compute_pi_anomaly(
         exp_raw.index = exp_raw.index + pd.DateOffset(years=year_offset)
         # Convert to naive datetime for slicing
         exp_raw.index = exp_raw.index.tz_localize(None) if exp_raw.index.tz is not None else exp_raw.index
+        # Remove duplicates, keeping the first occurrence
+        exp_raw = exp_raw[~exp_raw.index.duplicated(keep='first')]
         exp = exp_raw.loc[date_min:date_max]
         expected[col] = exp
 
-    exp_df = pd.DataFrame(expected).reindex(daily_df.index)
+    # Build DataFrame from expected series and reindex to match daily_df.index
+    # Use pd.concat instead of pd.DataFrame() to properly handle Series with different indices
+    exp_df = pd.concat(expected, axis=1)
+    exp_df = exp_df.reindex(daily_df.index)
 
     pi = daily_df / exp_df
     pi = pi.replace([np.inf, -np.inf], np.nan)
