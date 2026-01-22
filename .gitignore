@@ -3,10 +3,16 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# Local data & outputs
-data/
-outputs/
-pvgis_cache/
+# Local data & outputs (keep parquet files tracked)
+data/**
+outputs/**
+pvgis_cache/**
+!data/**/*.parquet
+!outputs/**/*.parquet
+!pvgis_cache/**/*.parquet
+!data/.gitkeep
+!outputs/.gitkeep
+!pvgis_cache/.gitkeep
 
 # OS/editor
 .vscode/
