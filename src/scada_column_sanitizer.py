@@ -178,13 +178,27 @@ class ScadaColumnSanitizer:
 
         park_snake = _snake_case_sql(park_name_clean, prefix_if_starts_digit="p_")
         rest_snake = _snake_case_sql(rest_clean, prefix_if_starts_digit="m_")
-        unit_snake = _snake_case_sql(unit, prefix_if_starts_digit="u_")
+        
+        # Handle special cases for units BEFORE converting to snake_case:
+        # - If no unit found, default to "num" (numeric value)
+        # - If unit is percentage-related, use "pct"
+        unit_lower = unit.lower().strip()
+        if not unit_lower or unit_lower == "":
+            unit_snake = "num"
+        elif unit_lower in ("%", "percent", "percentage", "pct"):
+            unit_snake = "pct"
+        else:
+            # Convert other units to snake_case
+            unit_snake = _snake_case_sql(unit, prefix_if_starts_digit="u_")
+            # If it's empty after conversion, use "num"
+            if not unit_snake or unit_snake == "u_":
+                unit_snake = "num"
 
         # Abbreviate long tokens to reduce identifier length and minimize hashing
         # DON'T abbreviate park_snake if it contains capacity info - that will be replaced anyway
         park_snake = _abbreviate_snake_case(park_snake, max_len=4)
         rest_snake = _abbreviate_snake_case(rest_snake, max_len=4)
-        # Note: unit_snake is abbreviated but kwp token is formatted separately
+        # Note: unit_snake is already processed above
 
         # Build parts list in order, but we'll ensure unit token is preserved
         parts: List[str] = []
@@ -196,9 +210,9 @@ class ScadaColumnSanitizer:
             parts.append(kwp_token)
         if rest_snake:
             parts.append(rest_snake)
-        unit_token = f"u_{unit_snake}" if unit_snake else ""
-        if unit_token:
-            parts.append(unit_token)
+        # Always add unit token (now defaults to "num" if empty)
+        unit_token = f"u_{unit_snake}" if not unit_snake.startswith("u_") else unit_snake
+        parts.append(unit_token)
 
         joiner = "__"
 
@@ -214,56 +228,83 @@ class ScadaColumnSanitizer:
                 return h[:max_len]
             return f"{text[:keep]}_{h}"
 
-        # Compose identifier and enforce Postgres 63-char limit without dropping unit token
+        # Compose identifier and enforce Postgres 60-char limit ALWAYS preserving unit token
         identifier = joiner.join(parts) if parts else "col"
-        max_len = 63
+        max_len = 60  # PostgreSQL identifier limit
+        
         if len(identifier) > max_len:
-            # First, try shortening the measurement (rest_snake)
-            if rest_snake:
-                # Recompute allowed length for rest_snake
-                other_parts = []
-                if park_snake:
-                    other_parts.append(park_snake)
-                if kwp is not None:
-                    other_parts.append(_format_kwp_snake(kwp))
-                if unit_token:
-                    other_parts.append(unit_token)
-                # separators between parts count as len(joiner)
-                num_parts = len(other_parts) + (1 if rest_snake else 0)
-                other_len = sum(len(p) for p in other_parts) + len(joiner) * (num_parts - 1)
-                allowed_rest = max_len - other_len
-                if allowed_rest > 0:
-                    rest_snake_short = _shorten_with_hash(rest_snake, allowed_rest)
+            # Strategy: preserve unit_token (always present now) and kwp, shorten rest_snake first, then park_snake
+            # Calculate fixed length (kwp token + unit token)
+            fixed_parts = []
+            if kwp is not None:
+                fixed_parts.append(_format_kwp_snake(kwp))
+            # unit_token is always present now
+            fixed_parts.append(unit_token)
+            
+            # Count joiners: we'll have (park + kwp + rest + unit) parts
+            num_total_parts = sum([1 if park_snake else 0, 1 if kwp is not None else 0, 
+                                   1 if rest_snake else 0, 1])  # unit always present
+            joiner_len = len(joiner) * (num_total_parts - 1)
+            fixed_len = sum(len(p) for p in fixed_parts)
+            
+            # Available space for park and rest
+            available = max_len - fixed_len - joiner_len
+            
+            # Distribute space: try to keep reasonable lengths for park and rest
+            # Priority: rest_snake gets more space (it's the measurement), park gets shortened first
+            if park_snake and rest_snake:
+                # Split available space: give more to rest
+                rest_target = int(available * 0.6)
+                park_target = available - rest_target
+                
+                if rest_target > len(rest_snake):
+                    # rest doesn't need shortening
+                    park_target = available - len(rest_snake)
+                    rest_snake_short = rest_snake
                 else:
-                    rest_snake_short = _shorten_with_hash(rest_snake, 12)
-                # Rebuild parts with shortened rest
+                    rest_snake_short = _shorten_with_hash(rest_snake, max(8, rest_target))
+                
+                if park_target > len(park_snake):
+                    park_snake_short = park_snake
+                else:
+                    park_snake_short = _shorten_with_hash(park_snake, max(8, park_target))
+                
+                # Rebuild parts with shortened versions
                 parts = []
-                if park_snake:
-                    parts.append(park_snake)
+                parts.append(park_snake_short)
                 if kwp is not None:
                     parts.append(_format_kwp_snake(kwp))
                 parts.append(rest_snake_short)
-                if unit_token:
-                    parts.append(unit_token)
+                parts.append(unit_token)  # always present
                 identifier = joiner.join(parts)
-
-            # If still too long, shorten the park name as well
-            if len(identifier) > max_len and park_snake:
-                # Recompute allowed length for park_snake with current parts
-                other_parts = parts.copy()
-                # Find index of park_snake
-                try:
-                    idx = other_parts.index(park_snake)
-                except ValueError:
-                    idx = -1
-                if idx != -1:
-                    tmp_parts = other_parts[:]
-                    tmp_parts.pop(idx)
-                    other_len = sum(len(p) for p in tmp_parts) + len(joiner) * (len(tmp_parts))
-                    allowed_park = max_len - other_len
-                    park_snake_short = _shorten_with_hash(park_snake, max(12, allowed_park))
-                    parts[idx] = park_snake_short
-                    identifier = joiner.join(parts)
+                
+            elif rest_snake and not park_snake:
+                # Only rest needs shortening
+                rest_target = available
+                if rest_target < len(rest_snake):
+                    rest_snake_short = _shorten_with_hash(rest_snake, max(8, rest_target))
+                else:
+                    rest_snake_short = rest_snake
+                parts = []
+                if kwp is not None:
+                    parts.append(_format_kwp_snake(kwp))
+                parts.append(rest_snake_short)
+                parts.append(unit_token)  # always present
+                identifier = joiner.join(parts)
+                
+            elif park_snake and not rest_snake:
+                # Only park needs shortening
+                park_target = available
+                if park_target < len(park_snake):
+                    park_snake_short = _shorten_with_hash(park_snake, max(8, park_target))
+                else:
+                    park_snake_short = park_snake
+                parts = []
+                parts.append(park_snake_short)
+                if kwp is not None:
+                    parts.append(_format_kwp_snake(kwp))
+                parts.append(unit_token)  # always present
+                identifier = joiner.join(parts)
 
         identifier = self._make_unique(identifier)
         return identifier
