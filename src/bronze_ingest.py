@@ -94,9 +94,10 @@ class Config:
 # Patterns
 # -----------------------------
 
-# park__measurement__u_unit  (unit optional)
-COL_RE = re.compile(r"^(?P<park>.+?)__(?P<meas>.+?)(?:__(?P<unit>u_[a-z0-9_]+))?$")
-CAP_KWP_RE = re.compile(r"_(?P<cap>\d+(?:\.\d+)?)kwp$")
+# park_id__capacity__measurement__u_unit  (unit optional)
+# Example: p_4e_ener_liko__176kwp__pcc_curr_thd_r_of_neut__u_pct
+# Groups: park, cap, meas, unit
+COL_RE = re.compile(r"^(?P<park>.+?)__(?P<cap>\d+(?:\.\d+)?kwp)__(?P<meas>.+?)(?:__(?P<unit>u_[a-z0-9_]+))?$")
 
 
 # -----------------------------
@@ -321,9 +322,10 @@ def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_fi
     long_df["signal_name"] = extracted["meas"]
     long_df["unit"] = extracted["unit"]
 
-    # Capacity from park token suffix (optional)
-    cap = extracted["park"].str.extract(CAP_KWP_RE)["cap"]
-    long_df["park_capacity_kwp"] = pd.to_numeric(cap, errors="coerce")
+    # Capacity from the capacity token (e.g., "176kwp")
+    # Extract just the numeric part, removing the "kwp" suffix
+    cap_str = extracted["cap"].str.replace(r"kwp$", "", regex=True)
+    long_df["park_capacity_kwp"] = pd.to_numeric(cap_str, errors="coerce")
 
     # Determine interval_start_date for daily values
     ts_local_series = pd.to_datetime(long_df["ts_local"])
