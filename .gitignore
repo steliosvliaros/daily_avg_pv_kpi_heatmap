@@ -3,16 +3,17 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# Local data & outputs (keep parquet files tracked)
+# Local data & outputs (exclude all data, keep only structure)
 data/**
 outputs/**
 pvgis_cache/**
-!data/**/*.parquet
-!outputs/**/*.parquet
-!pvgis_cache/**/*.parquet
 !data/.gitkeep
 !outputs/.gitkeep
 !pvgis_cache/.gitkeep
+
+# Parquet files (never track, they're generated during ingestion)
+*.parquet
+**/*.parquet
 
 # OS/editor
 .vscode/
