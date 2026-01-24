@@ -46,17 +46,25 @@ def _strip_leading_park_tokens(park_name: str, rest: str) -> str:
             return False
         if re.fullmatch(r"\d+(?:\.\d+)?", token):
             return True
+        if re.fullmatch(r"\d+(?:\.\d+)?(kwp|kw|mw|mwp)", token):
+            return True
         return token in ("kwp", "kw", "mw", "mwp")
 
     park_tokens = [t for t in re.split(r"[^A-Za-z0-9]+", park_name.lower()) if t]
+    park_concat = "".join(park_tokens)
     rest_tokens = rest.split()
     rest_norm = [_normalize_token(t) for t in rest_tokens]
 
     if not park_tokens or not rest_tokens:
         return rest
 
+    if park_concat and rest_norm and rest_norm[0].startswith(park_concat):
+        trimmed = " ".join(rest_tokens[1:]).strip()
+        return trimmed
+
     i = 0
     j = 0
+    matched = ""
     while i < len(rest_tokens) and j < len(park_tokens):
         token = rest_norm[i]
         if not token:
@@ -72,6 +80,20 @@ def _strip_leading_park_tokens(park_name: str, rest: str) -> str:
         break
 
     if j == len(park_tokens) and i > 0:
+        trimmed = " ".join(rest_tokens[i:]).strip()
+        return trimmed
+
+    # Fallback: allow contiguous match across tokens (ignoring capacity tokens)
+    i = 0
+    while i < len(rest_tokens) and matched != park_concat:
+        token = rest_norm[i]
+        i += 1
+        if not token or _is_capacity_token(token):
+            continue
+        matched += token
+        if not park_concat.startswith(matched):
+            break
+    if matched == park_concat:
         trimmed = " ".join(rest_tokens[i:]).strip()
         return trimmed
 

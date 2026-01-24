@@ -16,11 +16,12 @@ class EdaConfig:
     output_dir: Optional[Path] = None
     max_units: int = 8
     max_signals: int = 12
-    max_parks: int = 9
+    max_parks: Optional[int] = None
     grid_cols: int = 3
     focus_signal: Optional[str] = None
     focus_unit: Optional[str] = None
     focus_signals: Optional[List[str]] = None
+    plot_kinds: Optional[List[str]] = None
     max_days: Optional[int] = 120
     max_xticks: int = 12
     smooth_window: int = 21
@@ -206,21 +207,20 @@ def _select_focus_pairs(
         signal = str(focus_signal).strip().lower()
         if focus_unit:
             return [(signal, str(focus_unit).strip().lower())]
-        return [(signal, _select_unit_for_signal(df, signal))]
+        return [(signal, None)]
 
     if focus_signals:
         pairs = []
         for sig in focus_signals:
             signal = str(sig).strip().lower()
-            unit = str(focus_unit).strip().lower() if focus_unit else _select_unit_for_signal(df, signal)
+            unit = str(focus_unit).strip().lower() if focus_unit else None
             pairs.append((signal, unit))
         return pairs
 
     signals = df["signal_name"].value_counts().head(max_signals).index.tolist()
     pairs = []
     for signal in signals:
-        unit = _select_unit_for_signal(df, signal)
-        pairs.append((signal, unit))
+        pairs.append((signal, None))
     return pairs
 
 
@@ -228,7 +228,7 @@ def _focus_subset(
     df: pd.DataFrame,
     focus_signal: Optional[str],
     focus_unit: Optional[str],
-    max_parks: int,
+    max_parks: Optional[int],
 ) -> Tuple[pd.DataFrame, Optional[str], Optional[str], List[str]]:
     signal, unit = _select_focus_pair(df, focus_signal, focus_unit)
     sub = df.copy()
@@ -238,7 +238,10 @@ def _focus_subset(
         sub = sub[sub["unit"] == unit]
     if sub.empty:
         return sub, signal, unit, []
-    parks = sub["park_id"].value_counts().head(max_parks).index.tolist()
+    if max_parks is None or max_parks <= 0:
+        parks = sub["park_id"].value_counts().index.tolist()
+    else:
+        parks = sub["park_id"].value_counts().head(max_parks).index.tolist()
     return sub, signal, unit, parks
 
 
@@ -246,7 +249,7 @@ def _focus_subset_for_pair(
     df: pd.DataFrame,
     signal: Optional[str],
     unit: Optional[str],
-    max_parks: int,
+    max_parks: Optional[int],
 ) -> Tuple[pd.DataFrame, Optional[str], Optional[str], List[str]]:
     sub = df.copy()
     if signal:
@@ -255,7 +258,10 @@ def _focus_subset_for_pair(
         sub = sub[sub["unit"] == unit]
     if sub.empty:
         return sub, signal, unit, []
-    parks = sub["park_id"].value_counts().head(max_parks).index.tolist()
+    if max_parks is None or max_parks <= 0:
+        parks = sub["park_id"].value_counts().index.tolist()
+    else:
+        parks = sub["park_id"].value_counts().head(max_parks).index.tolist()
     return sub, signal, unit, parks
 
 
@@ -290,11 +296,18 @@ def _plot_park_grid_timeseries(
     sample_rows: Optional[int],
     smooth_window: int,
     label_suffix: Optional[str] = None,
+    parks_override: Optional[List[str]] = None,
 ) -> Tuple[Optional[plt.Figure], Optional[Path], Optional[str], Optional[str]]:
     if df.empty or "park_id" not in df.columns or "value" not in df.columns:
         return None, None, focus_signal, focus_unit
 
-    sub, signal, unit, parks = _focus_subset(df, focus_signal, focus_unit, max_parks)
+    if parks_override:
+        sub = df
+        signal = focus_signal
+        unit = focus_unit
+        parks = parks_override
+    else:
+        sub, signal, unit, parks = _focus_subset(df, focus_signal, focus_unit, max_parks)
     if sub.empty or not parks:
         return None, None, signal, unit
 
@@ -573,84 +586,108 @@ def run_silver_pre_ingestion_eda(
 
     figs: List[plt.Figure] = []
     plot_paths: List[Path] = []
+    plot_kinds = {k.strip().lower() for k in (config.plot_kinds or ["timeseries"]) if k}
 
-    for signal, unit in focus_pairs:
-        focus_df, focus_signal, focus_unit, focus_parks = _focus_subset_for_pair(
-            df, signal, unit, config.max_parks
-        )
-        if focus_df.empty or not focus_parks:
-            continue
+    was_interactive = plt.isinteractive()
+    plt.ioff()
+    try:
+        all_parks = df["park_id"].value_counts().index.tolist() if "park_id" in df.columns else []
 
-        park_stats = stats_by_park(focus_df, focus_parks, config.quantiles)
-        if not park_stats.empty:
-            park_stats["signal_name"] = focus_signal
-            park_stats["unit"] = focus_unit
-            park_stats_list.append(park_stats)
+        for idx, (signal, unit) in enumerate(focus_pairs):
+            focus_df, focus_signal, focus_unit, focus_parks = _focus_subset_for_pair(
+                df, signal, unit, config.max_parks
+            )
+            if focus_df.empty or not focus_parks:
+                continue
 
-        fig, path, _, _ = _plot_park_grid_timeseries(
-            focus_df,
-            focus_signal,
-            focus_unit,
-            config.max_parks,
-            config.grid_cols,
-            config.output_dir,
-            config.save_plots,
-            config.sample_rows,
-            config.smooth_window,
-            label_suffix=focus_signal,
-        )
-        if fig:
-            figs.append(fig)
-        if path:
-            plot_paths.append(path)
+            if config.max_parks is None or config.max_parks <= 0:
+                parks_to_use = all_parks
+            else:
+                parks_to_use = focus_parks
 
-        fig, path = _plot_park_grid_histograms(
-            focus_df,
-            focus_parks,
-            focus_signal,
-            focus_unit,
-            config.grid_cols,
-            config.output_dir,
-            config.save_plots,
-            config.sample_rows,
-            label_suffix=focus_signal,
-        )
-        if fig:
-            figs.append(fig)
-        if path:
-            plot_paths.append(path)
+            park_stats = stats_by_park(focus_df, focus_parks, config.quantiles)
+            if not park_stats.empty:
+                park_stats["signal_name"] = focus_signal
+                park_stats["unit"] = focus_unit
+                park_stats_list.append(park_stats)
 
-        fig, path = _plot_park_grid_boxplots(
-            focus_df,
-            focus_parks,
-            focus_signal,
-            focus_unit,
-            config.grid_cols,
-            config.output_dir,
-            config.save_plots,
-            config.sample_rows,
-            label_suffix=focus_signal,
-        )
-        if fig:
-            figs.append(fig)
-        if path:
-            plot_paths.append(path)
+            if "timeseries" in plot_kinds:
+                fig, path, _, _ = _plot_park_grid_timeseries(
+                    focus_df,
+                    focus_signal,
+                    focus_unit,
+                    config.max_parks,
+                    config.grid_cols,
+                    config.output_dir,
+                    config.save_plots,
+                    config.sample_rows,
+                    config.smooth_window,
+                    label_suffix=focus_signal,
+                    parks_override=parks_to_use,
+                )
+                if fig:
+                    plt.close(fig)
+                    figs.append(fig)
+                if path:
+                    plot_paths.append(path)
 
-        fig, path = _plot_coverage_heatmap(
-            focus_df,
-            focus_parks,
-            focus_signal,
-            focus_unit,
-            config.max_days,
-            config.max_xticks,
-            config.output_dir,
-            config.save_plots,
-            label_suffix=focus_signal,
-        )
-        if fig:
-            figs.append(fig)
-        if path:
-            plot_paths.append(path)
+            include_extras = bool(config.focus_signal or config.focus_signals) or idx == 0
+            if include_extras and "hist" in plot_kinds:
+                fig, path = _plot_park_grid_histograms(
+                    focus_df,
+                    parks_to_use,
+                    focus_signal,
+                    focus_unit,
+                    config.grid_cols,
+                    config.output_dir,
+                    config.save_plots,
+                    config.sample_rows,
+                    label_suffix=focus_signal,
+                )
+                if fig:
+                    plt.close(fig)
+                    figs.append(fig)
+                if path:
+                    plot_paths.append(path)
+
+            if include_extras and "box" in plot_kinds:
+                fig, path = _plot_park_grid_boxplots(
+                    focus_df,
+                    parks_to_use,
+                    focus_signal,
+                    focus_unit,
+                    config.grid_cols,
+                    config.output_dir,
+                    config.save_plots,
+                    config.sample_rows,
+                    label_suffix=focus_signal,
+                )
+                if fig:
+                    plt.close(fig)
+                    figs.append(fig)
+                if path:
+                    plot_paths.append(path)
+
+            if include_extras and "coverage" in plot_kinds:
+                fig, path = _plot_coverage_heatmap(
+                    focus_df,
+                    parks_to_use,
+                    focus_signal,
+                    focus_unit,
+                    config.max_days,
+                    config.max_xticks,
+                    config.output_dir,
+                    config.save_plots,
+                    label_suffix=focus_signal,
+                )
+                if fig:
+                    plt.close(fig)
+                    figs.append(fig)
+                if path:
+                    plot_paths.append(path)
+    finally:
+        if was_interactive:
+            plt.ion()
 
     park_stats_all = pd.concat(park_stats_list, ignore_index=True) if park_stats_list else pd.DataFrame()
 
@@ -679,6 +716,9 @@ def build_cfg(args) -> EdaConfig:
     focus_signals = None
     if args.focus_signals:
         focus_signals = [s.strip() for s in args.focus_signals.split(",") if s.strip()]
+    plot_kinds = None
+    if args.plot_kinds:
+        plot_kinds = [s.strip() for s in args.plot_kinds.split(",") if s.strip()]
     return EdaConfig(
         output_dir=Path(args.output_dir).resolve() if args.output_dir else None,
         max_units=args.max_units,
@@ -688,6 +728,7 @@ def build_cfg(args) -> EdaConfig:
         focus_signal=args.focus_signal,
         focus_unit=args.focus_unit,
         focus_signals=focus_signals,
+        plot_kinds=plot_kinds,
         max_days=args.max_days,
         max_xticks=args.max_xticks,
         smooth_window=args.smooth_window,
@@ -704,11 +745,12 @@ def main() -> None:
     ap.add_argument("--output_dir", default=None, help="Output directory for EDA artifacts")
     ap.add_argument("--max_units", type=int, default=8, help="Max units to plot")
     ap.add_argument("--max_signals", type=int, default=12, help="Max signal/unit pairs to summarize")
-    ap.add_argument("--max_parks", type=int, default=9, help="Max parks to plot in grid")
+    ap.add_argument("--max_parks", type=int, default=0, help="Max parks to plot in grid (0 = all)")
     ap.add_argument("--grid_cols", type=int, default=3, help="Grid columns for per-park plots")
     ap.add_argument("--focus_signal", default=None, help="Optional signal_name to plot per-park")
     ap.add_argument("--focus_unit", default=None, help="Optional unit to plot per-park")
     ap.add_argument("--focus_signals", default=None, help="Comma-separated signal_name list")
+    ap.add_argument("--plot_kinds", default=None, help="Comma-separated list: timeseries,hist,box,coverage")
     ap.add_argument("--max_days", type=int, default=120, help="Max days for coverage heatmap")
     ap.add_argument("--max_xticks", type=int, default=12, help="Max x-axis ticks for coverage heatmap")
     ap.add_argument("--smooth_window", type=int, default=21, help="Rolling window size for smoothing")

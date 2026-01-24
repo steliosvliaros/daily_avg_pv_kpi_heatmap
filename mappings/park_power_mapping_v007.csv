@@ -132,7 +132,7 @@ Timestamp,datetime
 [4E Energeiaki 805 KWp Darali] PCC Total Production active power (kW),p_4e_ener_dara__805kwp__pcc_tota_prod_acti_powe__u_kw
 [4E Energeiaki 805 KWp Darali] PCC Total Production apparent power (kVA),p_4e_ener_dara__805kwp__pcc_tota_prod_appa_powe__u_kva
 [4E Energeiaki 805 KWp Darali] PCC Total Production reactive power (kVAr),p_4e_ener_dara__805kwp__pcc_tota_prod_reac_powe__u_kvar
-[Fragiatoula_Utilitas_4866kWp] Fragiatoula_Utilitas_4866kWp Average Irradiance (W*m^-2),frag_util__4866kwp__frag_util_4866_aver_irra__u_w_m_2
+[Fragiatoula_Utilitas_4866kWp] Fragiatoula_Utilitas_4866kWp Average Irradiance (W*m^-2),frag_util__4866kwp__aver_irra__u_w_m_2
 [Fragiatoula_Utilitas_4866kWp] PCC PCC Current THD-R of phase L1 (%),frag_util__4866kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Fragiatoula_Utilitas_4866kWp] PCC PCC Current THD-R of phase L2 (%),frag_util__4866kwp__pcc_curr_thd_r_of_phas_l2__u_pct
 [Fragiatoula_Utilitas_4866kWp] PCC PCC Current THD-R of phase L3 (%),frag_util__4866kwp__pcc_curr_thd_r_of_phas_l3__u_pct
@@ -492,7 +492,7 @@ Timestamp,datetime
 [Kalamata_Asproxoma_2131kWp] Weather Station 1 Ambient temperature (C),kala_aspr__2131kwp__weat_stat_1_ambi_temp__u_c
 [Kalamata_Asproxoma_2131kWp] Weather Station 1 Relative humidity (%),kala_aspr__2131kwp__weat_stat_1_rela_humi__u_pct
 [Kalamata_Asproxoma_2131kWp] Weather Station 1 Wind speed (m*s^-1),kala_aspr__2131kwp__weat_stat_1_wind_spee__u_m_s_1
-"[Ntarali_Bonitas_0,45MW] Ntarali_Bonitas_0,45MW Average Irradiance (W*m^-2)",ntar_boni__450kwp__ntar_boni_0_45mw_aver_irra__u_w_m_2
+"[Ntarali_Bonitas_0,45MW] Ntarali_Bonitas_0,45MW Average Irradiance (W*m^-2)",ntar_boni__450kwp__aver_irra__u_w_m_2
 "[Ntarali_Bonitas_0,45MW] PCC PCC Current THD-R of neutral (%)",ntar_boni__450kwp__pcc_curr_thd_r_of_neut__u_pct
 "[Ntarali_Bonitas_0,45MW] PCC PCC Current THD-R of phase L1 (%)",ntar_boni__450kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 "[Ntarali_Bonitas_0,45MW] PCC PCC Current THD-R of phase L2 (%)",ntar_boni__450kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -532,7 +532,7 @@ Timestamp,datetime
 "[Ntarali_Bonitas_0,45MW] PCC Total Production active power (kW)",ntar_boni__450kwp__pcc_tota_prod_acti_powe__u_kw
 "[Ntarali_Bonitas_0,45MW] PCC Total Production apparent power (kVA)",ntar_boni__450kwp__pcc_tota_prod_appa_powe__u_kva
 "[Ntarali_Bonitas_0,45MW] PCC Total Production reactive power (kVAr)",ntar_boni__450kwp__pcc_tota_prod_reac_powe__u_kvar
-[Ntarali_Concept_296KW] Ntarali_Concept_296KW Average Irradiance (W*m^-2),ntar_conc__296kwp__ntar_conc_296k_aver_irra__u_w_m_2
+[Ntarali_Concept_296KW] Ntarali_Concept_296KW Average Irradiance (W*m^-2),ntar_conc__296kwp__aver_irra__u_w_m_2
 [Ntarali_Concept_296KW] PCC PCC Current THD-R of neutral (%),ntar_conc__296kwp__pcc_curr_thd_r_of_neut__u_pct
 [Ntarali_Concept_296KW] PCC PCC Current THD-R of phase L1 (%),ntar_conc__296kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Ntarali_Concept_296KW] PCC PCC Current THD-R of phase L2 (%),ntar_conc__296kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -577,7 +577,7 @@ Timestamp,datetime
 [Ntarali_Concept_296KW] PCC Total Production reactive power (kVAr),ntar_conc__296kwp__pcc_tota_prod_reac_powe__u_kvar
 [Ntarali_Concept_296KW] Weather Station Ambient temperature (C),ntar_conc__296kwp__weat_stat_ambi_temp__u_c
 [Ntarali_Concept_296KW] Weather Station Relative humidity (%),ntar_conc__296kwp__weat_stat_rela_humi__u_pct
-[Ntarali_Concept_320KW] Ntarali_Concept_320KW Average Irradiance (W*m^-2),ntar_conc__320kwp__ntar_conc_320k_aver_irra__u_w_m_2
+[Ntarali_Concept_320KW] Ntarali_Concept_320KW Average Irradiance (W*m^-2),ntar_conc__320kwp__aver_irra__u_w_m_2
 [Ntarali_Concept_320KW] PCC PCC active energy export (kWh),ntar_conc__320kwp__pcc_acti_ener_expo__u_kwh
 [Ntarali_Concept_320KW] PCC PCC active energy import (kWh),ntar_conc__320kwp__pcc_acti_ener_impo__u_kwh
 [Ntarali_Concept_320KW] PCC PCC apparent energy (kVAh),ntar_conc__320kwp__pcc_appa_ener__u_kvah
@@ -610,7 +610,7 @@ Timestamp,datetime
 [Ntarali_Concept_320KW] PCC Total Production reactive power (kVAr),ntar_conc__320kwp__pcc_tota_prod_reac_powe__u_kvar
 [Ntarali_Concept_320KW] Weather Station Ambient Temperature (C),ntar_conc__320kwp__weat_stat_ambi_temp__u_c
 [Ntarali_Concept_320KW] Weather Station Relative Humidity  (%),ntar_conc__320kwp__weat_stat_rela_humi__u_pct
-[Ntarali_Concept_592KW] Ntarali_Concept_592KW Average Irradiance (W*m^-2),ntar_conc__592kwp__ntar_conc_592k_aver_irra__u_w_m_2
+[Ntarali_Concept_592KW] Ntarali_Concept_592KW Average Irradiance (W*m^-2),ntar_conc__592kwp__aver_irra__u_w_m_2
 [Ntarali_Concept_592KW] PCC PCC Current THD-R of neutral (%),ntar_conc__592kwp__pcc_curr_thd_r_of_neut__u_pct
 [Ntarali_Concept_592KW] PCC PCC Current THD-R of phase L1 (%),ntar_conc__592kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Ntarali_Concept_592KW] PCC PCC Current THD-R of phase L2 (%),ntar_conc__592kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -653,7 +653,7 @@ Timestamp,datetime
 [Ntarali_Concept_592KW] PCC Total Production active power (kW),ntar_conc__592kwp__pcc_tota_prod_acti_powe__u_kw
 [Ntarali_Concept_592KW] PCC Total Production apparent power (kVA),ntar_conc__592kwp__pcc_tota_prod_appa_powe__u_kva
 [Ntarali_Concept_592KW] PCC Total Production reactive power (kVAr),ntar_conc__592kwp__pcc_tota_prod_reac_powe__u_kvar
-[Ntarali_Konenergy_590KW] Ntarali_Konenergy_590KW Average Irradiance (W*m^-2),ntar_kone__590kwp__ntar_kone_590k_aver_irra__u_w_m_2
+[Ntarali_Konenergy_590KW] Ntarali_Konenergy_590KW Average Irradiance (W*m^-2),ntar_kone__590kwp__aver_irra__u_w_m_2
 [Ntarali_Konenergy_590KW] PCC PCC Current THD-R of neutral (%),ntar_kone__590kwp__pcc_curr_thd_r_of_neut__u_pct
 [Ntarali_Konenergy_590KW] PCC PCC Current THD-R of phase L1 (%),ntar_kone__590kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Ntarali_Konenergy_590KW] PCC PCC Current THD-R of phase L2 (%),ntar_kone__590kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -783,7 +783,7 @@ Timestamp,datetime
 [Palaionaziro_Iraio] PCC Total Production active power (kW),pala_irai__4500kwp__pcc_tota_prod_acti_powe__u_kw
 [Palaionaziro_Iraio] PCC Total Production apparent power (kVA),pala_irai__4500kwp__pcc_tota_prod_appa_powe__u_kva
 [Palaionaziro_Iraio] PCC Total Production reactive power (kVAr),pala_irai__4500kwp__pcc_tota_prod_reac_powe__u_kvar
-[Palaionaziro_Iraio] Palaionaziro_Iraio Average Irradiance (W*m^-2),pala_irai__4500kwp__pala_irai_aver_irra__u_w_m_2
+[Palaionaziro_Iraio] Palaionaziro_Iraio Average Irradiance (W*m^-2),pala_irai__4500kwp__aver_irra__u_w_m_2
 [Palaionaziro_Iraio] Weather Station Ambient temperature (C),pala_irai__4500kwp__weat_stat_ambi_temp__u_c
 [Palaionaziro_Iraio] Weather Station Relative humidity (%),pala_irai__4500kwp__weat_stat_rela_humi__u_pct
 [Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of neutral (%),sola_conc_liko__276kwp__pcc_curr_thd_r_of_neut__u_pct

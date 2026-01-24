@@ -741,51 +741,51 @@ Timestamp,datetime
 [NyConTec 993 Kwp Giannopouleika] PCC Total Production reactive power (kVAr),nyco_gian__993kwp__pcc_tota_prod_reac_powe__u_kvar
 [NyConTec 993 Kwp Giannopouleika] Weather Station Ambient Temperature (C),nyco_gian__993kwp__weat_stat_ambi_temp__u_c
 [NyConTec 993 Kwp Giannopouleika] Weather Station Relative Humidity  (%),nyco_gian__993kwp__weat_stat_rela_humi__u_pct
-[Palaionaziro_Iraio] PCC PCC Current THD-R of neutral (%),pala_irai__4500kwp__pcc_curr_thd_r_of_neut__u_pct
-[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L1 (%),pala_irai__4500kwp__pcc_curr_thd_r_of_phas_l1__u_pct
-[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L2 (%),pala_irai__4500kwp__pcc_curr_thd_r_of_phas_l2__u_pct
-[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L3 (%),pala_irai__4500kwp__pcc_curr_thd_r_of_phas_l3__u_pct
-[Palaionaziro_Iraio] PCC PCC active energy export (kWh),pala_irai__4500kwp__pcc_acti_ener_expo__u_kwh
-[Palaionaziro_Iraio] PCC PCC active energy import (kWh),pala_irai__4500kwp__pcc_acti_ener_impo__u_kwh
-[Palaionaziro_Iraio] PCC PCC apparent energy (kVAh),pala_irai__4500kwp__pcc_appa_ener__u_kvah
-[Palaionaziro_Iraio] PCC PCC average current (A),pala_irai__4500kwp__pcc_aver_curr__u_a
-[Palaionaziro_Iraio] PCC PCC average line voltage (Vac),pala_irai__4500kwp__pcc_aver_line_volt__u_vac
-[Palaionaziro_Iraio] PCC PCC average phase voltage (Vac),pala_irai__4500kwp__pcc_aver_phas_volt__u_vac
-[Palaionaziro_Iraio] PCC PCC current of phase L1 (A),pala_irai__4500kwp__pcc_curr_of_phas_l1__u_a
-[Palaionaziro_Iraio] PCC PCC current of phase L2 (A),pala_irai__4500kwp__pcc_curr_of_phas_l2__u_a
-[Palaionaziro_Iraio] PCC PCC current of phase L3 (A),pala_irai__4500kwp__pcc_curr_of_phas_l3__u_a
-[Palaionaziro_Iraio] PCC PCC current unbalance of phase L1 (%),pala_irai__4500kwp__pcc_curr_unba_of_phas_l1__u_pct
-[Palaionaziro_Iraio] PCC PCC current unbalance of phase L2 (%),pala_irai__4500kwp__pcc_curr_unba_of_phas_l2__u_pct
-[Palaionaziro_Iraio] PCC PCC current unbalance of phase L3 (%),pala_irai__4500kwp__pcc_curr_unba_of_phas_l3__u_pct
-[Palaionaziro_Iraio] PCC PCC frequency (Hz),pala_irai__4500kwp__pcc_freq__u_hz
-[Palaionaziro_Iraio] PCC PCC power factor of phase L1 (-),pala_irai__4500kwp__pcc_powe_fact_of_phas_l1__u_num
-[Palaionaziro_Iraio] PCC PCC power factor of phase L2 (-),pala_irai__4500kwp__pcc_powe_fact_of_phas_l2__u_num
-[Palaionaziro_Iraio] PCC PCC power factor of phase L3 (-),pala_irai__4500kwp__pcc_powe_fact_of_phas_l3__u_num
-[Palaionaziro_Iraio] PCC PCC reactive energy export (kVArh),pala_irai__4500kwp__pcc_reac_ener_expo__u_kvarh
-[Palaionaziro_Iraio] PCC PCC reactive energy import (kVArh),pala_irai__4500kwp__pcc_reac_ener_impo__u_kvarh
-[Palaionaziro_Iraio] PCC PCC total power factor (-),pala_irai__4500kwp__pcc_tota_powe_fact__u_num
-[Palaionaziro_Iraio] PCC PCC voltage of L1-L2 (Vac),pala_irai__4500kwp__pcc_volt_of_l1_l2__u_vac
-[Palaionaziro_Iraio] PCC PCC voltage of L2-L3 (Vac),pala_irai__4500kwp__pcc_volt_of_l2_l3__u_vac
-[Palaionaziro_Iraio] PCC PCC voltage of L3-L1 (Vac),pala_irai__4500kwp__pcc_volt_of_l3_l1__u_vac
-[Palaionaziro_Iraio] PCC Production active energy export (kWh),pala_irai__4500kwp__pcc_prod_acti_ener_expo__u_kwh
-[Palaionaziro_Iraio] PCC Production active energy import (kWh),pala_irai__4500kwp__pcc_prod_acti_ener_impo__u_kwh
-[Palaionaziro_Iraio] PCC Production apparent energy (kVAh),pala_irai__4500kwp__pcc_prod_appa_ener__u_kvah
-[Palaionaziro_Iraio] PCC Production current of phase L1 (A),pala_irai__4500kwp__pcc_prod_curr_of_phas_l1__u_a
-[Palaionaziro_Iraio] PCC Production current of phase L2 (A),pala_irai__4500kwp__pcc_prod_curr_of_phas_l2__u_a
-[Palaionaziro_Iraio] PCC Production current of phase L3 (A),pala_irai__4500kwp__pcc_prod_curr_of_phas_l3__u_a
-[Palaionaziro_Iraio] PCC Production frequency (Hz),pala_irai__4500kwp__pcc_prod_freq__u_hz
-[Palaionaziro_Iraio] PCC Production reactive energy export (kVArh),pala_irai__4500kwp__pcc_prod_reac_ener_expo__u_kvarh
-[Palaionaziro_Iraio] PCC Production reactive energy import (kVArh),pala_irai__4500kwp__pcc_prod_reac_ener_impo__u_kvarh
-[Palaionaziro_Iraio] PCC Production total power factor (-),pala_irai__4500kwp__pcc_prod_tota_powe_fact__u_num
-[Palaionaziro_Iraio] PCC Production voltage of L1-L2 (Vac),pala_irai__4500kwp__pcc_prod_volt_of_l1_l2__u_vac
-[Palaionaziro_Iraio] PCC Production voltage of L2-L3 (Vac),pala_irai__4500kwp__pcc_prod_volt_of_l2_l3__u_vac
-[Palaionaziro_Iraio] PCC Production voltage of L3-L1 (Vac),pala_irai__4500kwp__pcc_prod_volt_of_l3_l1__u_vac
-[Palaionaziro_Iraio] PCC Total Production active power (kW),pala_irai__4500kwp__pcc_tota_prod_acti_powe__u_kw
-[Palaionaziro_Iraio] PCC Total Production apparent power (kVA),pala_irai__4500kwp__pcc_tota_prod_appa_powe__u_kva
-[Palaionaziro_Iraio] PCC Total Production reactive power (kVAr),pala_irai__4500kwp__pcc_tota_prod_reac_powe__u_kvar
-[Palaionaziro_Iraio] Palaionaziro_Iraio Average Irradiance (W*m^-2),pala_irai__4500kwp__pala_irai_aver_irra__u_w_m_2
-[Palaionaziro_Iraio] Weather Station Ambient temperature (C),pala_irai__4500kwp__weat_stat_ambi_temp__u_c
-[Palaionaziro_Iraio] Weather Station Relative humidity (%),pala_irai__4500kwp__weat_stat_rela_humi__u_pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of neutral (%),pala_irai__4400kwp__pcc_curr_thd_r_of_neut__u_pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L1 (%),pala_irai__4400kwp__pcc_curr_thd_r_of_phas_l1__u_pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L2 (%),pala_irai__4400kwp__pcc_curr_thd_r_of_phas_l2__u_pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L3 (%),pala_irai__4400kwp__pcc_curr_thd_r_of_phas_l3__u_pct
+[Palaionaziro_Iraio] PCC PCC active energy export (kWh),pala_irai__4400kwp__pcc_acti_ener_expo__u_kwh
+[Palaionaziro_Iraio] PCC PCC active energy import (kWh),pala_irai__4400kwp__pcc_acti_ener_impo__u_kwh
+[Palaionaziro_Iraio] PCC PCC apparent energy (kVAh),pala_irai__4400kwp__pcc_appa_ener__u_kvah
+[Palaionaziro_Iraio] PCC PCC average current (A),pala_irai__4400kwp__pcc_aver_curr__u_a
+[Palaionaziro_Iraio] PCC PCC average line voltage (Vac),pala_irai__4400kwp__pcc_aver_line_volt__u_vac
+[Palaionaziro_Iraio] PCC PCC average phase voltage (Vac),pala_irai__4400kwp__pcc_aver_phas_volt__u_vac
+[Palaionaziro_Iraio] PCC PCC current of phase L1 (A),pala_irai__4400kwp__pcc_curr_of_phas_l1__u_a
+[Palaionaziro_Iraio] PCC PCC current of phase L2 (A),pala_irai__4400kwp__pcc_curr_of_phas_l2__u_a
+[Palaionaziro_Iraio] PCC PCC current of phase L3 (A),pala_irai__4400kwp__pcc_curr_of_phas_l3__u_a
+[Palaionaziro_Iraio] PCC PCC current unbalance of phase L1 (%),pala_irai__4400kwp__pcc_curr_unba_of_phas_l1__u_pct
+[Palaionaziro_Iraio] PCC PCC current unbalance of phase L2 (%),pala_irai__4400kwp__pcc_curr_unba_of_phas_l2__u_pct
+[Palaionaziro_Iraio] PCC PCC current unbalance of phase L3 (%),pala_irai__4400kwp__pcc_curr_unba_of_phas_l3__u_pct
+[Palaionaziro_Iraio] PCC PCC frequency (Hz),pala_irai__4400kwp__pcc_freq__u_hz
+[Palaionaziro_Iraio] PCC PCC power factor of phase L1 (-),pala_irai__4400kwp__pcc_powe_fact_of_phas_l1__u_num
+[Palaionaziro_Iraio] PCC PCC power factor of phase L2 (-),pala_irai__4400kwp__pcc_powe_fact_of_phas_l2__u_num
+[Palaionaziro_Iraio] PCC PCC power factor of phase L3 (-),pala_irai__4400kwp__pcc_powe_fact_of_phas_l3__u_num
+[Palaionaziro_Iraio] PCC PCC reactive energy export (kVArh),pala_irai__4400kwp__pcc_reac_ener_expo__u_kvarh
+[Palaionaziro_Iraio] PCC PCC reactive energy import (kVArh),pala_irai__4400kwp__pcc_reac_ener_impo__u_kvarh
+[Palaionaziro_Iraio] PCC PCC total power factor (-),pala_irai__4400kwp__pcc_tota_powe_fact__u_num
+[Palaionaziro_Iraio] PCC PCC voltage of L1-L2 (Vac),pala_irai__4400kwp__pcc_volt_of_l1_l2__u_vac
+[Palaionaziro_Iraio] PCC PCC voltage of L2-L3 (Vac),pala_irai__4400kwp__pcc_volt_of_l2_l3__u_vac
+[Palaionaziro_Iraio] PCC PCC voltage of L3-L1 (Vac),pala_irai__4400kwp__pcc_volt_of_l3_l1__u_vac
+[Palaionaziro_Iraio] PCC Production active energy export (kWh),pala_irai__4400kwp__pcc_prod_acti_ener_expo__u_kwh
+[Palaionaziro_Iraio] PCC Production active energy import (kWh),pala_irai__4400kwp__pcc_prod_acti_ener_impo__u_kwh
+[Palaionaziro_Iraio] PCC Production apparent energy (kVAh),pala_irai__4400kwp__pcc_prod_appa_ener__u_kvah
+[Palaionaziro_Iraio] PCC Production current of phase L1 (A),pala_irai__4400kwp__pcc_prod_curr_of_phas_l1__u_a
+[Palaionaziro_Iraio] PCC Production current of phase L2 (A),pala_irai__4400kwp__pcc_prod_curr_of_phas_l2__u_a
+[Palaionaziro_Iraio] PCC Production current of phase L3 (A),pala_irai__4400kwp__pcc_prod_curr_of_phas_l3__u_a
+[Palaionaziro_Iraio] PCC Production frequency (Hz),pala_irai__4400kwp__pcc_prod_freq__u_hz
+[Palaionaziro_Iraio] PCC Production reactive energy export (kVArh),pala_irai__4400kwp__pcc_prod_reac_ener_expo__u_kvarh
+[Palaionaziro_Iraio] PCC Production reactive energy import (kVArh),pala_irai__4400kwp__pcc_prod_reac_ener_impo__u_kvarh
+[Palaionaziro_Iraio] PCC Production total power factor (-),pala_irai__4400kwp__pcc_prod_tota_powe_fact__u_num
+[Palaionaziro_Iraio] PCC Production voltage of L1-L2 (Vac),pala_irai__4400kwp__pcc_prod_volt_of_l1_l2__u_vac
+[Palaionaziro_Iraio] PCC Production voltage of L2-L3 (Vac),pala_irai__4400kwp__pcc_prod_volt_of_l2_l3__u_vac
+[Palaionaziro_Iraio] PCC Production voltage of L3-L1 (Vac),pala_irai__4400kwp__pcc_prod_volt_of_l3_l1__u_vac
+[Palaionaziro_Iraio] PCC Total Production active power (kW),pala_irai__4400kwp__pcc_tota_prod_acti_powe__u_kw
+[Palaionaziro_Iraio] PCC Total Production apparent power (kVA),pala_irai__4400kwp__pcc_tota_prod_appa_powe__u_kva
+[Palaionaziro_Iraio] PCC Total Production reactive power (kVAr),pala_irai__4400kwp__pcc_tota_prod_reac_powe__u_kvar
+[Palaionaziro_Iraio] Palaionaziro_Iraio Average Irradiance (W*m^-2),pala_irai__4400kwp__pala_irai_aver_irra__u_w_m_2
+[Palaionaziro_Iraio] Weather Station Ambient temperature (C),pala_irai__4400kwp__weat_stat_ambi_temp__u_c
+[Palaionaziro_Iraio] Weather Station Relative humidity (%),pala_irai__4400kwp__weat_stat_rela_humi__u_pct
 [Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of neutral (%),sola_conc_liko__276kwp__pcc_curr_thd_r_of_neut__u_pct
 [Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of phase L1 (%),sola_conc_liko__276kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of phase L2 (%),sola_conc_liko__276kwp__pcc_curr_thd_r_of_phas_l2__u_pct
