@@ -330,6 +330,15 @@ def _plot_park_grid_timeseries(
         ax.plot(x[: len(park_df)], y, linewidth=0.8, alpha=0.5)
         smooth = _smooth_series(y, window=smooth_window)
         ax.plot(x[: len(park_df)], smooth, linewidth=1.6, alpha=0.9, color="#D62728")
+        values = y.dropna()
+        if not values.empty:
+            q1 = values.quantile(0.25)
+            q3 = values.quantile(0.75)
+            iqr = q3 - q1
+            lower = q1 - 1.5 * iqr
+            upper = q3 + 1.5 * iqr
+            ax.axhline(lower, color="#9E9E9E", linewidth=0.9, alpha=0.7, linestyle="--")
+            ax.axhline(upper, color="#9E9E9E", linewidth=0.9, alpha=0.7, linestyle="--")
         ax.set_title(str(park))
         ax.tick_params(axis="x", labelrotation=45)
 
