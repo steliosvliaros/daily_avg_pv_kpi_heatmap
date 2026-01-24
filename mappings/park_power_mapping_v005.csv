@@ -1,6 +1,6 @@
 original,sanitized
 Timestamp,datetime
-[4E Energeiaki 176 KWp Likovouni] 4E Energeiaki 176 KWp Likovouni Average Irradiance (W*m^-2),p_4e_ener_liko__176kwp__m_4e_ener_176_9a7219c208__u_w_m_2
+[4E Energeiaki 176 KWp Likovouni] 4E Energeiaki 176 KWp Likovouni Average Irradiance (W*m^-2),p_4e_ener_liko__176kwp__aver_irra__u_w_m_2
 [4E Energeiaki 176 KWp Likovouni] PCC PCC Current THD-R of neutral (%),p_4e_ener_liko__176kwp__pcc_curr_thd_r_of_neut__u_pct
 [4E Energeiaki 176 KWp Likovouni] PCC PCC Current THD-R of phase L1 (%),p_4e_ener_liko__176kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [4E Energeiaki 176 KWp Likovouni] PCC PCC Current THD-R of phase L2 (%),p_4e_ener_liko__176kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -46,7 +46,7 @@ Timestamp,datetime
 [4E Energeiaki 176 KWp Likovouni] Weather Station 1 Ambient temperature (C),p_4e_ener_liko__176kwp__weat_stat_1_ambi_temp__u_c
 [4E Energeiaki 176 KWp Likovouni] Weather Station 1 Relative humidity (%),p_4e_ener_liko__176kwp__weat_stat_1_rela_humi__u_pct
 [4E Energeiaki 176 KWp Likovouni] Weather Station 1 Wind speed (m*s^-1),p_4e_ener_liko__176kwp__weat_stat_1_wind_spee__u_m_s_1
-[4E Energeiaki 4472 KWp Lexaina] 4E Energeiaki 4472 KWp Lexaina Average Irradiance (W*m^-2),p_4e_ener_lexa__4472kwp__m_4e_ener_447_1660c3aac9__u_w_m_2
+[4E Energeiaki 4472 KWp Lexaina] 4E Energeiaki 4472 KWp Lexaina Average Irradiance (W*m^-2),p_4e_ener_lexa__4472kwp__aver_irra__u_w_m_2
 [4E Energeiaki 4472 KWp Lexaina] PCC PCC active energy export (kWh),p_4e_ener_lexa__4472kwp__pcc_acti_ener_expo__u_kwh
 [4E Energeiaki 4472 KWp Lexaina] PCC PCC active energy import (kWh),p_4e_ener_lexa__4472kwp__pcc_acti_ener_impo__u_kwh
 [4E Energeiaki 4472 KWp Lexaina] PCC PCC apparent energy (kVAh),p_4e_ener_lexa__4472kwp__pcc_appa_ener__u_kvah
@@ -85,7 +85,7 @@ Timestamp,datetime
 [4E Energeiaki 4472 KWp Lexaina] Weather Station 1 Ambient Temperature (C),p_4e_ener_lexa__4472kwp__weat_stat_1_ambi_temp__u_c
 [4E Energeiaki 4472 KWp Lexaina] Weather Station 1 Relative Humidity  (%),p_4e_ener_lexa__4472kwp__weat_stat_1_rela_humi__u_pct
 [4E Energeiaki 4472 KWp Lexaina] Weather Station 1 Wind Speed  (m*s^-1),p_4e_ener_lexa__4472kwp__weat_stat_1_wind_spee__u_m_s_1
-[4E Energeiaki 805 KWp Darali] 4E Energeiaki 805 KWp Darali Average Irradiance (W*m^-2),p_4e_ener_dara__805kwp__m_4e_ener_805_70f126d7d2__u_w_m_2
+[4E Energeiaki 805 KWp Darali] 4E Energeiaki 805 KWp Darali Average Irradiance (W*m^-2),p_4e_ener_dara__805kwp__aver_irra__u_w_m_2
 [4E Energeiaki 805 KWp Darali] Main Weather Station Ambient Temperature (C),p_4e_ener_dara__805kwp__main_weat_stat_ambi_temp__u_c
 [4E Energeiaki 805 KWp Darali] Main Weather Station Diffuse irradiance (W*m^-2),p_4e_ener_dara__805kwp__main_weat_stat_diff_irra__u_w_m_2
 [4E Energeiaki 805 KWp Darali] Main Weather Station Relative Humidity  (%),p_4e_ener_dara__805kwp__main_weat_stat_rela_humi__u_pct
@@ -696,7 +696,7 @@ Timestamp,datetime
 [Ntarali_Konenergy_590KW] PCC Total Production active power (kW),ntar_kone__590kwp__pcc_tota_prod_acti_powe__u_kw
 [Ntarali_Konenergy_590KW] PCC Total Production apparent power (kVA),ntar_kone__590kwp__pcc_tota_prod_appa_powe__u_kva
 [Ntarali_Konenergy_590KW] PCC Total Production reactive power (kVAr),ntar_kone__590kwp__pcc_tota_prod_reac_powe__u_kvar
-[NyConTec 993 Kwp Giannopouleika] NyConTec 993 Kwp Giannopouleika Average Irradiance (W*m^-2),nyco_gian__993kwp__nyco_993_kwp_gian_aver_irra__u_w_m_2
+[NyConTec 993 Kwp Giannopouleika] NyConTec 993 Kwp Giannopouleika Average Irradiance (W*m^-2),nyco_gian__993kwp__aver_irra__u_w_m_2
 [NyConTec 993 Kwp Giannopouleika] PCC PCC Current THD-R of neutral (%),nyco_gian__993kwp__pcc_curr_thd_r_of_neut__u_pct
 [NyConTec 993 Kwp Giannopouleika] PCC PCC Current THD-R of phase L1 (%),nyco_gian__993kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [NyConTec 993 Kwp Giannopouleika] PCC PCC Current THD-R of phase L2 (%),nyco_gian__993kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -783,7 +783,7 @@ Timestamp,datetime
 [Palaionaziro_Iraio] PCC Total Production active power (kW),pala_irai__4500kwp__pcc_tota_prod_acti_powe__u_kw
 [Palaionaziro_Iraio] PCC Total Production apparent power (kVA),pala_irai__4500kwp__pcc_tota_prod_appa_powe__u_kva
 [Palaionaziro_Iraio] PCC Total Production reactive power (kVAr),pala_irai__4500kwp__pcc_tota_prod_reac_powe__u_kvar
-[Palaionaziro_Iraio] Palaionaziro_Iraio Average Irradiance (W*m^-2),pala_irai__4500kwp__pala_irai_aver_irra__u_w_m_2
+[Palaionaziro_Iraio] Palaionaziro_Iraio Average Irradiance (W*m^-2),pala_irai__4400kwp__pala_irai_aver_irra__u_w_m_2
 [Palaionaziro_Iraio] Weather Station Ambient temperature (C),pala_irai__4500kwp__weat_stat_ambi_temp__u_c
 [Palaionaziro_Iraio] Weather Station Relative humidity (%),pala_irai__4500kwp__weat_stat_rela_humi__u_pct
 [Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of neutral (%),sola_conc_liko__276kwp__pcc_curr_thd_r_of_neut__u_pct
@@ -825,7 +825,7 @@ Timestamp,datetime
 [Solar Concept 276 KWp Likovouni] PCC Total Production active power (kW),sola_conc_liko__276kwp__pcc_tota_prod_acti_powe__u_kw
 [Solar Concept 276 KWp Likovouni] PCC Total Production apparent power (kVA),sola_conc_liko__276kwp__pcc_tota_prod_appa_powe__u_kva
 [Solar Concept 276 KWp Likovouni] PCC Total Production reactive power (kVAr),sola_conc_liko__276kwp__pcc_tota_prod_reac_powe__u_kvar
-[Solar Concept 276 KWp Likovouni] Solar Concept 276 KWp Likovouni Average Irradiance (W*m^-2),sola_conc_liko__276kwp__sola_conc_276_dcfd01a912__u_w_m_2
+[Solar Concept 276 KWp Likovouni] Solar Concept 276 KWp Likovouni Average Irradiance (W*m^-2),sola_conc_liko__276kwp__aver_irra__u_w_m_2
 [Solar Concept 3721 KWp Lexaina] PCC PCC Current THD-R of phase L1 (%),sola_conc_lexa__3721kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Solar Concept 3721 KWp Lexaina] PCC PCC Current THD-R of phase L2 (%),sola_conc_lexa__3721kwp__pcc_curr_thd_r_of_phas_l2__u_pct
 [Solar Concept 3721 KWp Lexaina] PCC PCC Current THD-R of phase L3 (%),sola_conc_lexa__3721kwp__pcc_curr_thd_r_of_phas_l3__u_pct
@@ -859,7 +859,7 @@ Timestamp,datetime
 [Solar Concept 3721 KWp Lexaina] PCC Production voltage of L3-L1 (Vac),sola_conc_lexa__3721kwp__pcc_prod_volt_of_l3_l1__u_vac
 [Solar Concept 3721 KWp Lexaina] PCC Total Production active power (kW),sola_conc_lexa__3721kwp__pcc_tota_prod_acti_powe__u_kw
 [Solar Concept 3721 KWp Lexaina] PCC Total Production reactive power (kVAr),sola_conc_lexa__3721kwp__pcc_tota_prod_reac_powe__u_kvar
-[Solar Concept 3721 KWp Lexaina] Solar Concept 3721 KWp Lexaina Average Irradiance (W*m^-2),sola_conc_lexa__3721kwp__sola_conc_372_e883db3393__u_w_m_2
+[Solar Concept 3721 KWp Lexaina] Solar Concept 3721 KWp Lexaina Average Irradiance (W*m^-2),sola_conc_lexa__3721kwp__aver_irra__u_w_m_2
 [Solar Datum 2910 KWp Lexaina] PCC PCC Current THD-R of phase L1 (%),sola_datu_lexa__2910kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Solar Datum 2910 KWp Lexaina] PCC PCC Current THD-R of phase L2 (%),sola_datu_lexa__2910kwp__pcc_curr_thd_r_of_phas_l2__u_pct
 [Solar Datum 2910 KWp Lexaina] PCC PCC Current THD-R of phase L3 (%),sola_datu_lexa__2910kwp__pcc_curr_thd_r_of_phas_l3__u_pct
@@ -895,7 +895,7 @@ Timestamp,datetime
 [Solar Datum 2910 KWp Lexaina] PCC Total Production active power (kW),sola_datu_lexa__2910kwp__pcc_tota_prod_acti_powe__u_kw
 [Solar Datum 2910 KWp Lexaina] PCC Total Production apparent power (kVA),sola_datu_lexa__2910kwp__pcc_tota_prod_appa_powe__u_kva
 [Solar Datum 2910 KWp Lexaina] PCC Total Production reactive power (kVAr),sola_datu_lexa__2910kwp__pcc_tota_prod_reac_powe__u_kvar
-[Solar Datum 2910 KWp Lexaina] Solar Datum 2910 KWp Lexaina Average Irradiance (W*m^-2),sola_datu_lexa__2910kwp__sola_datu_291_8143312278__u_w_m_2
+[Solar Datum 2910 KWp Lexaina] Solar Datum 2910 KWp Lexaina Average Irradiance (W*m^-2),sola_datu_lexa__2910kwp__aver_irra__u_w_m_2
 [Solar Datum 864 KWp Darali] Main Weather Station Ambient Temperature (C),sola_datu_dara__864kwp__main_weat_stat_ambi_temp__u_c
 [Solar Datum 864 KWp Darali] Main Weather Station Relative Humidity  (%),sola_datu_dara__864kwp__main_weat_stat_rela_humi__u_pct
 [Solar Datum 864 KWp Darali] PCC PCC Current THD-R of neutral (%),sola_datu_dara__864kwp__pcc_curr_thd_r_of_neut__u_pct
@@ -940,7 +940,7 @@ Timestamp,datetime
 [Solar Datum 864 KWp Darali] PCC Total Production active power (kW),sola_datu_dara__864kwp__pcc_tota_prod_acti_powe__u_kw
 [Solar Datum 864 KWp Darali] PCC Total Production apparent power (kVA),sola_datu_dara__864kwp__pcc_tota_prod_appa_powe__u_kva
 [Solar Datum 864 KWp Darali] PCC Total Production reactive power (kVAr),sola_datu_dara__864kwp__pcc_tota_prod_reac_powe__u_kvar
-[Solar Datum 864 KWp Darali] Solar Datum 864 KWp Darali Average Irradiance (W*m^-2),sola_datu_dara__864kwp__sola_datu_864_478c2598b9__u_w_m_2
+[Solar Datum 864 KWp Darali] Solar Datum 864 KWp Darali Average Irradiance (W*m^-2),sola_datu_dara__864kwp__aver_irra__u_w_m_2
 [Solar Factory 494kWp Andravida] PCC PCC Current THD-R of neutral (%),sola_fact_andr__494kwp__pcc_curr_thd_r_of_neut__u_pct
 [Solar Factory 494kWp Andravida] PCC PCC Current THD-R of phase L1 (%),sola_fact_andr__494kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Solar Factory 494kWp Andravida] PCC PCC Current THD-R of phase L2 (%),sola_fact_andr__494kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -1028,7 +1028,7 @@ Timestamp,datetime
 [Spes Solaris 1527 KWp Darali] PCC Total Production active power (kW),spes_sola_dara__1527kwp__pcc_tota_prod_acti_powe__u_kw
 [Spes Solaris 1527 KWp Darali] PCC Total Production apparent power (kVA),spes_sola_dara__1527kwp__pcc_tota_prod_appa_powe__u_kva
 [Spes Solaris 1527 KWp Darali] PCC Total Production reactive power (kVAr),spes_sola_dara__1527kwp__pcc_tota_prod_reac_powe__u_kvar
-[Spes Solaris 1527 KWp Darali] Spes Solaris 1527 KWp Darali Average Irradiance (W*m^-2),spes_sola_dara__1527kwp__spes_sola_152_4bd80a9814__u_w_m_2
+[Spes Solaris 1527 KWp Darali] Spes Solaris 1527 KWp Darali Average Irradiance (W*m^-2),spes_sola_dara__1527kwp__aver_irra__u_w_m_2
 [Spes Solaris 1986 KWp Lexaina] PCC PCC Current THD-R of phase L1 (%),spes_sola_lexa__1986kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Spes Solaris 1986 KWp Lexaina] PCC PCC Current THD-R of phase L2 (%),spes_sola_lexa__1986kwp__pcc_curr_thd_r_of_phas_l2__u_pct
 [Spes Solaris 1986 KWp Lexaina] PCC PCC Current THD-R of phase L3 (%),spes_sola_lexa__1986kwp__pcc_curr_thd_r_of_phas_l3__u_pct
@@ -1064,7 +1064,7 @@ Timestamp,datetime
 [Spes Solaris 1986 KWp Lexaina] PCC Total Production active power (kW),spes_sola_lexa__1986kwp__pcc_tota_prod_acti_powe__u_kw
 [Spes Solaris 1986 KWp Lexaina] PCC Total Production apparent power (kVA),spes_sola_lexa__1986kwp__pcc_tota_prod_appa_powe__u_kva
 [Spes Solaris 1986 KWp Lexaina] PCC Total Production reactive power (kVAr),spes_sola_lexa__1986kwp__pcc_tota_prod_reac_powe__u_kvar
-[Spes Solaris 1986 KWp Lexaina] Spes Solaris 1986 KWp Lexaina Average Irradiance (W*m^-2),spes_sola_lexa__1986kwp__spes_sola_198_6e9d9d40df__u_w_m_2
+[Spes Solaris 1986 KWp Lexaina] Spes Solaris 1986 KWp Lexaina Average Irradiance (W*m^-2),spes_sola_lexa__1986kwp__aver_irra__u_w_m_2
 [Spes Solaris 201 KWp Konizos] PCC PCC Current THD-R of neutral (%),spes_sola_koni__201kwp__pcc_curr_thd_r_of_neut__u_pct
 [Spes Solaris 201 KWp Konizos] PCC PCC Current THD-R of phase L1 (%),spes_sola_koni__201kwp__pcc_curr_thd_r_of_phas_l1__u_pct
 [Spes Solaris 201 KWp Konizos] PCC PCC Current THD-R of phase L2 (%),spes_sola_koni__201kwp__pcc_curr_thd_r_of_phas_l2__u_pct
@@ -1104,7 +1104,7 @@ Timestamp,datetime
 [Spes Solaris 201 KWp Konizos] PCC Total Production active power (kW),spes_sola_koni__201kwp__pcc_tota_prod_acti_powe__u_kw
 [Spes Solaris 201 KWp Konizos] PCC Total Production apparent power (kVA),spes_sola_koni__201kwp__pcc_tota_prod_appa_powe__u_kva
 [Spes Solaris 201 KWp Konizos] PCC Total Production reactive power (kVAr),spes_sola_koni__201kwp__pcc_tota_prod_reac_powe__u_kvar
-[Spes Solaris 201 KWp Konizos] Spes Solaris 201 KWp Konizos Average Irradiance (W*m^-2),spes_sola_koni__201kwp__spes_sola_201_7a477f18d0__u_w_m_2
+[Spes Solaris 201 KWp Konizos] Spes Solaris 201 KWp Konizos Average Irradiance (W*m^-2),spes_sola_koni__201kwp__aver_irra__u_w_m_2
 [Spes Solaris 500 KWp Kavasila] PCC PCC active energy export (kWh),spes_sola_kava__500kwp__pcc_acti_ener_expo__u_kwh
 [Spes Solaris 500 KWp Kavasila] PCC PCC active energy import (kWh),spes_sola_kava__500kwp__pcc_acti_ener_impo__u_kwh
 [Spes Solaris 500 KWp Kavasila] PCC PCC apparent energy (kVAh),spes_sola_kava__500kwp__pcc_appa_ener__u_kvah
@@ -1134,7 +1134,7 @@ Timestamp,datetime
 [Spes Solaris 500 KWp Kavasila] PCC Total Production active power (kW),spes_sola_kava__500kwp__pcc_tota_prod_acti_powe__u_kw
 [Spes Solaris 500 KWp Kavasila] PCC Total Production apparent power (kVA),spes_sola_kava__500kwp__pcc_tota_prod_appa_powe__u_kva
 [Spes Solaris 500 KWp Kavasila] PCC Total Production reactive power (kVAr),spes_sola_kava__500kwp__pcc_tota_prod_reac_powe__u_kvar
-[Spes Solaris 500 KWp Kavasila] Spes Solaris 500 KWp Kavasila Average Irradiance (W*m^-2),spes_sola_kava__500kwp__spes_sola_500_42e58c9649__u_w_m_2
+[Spes Solaris 500 KWp Kavasila] Spes Solaris 500 KWp Kavasila Average Irradiance (W*m^-2),spes_sola_kava__500kwp__aver_irra__u_w_m_2
 [Spes Solaris 500 KWp Kavasila] Weather Station Ambient Temperature (C),spes_sola_kava__500kwp__weat_stat_ambi_temp__u_c
 [Spes Solaris 500 KWp Kavasila] Weather Station Relative Humidity  (%),spes_sola_kava__500kwp__weat_stat_rela_humi__u_pct
 [Spes Solaris 805 KWp Konizos] PCC PCC Current THD-R of neutral (%),spes_sola_koni__805kwp__pcc_curr_thd_r_of_neut__u_pct
@@ -1179,7 +1179,7 @@ Timestamp,datetime
 [Spes Solaris 805 KWp Konizos] PCC Total Production active power (kW),spes_sola_koni__805kwp__pcc_tota_prod_acti_powe__u_kw
 [Spes Solaris 805 KWp Konizos] PCC Total Production apparent power (kVA),spes_sola_koni__805kwp__pcc_tota_prod_appa_powe__u_kva
 [Spes Solaris 805 KWp Konizos] PCC Total Production reactive power (kVAr),spes_sola_koni__805kwp__pcc_tota_prod_reac_powe__u_kvar
-[Spes Solaris 805 KWp Konizos] Spes Solaris 805 KWp Konizos Average Irradiance (W*m^-2),spes_sola_koni__805kwp__spes_sola_805_683a44c127__u_w_m_2
+[Spes Solaris 805 KWp Konizos] Spes Solaris 805 KWp Konizos Average Irradiance (W*m^-2),spes_sola_koni__805kwp__aver_irra__u_w_m_2
 [Spes Solaris 805 KWp Konizos] Weather Station Ambient temperature (C),spes_sola_koni__805kwp__weat_stat_ambi_temp__u_c
 [Spes Solaris 805 KWp Konizos] Weather Station Relative humidity (%),spes_sola_koni__805kwp__weat_stat_rela_humi__u_pct
 [Spes Solaris 805 KWp Konizos] Weather Station Wind speed (m*s^-1),spes_sola_koni__805kwp__weat_stat_wind_spee__u_m_s_1

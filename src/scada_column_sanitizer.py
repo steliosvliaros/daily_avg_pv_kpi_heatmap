@@ -33,6 +33,50 @@ def _dedupe_tokens_preserve_order(text: str) -> str:
         out.append(t)
     return " ".join(out)
 
+def _strip_leading_park_tokens(park_name: str, rest: str) -> str:
+    """
+    If rest begins with the park name tokens, drop that prefix to avoid
+    repeating the park name inside the measurement string.
+    """
+    def _normalize_token(token: str) -> str:
+        return re.sub(r"[^a-z0-9]+", "", token.lower())
+
+    def _is_capacity_token(token: str) -> bool:
+        if not token:
+            return False
+        if re.fullmatch(r"\d+(?:\.\d+)?", token):
+            return True
+        return token in ("kwp", "kw", "mw", "mwp")
+
+    park_tokens = [t for t in re.split(r"[^A-Za-z0-9]+", park_name.lower()) if t]
+    rest_tokens = rest.split()
+    rest_norm = [_normalize_token(t) for t in rest_tokens]
+
+    if not park_tokens or not rest_tokens:
+        return rest
+
+    i = 0
+    j = 0
+    while i < len(rest_tokens) and j < len(park_tokens):
+        token = rest_norm[i]
+        if not token:
+            i += 1
+            continue
+        if token == park_tokens[j]:
+            i += 1
+            j += 1
+            continue
+        if _is_capacity_token(token):
+            i += 1
+            continue
+        break
+
+    if j == len(park_tokens) and i > 0:
+        trimmed = " ".join(rest_tokens[i:]).strip()
+        return trimmed
+
+    return rest
+
 def _snake_case_sql(text: str, *, prefix_if_starts_digit: str) -> str:
     s = text.strip()
     s = re.sub(r"[^\w]+", "_", s, flags=re.UNICODE)
@@ -169,6 +213,8 @@ class ScadaColumnSanitizer:
 
         park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
         rest_clean = _dedupe_tokens_preserve_order(rest)
+
+        rest_clean = _strip_leading_park_tokens(park_name_clean, rest_clean)
 
         unit = ""
         m_unit = TRAILING_UNIT_PARENS_RE.search(rest_clean)
