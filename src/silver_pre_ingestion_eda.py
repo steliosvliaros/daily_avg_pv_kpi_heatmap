@@ -16,6 +16,13 @@ class EdaConfig:
     output_dir: Optional[Path] = None
     max_units: int = 8
     max_signals: int = 12
+    max_parks: int = 9
+    grid_cols: int = 3
+    focus_signal: Optional[str] = None
+    focus_unit: Optional[str] = None
+    max_days: Optional[int] = 120
+    max_xticks: int = 12
+    smooth_window: int = 21
     quantiles: Tuple[float, ...] = (0.01, 0.05, 0.5, 0.95, 0.99)
     sample_rows: Optional[int] = 200_000
     save_plots: bool = False
@@ -142,86 +149,309 @@ def coverage_by_park_signal(df: pd.DataFrame) -> pd.DataFrame:
     return coverage.merge(counts, on=["park_id", "signal_name"], how="left")
 
 
-def _plot_count_bar(
+def _select_focus_pair(
     df: pd.DataFrame,
-    col: str,
-    title: str,
-    output_dir: Optional[Path],
-    save: bool,
-) -> Tuple[Optional[plt.Figure], Optional[Path]]:
-    if df.empty or col not in df.columns:
+    focus_signal: Optional[str],
+    focus_unit: Optional[str],
+) -> Tuple[Optional[str], Optional[str]]:
+    if "signal_name" not in df.columns:
         return None, None
-    counts = df[col].value_counts().head(20)
+
+    if focus_signal:
+        signal = str(focus_signal).strip().lower()
+        if "unit" not in df.columns:
+            return signal, None
+        if focus_unit:
+            return signal, str(focus_unit).strip().lower()
+        sub = df[df["signal_name"] == signal]
+        if sub.empty:
+            return signal, None
+        unit = sub["unit"].value_counts().index[0]
+        return signal, unit
+
+    if "unit" in df.columns:
+        counts = df.groupby(["signal_name", "unit"]).size().sort_values(ascending=False)
+        if counts.empty:
+            return None, None
+        signal, unit = counts.index[0]
+        return signal, unit
+
+    counts = df["signal_name"].value_counts()
     if counts.empty:
         return None, None
+    return counts.index[0], None
 
-    fig, ax = plt.subplots(figsize=(10, 4))
-    counts.sort_values(ascending=True).plot(kind="barh", ax=ax)
-    ax.set_title(title)
-    ax.set_xlabel("rows")
+
+def _focus_subset(
+    df: pd.DataFrame,
+    focus_signal: Optional[str],
+    focus_unit: Optional[str],
+    max_parks: int,
+) -> Tuple[pd.DataFrame, Optional[str], Optional[str], List[str]]:
+    signal, unit = _select_focus_pair(df, focus_signal, focus_unit)
+    sub = df.copy()
+    if signal:
+        sub = sub[sub["signal_name"] == signal]
+    if unit and "unit" in sub.columns:
+        sub = sub[sub["unit"] == unit]
+    if sub.empty:
+        return sub, signal, unit, []
+    parks = sub["park_id"].value_counts().head(max_parks).index.tolist()
+    return sub, signal, unit, parks
+
+
+def _downsample_timeseries(df: pd.DataFrame, max_rows: Optional[int]) -> pd.DataFrame:
+    if max_rows is None or len(df) <= max_rows:
+        return df
+    step = max(1, int(len(df) / max_rows))
+    return df.iloc[::step]
+
+
+def _smooth_series(values: pd.Series, window: int) -> pd.Series:
+    if window <= 1 or len(values) < window:
+        return values
+    min_periods = max(1, window // 2)
+    return values.rolling(window=window, center=True, min_periods=min_periods).mean()
+
+
+def _plot_park_grid_timeseries(
+    df: pd.DataFrame,
+    focus_signal: Optional[str],
+    focus_unit: Optional[str],
+    max_parks: int,
+    grid_cols: int,
+    output_dir: Optional[Path],
+    save: bool,
+    sample_rows: Optional[int],
+    smooth_window: int,
+) -> Tuple[Optional[plt.Figure], Optional[Path], Optional[str], Optional[str]]:
+    if df.empty or "park_id" not in df.columns or "value" not in df.columns:
+        return None, None, focus_signal, focus_unit
+
+    sub, signal, unit, parks = _focus_subset(df, focus_signal, focus_unit, max_parks)
+    if sub.empty or not parks:
+        return None, None, signal, unit
+
+    ncols = max(1, grid_cols)
+    nrows = int((len(parks) + ncols - 1) / ncols)
+    fig, axes = plt.subplots(nrows, ncols, figsize=(4 * ncols, 3 * nrows), squeeze=False)
+
+    for ax, park in zip(axes.flat, parks):
+        park_df = sub[sub["park_id"] == park].copy()
+        park_df = _downsample_timeseries(park_df, sample_rows)
+        if "ts_utc" in park_df.columns:
+            park_df = park_df.sort_values("ts_utc")
+            x = park_df["ts_utc"]
+        elif "interval_start_date" in park_df.columns:
+            park_df = park_df.sort_values("interval_start_date")
+            x = park_df["interval_start_date"]
+        else:
+            x = range(len(park_df))
+        y = park_df["value"].astype(float)
+        ax.plot(x[: len(park_df)], y, linewidth=0.8, alpha=0.5)
+        smooth = _smooth_series(y, window=smooth_window)
+        ax.plot(x[: len(park_df)], smooth, linewidth=1.6, alpha=0.9, color="#D62728")
+        ax.set_title(str(park))
+        ax.tick_params(axis="x", labelrotation=45)
+
+    for ax in axes.flat[len(parks):]:
+        ax.set_visible(False)
+
+    title_parts = ["per-park timeseries"]
+    if signal:
+        title_parts.append(f"signal={signal}")
+    if unit:
+        title_parts.append(f"unit={unit}")
+    fig.suptitle(" | ".join(title_parts))
     fig.tight_layout()
 
     out_path = None
     if save and output_dir is not None:
-        out_path = output_dir / f"counts_{col}.png"
+        out_path = output_dir / "park_grid_timeseries.png"
+        fig.savefig(out_path, dpi=150)
+    return fig, out_path, signal, unit
+
+
+def _plot_park_grid_histograms(
+    df: pd.DataFrame,
+    parks: List[str],
+    signal: Optional[str],
+    unit: Optional[str],
+    grid_cols: int,
+    output_dir: Optional[Path],
+    save: bool,
+    sample_rows: Optional[int],
+) -> Tuple[Optional[plt.Figure], Optional[Path]]:
+    if df.empty or not parks:
+        return None, None
+
+    ncols = max(1, grid_cols)
+    nrows = int((len(parks) + ncols - 1) / ncols)
+    fig, axes = plt.subplots(nrows, ncols, figsize=(4 * ncols, 3 * nrows), squeeze=False)
+
+    for ax, park in zip(axes.flat, parks):
+        park_df = df[df["park_id"] == park].copy()
+        park_df = _maybe_sample(park_df, sample_rows)
+        values = park_df["value"].dropna()
+        ax.hist(values, bins=40, color="#4C78A8", alpha=0.85)
+        if not values.empty:
+            p50 = values.quantile(0.5)
+            p70 = values.quantile(0.7)
+            p90 = values.quantile(0.9)
+            ax.axvline(p50, color="#E45756", linewidth=1.2, alpha=0.9)
+            ax.axvline(p70, color="#F58518", linewidth=1.0, alpha=0.9, linestyle="--")
+            ax.axvline(p90, color="#54A24B", linewidth=1.0, alpha=0.9, linestyle="--")
+        ax.set_title(str(park))
+        ax.set_xlabel("value")
+        ax.set_ylabel("count")
+
+    for ax in axes.flat[len(parks):]:
+        ax.set_visible(False)
+
+    title_parts = ["per-park distribution"]
+    if signal:
+        title_parts.append(f"signal={signal}")
+    if unit:
+        title_parts.append(f"unit={unit}")
+    fig.suptitle(" | ".join(title_parts))
+    fig.tight_layout()
+
+    out_path = None
+    if save and output_dir is not None:
+        out_path = output_dir / "park_grid_hist.png"
         fig.savefig(out_path, dpi=150)
     return fig, out_path
 
 
-def _plot_unit_histograms(
+def _plot_park_grid_boxplots(
     df: pd.DataFrame,
-    units: List[str],
+    parks: List[str],
+    signal: Optional[str],
+    unit: Optional[str],
+    grid_cols: int,
     output_dir: Optional[Path],
-    sample_rows: Optional[int],
     save: bool,
-) -> Tuple[List[plt.Figure], List[Path]]:
-    figs: List[plt.Figure] = []
-    paths: List[Path] = []
-    for unit in units:
-        sub = df[df["unit"] == unit]
-        if sub.empty:
+    sample_rows: Optional[int],
+) -> Tuple[Optional[plt.Figure], Optional[Path]]:
+    if df.empty or not parks:
+        return None, None
+
+    ncols = max(1, grid_cols)
+    nrows = int((len(parks) + ncols - 1) / ncols)
+    fig, axes = plt.subplots(nrows, ncols, figsize=(4 * ncols, 3 * nrows), squeeze=False)
+
+    for ax, park in zip(axes.flat, parks):
+        park_df = df[df["park_id"] == park].copy()
+        park_df = _maybe_sample(park_df, sample_rows)
+        values = park_df["value"].dropna()
+        if values.empty:
+            ax.set_visible(False)
             continue
-        sub = _maybe_sample(sub, sample_rows)
+        ax.boxplot(values, vert=True, showfliers=False)
+        ax.set_title(str(park))
+        ax.set_xticks([])
 
-        fig, ax = plt.subplots(figsize=(6, 4))
-        ax.hist(sub["value"].dropna(), bins=50, color="#4C78A8", alpha=0.85)
-        ax.set_title(f"value distribution: {unit}")
-        ax.set_xlabel("value")
-        ax.set_ylabel("count")
-        fig.tight_layout()
+    for ax in axes.flat[len(parks):]:
+        ax.set_visible(False)
 
-        out_path = None
-        if save and output_dir is not None:
-            out_path = output_dir / f"hist_{unit}.png"
-            fig.savefig(out_path, dpi=150)
-            paths.append(out_path)
-        figs.append(fig)
-    return figs, paths
+    title_parts = ["per-park boxplot"]
+    if signal:
+        title_parts.append(f"signal={signal}")
+    if unit:
+        title_parts.append(f"unit={unit}")
+    fig.suptitle(" | ".join(title_parts))
+    fig.tight_layout()
+
+    out_path = None
+    if save and output_dir is not None:
+        out_path = output_dir / "park_grid_box.png"
+        fig.savefig(out_path, dpi=150)
+    return fig, out_path
 
 
-def _plot_unit_boxplot(
+def _plot_coverage_heatmap(
     df: pd.DataFrame,
-    units: List[str],
+    parks: List[str],
+    signal: Optional[str],
+    unit: Optional[str],
+    max_days: Optional[int],
+    max_xticks: int,
     output_dir: Optional[Path],
     save: bool,
 ) -> Tuple[Optional[plt.Figure], Optional[Path]]:
-    if df.empty or not units:
+    if df.empty or not parks:
         return None, None
-    sub = df[df["unit"].isin(units)]
-    if sub.empty:
+
+    if "interval_start_date" in df.columns:
+        df = df.copy()
+        df["date"] = pd.to_datetime(df["interval_start_date"], errors="coerce")
+    elif "ts_utc" in df.columns:
+        df = df.copy()
+        df["date"] = pd.to_datetime(df["ts_utc"], errors="coerce", utc=True).dt.floor("D")
+    else:
         return None, None
-    fig, ax = plt.subplots(figsize=(10, 4))
-    data = [sub[sub["unit"] == u]["value"].dropna() for u in units]
-    ax.boxplot(data, labels=units, vert=False, showfliers=False)
-    ax.set_title("value spread by unit")
-    ax.set_xlabel("value")
+
+    df = df.dropna(subset=["date"])
+    if df.empty:
+        return None, None
+
+    df = df[df["park_id"].isin(parks)]
+    if max_days is not None and not df.empty:
+        last_date = df["date"].max()
+        df = df[df["date"] >= last_date - pd.Timedelta(days=max_days)]
+
+    pivot = df.groupby(["park_id", "date"]).size().unstack(fill_value=0)
+    pivot = pivot.reindex(sorted(pivot.columns), axis=1)
+    if pivot.empty:
+        return None, None
+
+    fig, ax = plt.subplots(figsize=(10, 0.4 * len(parks) + 2))
+    im = ax.imshow(pivot.values, aspect="auto", interpolation="nearest")
+    ax.set_yticks(range(len(pivot.index)))
+    ax.set_yticklabels(pivot.index)
+    if len(pivot.columns) > 0:
+        step = max(1, int(len(pivot.columns) / max(1, max_xticks)))
+        xticks = list(range(0, len(pivot.columns), step))
+        ax.set_xticks(xticks)
+        ax.set_xticklabels(
+            [pivot.columns[i].strftime("%Y-%m-%d") for i in xticks],
+            rotation=90,
+            fontsize=7,
+        )
+    title_parts = ["coverage heatmap (rows per day)"]
+    if signal:
+        title_parts.append(f"signal={signal}")
+    if unit:
+        title_parts.append(f"unit={unit}")
+    ax.set_title(" | ".join(title_parts))
+    fig.colorbar(im, ax=ax, shrink=0.8)
     fig.tight_layout()
 
     out_path = None
     if save and output_dir is not None:
-        out_path = output_dir / "boxplot_units.png"
+        out_path = output_dir / "coverage_heatmap.png"
         fig.savefig(out_path, dpi=150)
     return fig, out_path
+
+
+def stats_by_park(
+    df: pd.DataFrame,
+    parks: List[str],
+    quantiles: Iterable[float],
+) -> pd.DataFrame:
+    if df.empty or "park_id" not in df.columns or "value" not in df.columns:
+        return pd.DataFrame()
+    if parks:
+        df = df[df["park_id"].isin(parks)]
+    if df.empty:
+        return pd.DataFrame()
+    group = df.groupby("park_id")["value"]
+    stats = group.agg(count="size", min="min", max="max", mean="mean", std="std")
+    q_list = list(quantiles)
+    q_labels = [_quantile_label(q) for q in q_list]
+    q_df = group.quantile(q_list).unstack()
+    q_df.columns = q_labels
+    return stats.join(q_df, how="left").reset_index()
 
 
 def run_silver_pre_ingestion_eda(
@@ -240,6 +470,10 @@ def run_silver_pre_ingestion_eda(
     unit_stats = stats_by_unit(df, config.quantiles)
     signal_stats = stats_by_signal_unit(df, config.quantiles, config.max_signals)
     coverage = coverage_by_park_signal(df)
+    focus_df, focus_signal, focus_unit, focus_parks = _focus_subset(
+        df, config.focus_signal, config.focus_unit, config.max_parks
+    )
+    park_stats = stats_by_park(focus_df, focus_parks, config.quantiles)
 
     overview_path = None
     if config.save_stats and config.output_dir is not None:
@@ -262,10 +496,59 @@ def run_silver_pre_ingestion_eda(
 
     figs: List[plt.Figure] = []
     plot_paths: List[Path] = []
-    fig, path = _plot_count_bar(
+    fig, path, focus_signal, focus_unit = _plot_park_grid_timeseries(
         df,
-        "unit",
-        "rows by unit (top 20)",
+        config.focus_signal,
+        config.focus_unit,
+        config.max_parks,
+        config.grid_cols,
+        config.output_dir,
+        config.save_plots,
+        config.sample_rows,
+        config.smooth_window,
+    )
+    if fig:
+        figs.append(fig)
+    if path:
+        plot_paths.append(path)
+
+    fig, path = _plot_park_grid_histograms(
+        focus_df,
+        focus_parks,
+        focus_signal,
+        focus_unit,
+        config.grid_cols,
+        config.output_dir,
+        config.save_plots,
+        config.sample_rows,
+    )
+    if fig:
+        figs.append(fig)
+    if path:
+        plot_paths.append(path)
+
+    fig, path = _plot_park_grid_boxplots(
+        focus_df,
+        focus_parks,
+        focus_signal,
+        focus_unit,
+        config.grid_cols,
+        config.output_dir,
+        config.save_plots,
+        config.sample_rows,
+    )
+    if fig:
+        figs.append(fig)
+    if path:
+        plot_paths.append(path)
+
+    fig, path = _plot_coverage_heatmap(
+        focus_df,
+        focus_parks,
+        focus_signal,
+        focus_unit,
+        config.max_days,
+        config.max_xticks,
         config.output_dir,
         config.save_plots,
     )
@@ -273,41 +556,15 @@ def run_silver_pre_ingestion_eda(
         figs.append(fig)
     if path:
         plot_paths.append(path)
-
-    fig, path = _plot_count_bar(
-        df,
-        "signal_name",
-        "rows by signal (top 20)",
-        config.output_dir,
-        config.save_plots,
-    )
-    if fig:
-        figs.append(fig)
-    if path:
-        plot_paths.append(path)
-
-    if "unit" in df.columns:
-        top_units = df["unit"].value_counts().head(config.max_units).index.tolist()
-        unit_figs, unit_paths = _plot_unit_histograms(
-            df,
-            top_units,
-            config.output_dir,
-            config.sample_rows,
-            config.save_plots,
-        )
-        figs.extend(unit_figs)
-        plot_paths.extend(unit_paths)
-        fig, path = _plot_unit_boxplot(df, top_units, config.output_dir, config.save_plots)
-        if fig:
-            figs.append(fig)
-        if path:
-            plot_paths.append(path)
 
     return {
         "overview": overview,
         "unit_stats": unit_stats,
         "signal_stats": signal_stats,
         "coverage": coverage,
+        "park_stats": park_stats,
+        "focus_signal": focus_signal,
+        "focus_unit": focus_unit,
         "overview_path": overview_path,
         "unit_stats_path": unit_stats_path,
         "signal_stats_path": signal_stats_path,
@@ -322,6 +579,13 @@ def build_cfg(args) -> EdaConfig:
         output_dir=Path(args.output_dir).resolve() if args.output_dir else None,
         max_units=args.max_units,
         max_signals=args.max_signals,
+        max_parks=args.max_parks,
+        grid_cols=args.grid_cols,
+        focus_signal=args.focus_signal,
+        focus_unit=args.focus_unit,
+        max_days=args.max_days,
+        max_xticks=args.max_xticks,
+        smooth_window=args.smooth_window,
         quantiles=tuple(float(q) for q in args.quantiles.split(",")),
         sample_rows=args.sample_rows,
         save_plots=args.save_plots,
@@ -335,6 +599,13 @@ def main() -> None:
     ap.add_argument("--output_dir", default=None, help="Output directory for EDA artifacts")
     ap.add_argument("--max_units", type=int, default=8, help="Max units to plot")
     ap.add_argument("--max_signals", type=int, default=12, help="Max signal/unit pairs to summarize")
+    ap.add_argument("--max_parks", type=int, default=9, help="Max parks to plot in grid")
+    ap.add_argument("--grid_cols", type=int, default=3, help="Grid columns for per-park plots")
+    ap.add_argument("--focus_signal", default=None, help="Optional signal_name to plot per-park")
+    ap.add_argument("--focus_unit", default=None, help="Optional unit to plot per-park")
+    ap.add_argument("--max_days", type=int, default=120, help="Max days for coverage heatmap")
+    ap.add_argument("--max_xticks", type=int, default=12, help="Max x-axis ticks for coverage heatmap")
+    ap.add_argument("--smooth_window", type=int, default=10, help="Rolling window size for smoothing")
     ap.add_argument("--quantiles", default="0.01,0.05,0.5,0.95,0.99", help="Comma-separated quantiles")
     ap.add_argument("--sample_rows", type=int, default=200000, help="Sample rows per unit for plots")
     ap.add_argument("--save_plots", action="store_true", help="Save plots to output_dir")
@@ -357,6 +628,7 @@ __all__ = [
     "run_silver_pre_ingestion_eda",
     "stats_by_unit",
     "stats_by_signal_unit",
+    "stats_by_park",
     "coverage_by_park_signal",
 ]
 
