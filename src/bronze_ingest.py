@@ -89,6 +89,9 @@ class Config:
     csv_sep: Optional[str] = None
     csv_encoding: Optional[str] = None
 
+    # Runtime toggles
+    allow_duplicates: bool = False
+
 
 # -----------------------------
 # Patterns
@@ -141,6 +144,28 @@ def ensure_parquet_engine() -> None:
             raise RuntimeError(
                 "Parquet engine not found. Install 'pyarrow' (recommended) or 'fastparquet'."
             )
+
+
+def ensure_under(target: Path, root: Path) -> None:
+    """Guard destructive operations by ensuring target is within root."""
+    target_res = target.resolve()
+    root_res = root.resolve()
+    if target_res == root_res:
+        return
+    if root_res not in target_res.parents:
+        raise ValueError(f"Refusing to operate outside root: {target} (root={root})")
+
+
+def safe_rmtree(p: Path) -> None:
+    if p.exists():
+        shutil.rmtree(p)
+
+
+def safe_unlink(p: Path) -> None:
+    try:
+        p.unlink()
+    except FileNotFoundError:
+        pass
 
 
 # -----------------------------
@@ -444,6 +469,30 @@ def release_lock(lock_path: Path) -> None:
 
 
 # -----------------------------
+# Reset utilities
+# -----------------------------
+
+def reset_ops(cfg: Config, remove_run_logs: bool = True) -> None:
+    reg = registry_path(cfg)
+    runlog_dir = cfg.bronze_root / cfg.ops_dirname / cfg.runlog_dirname
+    lock = cfg.lockfile
+    ensure_under(reg, cfg.bronze_root)
+    ensure_under(runlog_dir, cfg.bronze_root)
+    ensure_under(lock, cfg.data_root)
+    safe_unlink(reg)
+    if remove_run_logs:
+        safe_rmtree(runlog_dir)
+    safe_unlink(lock)
+
+
+def reset_dataset(cfg: Config, remove_run_logs: bool = True) -> None:
+    dataset_dir = cfg.bronze_root / cfg.dataset_name
+    ensure_under(dataset_dir, cfg.bronze_root)
+    safe_rmtree(dataset_dir)
+    reset_ops(cfg, remove_run_logs=remove_run_logs)
+
+
+# -----------------------------
 # Main folder ingestion
 # -----------------------------
 
@@ -458,7 +507,7 @@ def list_inbox_files(cfg: Config) -> List[Path]:
     return files
 
 def ingest_one_file(inbox_file: Path, mapping: Dict[str, str], cfg: Config, registry_df: pd.DataFrame,
-                     mapping_filename: str = "", mapping_file_hash: str = "") -> Tuple[str, str]:
+                     mapping_filename: str = "", mapping_file_hash: str = "", allow_duplicates: bool = False) -> Tuple[str, str]:
     """
     Returns (status, message) where status in {"ingested","skipped_duplicate","rejected"}.
     Always moves file out of processing to archive/rejected.
@@ -491,8 +540,10 @@ def ingest_one_file(inbox_file: Path, mapping: Dict[str, str], cfg: Config, regi
     try:
         file_hash = sha256_file(proc_path)
 
-        # Duplicate hash => skip and archive under duplicates
-        if registry_has_hash(registry_df, cfg.dataset_name, file_hash):
+        duplicate_seen = registry_has_hash(registry_df, cfg.dataset_name, file_hash)
+
+        # Duplicate hash => skip unless explicitly allowed
+        if duplicate_seen and not allow_duplicates:
             archived_path = move_to_archive(proc_path, cfg, file_hash, bucket="duplicates")
             append_registry_row(cfg, {
                 "dataset": cfg.dataset_name,
@@ -527,6 +578,8 @@ def ingest_one_file(inbox_file: Path, mapping: Dict[str, str], cfg: Config, regi
         # Archive source file (success)
         archived_path = move_to_archive(proc_path, cfg, file_hash, bucket="archived")
 
+        status_note = "duplicate hash re-ingested (allow_duplicates)" if duplicate_seen else "ok"
+
         # Register + runlog (with mapping metadata)
         append_registry_row(cfg, {
             "dataset": cfg.dataset_name,
@@ -540,7 +593,7 @@ def ingest_one_file(inbox_file: Path, mapping: Dict[str, str], cfg: Config, regi
             "mapping_filename": mapping_filename,
             "mapping_file_hash": mapping_file_hash,
             "ingested_at_utc": utc_now().isoformat(),
-            "message": "ok",
+            "message": status_note,
         })
 
         write_runlog(cfg, run, {
@@ -554,9 +607,13 @@ def ingest_one_file(inbox_file: Path, mapping: Dict[str, str], cfg: Config, regi
             "rows_long": int(len(long_df)),
             "files_written": written_files,
             "ingested_at_utc": utc_now().isoformat(),
+            "duplicate_seen": bool(duplicate_seen),
+            "allow_duplicates": bool(allow_duplicates),
+            "status_note": status_note,
         })
 
-        return "ingested", f"ingested; archived to {archived_path}; wrote {len(written_files)} parquet file(s)"
+        suffix = " (allow_duplicates)" if duplicate_seen else ""
+        return "ingested", f"ingested{suffix}; archived to {archived_path}; wrote {len(written_files)} parquet file(s)"
 
     except Exception as e:
         # Move to rejected and log reason
@@ -637,7 +694,15 @@ def ingest_folder(cfg: Config, mapping_filename: Optional[str] = None) -> None:
         print(f"Using mapping: {mapping_filename} (hash: {mapping_file_hash[:12]})")
         
         for f in files:
-            status, msg = ingest_one_file(f, mapping, cfg, registry_df, mapping_filename, mapping_file_hash)
+            status, msg = ingest_one_file(
+                f,
+                mapping,
+                cfg,
+                registry_df,
+                mapping_filename,
+                mapping_file_hash,
+                allow_duplicates=cfg.allow_duplicates,
+            )
             print(f"[{status}] {f.name} -> {msg}")
 
             # Reload registry after each file so hash-skip is up-to-date within the same run
@@ -673,6 +738,7 @@ def build_cfg(args) -> Config:
         sheet_name=args.sheet,
         csv_sep=args.sep,
         csv_encoding=args.encoding,
+        allow_duplicates=args.allow_duplicates,
     )
 
     # lockfile in data_root/_locks
@@ -699,9 +765,31 @@ def main() -> None:
     ap.add_argument("--sheet", default=None, help="Excel sheet name (optional)")
     ap.add_argument("--sep", default=None, help="CSV delimiter (optional)")
     ap.add_argument("--encoding", default=None, help="CSV encoding (optional)")
+    ap.add_argument("--allow_duplicates", action="store_true",
+                    help="Allow duplicate source hashes to be ingested again during this run")
+    ap.add_argument("--reset_ops", action="store_true",
+                    help="Delete ingest registry, run logs, and lock file, then exit")
+    ap.add_argument("--reset_dataset", action="store_true",
+                    help="Delete Bronze dataset folder plus ops metadata, then exit")
+    ap.add_argument("--i_understand", action="store_true",
+                    help="Required with --reset_dataset to avoid accidental wipes")
     args = ap.parse_args()
 
     cfg = build_cfg(args)
+
+    if args.reset_dataset:
+        if not args.i_understand:
+            print("Refusing to reset dataset without --i_understand flag.")
+            return
+        reset_dataset(cfg)
+        print(f"Reset dataset under {cfg.bronze_root / cfg.dataset_name} and ops metadata.")
+        return
+
+    if args.reset_ops:
+        reset_ops(cfg)
+        print(f"Reset ops metadata under {cfg.bronze_root / cfg.ops_dirname} and lock file.")
+        return
+
     ingest_folder(cfg, mapping_filename=args.mapping_override)
 
 
