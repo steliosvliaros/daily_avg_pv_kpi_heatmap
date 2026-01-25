@@ -54,47 +54,70 @@ class PrepStats:
 
 def load_new_bronze_parts_from_runlogs(
     bronze_root: Path,
-    state_path: Path,
+    silver_watermark_path: Path,
     dataset_name: str = DEFAULT_DATASET_NAME,
-) -> pd.DataFrame:
+) -> Tuple[pd.DataFrame, List[str]]:
     """
     Load parquet parts from new runs using run logs as the source of truth.
-    Updates state_path to the newest processed run_id if load succeeds.
+    Uses silver watermark to determine what has been committed to silver.
+    Does NOT update watermark - use commit_silver_watermark() after successful silver write.
+    
+    Returns:
+        Tuple of (DataFrame, list of run_ids loaded)
     """
     runlog_dir = bronze_root / "_ops" / "run_logs"
     if not runlog_dir.exists():
-        return pd.DataFrame()
+        return pd.DataFrame(), []
 
-    last_run_id = "00000000T000000Z"
-    if state_path.exists():
-        last_run_id = state_path.read_text(encoding="utf-8").strip() or last_run_id
+    # Read last committed run_id from silver watermark
+    last_committed_run_id = "00000000T000000Z"
+    if silver_watermark_path.exists():
+        last_committed_run_id = silver_watermark_path.read_text(encoding="utf-8").strip() or last_committed_run_id
 
     runlog_files = sorted(runlog_dir.glob("run_*.json"))
-    new_runlogs = [p for p in runlog_files if p.stem.replace("run_", "") > last_run_id]
+    # Load everything > last committed (allows retry if silver write failed)
+    new_runlogs = [p for p in runlog_files if p.stem.replace("run_", "") > last_committed_run_id]
     if not new_runlogs:
-        return pd.DataFrame()
+        return pd.DataFrame(), []
 
     parquet_files: List[str] = []
-    newest_run_id = last_run_id
+    loaded_run_ids: List[str] = []
     for p in new_runlogs:
         payload = json.loads(p.read_text(encoding="utf-8"))
         if payload.get("dataset") != dataset_name:
             continue
         run_id = payload.get("run_id")
-        if run_id and run_id > newest_run_id:
-            newest_run_id = run_id
+        if run_id:
+            loaded_run_ids.append(run_id)
         parquet_files.extend(payload.get("files_written", []))
 
     if not parquet_files:
-        return pd.DataFrame()
+        return pd.DataFrame(), []
 
     dfs = [pd.read_parquet(f) for f in parquet_files]
     df_new = pd.concat(dfs, ignore_index=True)
 
-    state_path.parent.mkdir(parents=True, exist_ok=True)
-    state_path.write_text(newest_run_id, encoding="utf-8")
+    return df_new, loaded_run_ids
 
-    return df_new
+
+def commit_silver_watermark(
+    silver_watermark_path: Path,
+    run_ids: List[str],
+) -> None:
+    """
+    Commit silver watermark after successful silver stage write.
+    Only call this after data has been safely written to silver.
+    
+    Args:
+        silver_watermark_path: Path to silver watermark file
+        run_ids: List of run_ids that were successfully committed
+    """
+    if not run_ids:
+        return
+    
+    newest_run_id = max(run_ids)
+    silver_watermark_path.parent.mkdir(parents=True, exist_ok=True)
+    silver_watermark_path.write_text(newest_run_id, encoding="utf-8")
 
 
 def _normalize_string_col(df: pd.DataFrame, col: str) -> None:

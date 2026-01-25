@@ -13,6 +13,26 @@ import pandas as pd
 
 @dataclass
 class EdaConfig:
+    """Configuration for Silver EDA analysis.
+    
+    Args:
+        output_dir: Directory for saved outputs (required if save_plots or save_stats=True)
+        max_units: Maximum units to analyze in unit stats
+        max_signals: Maximum signals to plot (limits number of signals analyzed)
+        max_parks: Maximum parks per signal grid (None = all parks)
+        grid_cols: Number of columns in park grid plots
+        focus_signal: Plot only this specific signal
+        focus_unit: Unit to use with focus_signal
+        focus_signals: List of specific signals to plot
+        plot_kinds: Types of plots to generate (timeseries, hist, box, coverage)
+        max_days: Filter data to last N days (applies to ALL plots and stats)
+        max_xticks: Maximum x-axis ticks in coverage heatmap
+        smooth_window: Window size for smoothing in timeseries plots
+        quantiles: Quantiles to compute in statistics
+        sample_rows: Sample size for plots (None = use all data)
+        save_plots: Save plot figures to disk
+        save_stats: Save statistics tables to disk
+    """
     output_dir: Optional[Path] = None
     max_units: int = 8
     max_signals: int = 12
@@ -29,6 +49,7 @@ class EdaConfig:
     sample_rows: Optional[int] = 200_000
     save_plots: bool = False
     save_stats: bool = False
+
 
 
 def _coerce_frame(df: pd.DataFrame) -> pd.DataFrame:
@@ -490,9 +511,7 @@ def _plot_coverage_heatmap(
         return None, None
 
     df = df[df["park_id"].isin(parks)]
-    if max_days is not None and not df.empty:
-        last_date = df["date"].max()
-        df = df[df["date"] >= last_date - pd.Timedelta(days=max_days)]
+    # Note: max_days filtering now applied globally in run_silver_pre_ingestion_eda
 
     pivot = df.groupby(["park_id", "date"]).size().unstack(fill_value=0)
     pivot = pivot.reindex(sorted(pivot.columns), axis=1)
@@ -554,6 +573,21 @@ def run_silver_pre_ingestion_eda(
     config: EdaConfig,
 ) -> Dict[str, object]:
     df = _coerce_frame(df)
+    
+    # Filter to last N days if max_days specified (applies to all plots)
+    if config.max_days is not None and not df.empty:
+        if "interval_start_date" in df.columns:
+            df["_temp_date"] = pd.to_datetime(df["interval_start_date"], errors="coerce")
+        elif "ts_utc" in df.columns:
+            df["_temp_date"] = pd.to_datetime(df["ts_utc"], errors="coerce", utc=True).dt.floor("D")
+        else:
+            df["_temp_date"] = None
+        
+        if "_temp_date" in df.columns and df["_temp_date"].notna().any():
+            last_date = df["_temp_date"].max()
+            df = df[df["_temp_date"] >= last_date - pd.Timedelta(days=config.max_days)].copy()
+            df = df.drop(columns=["_temp_date"])
+    
     if config.save_plots or config.save_stats:
         if config.output_dir is None:
             raise ValueError("output_dir must be set when save_plots or save_stats is True")
@@ -640,7 +674,8 @@ def run_silver_pre_ingestion_eda(
                 if path:
                     plot_paths.append(path)
 
-            include_extras = bool(config.focus_signal or config.focus_signals) or idx == 0
+            # Plot all plot types for all signals (controlled by max_signals)
+            include_extras = True
             if include_extras and "hist" in plot_kinds:
                 fig, path = _plot_park_grid_histograms(
                     focus_df,
