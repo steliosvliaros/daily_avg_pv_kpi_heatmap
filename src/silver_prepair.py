@@ -301,26 +301,70 @@ def write_silver_stage(
     *,
     filename: Optional[str] = None,
     compression: str = "zstd",
+    retention: str = "last_n",
+    retain_n: int = 3,
 ) -> Optional[Path]:
     """
     Write a silver-ready parquet stage file for downstream ingestion.
+
+    Retention modes:
+    - keep:    Keep all stage files (no pruning)
+    - latest:  Write to a stable filename (silver_stage_latest.parquet) and remove other stage files
+    - last_n:  Keep the last N stage files by modified time (default retain_n=3)
     """
     if df.empty:
         return None
 
     output_dir.mkdir(parents=True, exist_ok=True)
     if not filename:
-        run_id = None
-        if "run_id" in df.columns:
-            run_ids = [r for r in df["run_id"].dropna().unique() if str(r).strip()]
-            if run_ids:
-                run_id = sorted(run_ids)[-1]
-        if not run_id:
-            run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        filename = f"silver_stage_{run_id}.parquet"
+        if retention == "latest":
+            filename = "silver_stage_latest.parquet"
+        else:
+            run_id = None
+            if "run_id" in df.columns:
+                run_ids = [r for r in df["run_id"].dropna().unique() if str(r).strip()]
+                if run_ids:
+                    run_id = sorted(run_ids)[-1]
+            if not run_id:
+                run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            filename = f"silver_stage_{run_id}.parquet"
 
     out_path = output_dir / filename
     df.to_parquet(out_path, index=False, compression=compression)
+
+    # Apply retention policy
+    mode = (retention or "keep").strip().lower()
+    try:
+        if mode == "keep":
+            return out_path
+        
+        # List all stage files
+        stage_files = sorted(output_dir.glob("silver_stage_*.parquet"), key=lambda p: p.stat().st_mtime, reverse=True)
+        
+        if mode == "latest":
+            # Remove all except the stable latest filename
+            for p in stage_files:
+                if p.name != "silver_stage_latest.parquet":
+                    try:
+                        p.unlink(missing_ok=True)
+                    except Exception:
+                        pass
+            return out_path
+        
+        if mode == "last_n":
+            n = max(1, int(retain_n))
+            # Keep the N most recent files; delete the rest
+            to_delete = stage_files[n:]
+            for p in to_delete:
+                try:
+                    p.unlink(missing_ok=True)
+                except Exception:
+                    pass
+            return out_path
+    finally:
+        # Fall-through returns the written path
+        ...
+
     return out_path
 
 
