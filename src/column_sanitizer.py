@@ -44,16 +44,18 @@ def _build_sanitizer(workspace_root: Path, default_capacity_kwp: float, prompt_m
     from src import scada_column_sanitizer as scs
 
     importlib.reload(scs)
+    
+    # Pass park metadata path to config
+    park_metadata_path = workspace_root / "mappings" / "park_metadata.csv"
+    
     cfg = scs.SanitizeConfig(
         prompt_missing_capacity=prompt_missing_capacity,
         default_capacity_kwp=default_capacity_kwp,
+        park_metadata_path=park_metadata_path if park_metadata_path.exists() else None,
     )
     sanitizer = scs.ScadaColumnSanitizer(config=cfg)
-
-    cap_map = _load_park_capacity_map(workspace_root)
-    if cap_map:
-        sanitizer._park_kwp_cache.update(cap_map)  # type: ignore[attr-defined]
-        print(f"Loaded capacity info for {len(cap_map)} parks from metadata")
+    
+    # Note: capacity cache is now loaded automatically from metadata in __init__
     return sanitizer
 
 

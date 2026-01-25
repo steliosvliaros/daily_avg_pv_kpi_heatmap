@@ -97,10 +97,12 @@ class Config:
 # Patterns
 # -----------------------------
 
-# park_id__capacity__measurement__u_unit  (unit optional)
-# Example: p_4e_ener_liko__176kwp__pcc_curr_thd_r_of_neut__u_pct
-# Groups: park, cap, meas, unit
-COL_RE = re.compile(r"^(?P<park>.+?)__(?P<cap>\d+(?:\.\d+)?kwp)__(?P<meas>.+?)(?:__(?P<unit>u_[a-z0-9_]+))?$")
+# park_id__signal_name__unit  (unit optional)
+# Format uses two-step sanitization: park_id from metadata, signal_name independent
+# Example: 4e_energeiaki_176_kwp_likovouni__pcc_active_energy_export__kwh
+# Groups: park_id, meas (signal), unit
+# Note: Capacity is embedded in park_id (e.g., 4e_energeiaki_176_kwp_likovouni includes "176_kwp")
+COL_RE = re.compile(r"^(?P<park_id>.+?)__(?P<meas>.+?)__(?P<unit>[a-z0-9_]+)$")
 
 
 # -----------------------------
@@ -335,7 +337,7 @@ def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_fi
     meas_cols = [c for c in candidate_cols if COL_RE.match(c)]
 
     if not meas_cols:
-        raise ValueError("No measurement columns matched pattern: park__measurement__u_unit")
+        raise ValueError("No measurement columns matched pattern: park_id__signal_name__unit")
 
     # Melt (keep only timestamp ids; extra id columns can be added if you want)
     id_vars = [ts_col, "ts_local", "ts_utc"]
@@ -343,14 +345,14 @@ def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_fi
     long_df = long_df.dropna(subset=["value"])
 
     extracted = long_df["col"].str.extract(COL_RE)
-    long_df["park_id"] = extracted["park"]
+    long_df["park_id"] = extracted["park_id"]
     long_df["signal_name"] = extracted["meas"]
     long_df["unit"] = extracted["unit"]
 
-    # Capacity from the capacity token (e.g., "176kwp")
-    # Extract just the numeric part, removing the "kwp" suffix
-    cap_str = extracted["cap"].str.replace(r"kwp$", "", regex=True)
-    long_df["park_capacity_kwp"] = pd.to_numeric(cap_str, errors="coerce")
+    # Extract capacity from park_id (e.g., "4e_energeiaki_176_kwp_likovouni" -> 176)
+    # Look for pattern: digits followed by "_kwp" anywhere in the park_id
+    capacity_match = extracted["park_id"].str.extract(r"(\d+(?:\.\d+)?)_kwp", expand=False)
+    long_df["park_capacity_kwp"] = pd.to_numeric(capacity_match, errors="coerce")
 
     # Determine interval_start_date for daily values
     ts_local_series = pd.to_datetime(long_df["ts_local"])

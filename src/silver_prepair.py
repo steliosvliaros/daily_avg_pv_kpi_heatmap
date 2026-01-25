@@ -94,7 +94,26 @@ def load_new_bronze_parts_from_runlogs(
     if not parquet_files:
         return pd.DataFrame(), []
 
-    dfs = [pd.read_parquet(f) for f in parquet_files]
+    # Read parquet files, skipping those that don't exist (e.g., after reset)
+    dfs = []
+    missing_files = []
+    for f in parquet_files:
+        file_path = Path(f)
+        if file_path.exists():
+            dfs.append(pd.read_parquet(f))
+        else:
+            missing_files.append(f)
+    
+    if missing_files:
+        print(f"Warning: {len(missing_files)} parquet file(s) referenced in run logs but not found (likely from reset):")
+        for f in missing_files[:3]:  # Show first 3
+            print(f"  {f}")
+        if len(missing_files) > 3:
+            print(f"  ... and {len(missing_files) - 3} more")
+    
+    if not dfs:
+        return pd.DataFrame(), []
+
     df_new = pd.concat(dfs, ignore_index=True)
 
     return df_new, loaded_run_ids

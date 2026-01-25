@@ -158,12 +158,83 @@ def _abbreviate_snake_case(snake_str: str, max_len: int = 4) -> str:
 class SanitizeConfig:
     prompt_missing_capacity: bool = True
     default_capacity_kwp: Optional[float] = None
+    park_metadata_path: Optional[str | Path] = None
 
 class ScadaColumnSanitizer:
     def __init__(self, config: SanitizeConfig = None):
         self.config = config or SanitizeConfig()
         self._seen_outputs: Dict[str, int] = {}
         self._park_kwp_cache: Dict[str, float] = {}
+        self._park_metadata: Optional[pd.DataFrame] = None
+        self._load_park_metadata()
+
+    def _load_park_metadata(self):
+        """Load park metadata CSV if configured."""
+        if self.config.park_metadata_path is None:
+            return
+        
+        path = Path(self.config.park_metadata_path)
+        if not path.exists():
+            return
+        
+        try:
+            self._park_metadata = pd.read_csv(path)
+            # Ensure required columns exist
+            if 'park_id' not in self._park_metadata.columns:
+                self._park_metadata = None
+                return
+            
+            # Pre-populate capacity cache from metadata
+            if 'capacity_kwp' in self._park_metadata.columns:
+                for _, row in self._park_metadata.iterrows():
+                    park_id = str(row.get('park_id', '')).strip()
+                    capacity = row.get('capacity_kwp')
+                    if park_id and pd.notna(capacity):
+                        try:
+                            self._park_kwp_cache[park_id] = float(capacity)
+                        except (TypeError, ValueError):
+                            pass
+        except Exception:
+            self._park_metadata = None
+
+    def _lookup_park_id_from_metadata(self, park_name: str, capacity_kwp: Optional[float] = None) -> Optional[str]:
+        """
+        Look up canonical park_id from park_metadata based on park name and/or capacity.
+        Returns park_id if found, None otherwise.
+        """
+        if self._park_metadata is None or self._park_metadata.empty:
+            return None
+        
+        # Normalize search term
+        park_norm = _snake_case_sql(park_name, prefix_if_starts_digit="p_")
+        
+        # Strategy 1: Try exact match on park_name column if it exists
+        if 'park_name' in self._park_metadata.columns:
+            for _, row in self._park_metadata.iterrows():
+                meta_name = str(row.get('park_name', '')).strip()
+                meta_norm = _snake_case_sql(meta_name, prefix_if_starts_digit="p_")
+                if meta_norm == park_norm:
+                    return str(row.get('park_id', '')).strip()
+        
+        # Strategy 2: Match by capacity if provided
+        if capacity_kwp is not None and 'capacity_kwp' in self._park_metadata.columns:
+            tolerance = 0.1  # Allow 0.1 kWp difference
+            for _, row in self._park_metadata.iterrows():
+                meta_capacity = row.get('capacity_kwp')
+                if pd.notna(meta_capacity):
+                    try:
+                        if abs(float(meta_capacity) - capacity_kwp) < tolerance:
+                            return str(row.get('park_id', '')).strip()
+                    except (TypeError, ValueError):
+                        pass
+        
+        # Strategy 3: Fuzzy match - check if park_id contains the normalized park name
+        for _, row in self._park_metadata.iterrows():
+            park_id = str(row.get('park_id', '')).strip().lower()
+            if park_norm.lower() in park_id or park_id in park_norm.lower():
+                return str(row.get('park_id', '')).strip()
+        
+        return None
 
     def sanitize_columns(
         self,
@@ -187,6 +258,12 @@ class ScadaColumnSanitizer:
         return sanitized, mapping
 
     def _sanitize_one(self, col_name: str) -> str:
+        """
+        Two-step sanitization:
+        1. Extract park info and look up canonical park_id from metadata
+        2. Sanitize signal name with unit
+        3. Concatenate: park_id__signal_name__unit
+        """
         m = PARK_HEADER_RE.match(col_name)
         if not m:
             before = col_name.replace('[', '').replace(']', '').strip()
@@ -196,184 +273,91 @@ class ScadaColumnSanitizer:
             park_name_raw = m.group("park").strip()
             rest = m.group("rest").strip()
 
+        # Step 1: Try to get canonical park_id from metadata
         kwp = _parse_capacity_to_kwp(park_name_raw)
-        if kwp is None:
-            if park_name_raw in self._park_kwp_cache:
-                kwp = self._park_kwp_cache[park_name_raw]
-            elif _is_timestamp_column(col_name):
-                # Timestamp columns don't need capacity
-                kwp = None
-            else:
-                # Missing capacity: prompt user or use default
-                if self.config.prompt_missing_capacity:
-                    while True:
-                        user_input = input(
-                            f"⚠️  No capacity found in '{park_name_raw}'. Enter capacity in kWp (e.g., 500, 4.5): "
-                        ).strip()
-                        if user_input:
-                            try:
-                                kwp = float(user_input.replace(",", "."))
-                                if kwp <= 0:
-                                    print("   ❌ Capacity must be positive. Try again.")
+        park_id = self._lookup_park_id_from_metadata(park_name_raw, kwp)
+        
+        # If no park_id found in metadata, fall back to sanitizing park name
+        if park_id is None:
+            # Get capacity if not already parsed
+            if kwp is None:
+                if park_name_raw in self._park_kwp_cache:
+                    kwp = self._park_kwp_cache[park_name_raw]
+                elif not _is_timestamp_column(col_name):
+                    # Missing capacity: prompt user or use default
+                    if self.config.prompt_missing_capacity:
+                        while True:
+                            user_input = input(
+                                f"⚠️  No capacity found in '{park_name_raw}'. Enter capacity in kWp (e.g., 500, 4.5): "
+                            ).strip()
+                            if user_input:
+                                try:
+                                    kwp = float(user_input.replace(",", "."))
+                                    if kwp <= 0:
+                                        print("   ❌ Capacity must be positive. Try again.")
+                                        continue
+                                    break
+                                except ValueError:
+                                    print("   ❌ Invalid input. Please enter a number (e.g., 500 or 4.5).")
                                     continue
-                                break
-                            except ValueError:
-                                print("   ❌ Invalid input. Please enter a number (e.g., 500 or 4.5).")
-                                continue
-                        else:
-                            print("   ⚠️  Capacity is required. Please provide a value.")
-                elif self.config.default_capacity_kwp is not None:
-                    kwp = self.config.default_capacity_kwp
-                # Cache result
-                if kwp is not None:
-                    self._park_kwp_cache[park_name_raw] = kwp
+                            else:
+                                print("   ⚠️  Capacity is required. Please provide a value.")
+                    elif self.config.default_capacity_kwp is not None:
+                        kwp = self.config.default_capacity_kwp
+                    # Cache result
+                    if kwp is not None:
+                        self._park_kwp_cache[park_name_raw] = kwp
 
-        if kwp is not None:
-            park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
-        else:
-            park_name_clean = park_name_raw.strip()
+            # Build park_id from sanitized name + capacity
+            if kwp is not None:
+                park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
+            else:
+                park_name_clean = park_name_raw.strip()
+            
+            park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
+            park_snake = _snake_case_sql(park_name_clean, prefix_if_starts_digit="p_")
+            
+            # Build park_id: park_name_capacity_kwp
+            if kwp is not None:
+                park_id = f"{park_snake}_{_format_kwp_snake(kwp)}"
+            else:
+                park_id = park_snake
 
-        park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
+        # Step 2: Sanitize signal name with unit
         rest_clean = _dedupe_tokens_preserve_order(rest)
-
-        rest_clean = _strip_leading_park_tokens(park_name_clean, rest_clean)
-
+        
+        # Extract unit from signal
         unit = ""
         m_unit = TRAILING_UNIT_PARENS_RE.search(rest_clean)
         if m_unit:
             unit = m_unit.group("unit").strip()
             rest_clean = TRAILING_UNIT_PARENS_RE.sub("", rest_clean).strip()
 
-        park_snake = _snake_case_sql(park_name_clean, prefix_if_starts_digit="p_")
         rest_snake = _snake_case_sql(rest_clean, prefix_if_starts_digit="m_")
         
-        # Handle special cases for units BEFORE converting to snake_case:
-        # - If no unit found, default to "num" (numeric value)
-        # - If unit is percentage-related, use "pct"
+        # Normalize unit
         unit_lower = unit.lower().strip()
         if not unit_lower or unit_lower == "":
-            unit_snake = "num"
+            unit_snake = ""
         elif unit_lower in ("%", "percent", "percentage", "pct"):
             unit_snake = "pct"
         else:
-            # Convert other units to snake_case
             unit_snake = _snake_case_sql(unit, prefix_if_starts_digit="u_")
-            # If it's empty after conversion, use "num"
             if not unit_snake or unit_snake == "u_":
-                unit_snake = "num"
+                unit_snake = ""
 
-        # Abbreviate long tokens to reduce identifier length and minimize hashing
-        # DON'T abbreviate park_snake if it contains capacity info - that will be replaced anyway
-        park_snake = _abbreviate_snake_case(park_snake, max_len=4)
-        rest_snake = _abbreviate_snake_case(rest_snake, max_len=4)
-        # Note: unit_snake is already processed above
-
-        # Build parts list in order, but we'll ensure unit token is preserved
+        # Step 3: Concatenate park_id__signal_name__unit
+        joiner = "__"
         parts: List[str] = []
-        if park_snake:
-            parts.append(park_snake)
-        if kwp is not None:
-            # Format kwp token - this should NOT be abbreviated (e.g., keep "450kwp" not "450k")
-            kwp_token = _format_kwp_snake(kwp)
-            parts.append(kwp_token)
+        
+        if park_id:
+            parts.append(park_id)
         if rest_snake:
             parts.append(rest_snake)
-        # Always add unit token (now defaults to "num" if empty)
-        unit_token = f"u_{unit_snake}" if not unit_snake.startswith("u_") else unit_snake
-        parts.append(unit_token)
+        if unit_snake:
+            parts.append(unit_snake)
 
-        joiner = "__"
-
-        def _shorten_with_hash(text: str, max_len: int) -> str:
-            if max_len <= 0:
-                return hashlib.md5(text.encode("utf-8")).hexdigest()[:max(1, min(10, len(text)))]
-            if len(text) <= max_len:
-                return text
-            h = hashlib.md5(text.encode("utf-8")).hexdigest()[:10]
-            # Keep as much prefix as possible, add '_' + hash
-            keep = max_len - (len(h) + 1)
-            if keep <= 0:
-                return h[:max_len]
-            return f"{text[:keep]}_{h}"
-
-        # Compose identifier and enforce Postgres 60-char limit ALWAYS preserving unit token
         identifier = joiner.join(parts) if parts else "col"
-        max_len = 60  # PostgreSQL identifier limit
-        
-        if len(identifier) > max_len:
-            # Strategy: preserve unit_token (always present now) and kwp, shorten rest_snake first, then park_snake
-            # Calculate fixed length (kwp token + unit token)
-            fixed_parts = []
-            if kwp is not None:
-                fixed_parts.append(_format_kwp_snake(kwp))
-            # unit_token is always present now
-            fixed_parts.append(unit_token)
-            
-            # Count joiners: we'll have (park + kwp + rest + unit) parts
-            num_total_parts = sum([1 if park_snake else 0, 1 if kwp is not None else 0, 
-                                   1 if rest_snake else 0, 1])  # unit always present
-            joiner_len = len(joiner) * (num_total_parts - 1)
-            fixed_len = sum(len(p) for p in fixed_parts)
-            
-            # Available space for park and rest
-            available = max_len - fixed_len - joiner_len
-            
-            # Distribute space: try to keep reasonable lengths for park and rest
-            # Priority: rest_snake gets more space (it's the measurement), park gets shortened first
-            if park_snake and rest_snake:
-                # Split available space: give more to rest
-                rest_target = int(available * 0.6)
-                park_target = available - rest_target
-                
-                if rest_target > len(rest_snake):
-                    # rest doesn't need shortening
-                    park_target = available - len(rest_snake)
-                    rest_snake_short = rest_snake
-                else:
-                    rest_snake_short = _shorten_with_hash(rest_snake, max(8, rest_target))
-                
-                if park_target > len(park_snake):
-                    park_snake_short = park_snake
-                else:
-                    park_snake_short = _shorten_with_hash(park_snake, max(8, park_target))
-                
-                # Rebuild parts with shortened versions
-                parts = []
-                parts.append(park_snake_short)
-                if kwp is not None:
-                    parts.append(_format_kwp_snake(kwp))
-                parts.append(rest_snake_short)
-                parts.append(unit_token)  # always present
-                identifier = joiner.join(parts)
-                
-            elif rest_snake and not park_snake:
-                # Only rest needs shortening
-                rest_target = available
-                if rest_target < len(rest_snake):
-                    rest_snake_short = _shorten_with_hash(rest_snake, max(8, rest_target))
-                else:
-                    rest_snake_short = rest_snake
-                parts = []
-                if kwp is not None:
-                    parts.append(_format_kwp_snake(kwp))
-                parts.append(rest_snake_short)
-                parts.append(unit_token)  # always present
-                identifier = joiner.join(parts)
-                
-            elif park_snake and not rest_snake:
-                # Only park needs shortening
-                park_target = available
-                if park_target < len(park_snake):
-                    park_snake_short = _shorten_with_hash(park_snake, max(8, park_target))
-                else:
-                    park_snake_short = park_snake
-                parts = []
-                parts.append(park_snake_short)
-                if kwp is not None:
-                    parts.append(_format_kwp_snake(kwp))
-                parts.append(unit_token)  # always present
-                identifier = joiner.join(parts)
-
         identifier = self._make_unique(identifier)
         return identifier
 
