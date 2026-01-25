@@ -147,6 +147,150 @@ def load_park_metadata(
     return df
 
 
+def ingest_silver_stage(
+    stage_path: Path,
+    silver_root: Path,
+    *,
+    max_invalid_pct: float = 20.0,
+    compression: str = "zstd",
+) -> Dict[str, object]:
+    """
+    Ingest a silver-staged parquet file into the persistent silver layer.
+    
+    Quality gates:
+    - Schema validation: required columns must exist
+    - Invalid row rate: aborts if flag_* indicates > max_invalid_pct invalid rows
+    - Deduplication: removes rows already ingested (by ingest_key + run_id)
+    - Partitioning: writes by year/month for efficient querying
+    - Idempotency: re-running same run_id is safe (deduped)
+    
+    Args:
+        stage_path: Path to silver_stage_*.parquet file
+        silver_root: Root directory for partitioned silver output (e.g., outputs/silver/)
+        max_invalid_pct: Abort if invalid rows > this % (default 20%)
+        compression: Parquet compression (default zstd)
+        
+    Returns:
+        Dict with ingestion metadata: rows_ingested, rows_deduped, quality_report, etc.
+    """
+    result = {
+        "success": False,
+        "stage_file": str(stage_path),
+        "rows_input": 0,
+        "rows_deduped": 0,
+        "rows_ingested": 0,
+        "invalid_pct": 0.0,
+        "quality_gate_passed": False,
+        "errors": [],
+    }
+    
+    # Load staged file
+    if not stage_path.exists():
+        result["errors"].append(f"Stage file not found: {stage_path}")
+        return result
+    
+    try:
+        df = pd.read_parquet(stage_path)
+    except Exception as e:
+        result["errors"].append(f"Failed to read stage file: {e}")
+        return result
+    
+    if df.empty:
+        result["errors"].append("Stage file is empty")
+        return result
+    
+    result["rows_input"] = len(df)
+    
+    # Ensure year/month columns exist (derive if missing)
+    if "year" not in df.columns or "month" not in df.columns:
+        if "interval_start_date" in df.columns:
+            dt_col = pd.to_datetime(df["interval_start_date"], errors="coerce")
+        else:
+            dt_col = pd.to_datetime(df["ts_utc"], errors="coerce", utc=True)
+        df["year"] = dt_col.dt.year.astype("Int64")
+        df["month"] = dt_col.dt.month.astype("Int64")
+
+    # Schema validation
+    required_cols = ["ts_utc", "park_id", "signal_name", "value", "year", "month"]
+    missing_cols = [c for c in required_cols if c not in df.columns]
+    if missing_cols:
+        result["errors"].append(f"Missing required columns: {missing_cols}")
+        return result
+    
+    # Quality: compute invalid row percentage
+    flag_cols = [c for c in df.columns if c.startswith("flag_")]
+    if flag_cols:
+        invalid_mask = df[flag_cols].any(axis=1)
+        invalid_count = int(invalid_mask.sum())
+        invalid_pct = (invalid_count / len(df)) * 100 if len(df) > 0 else 0
+        result["invalid_pct"] = round(invalid_pct, 2)
+        
+        if invalid_pct > max_invalid_pct:
+            result["errors"].append(
+                f"Quality gate failed: {invalid_pct:.1f}% invalid rows > {max_invalid_pct}% threshold"
+            )
+            return result
+        result["quality_gate_passed"] = True
+    else:
+        result["quality_gate_passed"] = True
+    
+    # Deduplication: remove rows already in silver (by ingest_key + run_id if present)
+    silver_root.mkdir(parents=True, exist_ok=True)
+    dedupe_cols = []
+    if "ingest_key" in df.columns:
+        dedupe_cols.append("ingest_key")
+    if "run_id" in df.columns:
+        dedupe_cols.append("run_id")
+    
+    dup_count = 0
+    if dedupe_cols:
+        # Check existing silver files for same ingest_key/run_id
+        existing_keys = set()
+        for parquet_file in silver_root.glob("**/part-*.parquet"):
+            try:
+                existing = pd.read_parquet(parquet_file, columns=dedupe_cols)
+                existing_keys.update(existing[dedupe_cols].apply(tuple, axis=1).unique())
+            except Exception:
+                pass
+        
+        if existing_keys:
+            current_keys = df[dedupe_cols].apply(tuple, axis=1)
+            dup_mask = current_keys.isin(existing_keys)
+            dup_count = int(dup_mask.sum())
+            df = df[~dup_mask].copy()
+        
+        result["rows_deduped"] = dup_count
+    
+    if df.empty:
+        result["errors"].append("No new rows after deduplication")
+        return result
+    
+    # Write partitioned by year/month
+    try:
+        for (year, month), group in df.groupby(["year", "month"], dropna=False):
+            year_val = int(year) if pd.notna(year) else 0
+            month_val = int(month) if pd.notna(month) else 0
+            
+            partition_dir = silver_root / f"year={year_val}" / f"month={month_val}"
+            partition_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Use timestamp for part filename
+            timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            part_file = partition_dir / f"part-{timestamp}.parquet"
+            
+            group.to_parquet(part_file, index=False, compression=compression)
+        
+        result["rows_ingested"] = len(df)
+        result["success"] = True
+        result["silver_root"] = str(silver_root)
+        
+    except Exception as e:
+        result["errors"].append(f"Failed to write silver: {e}")
+        return result
+    
+    return result
+
+
 def _normalize_string_col(df: pd.DataFrame, col: str) -> None:
     if col not in df.columns:
         return
@@ -404,4 +548,5 @@ __all__ = [
     "clean_bronze_for_silver",
     "write_silver_stage",
     "load_park_metadata",
+    "ingest_silver_stage",
 ]
