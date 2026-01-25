@@ -32,6 +32,7 @@ class EdaConfig:
         sample_rows: Sample size for plots (None = use all data)
         save_plots: Save plot figures to disk
         save_stats: Save statistics tables to disk
+        close_plots: Close plots after creation (set False to display inline)
     """
     output_dir: Optional[Path] = None
     max_units: int = 8
@@ -49,6 +50,7 @@ class EdaConfig:
     sample_rows: Optional[int] = 200_000
     save_plots: bool = False
     save_stats: bool = False
+    close_plots: bool = True
 
 
 
@@ -669,7 +671,8 @@ def run_silver_pre_ingestion_eda(
                     parks_override=parks_to_use,
                 )
                 if fig:
-                    plt.close(fig)
+                    if config.close_plots:
+                        plt.close(fig)
                     figs.append(fig)
                 if path:
                     plot_paths.append(path)
@@ -689,7 +692,8 @@ def run_silver_pre_ingestion_eda(
                     label_suffix=focus_signal,
                 )
                 if fig:
-                    plt.close(fig)
+                    if config.close_plots:
+                        plt.close(fig)
                     figs.append(fig)
                 if path:
                     plot_paths.append(path)
@@ -707,7 +711,8 @@ def run_silver_pre_ingestion_eda(
                     label_suffix=focus_signal,
                 )
                 if fig:
-                    plt.close(fig)
+                    if config.close_plots:
+                        plt.close(fig)
                     figs.append(fig)
                 if path:
                     plot_paths.append(path)
@@ -725,7 +730,8 @@ def run_silver_pre_ingestion_eda(
                     label_suffix=focus_signal,
                 )
                 if fig:
-                    plt.close(fig)
+                    if config.close_plots:
+                        plt.close(fig)
                     figs.append(fig)
                 if path:
                     plot_paths.append(path)

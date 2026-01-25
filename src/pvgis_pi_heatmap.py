@@ -101,8 +101,11 @@ def fetch_pvgis_hourly_cached(
     cache_dir: Path,
     url: str = "https://re.jrc.ec.europa.eu/api/",
     timeout: int = 60,
+    use_cache: bool = True,
+    save_cache: bool = True,
 ) -> pd.DataFrame:
-    cache_dir.mkdir(parents=True, exist_ok=True)
+    if save_cache:
+        cache_dir.mkdir(parents=True, exist_ok=True)
 
     optimalangles = (tilt_deg is None) or (azimuth_deg is None)
 
@@ -118,7 +121,7 @@ def fetch_pvgis_hourly_cached(
     })
     cache_path = cache_dir / f"pvgis_{start_year}-{end_year}_{key}.parquet"
 
-    if cache_path.exists():
+    if use_cache and cache_path.exists():
         return pd.read_parquet(cache_path)
 
     try:
@@ -148,7 +151,8 @@ def fetch_pvgis_hourly_cached(
     if "P" not in data.columns:
         raise RuntimeError("PVGIS output missing 'P'. (P is returned only when pvcalculation=True.)")
 
-    data.to_parquet(cache_path)
+    if save_cache:
+        data.to_parquet(cache_path)
     return data
 
 
