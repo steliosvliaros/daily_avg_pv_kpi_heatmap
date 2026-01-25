@@ -166,7 +166,7 @@ def ingest_silver_stage(
     
     Args:
         stage_path: Path to silver_stage_*.parquet file
-        silver_root: Root directory for partitioned silver output (e.g., outputs/silver/)
+        silver_root: Root directory for partitioned silver output (e.g., silver/)
         max_invalid_pct: Abort if invalid rows > this % (default 20%)
         compression: Parquet compression (default zstd)
         
