@@ -120,6 +120,33 @@ def commit_silver_watermark(
     silver_watermark_path.write_text(newest_run_id, encoding="utf-8")
 
 
+def load_park_metadata(
+    metadata_file: Optional[Path],
+) -> Optional[pd.DataFrame]:
+    """
+    Load park metadata dimension (separate from silver fact table).
+    Use this to enrich silver data at query time with park attributes.
+    
+    Args:
+        metadata_file: Path to park_metadata.csv
+        
+    Returns:
+        DataFrame with park_id and all metadata columns, or None if file missing
+    """
+    if not metadata_file or not metadata_file.exists():
+        return None
+    
+    df = pd.read_csv(metadata_file)
+    if "park_id" not in df.columns:
+        raise ValueError("park_metadata.csv must contain 'park_id' column")
+    
+    df["park_id"] = df["park_id"].astype("string").str.strip().str.lower()
+    # Keep latest version per park (in case of updates)
+    df = df.drop_duplicates(subset=["park_id"], keep="last")
+    
+    return df
+
+
 def _normalize_string_col(df: pd.DataFrame, col: str) -> None:
     if col not in df.columns:
         return
@@ -373,6 +400,8 @@ __all__ = [
     "DEFAULT_SILVER_COLUMNS",
     "FLAG_COLUMNS",
     "load_new_bronze_parts_from_runlogs",
+    "commit_silver_watermark",
     "clean_bronze_for_silver",
     "write_silver_stage",
+    "load_park_metadata",
 ]

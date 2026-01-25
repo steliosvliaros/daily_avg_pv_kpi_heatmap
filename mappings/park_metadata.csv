@@ -1,0 +1,4 @@
+park_id,park_name,capacity_kwp,location_lat,location_lon,location_region,nearest_meteo_station,nearest_meteo_distance_km,park_status,status_effective_date,notes
+park_alpha,Solar Farm Alpha,100.0,38.5,22.3,Peloponnese,Corinth_WS,15.2,active,2015-01-01,Operational since 2015
+park_beta,Solar Farm Beta,200.0,39.1,23.8,Attica,Athens_Airport_WS,8.5,sold,2023-06-15,Sold to investor X
+park_gamma,Solar Farm Gamma,150.0,37.9,23.6,Attica,Athens_Airport_WS,12.1,deferred,2024-01-01,Awaiting permits
