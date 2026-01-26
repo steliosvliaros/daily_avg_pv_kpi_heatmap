@@ -11,7 +11,8 @@ from typing import Dict, Iterable, List, Optional, Tuple
 
 import pandas as pd
 
-CAPACITY_RE = re.compile(r"(?i)(?P<num>\d+(?:[.,_]\d+)?)\s*(?P<unit>k\s*w\s*p|kwp|kw|mw|mwp)")
+# Match capacity tokens with optional underscores around the unit, e.g. '805 KWp', '805kwp', '805_kwp'
+CAPACITY_RE = re.compile(r"(?i)_?(?P<num>\d+(?:[.,_]\d+)?)\s*_?\s*(?P<unit>k\s*w\s*p|kwp|kw|mw|mwp)_?")
 PARK_HEADER_RE = re.compile(r"^\s*\[(?P<park>[^\]]+)\]\s*(?P<rest>.*)$")
 TRAILING_UNIT_PARENS_RE = re.compile(r"\((?P<unit>[^()]*)\)\s*$")
 TIMESTAMP_COLUMN_RE = re.compile(r"(?i)^(time|timestamp|date|datetime|created|updated|modified|instant)$")
@@ -37,6 +38,11 @@ def _strip_leading_park_tokens(park_name: str, rest: str) -> str:
     """
     If rest begins with the park name tokens, drop that prefix to avoid
     repeating the park name inside the measurement string.
+    
+    Handles cases like:
+    - park_name = "Fragiatoula_Utilitas_4866kWp"
+    - rest = "Fragiatoula_Utilitas_4866kWp Average Irradiance (W*m^-2)"
+    Should return: "Average Irradiance (W*m^-2)"
     """
     def _normalize_token(token: str) -> str:
         return re.sub(r"[^a-z0-9]+", "", token.lower())
@@ -44,27 +50,38 @@ def _strip_leading_park_tokens(park_name: str, rest: str) -> str:
     def _is_capacity_token(token: str) -> bool:
         if not token:
             return False
-        if re.fullmatch(r"\d+(?:\.\d+)?", token):
+        norm = token.lower().strip()
+        if re.fullmatch(r"\d+(?:\.\d+)?", norm):
             return True
-        if re.fullmatch(r"\d+(?:\.\d+)?(kwp|kw|mw|mwp)", token):
+        if re.fullmatch(r"\d+(?:\.\d+)?(kwp|kw|mw|mwp)", norm, re.IGNORECASE):
             return True
-        return token in ("kwp", "kw", "mw", "mwp")
+        return norm in ("kwp", "kw", "mw", "mwp")
 
-    park_tokens = [t for t in re.split(r"[^A-Za-z0-9]+", park_name.lower()) if t]
+    # Extract tokens from park name (split by non-alphanumeric)
+    park_tokens = [t for t in re.split(r"[^A-Za-z0-9]+", park_name.lower()) if t and not _is_capacity_token(t)]
     park_concat = "".join(park_tokens)
+    
+    # Split rest by whitespace
     rest_tokens = rest.split()
-    rest_norm = [_normalize_token(t) for t in rest_tokens]
-
-    if not park_tokens or not rest_tokens:
+    if not rest_tokens:
         return rest
 
-    if park_concat and rest_norm and rest_norm[0].startswith(park_concat):
+    # First, check if the first token in rest is a compound token containing all park tokens
+    # e.g., "Fragiatoula_Utilitas_4866kWp" contains "fragiatoula" and "utilitas"
+    first_token = rest_tokens[0]
+    first_token_norm = _normalize_token(first_token)
+    
+    # Check if first token contains all park tokens in sequence
+    if park_concat and first_token_norm == park_concat or (park_concat and park_concat in first_token_norm):
+        # The first token is the park name (possibly with capacity); skip it
         trimmed = " ".join(rest_tokens[1:]).strip()
-        return trimmed
+        return trimmed if trimmed else rest
 
+    # Second strategy: check if rest starts with park tokens as separate words
+    rest_norm = [_normalize_token(t) for t in rest_tokens]
+    
     i = 0
     j = 0
-    matched = ""
     while i < len(rest_tokens) and j < len(park_tokens):
         token = rest_norm[i]
         if not token:
@@ -74,28 +91,29 @@ def _strip_leading_park_tokens(park_name: str, rest: str) -> str:
             i += 1
             j += 1
             continue
-        if _is_capacity_token(token):
+        if _is_capacity_token(rest_tokens[i]):
             i += 1
             continue
         break
 
     if j == len(park_tokens) and i > 0:
         trimmed = " ".join(rest_tokens[i:]).strip()
-        return trimmed
+        return trimmed if trimmed else rest
 
-    # Fallback: allow contiguous match across tokens (ignoring capacity tokens)
+    # Third strategy: allow contiguous match across tokens (ignoring capacity tokens)
     i = 0
+    matched = ""
     while i < len(rest_tokens) and matched != park_concat:
         token = rest_norm[i]
         i += 1
-        if not token or _is_capacity_token(token):
+        if not token or _is_capacity_token(rest_tokens[i-1]):
             continue
         matched += token
         if not park_concat.startswith(matched):
             break
     if matched == park_concat:
         trimmed = " ".join(rest_tokens[i:]).strip()
-        return trimmed
+        return trimmed if trimmed else rest
 
     return rest
 
@@ -136,11 +154,8 @@ def _parse_capacity_to_kwp(text: str) -> Optional[float]:
     return val
 
 def _format_kwp_snake(kwp: float) -> str:
-    if abs(kwp - round(kwp)) < 1e-9:
-        return f"{int(round(kwp))}kwp"
-    else:
-        s = f"{kwp:.3f}".rstrip("0").rstrip(".")
-        return f"{s}kwp"
+    # Always use integer part of capacity
+    return f"{int(round(kwp))}_kwp"
 
 def _abbreviate_token(token: str, max_len: int = 4) -> str:
     """Abbreviate a single token to first max_len chars (e.g., 'energeiaki' → 'ener')."""
@@ -262,7 +277,7 @@ class ScadaColumnSanitizer:
         Two-step sanitization:
         1. Extract park info and look up canonical park_id from metadata
         2. Sanitize signal name with unit
-        3. Concatenate: park_id__signal_name__unit
+        3. Concatenate: park_id__capacity_kwp__signal_name__unit
         """
         m = PARK_HEADER_RE.match(col_name)
         if not m:
@@ -277,8 +292,23 @@ class ScadaColumnSanitizer:
         kwp = _parse_capacity_to_kwp(park_name_raw)
         park_id = self._lookup_park_id_from_metadata(park_name_raw, kwp)
         
-        # If no park_id found in metadata, fall back to sanitizing park name
-        if park_id is None:
+        # If park_id found in metadata, strip capacity from it
+        # Otherwise, fall back to sanitizing park name
+        if park_id is not None:
+            # park matched in metadata
+            # Prefer capacity from metadata cache if not already set
+            orig_meta_pid = park_id
+            if kwp is None and orig_meta_pid in self._park_kwp_cache:
+                try:
+                    kwp = float(self._park_kwp_cache[orig_meta_pid])
+                except (TypeError, ValueError):
+                    pass
+
+            # Build park_id from the raw park name (strip capacity, then snake_case)
+            park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
+            park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
+            park_id = _snake_case_sql(park_name_clean, prefix_if_starts_digit="p_")
+        else:
             # Get capacity if not already parsed
             if kwp is None:
                 if park_name_raw in self._park_kwp_cache:
@@ -308,23 +338,42 @@ class ScadaColumnSanitizer:
                     if kwp is not None:
                         self._park_kwp_cache[park_name_raw] = kwp
 
-            # Build park_id from sanitized name + capacity
-            if kwp is not None:
-                park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
-            else:
-                park_name_clean = park_name_raw.strip()
-            
+            # Build park_id from sanitized name (ONLY, without capacity)
+            # Capacity goes in the measurement/signal part, not the park name
+            park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
             park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
             park_snake = _snake_case_sql(park_name_clean, prefix_if_starts_digit="p_")
             
-            # Build park_id: park_name_capacity_kwp
-            if kwp is not None:
-                park_id = f"{park_snake}_{_format_kwp_snake(kwp)}"
-            else:
-                park_id = park_snake
+            # park_id is ONLY the park name (no capacity)
+            park_id = park_snake
 
         # Step 2: Sanitize signal name with unit
         rest_clean = _dedupe_tokens_preserve_order(rest)
+        
+        # Remove park name tokens from signal to avoid redundancy
+        # First, strip the raw park name (including capacity) if it appears as a prefix
+        rest_clean = _strip_leading_park_tokens(park_name_raw, rest_clean)
+        
+        # Then remove individual park name tokens from signal
+        # e.g., if park is "Spes Solaris" and signal contains "Spes Solaris Average", 
+        # remove those tokens to get just "Average"
+        park_tokens = set(park_name_clean.lower().split())
+        # Also remove capacity tokens (e.g., '993', 'kwp') from signal if capacity is known
+        if kwp is not None:
+            try:
+                # Use integer form if effectively whole number, else string form
+                if abs(kwp - round(kwp)) < 1e-9:
+                    park_tokens.add(str(int(round(kwp))))
+                else:
+                    park_tokens.add(str(kwp).lower())
+            except Exception:
+                pass
+            park_tokens.update({"kwp", "kw", "mw", "mwp"})
+
+        signal_tokens = rest_clean.lower().split()
+        filtered_tokens = [t for t in signal_tokens if t.lower() not in park_tokens]
+        if filtered_tokens:
+            rest_clean = " ".join(filtered_tokens)
         
         # Extract unit from signal
         unit = ""
@@ -346,12 +395,15 @@ class ScadaColumnSanitizer:
             if not unit_snake or unit_snake == "u_":
                 unit_snake = ""
 
-        # Step 3: Concatenate park_id__signal_name__unit
+        # Step 3: Concatenate park_id__capacity_kwp__signal_name__unit
         joiner = "__"
         parts: List[str] = []
         
         if park_id:
             parts.append(park_id)
+        # Add capacity as part of the identifier
+        if kwp is not None:
+            parts.append(_format_kwp_snake(kwp))
         if rest_snake:
             parts.append(rest_snake)
         if unit_snake:
@@ -360,6 +412,7 @@ class ScadaColumnSanitizer:
         identifier = joiner.join(parts) if parts else "col"
         identifier = self._make_unique(identifier)
         return identifier
+
 
     def _make_unique(self, name: str) -> str:
         if name not in self._seen_outputs:
@@ -371,7 +424,11 @@ class ScadaColumnSanitizer:
             return f"{name}_{count}"
 
     def load_mapping_csv(self, mapping_path: str | Path) -> Dict[str, str]:
-        """Load an existing mapping CSV (original,sanitized) into a dict."""
+        """Load an existing mapping CSV (original,sanitized) into a dict.
+        
+        Validates that columns are in the correct order: original -> sanitized.
+        If they appear swapped (sanitized -> original), auto-corrects them.
+        """
         mapping: Dict[str, str] = {}
         mapping_path = Path(mapping_path)
         if not mapping_path.exists():
@@ -391,6 +448,24 @@ class ScadaColumnSanitizer:
             for row in reader:
                 if len(row) >= 2:
                     mapping[row[0]] = row[1]
+        
+        # Validate mapping orientation: keys should be original (vendor format), values should be sanitized (with __)
+        # Sample a few entries to detect if columns are swapped
+        if mapping:
+            sample_size = min(10, len(mapping))
+            sample_keys = list(mapping.keys())[:sample_size]
+            sample_values = [mapping[k] for k in sample_keys]
+            
+            keys_with_dunder = sum(1 for k in sample_keys if '__' in k)
+            values_with_dunder = sum(1 for v in sample_values if '__' in v)
+            
+            # If most keys have __ but values don't, the mapping is backwards
+            if keys_with_dunder > values_with_dunder and keys_with_dunder >= sample_size * 0.7:
+                print(f"⚠️  WARNING: Mapping file {mapping_path.name} appears to have swapped columns!")
+                print(f"   Auto-correcting: swapping original ↔ sanitized")
+                # Swap the mapping
+                mapping = {v: k for k, v in mapping.items()}
+        
         return mapping
 
     def save_outputs(

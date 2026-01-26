@@ -18,13 +18,18 @@ What it does (daily SCADA exports):
     - Moves file to data_root/archived (renamed with hash)
 - If parsing/validation fails => move to data_root/rejected with a reason
 
-Assumptions:
-- Your sanitized measurement columns look like:
-    <park_token>__<measurement_token>__<unit_token>
+Column Format:
+- Sanitized measurement columns follow the pattern:
+    <park_name>__<capacity_kwp>__<signal_name>__<unit>
   Example:
-    p_4e_energeiaki_lexaina_4472kwp__pcc_active_energy_export__u_kwh
+    ntarali_concept__296_kwp__average_irradiance__w_m_2
+    fragiatoula_utilitas__4866_kwp__active_power__kw
 
-- Timestamp column will be mapped to "ts" (recommended).
+- Bronze long format extracts:
+    - park_id = park_name + "__" + capacity_kwp (e.g., ntarali_concept__296_kwp)
+    - signal_name = the measurement (e.g., average_irradiance)
+    - unit = the unit (e.g., w_m_2)
+    - park_capacity_kwp = numeric capacity (e.g., 296)
 """
 
 from __future__ import annotations
@@ -97,12 +102,11 @@ class Config:
 # Patterns
 # -----------------------------
 
-# park_id__signal_name__unit  (unit optional)
-# Format uses two-step sanitization: park_id from metadata, signal_name independent
-# Example: 4e_energeiaki_176_kwp_likovouni__pcc_active_energy_export__kwh
-# Groups: park_id, meas (signal), unit
-# Note: Capacity is embedded in park_id (e.g., 4e_energeiaki_176_kwp_likovouni includes "176_kwp")
-COL_RE = re.compile(r"^(?P<park_id>.+?)__(?P<meas>.+?)__(?P<unit>[a-z0-9_]+)$")
+# park_id__capacity_kwp__signal_name__unit  (unit optional)
+# Format: park_name (no capacity) __ capacity (integer_kwp) __ signal_name __ unit
+# Example: ntarali_concept__296_kwp__average_irradiance__w_m_2
+# Groups: park_id (name only), capacity_kwp (integer_kwp), meas (signal), unit
+COL_RE = re.compile(r"^(?P<park_id>.+?)__(?P<capacity>\d+_kwp)__(?P<meas>.+?)__(?P<unit>[a-z0-9_]*)$")
 
 
 # -----------------------------
@@ -337,7 +341,7 @@ def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_fi
     meas_cols = [c for c in candidate_cols if COL_RE.match(c)]
 
     if not meas_cols:
-        raise ValueError("No measurement columns matched pattern: park_id__signal_name__unit")
+        raise ValueError("No measurement columns matched pattern: park_id__capacity_kwp__signal_name__unit")
 
     # Melt (keep only timestamp ids; extra id columns can be added if you want)
     id_vars = [ts_col, "ts_local", "ts_utc"]
@@ -345,13 +349,13 @@ def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_fi
     long_df = long_df.dropna(subset=["value"])
 
     extracted = long_df["col"].str.extract(COL_RE)
-    long_df["park_id"] = extracted["park_id"]
+    # Reconstruct park_id to include capacity: park_id + __ + capacity_kwp
+    long_df["park_id"] = extracted["park_id"] + "__" + extracted["capacity"]
     long_df["signal_name"] = extracted["meas"]
     long_df["unit"] = extracted["unit"]
 
-    # Extract capacity from park_id (e.g., "4e_energeiaki_176_kwp_likovouni" -> 176)
-    # Look for pattern: digits followed by "_kwp" anywhere in the park_id
-    capacity_match = extracted["park_id"].str.extract(r"(\d+(?:\.\d+)?)_kwp", expand=False)
+    # Extract capacity from the capacity_kwp portion (e.g., "296_kwp" -> 296)
+    capacity_match = extracted["capacity"].str.extract(r"(\d+)_kwp", expand=False)
     long_df["park_capacity_kwp"] = pd.to_numeric(capacity_match, errors="coerce")
 
     # Determine interval_start_date for daily values
