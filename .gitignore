@@ -19,8 +19,15 @@ pvgis_cache/**
 .vscode/
 .DS_Store
 
-.pdf
+*.pdf
 
-.jpg
-.png
-.jpeg
+*.jpg
+*.png
+*.jpeg
+*.gif
+*.svg
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip
