@@ -17,19 +17,24 @@ from tqdm import tqdm
 # ----------------------------
 _KWP_RE = re.compile(r"(?P<num>\d+(?:[.,]\d+)?)[\s_]*(?P<unit>mw|kw(?:p)?)(?=_|\s|$|\]|[^\w])", re.IGNORECASE)
 
-def parse_kwp_from_header(col: str, default: float = 100.0) -> float:
+def parse_kwp_from_header(col: str | tuple, default: float = 100.0) -> float:
     """
     Extract kWp/kW/MW from column header.
     Handles both space-separated and underscore-separated formats.
     If parsing fails, returns default value (100.0 kWp).
+    Can accept either a string or tuple (extracts first element from tuple).
     """
-    bracket = re.search(r"\[(.*?)\]", col)
-    txt = bracket.group(1) if bracket else col
+    if isinstance(col, tuple):
+        col = col[0]  # Extract first element from tuple
+    col_str = str(col)
+    
+    bracket = re.search(r"\[(.*?)\]", col_str)
+    txt = bracket.group(1) if bracket else col_str
 
     m = _KWP_RE.search(txt)
     if not m:
         # Return default instead of raising error
-        print(f"Warning: Could not parse kWp/MW from header '{col}', using default {default} kWp")
+        print(f"Warning: Could not parse kWp/MW from header '{col_str}', using default {default} kWp")
         return default
 
     num = float(m.group("num").replace(",", "."))
@@ -40,9 +45,17 @@ def parse_kwp_from_header(col: str, default: float = 100.0) -> float:
     return num  # treat kW/kWp as kWp numerically
 
 
-def short_label(col: str) -> str:
-    bracket = re.search(r"\[(.*?)\]", col)
-    return bracket.group(1) if bracket else col
+def short_label(col: str | tuple) -> str:
+    """Extract short label from column name or tuple.
+    
+    If col is a tuple like ('park_name__kwp', 'signal', 'unit'), extract park name.
+    If col is a string, search for bracketed content.
+    """
+    if isinstance(col, tuple):
+        col = col[0]  # Extract first element from tuple
+    col_str = str(col)
+    bracket = re.search(r"\[(.*?)\]", col_str)
+    return bracket.group(1) if bracket else col_str
 
 
 # ----------------------------
