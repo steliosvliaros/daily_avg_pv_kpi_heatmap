@@ -727,8 +727,188 @@ def create_financial_report_for_all_parks(
     fig = plt.figure(figsize=(20, 24), facecolor="white")
     gs = fig.add_gridspec(6, 3, hspace=0.35, wspace=0.3, top=0.96)
 
-    # (rest of plot code - shortened for brevity, identical to economic dashboard)
-    # ... [plots 1-15 same as in create_economic_analysis_dashboard] ...
+    _log(f"📊 Creating Economic Analysis Dashboard for {short_label(column)}", logger)
+    _log(f"   Data range: {daily_series.index.min()} to {daily_series.index.max()}", logger)
+    _log(f"   Monthly observations: {len(monthly_data)}", logger)
+
+    # 1. Time Series of Monthly Energy
+    ax1 = fig.add_subplot(gs[0, :2])
+    ax1.plot(range(len(monthly_data)), monthly_data.values, "o-", linewidth=2.5, markersize=6, color="#2E86AB", label="Monthly Generation")
+    ax1.fill_between(range(len(monthly_data)), monthly_data.values, alpha=0.3, color="#2E86AB")
+    ax1.set_title("Monthly Energy Generation - Time Series", fontsize=13, fontweight="bold")
+    ax1.set_xlabel("Month Index")
+    ax1.set_ylabel("Energy [kWh]")
+    ax1.grid(alpha=0.3, linestyle="--")
+    ax1.legend()
+
+    # 2. Rolling Statistics
+    ax2 = fig.add_subplot(gs[0, 2])
+    rolling_mean = monthly_data.rolling(window=3).mean()
+    rolling_std = monthly_data.rolling(window=3).std()
+    ax2.plot(range(len(monthly_data)), monthly_data.values, "o-", alpha=0.5, label="Actual")
+    ax2.plot(range(len(rolling_mean)), rolling_mean.values, "s-", linewidth=2, color="red", label="3-month MA")
+    ax2.fill_between(range(len(rolling_mean)), rolling_mean.values - rolling_std.values, rolling_mean.values + rolling_std.values, alpha=0.2, color="red")
+    ax2.set_title("Rolling Mean & Std Dev", fontsize=13, fontweight="bold")
+    ax2.set_ylabel("Energy [kWh]")
+    ax2.legend(fontsize=9)
+    ax2.grid(alpha=0.3, linestyle="--")
+
+    # 3. Monthly Revenue Time Series
+    ax3 = fig.add_subplot(gs[1, :2])
+    colors = ["green" if v > monthly_revenue.mean() else "coral" for v in monthly_revenue.values]
+    ax3.bar(range(len(monthly_revenue)), monthly_revenue.values, color=colors, alpha=0.7, edgecolor="black", linewidth=1)
+    ax3.axhline(monthly_revenue.mean(), color="red", linestyle="--", linewidth=2, label=f"Average: {monthly_revenue.mean():,.0f}")
+    ax3.set_title(f"Monthly Revenue - Time Series ({currency}/month)", fontsize=13, fontweight="bold")
+    ax3.set_xlabel("Month Index")
+    ax3.set_ylabel(f"Revenue [{currency}]")
+    ax3.legend()
+    ax3.grid(axis="y", alpha=0.3)
+
+    # 4. Revenue Distribution
+    ax4 = fig.add_subplot(gs[1, 2])
+    ax4.hist(monthly_revenue.values, bins=15, color="steelblue", alpha=0.7, edgecolor="black")
+    ax4.axvline(monthly_revenue.mean(), color="red", linestyle="--", linewidth=2, label="Mean")
+    ax4.axvline(monthly_revenue.median(), color="green", linestyle="--", linewidth=2, label="Median")
+    ax4.set_title("Revenue Distribution", fontsize=13, fontweight="bold")
+    ax4.set_xlabel(f"Revenue [{currency}]")
+    ax4.set_ylabel("Frequency")
+    ax4.legend()
+    ax4.grid(axis="y", alpha=0.3)
+
+    # 5. Seasonal Pattern
+    ax5 = fig.add_subplot(gs[2, :2])
+    monthly_by_year = daily_series.groupby(daily_series.index.month).sum()
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    ax5.bar(range(len(monthly_by_year)), monthly_by_year.values, color="#A23B72", alpha=0.7, edgecolor="black")
+    ax5.set_xticks(range(12))
+    ax5.set_xticklabels(months, rotation=45, ha="right")
+    ax5.set_title("Seasonal Pattern - Energy by Calendar Month", fontsize=13, fontweight="bold")
+    ax5.set_xlabel("Month")
+    ax5.set_ylabel("Total Energy [kWh]")
+    ax5.grid(axis="y", alpha=0.3)
+
+    # 6. Seasonal Revenue
+    ax6 = fig.add_subplot(gs[2, 2])
+    seasonal_revenue = daily_series.groupby(daily_series.index.month).sum() * price_per_kwh
+    colors_seasonal = ["gold" if v > seasonal_revenue.mean() else "lightblue" for v in seasonal_revenue.values]
+    ax6.bar(range(len(seasonal_revenue)), seasonal_revenue.values, color=colors_seasonal, alpha=0.7, edgecolor="black")
+    ax6.axhline(seasonal_revenue.mean(), color="red", linestyle="--", linewidth=2)
+    ax6.set_xticks(range(12))
+    ax6.set_xticklabels(months, rotation=45, ha="right")
+    ax6.set_title(f"Seasonal Revenue Pattern ({currency})", fontsize=13, fontweight="bold")
+    ax6.set_ylabel(f"Revenue [{currency}]")
+    ax6.grid(axis="y", alpha=0.3)
+
+    # 7. Year-over-Year Growth Rate
+    ax7 = fig.add_subplot(gs[3, 0])
+    if len(yearly_energy) > 1:
+        yoy_growth = yearly_energy.pct_change() * 100
+        yoy_growth_clean = yoy_growth.dropna()
+        colors_growth = ["green" if x > 0 else "red" for x in yoy_growth_clean.values]
+        ax7.bar(range(len(yoy_growth_clean)), yoy_growth_clean.values, color=colors_growth, alpha=0.7, edgecolor="black")
+        ax7.axhline(0, color="black", linewidth=1)
+        ax7.set_xticks(range(len(yoy_growth_clean)))
+        ax7.set_xticklabels(yoy_growth_clean.index, rotation=45, ha="right")
+        ax7.set_title("Year-over-Year Growth Rate (%)", fontsize=13, fontweight="bold")
+        ax7.set_ylabel("Growth Rate (%)")
+        ax7.grid(axis="y", alpha=0.3)
+
+    # 8. Annual Energy by Year
+    ax8 = fig.add_subplot(gs[3, 1])
+    ax8.bar(range(len(yearly_energy)), yearly_energy.values, color="#2E86AB", alpha=0.7, edgecolor="black", linewidth=1.5)
+    ax8.set_xticks(range(len(yearly_energy)))
+    ax8.set_xticklabels(yearly_energy.index, rotation=45, ha="right")
+    ax8.set_title("Annual Energy Generation by Year", fontsize=13, fontweight="bold")
+    ax8.set_ylabel("Energy [kWh/year]")
+    ax8.grid(axis="y", alpha=0.3)
+
+    # 9. Annual Revenue by Year
+    ax9 = fig.add_subplot(gs[3, 2])
+    colors_revenue = ["darkgreen" if v > yearly_revenue.mean() else "darkred" for v in yearly_revenue.values]
+    ax9.bar(range(len(yearly_revenue)), yearly_revenue.values, color=colors_revenue, alpha=0.7, edgecolor="black", linewidth=1.5)
+    ax9.set_xticks(range(len(yearly_revenue)))
+    ax9.set_xticklabels(yearly_revenue.index, rotation=45, ha="right")
+    ax9.set_title(f"Annual Revenue by Year ({currency})", fontsize=13, fontweight="bold")
+    ax9.set_ylabel(f"Revenue [{currency}/year]")
+    ax9.grid(axis="y", alpha=0.3)
+
+    # 10. Autocorrelation Function (ACF)
+    ax10 = fig.add_subplot(gs[4, 0])
+    try:
+        from statsmodels.graphics.tsaplots import plot_acf
+        plot_acf(monthly_data.dropna(), lags=min(20, len(monthly_data) // 2), ax=ax10, title="Autocorrelation (Monthly Data)")
+        ax10.set_ylabel("ACF")
+        ax10.grid(alpha=0.3)
+    except Exception:
+        ax10.text(0.5, 0.5, "ACF Error", ha="center", va="center")
+
+    # 11. Partial Autocorrelation (PACF)
+    ax11 = fig.add_subplot(gs[4, 1])
+    try:
+        from statsmodels.graphics.tsaplots import plot_pacf
+        plot_pacf(monthly_data.dropna(), lags=min(20, len(monthly_data) // 2), ax=ax11, method="ywm", title="Partial Autocorrelation (Monthly)")
+        ax11.set_ylabel("PACF")
+        ax11.grid(alpha=0.3)
+    except Exception:
+        ax11.text(0.5, 0.5, "PACF Error", ha="center", va="center")
+
+    # 12. Monthly Volatility
+    ax12 = fig.add_subplot(gs[4, 2])
+    monthly_volatility = monthly_data.rolling(window=3).std()
+    ax12.plot(range(len(monthly_volatility)), monthly_volatility.values, "o-", color="#A23B72", linewidth=2, markersize=6)
+    ax12.fill_between(range(len(monthly_volatility)), monthly_volatility.values, alpha=0.3, color="#A23B72")
+    ax12.set_title("Rolling Volatility (3-month Std Dev)", fontsize=13, fontweight="bold")
+    ax12.set_ylabel("Std Dev [kWh]")
+    ax12.grid(alpha=0.3, linestyle="--")
+
+    # 13. Cumulative Energy
+    ax13 = fig.add_subplot(gs[5, 0])
+    cumsum_energy = monthly_data.cumsum()
+    ax13.plot(range(len(cumsum_energy)), cumsum_energy.values, "o-", linewidth=2.5, color="#2E86AB", markersize=5)
+    ax13.fill_between(range(len(cumsum_energy)), cumsum_energy.values, alpha=0.3, color="#2E86AB")
+    ax13.set_title("Cumulative Energy Generation", fontsize=13, fontweight="bold")
+    ax13.set_xlabel("Month Index")
+    ax13.set_ylabel("Cumulative Energy [kWh]")
+    ax13.grid(alpha=0.3, linestyle="--")
+
+    # 14. Cumulative Revenue
+    ax14 = fig.add_subplot(gs[5, 1])
+    cumsum_revenue = monthly_revenue.cumsum()
+    ax14.plot(range(len(cumsum_revenue)), cumsum_revenue.values, "s-", linewidth=2.5, color="green", markersize=5)
+    ax14.fill_between(range(len(cumsum_revenue)), cumsum_revenue.values, alpha=0.3, color="green")
+    ax14.set_title(f"Cumulative Revenue ({currency})", fontsize=13, fontweight="bold")
+    ax14.set_xlabel("Month Index")
+    ax14.set_ylabel(f"Cumulative Revenue [{currency}]")
+    ax14.grid(alpha=0.3, linestyle="--")
+
+    # 15. Statistical Summary Box
+    ax15 = fig.add_subplot(gs[5, 2])
+    ax15.axis("off")
+    stats_text = f"""
+╔════════════════════════════════════╗
+║     ECONOMIC SUMMARY STATISTICS    ║
+╠════════════════════════════════════╣
+║ Energy (Monthly)                   ║
+║  Mean:        {monthly_data.mean():>15,.0f} kWh
+║  Median:      {monthly_data.median():>15,.0f} kWh
+║  Std Dev:     {monthly_data.std():>15,.0f} kWh
+║  Min:         {monthly_data.min():>15,.0f} kWh
+║  Max:         {monthly_data.max():>15,.0f} kWh
+║                                    ║
+║ Revenue (Monthly @ {price_per_kwh} {currency}/kWh)  ║
+║  Mean:        {monthly_revenue.mean():>15,.0f} {currency}
+║  Median:      {monthly_revenue.median():>15,.0f} {currency}
+║  Std Dev:     {monthly_revenue.std():>15,.0f} {currency}
+║  Min:         {monthly_revenue.min():>15,.0f} {currency}
+║  Max:         {monthly_revenue.max():>15,.0f} {currency}
+║                                    ║
+║ Aggregated Totals                  ║
+║  Total Energy: {daily_series.sum():>14,.0f} kWh
+║  Total Revenue:{yearly_revenue.sum():>14,.0f} {currency}
+║  Annual Avg:  {yearly_revenue.mean():>15,.0f} {currency}
+╚════════════════════════════════════╝
+    """
+    ax15.text(0.05, 0.95, stats_text, transform=ax15.transAxes, fontsize=10, verticalalignment="top", fontfamily="monospace", bbox=dict(boxstyle="round", facecolor="wheat", alpha=0.8))
 
     plt.suptitle(f"Economic Analysis Dashboard - {short_label(column)} ({parse_kwp_from_header(column):.0f} kWp)", fontsize=16, fontweight="bold", y=0.995)
 
