@@ -232,6 +232,11 @@ def aggregate_month_to_date_by_column(
     start_date = pd.Timestamp(year=year, month=month, day=1)
     end_date = pd.Timestamp(year=year, month=month, day=day)
     
+    # Match timezone if the index is timezone-aware
+    if df.index.tz is not None:
+        start_date = start_date.tz_localize(df.index.tz)
+        end_date = end_date.tz_localize(df.index.tz)
+    
     # Slice the DataFrame for the period
     mask = (df.index >= start_date) & (df.index <= end_date)
     period_df = df.loc[mask]

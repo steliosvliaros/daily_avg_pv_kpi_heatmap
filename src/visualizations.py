@@ -735,14 +735,12 @@ def plot_mtd_revenue_by_year_grid(
     
     fig.suptitle(f"Month-to-Date Revenue per kWp by Year — All Parks ({month_name})", fontsize=14, fontweight='bold', y=1.01)
 
-    if save_dir is None and config is not None:
-        save_dir = config.PLOTS_DIR / "weekly_analysis"
+    if save_dir is None:
+        save_dir = Path("plots") / "weekly_analysis"
+        save_dir.mkdir(parents=True, exist_ok=True)
     
-    if base_filename == "revenue_mtd_grid" and plot_name:
-        base_filename = plot_name
-
     saved_path = save_figure(fig, title_prefix="MTD Revenue per kWp by Year Grid", save=save, save_dir=save_dir,
-                             base_filename=base_filename, dpi=dpi, fmt=fmt, auto_version=auto_version, add_date=add_date)
+                             base_filename=base_filename, dpi=dpi, fmt=fmt, auto_version=True, add_date=True)
     plt.show()
     plt.close(fig)
     return saved_path
