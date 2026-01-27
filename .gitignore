@@ -20,3 +20,7 @@ pvgis_cache/**
 .DS_Store
 
 .pdf
+
+.jpg
+.png
+.jpeg
