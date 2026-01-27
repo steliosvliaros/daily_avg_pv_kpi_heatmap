@@ -26,9 +26,9 @@ from src import silver_pre_ingestion_eda as spie
 @dataclass
 class SilverPipelineConfig:
     """Configuration for silver processing pipeline"""
-    bronze_root: Path
-    silver_root: Path
-    silver_watermark_path: Path
+    bronze_root: Path = None
+    silver_root: Path = None
+    silver_watermark_path: Path = None
     unit_benchmarks_path: Optional[Path] = None
     park_metadata_path: Optional[Path] = None
     
@@ -55,6 +55,32 @@ class SilverPipelineConfig:
     parquet_compression: str = "zstd"
     
     dataset_name: str = "scada_1d_signal"
+    
+    def __init__(self, workspace_config=None, **kwargs):
+        """Initialize config from workspace_config or individual paths.
+        
+        Parameters
+        ----------
+        workspace_config : WorkspaceConfig, optional
+            Workspace configuration object. If provided, paths are derived from it.
+        **kwargs : dict
+            Override any config attributes
+        """
+        if workspace_config is not None:
+            self.bronze_root = workspace_config.BRONZE_ROOT
+            self.silver_root = workspace_config.SILVER_ROOT
+            self.silver_watermark_path = workspace_config.SILVER_OPS / "last_silver_committed.txt"
+            self.unit_benchmarks_path = workspace_config.UNIT_BENCHMARKS_CSV
+            self.park_metadata_path = workspace_config.PARK_METADATA_CSV
+        
+        # Apply any overrides from kwargs
+        for key, value in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+        
+        # Validate required paths
+        if self.bronze_root is None or self.silver_root is None:
+            raise ValueError("bronze_root and silver_root must be provided either via workspace_config or directly")
 
 
 @dataclass

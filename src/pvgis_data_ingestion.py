@@ -48,6 +48,51 @@ class TypicalYearConfig:
     save_eda_stats: bool = False
     show_eda_plots: bool = False
     force_download: bool = False
+    
+    def __init__(self, workspace_config=None, **kwargs):
+        """Initialize config from workspace_config or individual paths.
+        
+        Parameters
+        ----------
+        workspace_config : WorkspaceConfig, optional
+            Workspace configuration object. If provided, paths are derived from it.
+        **kwargs : dict
+            Override any config attributes
+        """
+        # Set default values
+        self.workspace_root = None
+        self.metadata_path = None
+        self.cache_root = None
+        self.output_dir = None
+        self.eda_output_dir = None
+        self.use_cache = True
+        self.save_cache = False
+        self.save_output = False
+        self.start_year = 2015
+        self.end_year = 2023
+        self.loss_pct = 18.0
+        self.default_capacity_kwp = 100.0
+        self.default_timezone = "Europe/Athens"
+        self.pvgis_url = "https://re.jrc.ec.europa.eu/api/"
+        self.drop_feb29 = True
+        self.reference_year = 2001
+        self.run_eda_on_new = True
+        self.save_eda_plots = False
+        self.save_eda_stats = False
+        self.show_eda_plots = False
+        self.force_download = False
+        
+        if workspace_config is not None:
+            self.workspace_root = workspace_config.WORKSPACE_ROOT
+            self.metadata_path = workspace_config.PARK_METADATA_CSV
+            self.cache_root = workspace_config.PVGIS_CACHE
+            self.output_dir = workspace_config.PVGIS_OUTPUT
+            self.eda_output_dir = workspace_config.PLOTS_PVGIS_EDA
+        
+        # Apply any overrides from kwargs
+        for key, value in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
 
 
 def _hash_payload(payload: Dict[str, object]) -> str:

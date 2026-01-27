@@ -29,11 +29,15 @@ def plot_heatmap(
     vmax=None,
     start_date=None,
     end_date=None,
+    config=None,
+    plot_name: str | None = None,
     save: bool = False,
     save_dir: str | Path | None = None,
     base_filename: str | None = None,
     dpi: int = 150,
     fmt: str = "png",
+    auto_version: bool = True,
+    add_date: bool = True,
 ):
     """
     Plot a heatmap of date x park data.
@@ -48,22 +52,41 @@ def plot_heatmap(
         Color scale limits
     start_date, end_date : str or Timestamp, optional
         Date range filter
+    config : WorkspaceConfig, optional
+        Workspace configuration object. If provided, uses config.PLOTS_DIR as default save_dir
+    plot_name : str, optional
+        Short name for the plot (e.g., "power_ratio_heatmap"). Used for filename if provided.
     save : bool
         Whether to save the figure
     save_dir : Path or str
-        Directory for saving
+        Directory for saving. If None and config provided, uses config.PLOTS_DIR
     base_filename : str
-        Base filename for saving
+        Base filename for saving (deprecated, use plot_name instead)
     dpi : int
         Resolution
     fmt : str
         Image format
+    auto_version : bool
+        If True, automatically adds date (YYYYMMDD) and version (v001, v002, etc.)
+    add_date : bool
+        If True with auto_version, adds YYYYMMDD to filename
         
     Returns
     -------
     Path or None
         Path to saved file if save=True
     """
+    # Determine save directory
+    if save_dir is None and config is not None:
+        save_dir = config.PLOTS_DIR / "weekly_analysis"
+    
+    # Determine filename
+    if base_filename is None:
+        if plot_name:
+            base_filename = plot_name
+        else:
+            base_filename = "heatmap"
+    
     # Filter by date range if specified
     if start_date is not None or end_date is not None:
         tz = mat.index.tz if isinstance(mat.index, pd.DatetimeIndex) else None
@@ -134,6 +157,8 @@ def plot_heatmap(
         base_filename=base_filename,
         dpi=dpi,
         fmt=fmt,
+        auto_version=auto_version,
+        add_date=add_date,
     )
 
     plt.show()
@@ -148,11 +173,14 @@ def lineplot_timeseries_per_column(
     sharex: bool = True,
     sharey: bool = False,
     rolling_window: int = 7,
+    config=None,
     save: bool = False,
     save_dir: str | Path | None = None,
     base_filename: str | None = None,
     dpi: int = 150,
     fmt: str = "png",
+    auto_version: bool = True,
+    add_date: bool = True,
 ):
     """
     Plot one line chart per column in a grid of subplots with rolling average and IQR bands.
@@ -263,6 +291,9 @@ def lineplot_timeseries_per_column(
 
     plt.tight_layout()
 
+    if save_dir is None and config is not None:
+        save_dir = config.PLOTS_DIR / "weekly_analysis"
+
     saved_path = save_figure(
         fig=fig,
         title_prefix=title_prefix,
@@ -271,6 +302,8 @@ def lineplot_timeseries_per_column(
         base_filename=base_filename,
         dpi=dpi,
         fmt=fmt,
+        auto_version=auto_version,
+        add_date=add_date,
     )
 
     plt.show()
@@ -288,11 +321,14 @@ def histplot_distribution_per_column(
     sharex: bool = False,
     sharey: bool = False,
     show_stats: bool = True,
+    config=None,
     save: bool = False,
     save_dir: str | Path | None = None,
     base_filename: str | None = None,
     dpi: int = 150,
     fmt: str = "png",
+    auto_version: bool = True,
+    add_date: bool = True,
 ):
     """
     Plot one histogram per column in a grid of subplots and optionally save the figure.
@@ -380,6 +416,9 @@ def histplot_distribution_per_column(
 
     plt.tight_layout()
 
+    if save_dir is None and config is not None:
+        save_dir = config.PLOTS_DIR / "weekly_analysis"
+
     saved_path = save_figure(
         fig=fig,
         title_prefix=title_prefix,
@@ -388,6 +427,8 @@ def histplot_distribution_per_column(
         base_filename=base_filename,
         dpi=dpi,
         fmt=fmt,
+        auto_version=auto_version,
+        add_date=add_date,
     )
 
     plt.show()
@@ -399,11 +440,15 @@ def plot_revenue_by_year(
     title: str = "Revenue by Year",
     price_per_kwh: float = 0.2,
     currency: str = "EUR",
+    config=None,
+    plot_name: str | None = None,
     save: bool = False,
     save_dir: Path | None = None,
     base_filename: str = "revenue_by_year",
     dpi: int = 150,
     fmt: str = "png",
+    auto_version: bool = True,
+    add_date: bool = True,
 ):
     """
     Create an enhanced revenue chart showing revenue by year with styling.
@@ -483,6 +528,12 @@ def plot_revenue_by_year(
     
     plt.tight_layout()
     
+    if save_dir is None and config is not None:
+        save_dir = config.PLOTS_DIR / "weekly_analysis"
+    
+    if base_filename == "revenue_by_year" and plot_name:
+        base_filename = plot_name
+    
     saved_path = save_figure(
         fig=fig,
         title_prefix=title,
@@ -491,6 +542,8 @@ def plot_revenue_by_year(
         base_filename=base_filename,
         dpi=dpi,
         fmt=fmt,
+        auto_version=auto_version,
+        add_date=add_date,
     )
     
     plt.show()
@@ -682,8 +735,14 @@ def plot_mtd_revenue_by_year_grid(
     
     fig.suptitle(f"Month-to-Date Revenue per kWp by Year — All Parks ({month_name})", fontsize=14, fontweight='bold', y=1.01)
 
+    if save_dir is None and config is not None:
+        save_dir = config.PLOTS_DIR / "weekly_analysis"
+    
+    if base_filename == "revenue_mtd_grid" and plot_name:
+        base_filename = plot_name
+
     saved_path = save_figure(fig, title_prefix="MTD Revenue per kWp by Year Grid", save=save, save_dir=save_dir,
-                             base_filename=base_filename, dpi=dpi, fmt=fmt)
+                             base_filename=base_filename, dpi=dpi, fmt=fmt, auto_version=auto_version, add_date=add_date)
     plt.show()
     plt.close(fig)
     return saved_path
