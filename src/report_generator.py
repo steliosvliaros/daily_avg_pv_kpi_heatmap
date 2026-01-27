@@ -15,7 +15,7 @@ from src.visualizations import (
 )
 from src.metrics_calculator import analyze_month_to_date_by_year
 from src.pvgis_pi_heatmap import short_label, parse_kwp_from_header
-from src.utils import sanitize_filename
+from src.utils import sanitize_filename, generate_versioned_filename
 
 
 __all__ = [
@@ -535,8 +535,19 @@ def create_financial_report_for_all_parks(
     _log("GENERATING MARKDOWN REPORT", logger)
     _log(f"{'='*80}", logger)
 
-    report_filename = f"report_weekly_financial_{report_date.strftime('%Y-%m-%d')}.md"
-    report_path = ws_root / "docs" / report_filename
+    # Generate versioned filename with YYYYMMDD format
+    docs_dir = ws_root / "docs"
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    
+    report_base = "report_weekly_financial"
+    versioned_name = generate_versioned_filename(
+        base_name=report_base,
+        save_dir=docs_dir,
+        fmt="md",
+        add_date=True,
+    )
+    report_filename = f"{versioned_name}.md"
+    report_path = docs_dir / report_filename
 
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(f"# Financial Analysis Report - {short_label(column)}\n")
