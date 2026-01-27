@@ -552,11 +552,12 @@ def plot_revenue_by_year(
 
 def plot_mtd_revenue_by_year_grid(
     daily_historical_df: pd.DataFrame,
-    price_per_kwh: float = 0.2,
+    price_per_kwh: float | pd.Series | dict | None = 0.2,
     currency: str = "EUR",
     current_date: pd.Timestamp | None = None,
     power_mapping_df: pd.DataFrame | None = None,
     power_mapping_path: Path | str | None = None,
+    metadata_path: Path | str | None = None,
     ncols: int = 3,
     save: bool = True,
     save_dir: Path | None = None,
@@ -573,14 +574,22 @@ def plot_mtd_revenue_by_year_grid(
     
     Revenue is normalized per kWp: (energy_kwh * price_per_kwh) / power_kwp
     
+    **Per-park pricing**: Supports individual prices per park from metadata.
+    
     Parameters
     ----------
     daily_historical_df : pd.DataFrame
         Date-indexed DataFrame with parks as columns
-    price_per_kwh : float
-        Price per kWh
+    price_per_kwh : float, pd.Series, dict, or None
+        Price per kWh. Can be:
+        - float: Single price for all parks (default: 0.2)
+        - pd.Series: Indexed by park_id with per-park prices
+        - dict: Mapping park_id -> price
+        - None: Auto-load from metadata_path
     currency : str
         Currency code
+    metadata_path : Path or str, optional
+        Path to park_metadata.csv for loading per-park prices when price_per_kwh=None
     current_date : pd.Timestamp
         Reference date for MTD calculation
     power_mapping_df : pd.DataFrame, optional
@@ -669,6 +678,24 @@ def plot_mtd_revenue_by_year_grid(
         per_park=True,
         current_date=current_date,
     )
+    
+    # Load or prepare per-park prices
+    from src.metrics_calculator import load_park_prices
+    
+    if price_per_kwh is None:
+        # Auto-load from metadata
+        if metadata_path is None:
+            raise ValueError("metadata_path required when price_per_kwh=None")
+        price_series = load_park_prices(metadata_path)
+    elif isinstance(price_per_kwh, dict):
+        price_series = pd.Series(price_per_kwh)
+    elif isinstance(price_per_kwh, pd.Series):
+        price_series = price_per_kwh
+    elif isinstance(price_per_kwh, (int, float)):
+        # Single price - create series for all parks
+        price_series = pd.Series({park: price_per_kwh for park in parks})
+    else:
+        raise TypeError(f"Unsupported price_per_kwh type: {type(price_per_kwh)}")
 
     # Build each subplot
     for idx, park in enumerate(parks):
@@ -679,9 +706,18 @@ def plot_mtd_revenue_by_year_grid(
         else:
             mtd_energy = pd.Series(dtype=float)
 
+        # Get price for this park
+        # Extract park_id from column (format: park_id__signal__unit)
+        if isinstance(park, tuple):
+            park_id = str(park[0]).split('__')[0]  # Extract base park_id
+        else:
+            park_id = str(park).split('__')[0]
+        
+        park_price = price_series.get(park_id, price_series.get(park, 0.2))
+        
         # Convert to revenue: (energy * price) / power_kwp
         power_kwp = power_kwp_dict.get(park, 100.0)
-        mtd_revenue = (mtd_energy * price_per_kwh) / power_kwp
+        mtd_revenue = (mtd_energy * park_price) / power_kwp
 
         # Compute average and colors
         avg_val = float(mtd_revenue.mean()) if len(mtd_revenue) else 0.0

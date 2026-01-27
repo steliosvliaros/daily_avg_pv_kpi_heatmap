@@ -234,31 +234,172 @@ def aggregate_month_to_date_by_column(
     return out
 
 
-def calculate_revenue_from_energy(
-    energy_series: pd.Series,
-    price_per_kwh: float = 0.2,
-    currency: str = "EUR",
-) -> pd.Series:
+def load_park_prices(metadata_path, price_col="price_euro_to_kwh", park_id_col="park_id"):
     """
-    Calculate revenue from energy data.
+    Load per-park pricing from metadata CSV.
     
     Parameters
     ----------
-    energy_series : pd.Series
-        Series with energy values (kWh)
-    price_per_kwh : float
-        Price per kWh (default: 0.2)
-    currency : str
-        Currency label (default: "EUR")
+    metadata_path : Path or str
+        Path to park_metadata.csv
+    price_col : str
+        Column name for price (default: "price_euro_to_kwh")
+    park_id_col : str
+        Column name for park ID (default: "park_id")
         
     Returns
     -------
     pd.Series
-        Revenue series with updated name
+        Series indexed by park_id with price values
     """
-    revenue = energy_series * price_per_kwh
-    revenue.name = f"Revenue ({currency})"
-    return revenue
+    import pandas as pd
+    from pathlib import Path
+    
+    metadata_path = Path(metadata_path)
+    if not metadata_path.exists():
+        raise FileNotFoundError(f"Metadata file not found: {metadata_path}")
+    
+    df = pd.read_csv(metadata_path)
+
+    # Handle the common misalignment where prices were placed in the 'notes' column
+    # (CSV rows had one extra comma before status_effective). If the price column
+    # is entirely NaN but 'notes' contains numeric values, migrate them.
+    if price_col not in df.columns:
+        raise ValueError(f"Price column '{price_col}' not found in metadata")
+    if park_id_col not in df.columns:
+        raise ValueError(f"Park ID column '{park_id_col}' not found in metadata")
+
+    if df[price_col].isna().all() and "notes" in df.columns:
+        notes_numeric = pd.to_numeric(df["notes"], errors="coerce")
+        if notes_numeric.notna().any():
+            df[price_col] = notes_numeric
+            # Optional: could log a warning here if desired
+    
+    # Create series indexed by park_id
+    prices = df.set_index(park_id_col)[price_col]
+    prices = pd.to_numeric(prices, errors='coerce')
+    
+    return prices
+
+
+def calculate_revenue_from_energy(
+    energy_series: pd.Series | pd.DataFrame,
+    price_per_kwh: float | pd.Series | dict | None = 0.2,
+    currency: str = "EUR",
+    metadata_path = None,
+) -> pd.Series | pd.DataFrame:
+    """
+    Calculate revenue from energy data with support for per-park pricing.
+    
+    Parameters
+    ----------
+    energy_series : pd.Series or pd.DataFrame
+        Series/DataFrame with energy values (kWh).
+        If DataFrame, columns should be park IDs.
+    price_per_kwh : float, pd.Series, dict, or None
+        Price per kWh. Can be:
+        - float: Single price for all parks (default: 0.2)
+        - pd.Series: Indexed by park_id with per-park prices
+        - dict: Mapping park_id -> price
+        - None: Auto-load from metadata_path (requires metadata_path)
+    currency : str
+        Currency label (default: "EUR")
+    metadata_path : Path or str, optional
+        Path to park_metadata.csv for auto-loading prices when price_per_kwh=None
+        
+    Returns
+    -------
+    pd.Series or pd.DataFrame
+        Revenue with same structure as input, with updated name/column names
+        
+    Examples
+    --------
+    >>> # Single price for all parks
+    >>> revenue = calculate_revenue_from_energy(energy_df, price_per_kwh=0.2)
+    
+    >>> # Per-park pricing from Series
+    >>> prices = pd.Series({'park_1': 0.15, 'park_2': 0.25})
+    >>> revenue = calculate_revenue_from_energy(energy_df, price_per_kwh=prices)
+    
+    >>> # Auto-load from metadata
+    >>> revenue = calculate_revenue_from_energy(energy_df, price_per_kwh=None,
+    ...                                         metadata_path='mappings/park_metadata.csv')
+    """
+    def _align_prices_to_columns(columns, price_series: pd.Series) -> pd.Series:
+        """Align per-park prices to DataFrame columns (supports MultiIndex).
+
+        Tries two strategies:
+        1) Direct match on level-0 labels for MultiIndex (or full column for flat).
+        2) Fallback: extract park_id prefix before '__' and match on that.
+        Missing prices are filled with 0.0 to avoid NaNs/zeroing everything via multiplication.
+        """
+        if isinstance(columns, pd.MultiIndex):
+            base_cols = columns.get_level_values(0)
+            aligned = price_series.reindex(base_cols)
+            if aligned.isna().all():
+                # Fallback: try splitting on '__' to match park_id prefix
+                park_ids = [str(c).split('__')[0] for c in base_cols]
+                aligned = price_series.reindex(park_ids)
+            aligned.index = columns
+        else:
+            # Flat columns
+            aligned = price_series.reindex(columns)
+            if aligned.isna().all():
+                park_ids = [str(c).split('__')[0] for c in columns]
+                aligned = price_series.reindex(park_ids)
+                aligned.index = columns
+        return aligned.fillna(0.0)
+
+    import pandas as pd
+    
+    # Auto-load prices from metadata if requested
+    if price_per_kwh is None:
+        if metadata_path is None:
+            raise ValueError("metadata_path required when price_per_kwh=None")
+        price_per_kwh = load_park_prices(metadata_path)
+    
+    # Handle DataFrame (per-park energy)
+    if isinstance(energy_series, pd.DataFrame):
+        if isinstance(price_per_kwh, (int, float)):
+            # Single price for all parks
+            revenue = energy_series * price_per_kwh
+        elif isinstance(price_per_kwh, dict):
+            # Convert dict to Series for alignment
+            price_series = pd.Series(price_per_kwh)
+            aligned_prices = _align_prices_to_columns(energy_series.columns, price_series)
+            revenue = energy_series.multiply(aligned_prices, axis=1)
+        elif isinstance(price_per_kwh, pd.Series):
+            # Per-park pricing - align by column names (handle MultiIndex columns)
+            aligned_prices = _align_prices_to_columns(energy_series.columns, price_per_kwh)
+            revenue = energy_series.multiply(aligned_prices, axis=1)
+        else:
+            raise TypeError(f"Unsupported price_per_kwh type: {type(price_per_kwh)}")
+        
+        # Update column names to indicate revenue
+        try:
+            revenue.columns = [f"{col}_revenue" for col in revenue.columns]
+        except Exception:
+            # If columns are MultiIndex, keep original to avoid unintended coercion
+            pass
+        return revenue
+    
+    # Handle Series (aggregated energy)
+    else:
+        if isinstance(price_per_kwh, (int, float)):
+            # Simple scalar multiplication
+            revenue = energy_series * price_per_kwh
+        elif isinstance(price_per_kwh, (dict, pd.Series)):
+            # For Series input with per-park pricing, we need to know which parks are included
+            # This is ambiguous - raise informative error
+            raise ValueError(
+                "Per-park pricing (Series/dict) requires DataFrame input with park columns. "
+                "For aggregated energy (Series input), use a single scalar price."
+            )
+        else:
+            raise TypeError(f"Unsupported price_per_kwh type: {type(price_per_kwh)}")
+        
+        revenue.name = f"Revenue ({currency})"
+        return revenue
 
 
 def calculate_anomaly_metrics(
