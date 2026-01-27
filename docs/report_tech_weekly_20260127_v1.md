@@ -12,7 +12,7 @@ This weekly technical report summarizes operational performance across all PV pa
 
 ## 1. Daily Energy Time Series (All Parks)
 
-![Daily Energy Time Series](..\plots\weekly_analysis\fig1_daily_energy_timeseries_20260127_v1_20260127_v004.png)
+![Daily Energy Time Series](..\plots\weekly_analysis\fig1_daily_energy_timeseries_20260127_v1_20260127_v005.png)
 
 **Notes:**
 - Check for gaps or flatlines indicating telemetry or data acquisition issues.
@@ -22,7 +22,7 @@ This weekly technical report summarizes operational performance across all PV pa
 
 ## 2. Performance Index (PI) Heatmap — Full Period
 
-![PI Heatmap - Full Period](..\plots\weekly_analysis\fig2_pi_heatmap_full_20260127_v1_20260127_v004.png)
+![PI Heatmap - Full Period](..\plots\weekly_analysis\fig2_pi_heatmap_full_20260127_v1_20260127_v005.png)
 
 **Interpretation:** PI ≈ 1 implies measured energy aligns with PVGIS expectation. Sustained PI < 0.8 suggests underperformance; PI > 1.2 may indicate measurement anomalies.
 
@@ -30,7 +30,7 @@ This weekly technical report summarizes operational performance across all PV pa
 
 ## 3. PI Heatmap — January 2026 (Month-to-Date)
 
-![PI Heatmap - MTD](..\plots\weekly_analysis\fig3_pi_heatmap_mtd_20260127_v1_20260127_v004.png)
+![PI Heatmap - MTD](..\plots\weekly_analysis\fig3_pi_heatmap_mtd_20260127_v1_20260127_v005.png)
 
 **Operational Checkpoints:**
 - Investigate parks with sustained blue regions (PI < 0.8).
@@ -42,7 +42,7 @@ This weekly technical report summarizes operational performance across all PV pa
 
 Period: January 1–27
 
-![Revenue MTD - All Parks](..\plots\weekly_analysis\fig4_revenue_mtd_all_parks_20260127_v1_20260127_v004.png)
+![Revenue MTD - All Parks](..\plots\weekly_analysis\fig4_revenue_mtd_all_parks_20260127_v1_20260127_v005.png)
 
 **Insights:**
 - Highest MTD revenue: 2023 (414,591.29 EUR)
@@ -53,10 +53,10 @@ Period: January 1–27
 
 ## 5. Month-to-Date Revenue per Park by Year (Grid)
 
-![MTD Revenue Grid](..\plots\weekly_analysis\fig5_revenue_mtd_grid_20260127_v1_20260127_v001.png)
+![MTD Revenue Grid](..\plots\weekly_analysis\fig5_revenue_mtd_grid_20260127_v1_20260127_v002.png)
 
 **Usage:** Highlights per-park month-to-date revenue against historical years. Use alongside PI heatmaps to differentiate revenue-impacting underperformance from data issues.
 
 ---
 
-*Report generated on 2026-01-27 09:58:15*
+*Report generated on 2026-01-27 10:19:22*

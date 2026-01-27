@@ -16,10 +16,12 @@ from src.visualizations import (
 from src.metrics_calculator import analyze_month_to_date_by_year
 from src.pvgis_pi_heatmap import short_label, parse_kwp_from_header
 from src.utils import sanitize_filename, generate_versioned_filename
+from src.degradation_analysis import analyze_degradation_with_stl
 
 
 __all__ = [
     "create_weekly_technical_report_for_all_parks",
+    "create_weekly_stl_report",
     "create_economic_analysis_dashboard",
     "create_financial_report_for_all_parks",
 ]
@@ -227,6 +229,200 @@ def create_weekly_technical_report_for_all_parks(
         f.write(f"*Report generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n")
 
     _log(f"\n✓ Technical report saved: {report_path}", logger)
+    return report_path
+
+
+def create_weekly_stl_report(
+    daily_df: pd.DataFrame,
+    report_date: Optional[str | pd.Timestamp] = None,
+    parks: Optional[list[str]] = None,
+    max_parks: int = 6,
+    save_dir: Optional[Path | str] = None,
+    workspace_root: Optional[Path | str] = None,
+    dpi: int = 150,
+    fmt: str = "png",
+    apply_log: bool = False,
+    logger=None,
+) -> Path:
+    """Create a weekly STL degradation report with plots and markdown summary.
+
+    Limits to ``max_parks`` series to keep runtime manageable. Uses versioned
+    filenames similar to technical/financial reports.
+    """
+    import matplotlib.pyplot as plt
+    import warnings
+
+    warnings.filterwarnings("ignore")
+
+    if workspace_root is None or save_dir is None:
+        from src.config import get_config
+        config = get_config()
+        ws_root = Path(workspace_root) if workspace_root else config.WORKSPACE_ROOT
+        plots_root = Path(save_dir) if save_dir else config.PLOTS_DIR
+    else:
+        ws_root = Path(workspace_root)
+        plots_root = Path(save_dir)
+
+    report_date = pd.Timestamp.now() if report_date is None else pd.Timestamp(report_date)
+    date_str = report_date.strftime("%Y%m%d")
+
+    stl_dir = plots_root / "weekly_analysis" / "stl"
+    stl_dir.mkdir(parents=True, exist_ok=True)
+
+    docs_dir = ws_root / "docs"
+    docs_dir.mkdir(parents=True, exist_ok=True)
+
+    selected_parks = list(parks) if parks else list(daily_df.columns)
+    if max_parks and len(selected_parks) > max_parks:
+        selected_parks = selected_parks[:max_parks]
+
+    summaries = []
+
+    _log("=" * 80, logger)
+    _log("GENERATING WEEKLY STL REPORT", logger)
+    _log("=" * 80, logger)
+    _log(f"Report Date: {report_date.strftime('%B %d, %Y')}", logger)
+    _log(f"Save Directory: {stl_dir}", logger)
+    _log(f"Parks included: {len(selected_parks)}", logger)
+    _log("=" * 80, logger)
+
+    for col in selected_parks:
+        if col not in daily_df.columns:
+            _log(f"⚠️  Skipping missing column: {col}", logger)
+            continue
+
+        series = daily_df[col].dropna()
+        if len(series) == 0:
+            _log(f"⚠️  Skipping empty series: {short_label(col)}", logger)
+            continue
+
+        try:
+            results = analyze_degradation_with_stl(
+                series=series,
+                apply_log=apply_log,
+                period=365,
+                robust=True,
+                anomaly_threshold=-3.0,
+                min_consecutive_days=2,
+                return_components=True,
+            )
+        except ValueError as exc:
+            _log(f"⚠️  {short_label(col)}: {exc}", logger)
+            continue
+
+        anomalies = results["anomaly_flags"]
+        persistent = results["persistent_anomaly_flags"]
+        trend = results.get("trend")
+        residual_z = results.get("residual_z_scores")
+
+        fig, axes = plt.subplots(3, 1, figsize=(12, 9), sharex=True)
+
+        axes[0].plot(series.index, series.values, linewidth=0.8, color="black", alpha=0.7, label="Observed")
+        if anomalies.any():
+            axes[0].scatter(anomalies[anomalies].index, series.loc[anomalies].values, color="orange", s=15, label="Anomaly", zorder=3)
+        if persistent.any():
+            axes[0].scatter(persistent[persistent].index, series.loc[persistent].values, color="red", s=25, marker="x", label="Persistent", zorder=4)
+        axes[0].set_ylabel("Energy")
+        axes[0].set_title(f"Observed with Anomalies — {short_label(col)}")
+        axes[0].grid(alpha=0.3)
+        axes[0].legend(loc="best", fontsize=8)
+
+        if trend is not None:
+            axes[1].plot(trend.index, trend.values, linewidth=1.2, color="#2E86AB", label="Trend")
+            days_numeric = (trend.index - trend.index[0]).days.values
+            fit = results["trend_slope"] * days_numeric + results["trend_intercept"]
+            axes[1].plot(trend.index, fit, "--", color="red", linewidth=1.5, alpha=0.8, label="Linear Fit")
+            axes[1].set_ylabel("Trend")
+            axes[1].set_title("Trend and Linear Fit")
+            axes[1].legend(loc="best", fontsize=8)
+            axes[1].grid(alpha=0.3)
+
+        if residual_z is not None:
+            axes[2].plot(residual_z.index, residual_z.values, linewidth=0.8, color="steelblue", alpha=0.7)
+            axes[2].axhline(-3, color="red", linestyle="--", linewidth=1.2, label="Threshold")
+            axes[2].axhline(0, color="black", linewidth=0.8, alpha=0.6)
+            axes[2].fill_between(residual_z.index, residual_z.values, -3, where=(residual_z.values < -3), color="red", alpha=0.15)
+            axes[2].set_ylabel("Robust Z-score")
+            axes[2].set_title("Residual Robust Z-scores")
+            axes[2].legend(loc="best", fontsize=8)
+            axes[2].grid(alpha=0.3)
+
+        axes[2].set_xlabel("Date")
+        plt.tight_layout()
+
+        safe_name = sanitize_filename(col)
+        fig_path = stl_dir / f"stl_{safe_name}_{date_str}.{fmt}"
+        fig.savefig(fig_path, dpi=dpi, bbox_inches="tight", facecolor="white", format=fmt)
+        plt.close(fig)
+
+        summaries.append(
+            {
+                "park": col,
+                "label": short_label(col),
+                "annual_deg": results.get("annual_degradation", 0.0),
+                "monthly_deg": results.get("degradation_rate", 0.0),
+                "anomalies": int(results.get("anomaly_count", 0)),
+                "persistent": int(results.get("persistent_anomaly_count", 0)),
+                "r2": results.get("trend_r_squared", 0.0),
+                "path": fig_path,
+                "range": results.get("date_range", ""),
+                "points": results.get("data_points", 0),
+            }
+        )
+
+        _log(
+            f"  ✓ {short_label(col)} | annual {results.get('annual_degradation', 0.0):+.2f}% | "
+            f"anomalies {results.get('anomaly_count', 0)} | persistent {results.get('persistent_anomaly_count', 0)}",
+            logger,
+        )
+
+    if not summaries:
+        raise ValueError("No STL results generated; check input data or parameters.")
+
+    versioned_name = generate_versioned_filename(
+        base_name="report_weekly_stl",
+        save_dir=docs_dir,
+        fmt="md",
+        add_date=True,
+    )
+    report_path = docs_dir / f"{versioned_name}.md"
+
+    summaries_sorted = sorted(summaries, key=lambda x: x["annual_deg"])
+
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write("# Weekly STL Degradation Report\n")
+        f.write(f"**Report Date:** {report_date.strftime('%B %d, %Y')}\n\n")
+        f.write(f"Analyzed Parks: {len(summaries_sorted)} (max {max_parks})\n\n")
+        f.write("---\n\n")
+
+        f.write("## Summary Table\n\n")
+        f.write("| Park | Annual Deg (%/yr) | Monthly Deg (%/mo) | Anomalies | Persistent | Trend R² | Range | Points | Plot |\n")
+        f.write("|------|-------------------|--------------------|----------|------------|---------|-------|--------|------|\n")
+        for item in summaries_sorted:
+            rel_plot = Path("..") / "plots" / "weekly_analysis" / "stl" / Path(item["path"]).name
+            f.write(
+                f"| {item['label']} | {item['annual_deg']:+.2f} | {item['monthly_deg']:+.2f} | "
+                f"{item['anomalies']} | {item['persistent']} | {item['r2']:.3f} | {item['range']} | "
+                f"{item['points']} | ![plot]({rel_plot}) |\n"
+            )
+
+        f.write("\n---\n\n")
+        f.write("## Individual STL Plots\n\n")
+        for item in summaries_sorted:
+            rel_plot = Path("..") / "plots" / "weekly_analysis" / "stl" / Path(item["path"]).name
+            f.write(f"### {item['label']} ({parse_kwp_from_header(item['park']):.0f} kWp)\n\n")
+            f.write(f"- Date Range: {item['range']}\n")
+            f.write(f"- Data Points: {item['points']:,}\n")
+            f.write(f"- Annual Degradation: {item['annual_deg']:+.2f}%/yr\n")
+            f.write(f"- Monthly Degradation: {item['monthly_deg']:+.2f}%/mo\n")
+            f.write(f"- Anomalies: {item['anomalies']} (Persistent: {item['persistent']})\n")
+            f.write(f"- Trend R²: {item['r2']:.3f}\n\n")
+            f.write(f"![STL Plot]({rel_plot})\n\n")
+            f.write("---\n\n")
+
+        f.write(f"*Report generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n")
+
+    _log(f"\n✓ STL report saved: {report_path}", logger)
     return report_path
 
 
