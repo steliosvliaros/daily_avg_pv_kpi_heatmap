@@ -22,6 +22,7 @@ from src.degradation_analysis import analyze_degradation_with_stl
 __all__ = [
     "create_weekly_technical_report_for_all_parks",
     "create_weekly_stl_report",
+    "create_weekly_stl_report_for_all_parks",
     "create_economic_analysis_dashboard",
     "create_financial_report_for_all_parks",
 ]
@@ -158,10 +159,19 @@ def create_weekly_technical_report_for_all_parks(
         fmt=fmt,
     )
 
-    # Markdown report
+    # Markdown report with versioned filename
     _log("\nWriting markdown report ...", logger)
-    report_filename = f"report_tech_weekly_{date_str}_{version}.md"
-    report_path = ws_root / "docs" / report_filename
+    docs_dir = ws_root / "docs"
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Use generate_versioned_filename for automatic v001, v002, etc.
+    versioned_name = generate_versioned_filename(
+        base_name="report_tech_weekly",
+        save_dir=docs_dir,
+        fmt="md",
+        add_date=True,
+    )
+    report_path = docs_dir / f"{versioned_name}.md"
 
     rel = lambda p: Path("../plots/weekly_analysis") / Path(p).name if p else None
     rel_ts_path = rel(ts_path)
@@ -169,11 +179,14 @@ def create_weekly_technical_report_for_all_parks(
     rel_pi_mtd = rel(pi_mtd_path)
     rel_revenue_by_year = rel(revenue_by_year_path)
     rel_mtd_grid = rel(mtd_grid_path)
+    
+    # Extract version from generated filename (e.g., report_tech_weekly_20260127_v001)
+    version_from_filename = versioned_name.split("_")[-1] if "_v" in versioned_name else version
 
     with open(report_path, "w", encoding="utf-8") as f:
         f.write("# Weekly PV Technical Report\n")
         f.write(f"**Report Date:** {report_date.strftime('%B %d, %Y')}\n")
-        f.write(f"**Version:** {version}\n\n")
+        f.write(f"**Version:** {version_from_filename}\n\n")
         f.write("---\n\n")
 
         f.write("## Executive Summary\n\n")
@@ -808,3 +821,61 @@ def create_financial_report_for_all_parks(
     _log(f"\n{'='*80}", logger)
 
     return report_path
+
+
+# Alias for backwards compatibility and clearer naming
+def create_weekly_stl_report_for_all_parks(
+    daily_df: pd.DataFrame,
+    report_date: Optional[str | pd.Timestamp] = None,
+    period: int = 365,
+    robust: bool = True,
+    anomaly_threshold: float = -3.0,
+    min_consecutive_days: int = 2,
+    apply_log: bool = False,
+    parks: Optional[list[str]] = None,
+    max_parks: int = 6,
+    save_dir: Optional[Path | str] = None,
+    workspace_root: Optional[Path | str] = None,
+    dpi: int = 150,
+    fmt: str = "png",
+    logger=None,
+) -> Path:
+    """Wrapper for create_weekly_stl_report with expanded parameters.
+    
+    This function provides a more explicit interface for generating weekly STL reports
+    for all parks, with explicit control over STL parameters.
+    
+    Parameters:
+        daily_df: DataFrame with daily energy data (columns are parks)
+        report_date: Date of the report (default: today)
+        period: STL period (default: 365 for annual seasonality)
+        robust: Use robust STL (default: True)
+        anomaly_threshold: Z-score threshold for anomaly detection (default: -3.0)
+        min_consecutive_days: Minimum consecutive days for persistent anomalies (default: 2)
+        apply_log: Apply log transformation before STL (default: False)
+        parks: List of specific parks to analyze (default: all)
+        max_parks: Maximum number of parks to include (default: 6)
+        save_dir: Directory to save plots
+        workspace_root: Root workspace directory
+        dpi: Plot resolution (default: 150)
+        fmt: Plot format (default: 'png')
+        logger: Optional logger instance
+        
+    Returns:
+        Path to the generated markdown report
+    """
+    # Note: period, robust, anomaly_threshold, min_consecutive_days are used internally
+    # by analyze_degradation_with_stl which is called inside create_weekly_stl_report
+    return create_weekly_stl_report(
+        daily_df=daily_df,
+        report_date=report_date,
+        parks=parks,
+        max_parks=max_parks,
+        save_dir=save_dir,
+        workspace_root=workspace_root,
+        dpi=dpi,
+        fmt=fmt,
+        apply_log=apply_log,
+        logger=logger,
+    )
+
