@@ -402,6 +402,117 @@ def calculate_revenue_from_energy(
         return revenue
 
 
+def calculate_revenue_with_fuzzy_matching(
+    energy_df: pd.DataFrame,
+    metadata_path,
+    currency: str = "EUR",
+    min_word_overlap: int = 1,
+) -> pd.DataFrame:
+    """
+    Calculate revenue from energy data with fuzzy column-to-park_id matching.
+    
+    This function handles cases where energy DataFrame column names don't exactly
+    match the park_id values in metadata. It uses word-overlap matching to find
+    the best park_id for each column, then applies per-park pricing.
+    
+    Parameters
+    ----------
+    energy_df : pd.DataFrame
+        Energy data indexed by year (from annual_mtd_energy with per_park=True).
+        Columns are park identifiers (may be MultiIndex or strings that don't
+        exactly match metadata park_id format).
+    metadata_path : Path or str
+        Path to park_metadata.csv containing park_id, price, and status_effective
+    currency : str, default "EUR"
+        Currency label for revenue
+    min_word_overlap : int, default 1
+        Minimum number of matching words required between column name and park_id
+        
+    Returns
+    -------
+    pd.DataFrame
+        Revenue DataFrame with same shape as input, values in specified currency
+        
+    Examples
+    --------
+    >>> # Energy from annual_mtd_energy
+    >>> jan_energy = annual_mtd_energy(daily_historical, agg="sum", per_park=True)
+    >>> # Calculate revenue with fuzzy matching
+    >>> revenue = calculate_revenue_with_fuzzy_matching(
+    ...     jan_energy,
+    ...     metadata_path='mappings/park_metadata.csv'
+    ... )
+    """
+    import pandas as pd
+    from pathlib import Path
+    
+    def normalize_for_matching(text):
+        """Extract meaningful words for fuzzy matching."""
+        text = str(text).lower().replace('p_', '').replace('__', '_')
+        words = []
+        for part in text.split('_'):
+            # Skip numeric parts, capacity indicators, and empty strings
+            if part and not part.replace('.', '').replace(',', '').isdigit():
+                if 'kwp' not in part and 'kw' not in part and 'mw' not in part:
+                    words.append(part)
+        return set(words)
+    
+    # Load metadata and prices
+    from .silver_prepair import load_park_metadata
+    
+    meta = load_park_metadata(metadata_path)
+    if meta is None:
+        raise ValueError(f"Could not load metadata from {metadata_path}")
+    
+    # Filter to active parks only
+    if "status_effective" in meta.columns:
+        status_series = meta["status_effective"].astype("string").str.strip().str.lower()
+        active_meta = meta.loc[status_series == "true"].copy()
+    else:
+        active_meta = meta.copy()
+    
+    # Load prices
+    prices = load_park_prices(metadata_path)
+    
+    # Build column -> park_id mapping
+    col_to_park = {}
+    price_dict = {}
+    
+    for col in energy_df.columns:
+        # Extract column name string (handle MultiIndex)
+        col_str = str(col[0] if isinstance(col, tuple) else col)
+        col_words = normalize_for_matching(col_str)
+        
+        best_match = None
+        best_overlap = 0
+        
+        for _, row in active_meta.iterrows():
+            park_id = str(row['park_id']).lower()
+            park_words = normalize_for_matching(park_id)
+            overlap = len(col_words & park_words)
+            
+            if overlap > best_overlap:
+                best_overlap = overlap
+                best_match = park_id
+        
+        if best_match and best_overlap >= min_word_overlap:
+            col_to_park[col] = best_match
+            price = prices.get(best_match, 0.0)
+            price_dict[col] = price
+    
+    # Calculate revenue: Energy × Price per column
+    revenue_df = energy_df.copy()
+    
+    for col in revenue_df.columns:
+        if col in price_dict:
+            revenue_df[col] = revenue_df[col] * price_dict[col]
+        else:
+            # No match found - set to 0
+            revenue_df[col] = 0.0
+    
+    return revenue_df
+
+
 def calculate_anomaly_metrics(
     power_ratio_pct: pd.DataFrame,
     daily_historical: pd.DataFrame = None,
