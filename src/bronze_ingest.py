@@ -96,6 +96,8 @@ class Config:
 
     # Runtime toggles
     allow_duplicates: bool = False
+    # Optional filter to restrict parks ingested (lowercased park_id with capacity suffix)
+    allowed_parks: Optional[set] = None
 
 
 def get_config_from_workspace(
@@ -410,6 +412,16 @@ def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_fi
     # Extract capacity from the capacity_kwp portion (e.g., "296_kwp" -> 296)
     capacity_match = extracted["capacity"].str.extract(r"(\d+)_kwp", expand=False)
     long_df["park_capacity_kwp"] = pd.to_numeric(capacity_match, errors="coerce")
+
+    # Filter by allowed parks if provided (status_effective == true)
+    if cfg.allowed_parks:
+        before = len(long_df)
+        long_df["park_id"] = long_df["park_id"].astype("string").str.strip().str.lower()
+        long_df = long_df[long_df["park_id"].isin(cfg.allowed_parks)]
+        after = len(long_df)
+        print(f"[bronze_ingest] status_effective filter: {before:,} -> {after:,} rows")
+        if long_df.empty:
+            return long_df
 
     # Determine interval_start_date for daily values
     ts_local_series = pd.to_datetime(long_df["ts_local"])

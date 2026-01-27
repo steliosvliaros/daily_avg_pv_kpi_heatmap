@@ -13,7 +13,7 @@ from src.visualizations import (
     plot_revenue_by_year,
     plot_mtd_revenue_by_year_grid,
 )
-from src.metrics_calculator import analyze_month_to_date_by_year
+from src.metrics_calculator import annual_mtd_energy
 from src.pvgis_pi_heatmap import short_label, parse_kwp_from_header
 from src.utils import sanitize_filename, generate_versioned_filename
 from src.degradation_analysis import analyze_degradation_with_stl
@@ -124,10 +124,10 @@ def create_weekly_technical_report_for_all_parks(
 
     # 4) Month-to-date total revenue (all parks)
     _log("4) Month-to-date total REVENUE for all parks by year ...", logger)
-    mtd_total_energy = analyze_month_to_date_by_year(
+    mtd_total_energy = annual_mtd_energy(
         daily_historical_df,
-        column=None,
-        aggregation="sum",
+        agg="sum",
+        per_park=False,
         current_date=report_date,
     )
     mtd_total_revenue = mtd_total_energy * price_per_kwh

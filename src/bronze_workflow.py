@@ -31,6 +31,7 @@ class BronzePipelineConfig:
     bronze_root: Path
     mappings_root: Path
     outputs_root: Path
+    park_metadata_path: Optional[Path] = None
     
     # Sanitization options
     sanitize_files: bool = True
@@ -154,6 +155,24 @@ def run_bronze_pipeline(config: BronzePipelineConfig) -> BronzePipelineResult:
                 print(f"⚠ {sanitize_results.failed_count} files failed sanitization")
                 result.errors.extend([f"Sanitization failed: {f}" for f, e in sanitize_results.failed])
         
+        # Determine allowed parks based on metadata (status_effective == true)
+        allowed_parks = None
+        if config.park_metadata_path and config.park_metadata_path.exists():
+            try:
+                from src.silver_prepair import load_park_metadata
+
+                meta = load_park_metadata(config.park_metadata_path)
+                if meta is None or "status_effective" not in meta.columns:
+                    raise ValueError("park_metadata must contain status_effective to filter bronze ingestion")
+
+                status_series = meta["status_effective"].astype("string").str.strip().str.lower()
+                allowed_parks = set(meta.loc[status_series == "true", "park_id"].astype(str))
+                print(f"[bronze_pipeline] status_effective=true parks: {len(allowed_parks)}")
+            except Exception as exc:
+                result.errors.append(str(exc))
+                print(f"✗ Failed to load park metadata for filtering: {exc}")
+                return result
+
         # Step 2: Configure Bronze Ingestion
         print("\n" + "="*80)
         print("BRONZE PIPELINE: Building Ingestion Config")
@@ -175,6 +194,7 @@ def run_bronze_pipeline(config: BronzePipelineConfig) -> BronzePipelineResult:
             min_age_seconds=config.min_age_seconds,
             stable_check_seconds=config.stable_check_seconds,
             allow_duplicates=config.allow_duplicates,
+            allowed_parks=allowed_parks,
         )
         
         ingest_cfg.lockfile = config.data_root / "_locks" / "bronze_ingest.lock"
@@ -299,6 +319,7 @@ def get_bronze_pipeline_config_from_workspace_config(
         bronze_root=workspace_config.BRONZE_ROOT,
         mappings_root=workspace_config.MAPPINGS_ROOT,
         outputs_root=workspace_config.OUTPUTS_DIR,
+        park_metadata_path=workspace_config.PARK_METADATA_CSV,
         
         sanitize_files=sanitize_files,
         restore_rejected=True,

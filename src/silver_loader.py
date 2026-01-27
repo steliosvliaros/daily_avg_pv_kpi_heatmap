@@ -97,7 +97,7 @@ def load_silver_wide(
     signals=None,
     start_date=None,
     end_date=None,
-    status_effective=None,
+    status_effective="true",
     only_valid=True,
     flatten_columns=False,
     debug=False,
@@ -119,8 +119,8 @@ def load_silver_wide(
         Start date for filtering (inclusive)
     end_date : str or Timestamp, optional
         End date for filtering (inclusive)
-    status_effective : str or list-like, optional
-        Filter parks by status_effective from metadata
+    status_effective : str or list-like, default "true"
+        Filter parks by status_effective from metadata. Use "all" or None to disable filtering.
     only_valid : bool, default True
         If True, exclude rows with any flag_* columns set
     flatten_columns : bool, default False
@@ -138,7 +138,11 @@ def load_silver_wide(
     
     park_set = _normalize_values(park_ids)
     signal_set = _normalize_values(signals)
-    status_set = _normalize_status(status_effective)
+    # Default to active parks; allow opt-out with "all"/None
+    if isinstance(status_effective, str) and status_effective.strip().lower() == "all":
+        status_set = None
+    else:
+        status_set = _normalize_status(status_effective)
 
     part_files = _iter_silver_parts(silver_root, start_date=start_date, end_date=end_date)
     if debug:
@@ -173,7 +177,7 @@ def load_silver_wide(
         if meta is None or "status_effective" not in meta.columns:
             raise ValueError("status_effective filter requested but metadata missing status_effective")
         status_series = meta["status_effective"].astype("string").str.strip().str.lower()
-        allowed_parks = set(meta.loc[status_series.isin(status_set), "park_id"].astype(str))
+        allowed_parks = set(meta.loc[status_series.isin(status_set), "park_id"].astype(str).str.lower())
         if debug:
             intersection = set(df["park_id"].dropna()) & allowed_parks
             print(f"[load_silver_wide] status_effective parks: {len(allowed_parks)}")
@@ -274,10 +278,12 @@ def load_pvgis_typical_wide(
     pvgis_path=None,
     cache_dir=None,
     workspace_root=None,
+    metadata_path=None,
     park_ids=None,
     signals=None,
     start_date=None,
     end_date=None,
+    status_effective="true",
     flatten_columns=False,
     local_timezone=None,
     debug=False,
@@ -293,6 +299,8 @@ def load_pvgis_typical_wide(
         Directory containing PVGIS cache files
     workspace_root : Path or str, optional
         Workspace root to search for PVGIS data
+    metadata_path : Path or str, optional
+        Path to park_metadata.csv; defaults to workspace_root/mappings/park_metadata.csv
     park_ids : list-like, optional
         Filter to specific park IDs
     signals : list-like, optional
@@ -301,6 +309,8 @@ def load_pvgis_typical_wide(
         Start date for filtering (matched by month-day)
     end_date : str or Timestamp, optional
         End date for filtering (matched by month-day)
+    status_effective : str or list-like, default "true"
+        Filter parks by status_effective from metadata. Use "all" or None to disable filtering.
     flatten_columns : bool, default False
         If True, flatten MultiIndex columns to strings
     local_timezone : str, optional
@@ -315,6 +325,10 @@ def load_pvgis_typical_wide(
     """
     park_set = _normalize_values(park_ids)
     signal_set = _normalize_values(signals)
+    if isinstance(status_effective, str) and status_effective.strip().lower() == "all":
+        status_set = None
+    else:
+        status_set = _normalize_status(status_effective)
 
     files = _resolve_pvgis_files(pvgis_path, cache_dir, workspace_root)
     if debug:
@@ -332,6 +346,29 @@ def load_pvgis_typical_wide(
 
     df["park_id"] = df["park_id"].astype("string").str.strip().str.lower()
     df["signal_name"] = df["signal_name"].astype("string").str.strip().str.lower()
+
+    if status_set is not None:
+        from src.silver_prepair import load_park_metadata
+
+        meta_path = Path(metadata_path) if metadata_path is not None else None
+        if meta_path is None and workspace_root is not None:
+            meta_path = Path(workspace_root) / "mappings" / "park_metadata.csv"
+        if meta_path is None:
+            raise ValueError("status_effective filter requested but metadata_path not provided")
+
+        meta = load_park_metadata(meta_path)
+        if meta is None or "status_effective" not in meta.columns:
+            raise ValueError("status_effective filter requested but metadata missing status_effective")
+
+        status_series = meta["status_effective"].astype("string").str.strip().str.lower()
+        allowed_parks = set(meta.loc[status_series.isin(status_set), "park_id"].astype(str).str.lower())
+        if debug:
+            print(f"[load_pvgis_typical_wide] status_effective parks: {len(allowed_parks)}")
+        if park_set:
+            allowed_parks = allowed_parks.intersection(park_set)
+        df = df[df["park_id"].isin(allowed_parks)]
+        if debug:
+            print(f"[load_pvgis_typical_wide] rows after status_effective: {len(df)}")
 
     if park_set is not None:
         df = df[df["park_id"].isin(park_set)]

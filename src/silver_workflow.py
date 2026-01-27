@@ -138,15 +138,42 @@ def run_silver_pipeline(config: SilverPipelineConfig) -> SilverPipelineResult:
             silver_watermark_path=config.silver_watermark_path,
             dataset_name=config.dataset_name,
         )
-        
+
         result.rows_loaded = len(df_new)
-        
+
         if df_new.empty:
             print("No new bronze rows found.")
             result.success = True
             return result
-        
+
         print(f"✓ Loaded {len(df_new):,} new bronze rows from {len(loaded_run_ids)} run(s)")
+
+        # Filter to parks with status_effective == true
+        meta = sp.load_park_metadata(config.park_metadata_path)
+        if meta is None:
+            raise ValueError("park_metadata not found; required for status_effective filtering")
+        if "status_effective" not in meta.columns:
+            raise ValueError("park_metadata must contain status_effective column")
+
+        status_series = meta["status_effective"].astype("string").str.strip().str.lower()
+        allowed_parks = set(meta.loc[status_series == "true", "park_id"].astype(str))
+        print(f"[silver_pipeline] status_effective=true parks: {len(allowed_parks)}")
+
+        if not allowed_parks:
+            print("No parks with status_effective=true; skipping silver pipeline")
+            result.success = True
+            return result
+
+        df_new["park_id"] = df_new["park_id"].astype("string").str.strip().str.lower()
+        before_filter = len(df_new)
+        df_new = df_new[df_new["park_id"].isin(allowed_parks)]
+        after_filter = len(df_new)
+        print(f"[silver_pipeline] rows after status_effective filter: {before_filter:,} -> {after_filter:,}")
+
+        if df_new.empty:
+            print("No rows remain after status_effective filter; skipping silver pipeline")
+            result.success = True
+            return result
         
         # Step 2: Clean and validate
         print("\n" + "="*80)

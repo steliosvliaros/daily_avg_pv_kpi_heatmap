@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from src.pvgis_pi_heatmap import parse_kwp_from_header, short_label
 from src.utils import save_figure
-from src.metrics_calculator import analyze_month_to_date_by_year
+from src.metrics_calculator import annual_mtd_energy
 
 
 def extract_park_name_before_pcc(col):
@@ -568,7 +568,7 @@ def plot_mtd_revenue_by_year_grid(
     Grid of revenue-by-year charts, one per park, showing month-to-date revenue per kWp.
 
     For each column (park), computes month-to-date energy per year via
-    `analyze_month_to_date_by_year(..., aggregation='sum')`, converts to revenue,
+    `annual_mtd_energy(..., agg='sum', per_park=True)`, converts to revenue,
     and renders a bar chart with average reference line and value annotations.
     
     Revenue is normalized per kWp: (energy_kwh * price_per_kwh) / power_kwp
@@ -662,16 +662,23 @@ def plot_mtd_revenue_by_year_grid(
             m = _re.search(r"\[(.*?)\]", str(col))
             return m.group(1) if m else str(col)
 
+    # Pre-compute MTD energy per park/year
+    mtd_energy_df = annual_mtd_energy(
+        daily_historical_df,
+        agg="sum",
+        per_park=True,
+        current_date=current_date,
+    )
+
     # Build each subplot
     for idx, park in enumerate(parks):
         ax = axes_list[idx]
-        # Month-to-date energy per year
-        mtd_energy = analyze_month_to_date_by_year(
-            daily_historical_df,
-            park,
-            aggregation='sum',
-            current_date=current_date,
-        )
+        # Month-to-date energy per year for this park
+        if isinstance(mtd_energy_df, pd.DataFrame) and park in mtd_energy_df.columns:
+            mtd_energy = mtd_energy_df[park].dropna()
+        else:
+            mtd_energy = pd.Series(dtype=float)
+
         # Convert to revenue: (energy * price) / power_kwp
         power_kwp = power_kwp_dict.get(park, 100.0)
         mtd_revenue = (mtd_energy * price_per_kwh) / power_kwp

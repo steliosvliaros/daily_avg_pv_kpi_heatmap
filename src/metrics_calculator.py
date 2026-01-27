@@ -9,164 +9,132 @@ import pandas as pd
 import numpy as np
 
 
-def analyze_month_to_date_by_year(
+def annual_mtd_energy(
     df: pd.DataFrame,
-    column: str | None = None,
-    aggregation: str = 'sum',
+    agg: str | callable = "sum",
+    per_park: bool = True,
     current_date: pd.Timestamp | str | None = None,
-) -> pd.Series | list:
+    parks: list | tuple | None = None,
+) -> pd.DataFrame | pd.Series:
     """
-    Analyze month-to-date values for a specific column (or all columns) across all years in the dataset.
-    
+    Compute month-to-date (1..current day) aggregates for each calendar year.
+
     Parameters
     ----------
     df : pd.DataFrame
-        Date-indexed DataFrame where each column represents a park/series
-    column : str or None
-        Column name to analyze. If None, aggregates across all columns
-    aggregation : str
-        Aggregation method: 'sum', 'mean'/'avg'/'average', 'min', 'max', 'median', 'std', 'count'
+        Date-indexed DataFrame where each column represents a park/series.
+    agg : str or callable, default "sum"
+        Aggregation to apply. Strings support pandas aggregations
+        ('sum', 'mean'/'avg'/'average', 'min', 'max', 'median', 'std', 'count').
+        A callable receives a Series and must return a scalar.
+    per_park : bool, default True
+        If True, returns a DataFrame with one column per park.
+        If False, returns a Series aggregating across all parks per year.
     current_date : pd.Timestamp, str, or None
-        Reference date (default: today). Determines the month-to-date window
-        
+        Reference date (defaults to now). Defines the month/day for the MTD window.
+    parks : list/tuple or None
+        Optional subset of park/column names to include.
+
     Returns
     -------
+    pd.DataFrame
+        If per_park=True, index is Year and columns are parks.
     pd.Series
-        Series indexed by year with aggregated values
-    list
-        If column is None and not found, returns list of available columns
+        If per_park=False, index is Year with aggregated values across parks.
     """
-    # Set current date (default to today)
-    if current_date is None:
-        current_date = pd.Timestamp.now()
-    else:
-        current_date = pd.to_datetime(current_date)
-    
-    # Get the timezone from the dataframe index
+
+    # Normalize current_date and timezone alignment
+    current_date = pd.to_datetime(current_date) if current_date is not None else pd.Timestamp.now()
     df_tz = df.index.tz
-    
-    # Make current_date tz-aware if needed to match df
     if df_tz is not None and current_date.tz is None:
         current_date = current_date.tz_localize(df_tz)
     elif df_tz is None and current_date.tz is not None:
         current_date = current_date.tz_localize(None)
-    
-    # Extract current month and day
-    current_month = current_date.month
-    current_day = current_date.day
-    
-    # Map aggregation aliases
-    agg_map = {'avg': 'mean', 'average': 'mean'}
-    aggregation = agg_map.get(aggregation.lower(), aggregation.lower())
-    
-    # Validate aggregation method
-    valid_aggs = ['sum', 'mean', 'min', 'max', 'median', 'std', 'count']
-    if aggregation not in valid_aggs:
-        raise ValueError(f"Invalid aggregation '{aggregation}'. Valid options: {valid_aggs}")
-    
-    # Handle None column - aggregate across all columns
-    if column is None:
-        # Get all unique years in the dataset
-        years = df.index.year.unique()
-        results = {}
-        
-        for year in sorted(years):
-            start_date = pd.Timestamp(year=year, month=current_month, day=1)
-            end_date = pd.Timestamp(year=year, month=current_month, day=current_day)
-            
-            # Match timezone
+
+    month = current_date.month
+    day = current_date.day
+
+    # Resolve aggregation
+    agg_alias = {"avg": "mean", "average": "mean"}
+    if isinstance(agg, str):
+        agg_name = agg_alias.get(agg.lower(), agg.lower())
+        valid_aggs = ["sum", "mean", "min", "max", "median", "std", "count"]
+        if agg_name not in valid_aggs:
+            raise ValueError(f"Invalid aggregation '{agg}'. Valid options: {valid_aggs} or a callable.")
+        agg_func = agg_name
+        agg_label = agg_name.capitalize()
+    elif callable(agg):
+        agg_func = agg
+        agg_label = getattr(agg, "__name__", "custom")
+    else:
+        raise TypeError("agg must be a string or callable")
+
+    cols = list(parks) if parks is not None else list(df.columns)
+    years = sorted(pd.unique(df.index.year))
+
+    if per_park:
+        rows = {}
+        for year in years:
+            start = pd.Timestamp(year=year, month=month, day=1)
+            end = pd.Timestamp(year=year, month=month, day=day)
             if df_tz is not None:
-                start_date = start_date.tz_localize(df_tz)
-                end_date = end_date.tz_localize(df_tz)
-            
-            mask = (df.index >= start_date) & (df.index <= end_date)
-            period_data = df.loc[mask].dropna(how='all')
-            
-            if len(period_data) == 0:
+                start = start.tz_localize(df_tz)
+                end = end.tz_localize(df_tz)
+            mask = (df.index >= start) & (df.index <= end)
+            period_df = df.loc[mask, cols]
+            if period_df.empty:
                 continue
-            
-            if aggregation == 'sum':
-                value = period_data.sum().sum()
-            elif aggregation == 'mean':
-                value = period_data.stack().mean()
-            elif aggregation == 'min':
-                value = period_data.min().min()
-            elif aggregation == 'max':
-                value = period_data.max().max()
-            elif aggregation == 'median':
-                value = period_data.stack().median()
-            elif aggregation == 'std':
-                value = period_data.stack().std()
-            elif aggregation == 'count':
-                value = period_data.count().sum()
-            
-            results[year] = value
-        
-        result = pd.Series(results, name=f'{aggregation.capitalize()}')
-        result.index.name = 'Year'
-        
-        month_name = current_date.strftime('%B')
-        print(f"\n📊 Analysis: {month_name} 1-{current_day} ({aggregation}) for ALL COLUMNS")
-        print(f"   Columns count: {len(df.columns)}")
-        print(f"   Years analyzed: {len(result)}")
-        print(f"   Date range per year: {month_name} 1 - {month_name} {current_day}")
-        print(f"\n{result.to_string()}")
-        
+            if callable(agg_func):
+                aggregated = period_df.apply(agg_func, axis=0)
+            else:
+                aggregated = period_df.agg(agg_func)
+            rows[year] = aggregated
+
+        result = pd.DataFrame.from_dict(rows, orient="index")
+        result.index.name = "Year"
+        result.columns.name = "Park"
         return result
-    
-    # Check if column exists
-    if column not in df.columns:
-        print(f"❌ Column '{column}' not found in dataframe")
-        print(f"\n📋 Available columns ({len(df.columns)}):")
-        return list(df.columns)
-    
-    # Single column analysis
-    years = df.index.year.unique()
+
+    # Aggregate across all parks
     results = {}
-    
-    for year in sorted(years):
-        start_date = pd.Timestamp(year=year, month=current_month, day=1)
-        end_date = pd.Timestamp(year=year, month=current_month, day=current_day)
-        
-        # Match timezone
+    for year in years:
+        start = pd.Timestamp(year=year, month=month, day=1)
+        end = pd.Timestamp(year=year, month=month, day=day)
         if df_tz is not None:
-            start_date = start_date.tz_localize(df_tz)
-            end_date = end_date.tz_localize(df_tz)
-        
-        mask = (df.index >= start_date) & (df.index <= end_date)
-        period_data = df.loc[mask, column].dropna()
-        
-        if len(period_data) == 0:
+            start = start.tz_localize(df_tz)
+            end = end.tz_localize(df_tz)
+        mask = (df.index >= start) & (df.index <= end)
+        period_df = df.loc[mask, cols]
+        if period_df.empty:
             continue
         
-        if aggregation == 'sum':
-            value = period_data.sum()
-        elif aggregation == 'mean':
-            value = period_data.mean()
-        elif aggregation == 'min':
-            value = period_data.min()
-        elif aggregation == 'max':
-            value = period_data.max()
-        elif aggregation == 'median':
-            value = period_data.median()
-        elif aggregation == 'std':
-            value = period_data.std()
-        elif aggregation == 'count':
-            value = period_data.count()
+        # Flatten the dataframe to a 1D series of all values
+        # For MultiIndex columns, we want all values regardless of structure
+        flat_values = period_df.values.flatten()
+        # Remove NaNs
+        flat_values = flat_values[~pd.isna(flat_values)]
+        if len(flat_values) == 0:
+            continue
         
-        results[year] = value
-    
-    result = pd.Series(results, name=f'{aggregation.capitalize()}')
-    result.index.name = 'Year'
-    
-    month_name = current_date.strftime('%B')
-    print(f"\n📊 Analysis: {month_name} 1-{current_day} ({aggregation}) for '{str(column)}'")
-    print(f"   Column: {column}")
-    print(f"   Years analyzed: {len(result)}")
-    print(f"   Date range per year: {month_name} 1 - {month_name} {current_day}")
-    print(f"\n{result.to_string()}")
-    
-    return result
+        if callable(agg_func):
+            results[year] = agg_func(flat_values)
+        else:
+            # Use numpy functions for aggregation on flattened array
+            if agg_func == 'sum':
+                results[year] = np.sum(flat_values)
+            elif agg_func == 'mean':
+                results[year] = np.mean(flat_values)
+            elif agg_func == 'min':
+                results[year] = np.min(flat_values)
+            elif agg_func == 'max':
+                results[year] = np.max(flat_values)
+            else:
+                # Fallback: convert back to series and use pandas method
+                results[year] = getattr(pd.Series(flat_values), agg_func)()
+
+    series = pd.Series(results, name=f"MTD {agg_label}")
+    series.index.name = "Year"
+    return series
 
 
 def aggregate_month_to_date_by_column(
