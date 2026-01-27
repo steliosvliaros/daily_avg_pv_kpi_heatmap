@@ -11,6 +11,22 @@ from typing import Iterable, List, Optional
 import pandas as pd
 
 
+def get_runlog_logger(name: str = "runlog_loader", level: int = logging.INFO) -> logging.Logger:
+    """Return a configured logger for runlog loading.
+
+    Adds a StreamHandler with basic formatting if no handlers are attached.
+    """
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        handler.setLevel(level)
+        formatter = logging.Formatter("%(asctime)s %(levelname)s %(name)s - %(message)s")
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+    return logger
+
+
 @dataclass
 class LoaderStats:
     runlogs_considered: int = 0

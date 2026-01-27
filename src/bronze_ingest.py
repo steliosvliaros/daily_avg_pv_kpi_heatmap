@@ -98,6 +98,59 @@ class Config:
     allow_duplicates: bool = False
 
 
+def get_config_from_workspace(
+    workspace_config=None,
+    timezone_local: str = "Europe/Athens",
+    parquet_compression: str = "zstd",
+    min_age_seconds: int = 0,
+    stable_check_seconds: int = 0,
+    allow_duplicates: bool = False,
+) -> Config:
+    """
+    Create a bronze ingestion Config from centralized WorkspaceConfig.
+    
+    Args:
+        workspace_config: Optional WorkspaceConfig instance. If None, uses get_config()
+        timezone_local: Timezone for data timestamps
+        parquet_compression: Parquet compression algorithm
+        min_age_seconds: Minimum file age before processing
+        stable_check_seconds: File stability verification interval
+        allow_duplicates: Whether to allow duplicate file hashes
+        
+    Returns:
+        Config instance ready for bronze ingestion
+    """
+    if workspace_config is None:
+        try:
+            from src.config import get_config
+            workspace_config = get_config()
+        except ImportError:
+            raise RuntimeError(
+                "Cannot import src.config. Either pass workspace_config or ensure src.config is available."
+            )
+    
+    cfg = Config(
+        data_root=workspace_config.DATA_DIR,
+        inbox=workspace_config.INBOX_DIR,
+        processing=workspace_config.PROCESSING_DIR,
+        archived=workspace_config.ARCHIVED_DIR,
+        rejected=workspace_config.REJECTED_DIR,
+        bronze_root=workspace_config.BRONZE_ROOT,
+        mappings_root=workspace_config.MAPPINGS_ROOT,
+        dataset_name="scada_1d_signal",
+        timezone_local=timezone_local,
+        daily_interval_end_is_midnight=True,
+        parquet_compression=parquet_compression,
+        min_age_seconds=min_age_seconds,
+        stable_check_seconds=stable_check_seconds,
+        allow_duplicates=allow_duplicates,
+    )
+    
+    cfg.lockfile = workspace_config.LOCKS_DIR / "bronze_ingest.lock"
+    
+    return cfg
+
+
 # -----------------------------
 # Patterns
 # -----------------------------
