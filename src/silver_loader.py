@@ -567,6 +567,32 @@ def divide_wide_by_reference(
         print(f"[divide_wide_by_reference] Measured index tz: {measured.index.tz}")
         print(f"[divide_wide_by_reference] Reference index tz: {reference.index.tz}")
     
+    # Align column structures: if both have MultiIndex columns, ensure they match on park_id/unit
+    # This handles case where signal names differ (e.g., 'pcc_active_energy_export' vs 'pvgis_expected_daily_kwh')
+    if isinstance(measured.columns, pd.MultiIndex) and isinstance(reference.columns, pd.MultiIndex):
+        # Extract park_id and unit from column tuples (assuming (park_id, signal_name, unit))
+        measured_parks = {(col[0], col[2]): col for col in measured.columns}  # (park_id, unit) -> full col
+        reference_parks = {(col[0], col[2]): col for col in reference.columns}  # (park_id, unit) -> full col
+        
+        # Find matching parks in both (same park_id, unit, but potentially different signal names)
+        common_parks = set(measured_parks.keys()) & set(reference_parks.keys())
+        
+        if common_parks and len(common_parks) < len(measured.columns):
+            # Filter both dataframes to only common parks
+            measured_cols = [measured_parks[pk] for pk in common_parks]
+            reference_cols = [reference_parks[pk] for pk in common_parks]
+            
+            measured = measured[measured_cols]
+            reference = reference[reference_cols]
+            
+            # Reindex reference columns to match measured (only change signal name if needed)
+            if not (measured.columns == reference.columns).all():
+                reference.columns = measured.columns
+            
+            if debug:
+                print(f"[divide_wide_by_reference] Aligned columns to common parks: {len(common_parks)}")
+                print(f"[divide_wide_by_reference] After alignment: measured={measured.shape}, reference={reference.shape}")
+    
     # Remove timezone if present for matching
     if hasattr(measured.index, 'tz') and measured.index.tz is not None:
         measured.index = measured.index.tz_localize(None)
@@ -607,26 +633,6 @@ def divide_wide_by_reference(
     else:
         # No calendar matching, just align indices
         measured, reference = measured.align(reference, join=join_type, axis=0)
-        if len(ref_years) == 1:
-            if debug:
-                print(f"[divide_wide_by_reference] Typical year detected, matching by calendar day...")
-            
-            measured_mday = measured.index.strftime("%m-%d") if hasattr(measured.index, 'strftime') else pd.Series(measured.index).astype(str).str[5:10].values
-            reference_mday = reference.index.strftime("%m-%d")
-            
-            # For each column, align reference to measured by month-day
-            reference_aligned = pd.DataFrame(index=measured.index, columns=reference.columns, dtype=float)
-            for col in reference.columns:
-                ref_series = reference[col].copy()
-                ref_series.index = reference_mday
-                # Group by month-day and take mean (in case of duplicates)
-                ref_grouped = ref_series.groupby(level=0).mean()
-                # Reindex to measured month-day
-                reference_aligned[col] = ref_grouped.reindex(measured_mday, method='ffill').values
-            reference = reference_aligned
-    
-    # Align by index
-    measured, reference = measured.align(reference, join=join_type, axis=0)
     
     if debug:
         print(f"[divide_wide_by_reference] After alignment: {measured.shape}")
@@ -653,6 +659,7 @@ def divide_wide_by_reference(
         total_count = ratio.shape[0] * ratio.shape[1]
         pct = (non_null_count / total_count * 100) if total_count > 0 else 0
         print(f"[divide_wide_by_reference] Output: {ratio.shape}, non-null: {pct:.1f}%")
+        print(f"\n{ratio.describe()}")
     
     return ratio
 
