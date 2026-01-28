@@ -622,25 +622,45 @@ def plot_mtd_revenue_by_year_grid(
     else:
         current_date = pd.Timestamp(current_date)
 
-    # Build a dictionary of park -> power_kwp by extracting kWp from column tuple
-    # Column format: (park_name__XXXX_kwp, signal, unit)
+    # Build a dictionary of park -> power_kwp
+    # Use metadata as authoritative source, with fallback to column name parsing
     power_kwp_dict = {}
+    
+    # Try to load capacity from metadata first
+    park_capacity_map = {}
+    if metadata_path is not None:
+        try:
+            meta_df = pd.read_csv(metadata_path)
+            if 'park_id' in meta_df.columns and 'capacity_kwp' in meta_df.columns:
+                # Normalize park_id to lowercase for matching
+                meta_df['park_id_normalized'] = meta_df['park_id'].astype(str).str.strip().str.lower()
+                park_capacity_map = dict(zip(meta_df['park_id_normalized'], meta_df['capacity_kwp']))
+        except Exception as e:
+            print(f"⚠️  Warning: Could not load capacity from metadata: {e}")
+    
+    # Map each column to its capacity
     for col in daily_historical_df.columns:
-        # col is a tuple like ('fragiatoula_utilitas__4866_kwp', 'pcc_active_energy_export', 'kwh')
         park_full = str(col[0]) if isinstance(col, tuple) else str(col)
         
-        # Extract kWp from pattern like "park_name__XXXX_kwp"
-        m = _re.search(r'__(\d+)_kwp', park_full)
-        if m:
-            try:
-                kwp = float(m.group(1))
-                power_kwp_dict[col] = kwp
-            except ValueError:
-                print(f"⚠️  Warning: Could not parse kWp from {col}, defaulting to 100 kWp")
-                power_kwp_dict[col] = 100.0
+        # Extract park_id from column (before the __ separator)
+        park_id = park_full.split('__')[0].strip().lower()
+        
+        # Try metadata first
+        if park_id in park_capacity_map:
+            power_kwp_dict[col] = float(park_capacity_map[park_id])
         else:
-            print(f"⚠️  Warning: Could not find kWp pattern in {col}, defaulting to 100 kWp")
-            power_kwp_dict[col] = 100.0
+            # Fallback: Extract kWp from pattern like "park_name__XXXX_kwp"
+            m = _re.search(r'__(\d+)_kwp', park_full)
+            if m:
+                try:
+                    kwp = float(m.group(1))
+                    power_kwp_dict[col] = kwp
+                except ValueError:
+                    print(f"⚠️  Warning: Could not parse kWp from {col}, defaulting to 100 kWp")
+                    power_kwp_dict[col] = 100.0
+            else:
+                print(f"⚠️  Warning: Could not find kWp for {park_id} in metadata or column name, defaulting to 100 kWp")
+                power_kwp_dict[col] = 100.0
 
     # Ensure save_dir
     if save_dir is None:
@@ -716,7 +736,13 @@ def plot_mtd_revenue_by_year_grid(
             else:
                 park_id = str(park).split('__')[0]
             
-            park_price = price_series.get(park_id, price_series.get(park, 0.2))
+            # Get price, with fallback to default
+            if park_id in price_series.index:
+                park_price = float(price_series.loc[park_id])
+            elif park in price_series.index:
+                park_price = float(price_series.loc[park])
+            else:
+                park_price = 0.2
             mtd_revenue_df[park] = mtd_energy_df[park] * park_price
 
     # Build each subplot
