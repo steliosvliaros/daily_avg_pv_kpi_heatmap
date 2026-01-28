@@ -40,6 +40,8 @@ class BronzePipelineConfig:
     
     # Ingestion options
     run_ingestion: bool = True
+    reset_before_ingestion: bool = False  # Set to True to clear dataset before ingesting (full reload)
+    reset_and_remove_logs: bool = False  # If True, also deletes run logs during reset
     timezone_local: str = "Europe/Athens"
     min_age_seconds: int = 0  # For notebook: ingest immediately
     stable_check_seconds: int = 0
@@ -166,8 +168,9 @@ def run_bronze_pipeline(config: BronzePipelineConfig) -> BronzePipelineResult:
                     raise ValueError("park_metadata must contain status_effective to filter bronze ingestion")
 
                 status_series = meta["status_effective"].astype("string").str.strip().str.lower()
-                allowed_parks = set(meta.loc[status_series == "true", "park_id"].astype(str))
+                allowed_parks = set(meta.loc[status_series == "true", "park_id"].astype(str).str.lower())
                 print(f"[bronze_pipeline] status_effective=true parks: {len(allowed_parks)}")
+                print(f"[bronze_pipeline] Sample allowed park_ids: {sorted(list(allowed_parks))[:5]}")
             except Exception as exc:
                 result.errors.append(str(exc))
                 print(f"✗ Failed to load park metadata for filtering: {exc}")
@@ -209,9 +212,12 @@ def run_bronze_pipeline(config: BronzePipelineConfig) -> BronzePipelineResult:
             print("BRONZE PIPELINE: Executing Ingestion")
             print("="*80)
             
-            # Optional: reset dataset first
-            print("Resetting dataset (keeping run logs)...")
-            bi.reset_dataset(ingest_cfg, remove_run_logs=False)
+            # Optional: reset dataset first (only if explicitly requested)
+            if config.reset_before_ingestion:
+                print("Resetting dataset before ingestion...")
+                bi.reset_dataset(ingest_cfg, remove_run_logs=config.reset_and_remove_logs)
+            else:
+                print("Running incremental ingestion (keeping existing data)")
             
             print("Ingesting files from inbox...")
             bi.ingest_folder(ingest_cfg)

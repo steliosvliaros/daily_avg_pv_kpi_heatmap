@@ -567,28 +567,35 @@ def divide_wide_by_reference(
         print(f"[divide_wide_by_reference] Measured index tz: {measured.index.tz}")
         print(f"[divide_wide_by_reference] Reference index tz: {reference.index.tz}")
     
-    # Align column structures: if both have MultiIndex columns, ensure they match on park_id/unit
+    # Align column structures: if both have MultiIndex columns, match by park_id (level 0)
     # This handles case where signal names differ (e.g., 'pcc_active_energy_export' vs 'pvgis_expected_daily_kwh')
     if isinstance(measured.columns, pd.MultiIndex) and isinstance(reference.columns, pd.MultiIndex):
-        # Extract park_id and unit from column tuples (assuming (park_id, signal_name, unit))
-        measured_parks = {(col[0], col[2]): col for col in measured.columns}  # (park_id, unit) -> full col
-        reference_parks = {(col[0], col[2]): col for col in reference.columns}  # (park_id, unit) -> full col
-        
-        # Find matching parks in both (same park_id, unit, but potentially different signal names)
-        common_parks = set(measured_parks.keys()) & set(reference_parks.keys())
-        
-        if common_parks and len(common_parks) < len(measured.columns):
-            # Filter both dataframes to only common parks
-            measured_cols = [measured_parks[pk] for pk in common_parks]
-            reference_cols = [reference_parks[pk] for pk in common_parks]
-            
-            measured = measured[measured_cols]
-            reference = reference[reference_cols]
-            
-            # Reindex reference columns to match measured (only change signal name if needed)
-            if not (measured.columns == reference.columns).all():
-                reference.columns = measured.columns
-            
+        measured_parks = measured.columns.get_level_values(0)
+        reference_parks = reference.columns.get_level_values(0)
+        common_parks = set(measured_parks) & set(reference_parks)
+
+        if common_parks:
+            measured = measured.loc[:, measured_parks.isin(common_parks)]
+            reference = reference.loc[:, reference_parks.isin(common_parks)]
+
+            # Align reference columns to measured by park_id only (level 0)
+            reference_cols_by_park = {}
+            for col in reference.columns:
+                park_id = col[0]
+                if park_id not in reference_cols_by_park:
+                    reference_cols_by_park[park_id] = col
+
+            aligned_reference_cols = []
+            for col in measured.columns:
+                park_id = col[0]
+                ref_col = reference_cols_by_park.get(park_id)
+                if ref_col is not None:
+                    aligned_reference_cols.append(ref_col)
+
+            if aligned_reference_cols:
+                reference = reference[aligned_reference_cols]
+                reference.columns = measured.columns[:len(aligned_reference_cols)]
+
             if debug:
                 print(f"[divide_wide_by_reference] Aligned columns to common parks: {len(common_parks)}")
                 print(f"[divide_wide_by_reference] After alignment: measured={measured.shape}, reference={reference.shape}")

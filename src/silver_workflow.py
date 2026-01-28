@@ -54,6 +54,10 @@ class SilverPipelineConfig:
     ingest_to_persistent: bool = True
     parquet_compression: str = "zstd"
     
+    # Reset options (full reload scenarios)
+    reset_before_processing: bool = False  # Set to True to clear silver and reset watermark (full reload)
+    reset_keep_backups: bool = True        # If True, archive deleted data before reset
+    
     dataset_name: str = "scada_1d_signal"
     
     def __init__(self, workspace_config=None, **kwargs):
@@ -128,7 +132,35 @@ def run_silver_pipeline(config: SilverPipelineConfig) -> SilverPipelineResult:
     result = SilverPipelineResult(success=False)
     
     try:
+        # Step 0: Optional reset for full reload
+        if config.reset_before_processing:
+            print("="*80)
+            print("SILVER PIPELINE: Resetting for full reload")
+            print("="*80)
+            
+            # Backup silver data if requested
+            if config.reset_keep_backups and config.silver_root.exists():
+                backup_dir = config.silver_root.parent / f"silver_backup_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}"
+                print(f"Backing up silver data to: {backup_dir}")
+                import shutil
+                if config.silver_root.exists():
+                    shutil.copytree(config.silver_root, backup_dir)
+            
+            # Reset silver persistent data (but keep _ops for logs)
+            silver_data_dir = config.silver_root / "year=*"
+            import glob
+            for year_dir in glob.glob(str(silver_data_dir)):
+                import shutil
+                shutil.rmtree(year_dir)
+                print(f"Deleted: {year_dir}")
+            
+            # Reset watermark to process all bronze data
+            config.silver_watermark_path.parent.mkdir(parents=True, exist_ok=True)
+            config.silver_watermark_path.write_text("")  # Empty watermark = reprocess everything
+            print("Watermark reset - will reprocess all bronze data on next run")
+        
         # Step 1: Load new bronze data
+
         print("="*80)
         print("SILVER PIPELINE: Loading new bronze data")
         print("="*80)

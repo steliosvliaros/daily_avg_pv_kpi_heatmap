@@ -26,10 +26,11 @@ Column Format:
     fragiatoula_utilitas__4866_kwp__active_power__kw
 
 - Bronze long format extracts:
-    - park_id = park_name + "__" + capacity_kwp (e.g., ntarali_concept__296_kwp)
+    - park_id = sourced from park_metadata.csv (authoritative single source of truth)
+    - park_name = park name from metadata
     - signal_name = the measurement (e.g., average_irradiance)
     - unit = the unit (e.g., w_m_2)
-    - park_capacity_kwp = numeric capacity (e.g., 296)
+    - park_capacity_kwp = numeric capacity extracted from column (e.g., 296)
 """
 
 from __future__ import annotations
@@ -158,9 +159,11 @@ def get_config_from_workspace(
 # -----------------------------
 
 # park_id__capacity_kwp__signal_name__unit  (unit optional)
-# Format: park_name (no capacity) __ capacity (integer_kwp) __ signal_name __ unit
-# Example: ntarali_concept__296_kwp__average_irradiance__w_m_2
-# Groups: park_id (name only), capacity_kwp (integer_kwp), meas (signal), unit
+# Format: park_id (matches metadata) __ capacity (integer_kwp) __ signal_name __ unit
+# CRITICAL: park_id extracted from column names MUST match park_metadata.csv park_id exactly
+# Example: 4e_energeiaki_176_kwp_likovouni__176_kwp__pcc_active_energy_export__kwh
+# The park_id part ("4e_energeiaki_176_kwp_likovouni") must match metadata park_id
+# Groups: park_id (canonical from metadata), capacity_kwp (integer_kwp), meas (signal), unit
 COL_RE = re.compile(r"^(?P<park_id>.+?)__(?P<capacity>\d+_kwp)__(?P<meas>.+?)__(?P<unit>[a-z0-9_]*)$")
 
 
@@ -361,7 +364,7 @@ def read_wide_file(path: Path, cfg: Config) -> pd.DataFrame:
 # Wide -> Long (all signals)
 # -----------------------------
 
-def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_file_hash: str, run_id: str) -> pd.DataFrame:
+def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_file_hash: str, run_id: str, park_metadata: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     # Timestamp column detection
     ts_col = None
     for c in df_wide.columns:
@@ -404,19 +407,74 @@ def wide_to_long(df_wide: pd.DataFrame, cfg: Config, source_file: str, source_fi
     long_df = long_df.dropna(subset=["value"])
 
     extracted = long_df["col"].str.extract(COL_RE)
-    # Reconstruct park_id to include capacity: park_id + __ + capacity_kwp
-    long_df["park_id"] = extracted["park_id"] + "__" + extracted["capacity"]
-    long_df["signal_name"] = extracted["meas"]
-    long_df["unit"] = extracted["unit"]
-
-    # Extract capacity from the capacity_kwp portion (e.g., "296_kwp" -> 296)
+    # Extract park name, capacity, signal, unit
+    park_name_extracted = extracted["park_id"].str.strip().str.lower()
     capacity_match = extracted["capacity"].str.extract(r"(\d+)_kwp", expand=False)
     long_df["park_capacity_kwp"] = pd.to_numeric(capacity_match, errors="coerce")
+    long_df["signal_name"] = extracted["meas"]
+    long_df["unit"] = extracted["unit"]
+    
+    # DEBUG: Show unique extracted park_ids
+    unique_extracted = park_name_extracted.unique()
+    print(f"[bronze_ingest] DEBUG: Extracted {len(unique_extracted)} unique park_ids from columns")
+    if len(unique_extracted) <= 30:
+        for pn in sorted(unique_extracted):
+            print(f"  '{pn}'")
+    
+    # Join with park_metadata to get authoritative park_id
+    print(f"[bronze_ingest] DEBUG: park_metadata is None? {park_metadata is None}")
+    print(f"[bronze_ingest] DEBUG: park_metadata is empty? {park_metadata is not None and park_metadata.empty}")
+    if park_metadata is not None and not park_metadata.empty:
+        # Build direct lookup: extracted park_name -> metadata park_id
+        # Column format from sanitizer: {park_id}__{capacity_kwp}__{signal}__{unit}
+        # park_id in columns should match metadata park_id exactly (no normalization needed)
+        # 
+        # Example:
+        #   Column: "4e_energeiaki_176_kwp_likovouni__176_kwp__..."
+        #   Metadata park_id: "4e_energeiaki_176_kwp_likovouni"
+        #   Match: direct lookup (already lowercase)
+        
+        park_id_set = set(park_metadata['park_id'])  # Already lowercased at load time
+        
+        print(f"[bronze_ingest] DEBUG: Metadata has {len(park_id_set)} unique park_ids")
+        print(f"[bronze_ingest] DEBUG: Sample metadata park_ids: {sorted(list(park_id_set))[:5]}")
+        
+        # Direct lookup: extracted park_name -> metadata park_id
+        # If park_name from column matches a park_id in metadata, use that park_id
+        # Otherwise, keep the original extracted park_name
+        def map_to_park_id(extracted_park_name):
+            if pd.isna(extracted_park_name) or extracted_park_name == "":
+                return None
+            # Direct match (column sanitizer should have generated correct park_id)
+            if extracted_park_name in park_id_set:
+                return extracted_park_name
+            # No match - return None (will be reported as unmatched)
+            return None
+        
+        long_df["park_id"] = park_name_extracted.apply(map_to_park_id)
+        
+        # Report results
+        matched_count = long_df["park_id"].notna().sum()
+        unmatched_count = long_df["park_id"].isna().sum()
+        unique_matched = long_df["park_id"].dropna().nunique()
+        print(f"[bronze_ingest] DEBUG: Lookup result: {matched_count:,} rows matched ({unique_matched} unique parks), {unmatched_count:,} unmatched")
+        
+        # Warn if any park_id is NaN
+        if long_df["park_id"].isna().any():
+            nan_count = long_df["park_id"].isna().sum()
+            unmatched_parks = park_name_extracted[long_df["park_id"].isna()].unique()
+            print(f"[bronze_ingest] WARNING: {nan_count:,} rows have NaN park_id (parks not found in metadata)")
+            print(f"[bronze_ingest] Unmatched extracted park_ids: {sorted([p for p in unmatched_parks if p])}")
+    else:
+        # Fallback: use derived park_id (park_name + __ + capacity_kwp)
+        long_df["park_id"] = park_name_extracted + "__" + extracted["capacity"]
+    
+    # Normalize park_id
+    long_df["park_id"] = long_df["park_id"].astype("string").str.strip().str.lower()
 
     # Filter by allowed parks if provided (status_effective == true)
     if cfg.allowed_parks:
         before = len(long_df)
-        long_df["park_id"] = long_df["park_id"].astype("string").str.strip().str.lower()
         long_df = long_df[long_df["park_id"].isin(cfg.allowed_parks)]
         after = len(long_df)
         print(f"[bronze_ingest] status_effective filter: {before:,} -> {after:,} rows")
@@ -634,6 +692,19 @@ def ingest_one_file(inbox_file: Path, mapping: Dict[str, str], cfg: Config, regi
         df_wide = read_wide_file(proc_path, cfg)
         df_wide = df_wide.rename(columns={str(c): mapping.get(str(c), str(c)) for c in df_wide.columns})
 
+        # Load park metadata from mappings folder (authoritative source for park_id)
+        park_metadata_path = cfg.mappings_root / "park_metadata.csv"
+        park_metadata = None
+        if park_metadata_path.exists():
+            try:
+                park_metadata = pd.read_csv(park_metadata_path)
+                park_metadata["park_id"] = park_metadata["park_id"].astype("string").str.strip().str.lower()
+                print(f"[bronze_ingest] Loaded park_metadata with {len(park_metadata)} parks")
+            except Exception as e:
+                print(f"[bronze_ingest] WARNING: Could not load park_metadata: {e}")
+        else:
+            print(f"[bronze_ingest] WARNING: park_metadata.csv not found at {park_metadata_path}; using fallback park_id derivation")
+
         # Transform
         long_df = wide_to_long(
             df_wide=df_wide,
@@ -641,6 +712,7 @@ def ingest_one_file(inbox_file: Path, mapping: Dict[str, str], cfg: Config, regi
             source_file=str(proc_path.resolve()),
             source_file_hash=file_hash,
             run_id=run,
+            park_metadata=park_metadata,
         )
 
         # Write Bronze

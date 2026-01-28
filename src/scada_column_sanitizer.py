@@ -292,10 +292,15 @@ class ScadaColumnSanitizer:
         kwp = _parse_capacity_to_kwp(park_name_raw)
         park_id = self._lookup_park_id_from_metadata(park_name_raw, kwp)
         
-        # If park_id found in metadata, strip capacity from it
+        # Clean park name (strip capacity) for token removal from signals
+        # This is needed regardless of whether we found park_id in metadata
+        park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
+        park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
+        
+        # If park_id found in metadata, use it directly (canonical source of truth)
         # Otherwise, fall back to sanitizing park name
         if park_id is not None:
-            # park matched in metadata
+            # park matched in metadata - use canonical park_id directly
             # Prefer capacity from metadata cache if not already set
             orig_meta_pid = park_id
             if kwp is None and orig_meta_pid in self._park_kwp_cache:
@@ -303,11 +308,8 @@ class ScadaColumnSanitizer:
                     kwp = float(self._park_kwp_cache[orig_meta_pid])
                 except (TypeError, ValueError):
                     pass
-
-            # Build park_id from the raw park name (strip capacity, then snake_case)
-            park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
-            park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
-            park_id = _snake_case_sql(park_name_clean, prefix_if_starts_digit="p_")
+            # DO NOT rebuild park_id - use the canonical value from metadata
+            # park_id is already set from _lookup_park_id_from_metadata()
         else:
             # Get capacity if not already parsed
             if kwp is None:
@@ -340,8 +342,6 @@ class ScadaColumnSanitizer:
 
             # Build park_id from sanitized name (ONLY, without capacity)
             # Capacity goes in the measurement/signal part, not the park name
-            park_name_clean = CAPACITY_RE.sub("", park_name_raw).strip()
-            park_name_clean = _dedupe_tokens_preserve_order(park_name_clean)
             park_snake = _snake_case_sql(park_name_clean, prefix_if_starts_digit="p_")
             
             # park_id is ONLY the park name (no capacity)
