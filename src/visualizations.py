@@ -622,11 +622,11 @@ def plot_mtd_revenue_by_year_grid(
     else:
         current_date = pd.Timestamp(current_date)
 
-    # Build a dictionary of park -> power_kwp
-    # Use metadata as authoritative source, with fallback to column name parsing
+    # Build a dictionary of park -> power_kwp using metadata
+    # Column format: (park_id, signal, unit) - already cleaned by silver
     power_kwp_dict = {}
     
-    # Try to load capacity from metadata first
+    # Load capacity from metadata
     park_capacity_map = {}
     if metadata_path is not None:
         try:
@@ -640,26 +640,30 @@ def plot_mtd_revenue_by_year_grid(
     
     # Map each column to its capacity
     for col in daily_historical_df.columns:
-        park_full = str(col[0]) if isinstance(col, tuple) else str(col)
+        # Column is a tuple like ('park_id', 'signal_name', 'unit')
+        # Extract park_id (first element of tuple)
+        if isinstance(col, tuple):
+            park_id = str(col[0]).strip().lower()
+            park_full = str(col[0])
+        else:
+            # Fallback: if column is string, try to extract park_id
+            park_full = str(col)
+            park_id = park_full.split('__')[0].strip().lower() if '__' in park_full else park_full.strip().lower()
         
-        # Extract park_id from column (before the __ separator)
-        park_id = park_full.split('__')[0].strip().lower()
-        
-        # Try metadata first
+        # Try metadata first (preferred method - uses authoritative capacity_kwp)
         if park_id in park_capacity_map:
             power_kwp_dict[col] = float(park_capacity_map[park_id])
         else:
-            # Fallback: Extract kWp from pattern like "park_name__XXXX_kwp"
-            m = _re.search(r'__(\d+)_kwp', park_full)
+            # Fallback: Extract kWp from pattern like "_XXXkwp" or "_XXXX_kwp"
+            m = _re.search(r'_(\d+)_?kwp', park_full, _re.IGNORECASE)
             if m:
                 try:
                     kwp = float(m.group(1))
                     power_kwp_dict[col] = kwp
                 except ValueError:
-                    print(f"⚠️  Warning: Could not parse kWp from {col}, defaulting to 100 kWp")
                     power_kwp_dict[col] = 100.0
             else:
-                print(f"⚠️  Warning: Could not find kWp for {park_id} in metadata or column name, defaulting to 100 kWp")
+                # Default fallback (should rarely happen with metadata-based approach)
                 power_kwp_dict[col] = 100.0
 
     # Ensure save_dir
