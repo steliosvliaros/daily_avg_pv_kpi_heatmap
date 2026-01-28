@@ -95,7 +95,7 @@ def annual_mtd_energy(
         result.columns.name = "Park"
         return result
 
-    # Aggregate across all parks
+    # Aggregate across all parks: first sum across parks per day, then aggregate MTD
     results = {}
     for year in years:
         start = pd.Timestamp(year=year, month=month, day=1)
@@ -108,33 +108,128 @@ def annual_mtd_energy(
         if period_df.empty:
             continue
         
-        # Flatten the dataframe to a 1D series of all values
-        # For MultiIndex columns, we want all values regardless of structure
-        flat_values = period_df.values.flatten()
-        # Remove NaNs
-        flat_values = flat_values[~pd.isna(flat_values)]
-        if len(flat_values) == 0:
-            continue
+        # First: sum across all parks per day (row-wise sum)
+        daily_total = period_df.sum(axis=1)  # One value per day summing all parks
         
+        # Then: aggregate the daily totals over the MTD period
         if callable(agg_func):
-            results[year] = agg_func(flat_values)
+            results[year] = agg_func(daily_total)
         else:
-            # Use numpy functions for aggregation on flattened array
+            # Apply aggregation to the daily totals
             if agg_func == 'sum':
-                results[year] = np.sum(flat_values)
+                results[year] = daily_total.sum()
             elif agg_func == 'mean':
-                results[year] = np.mean(flat_values)
+                results[year] = daily_total.mean()
             elif agg_func == 'min':
-                results[year] = np.min(flat_values)
+                results[year] = daily_total.min()
             elif agg_func == 'max':
-                results[year] = np.max(flat_values)
+                results[year] = daily_total.max()
+            elif agg_func == 'median':
+                results[year] = daily_total.median()
+            elif agg_func == 'std':
+                results[year] = daily_total.std()
+            elif agg_func == 'count':
+                results[year] = daily_total.count()
             else:
-                # Fallback: convert back to series and use pandas method
-                results[year] = getattr(pd.Series(flat_values), agg_func)()
+                # Fallback: use pandas method
+                results[year] = getattr(daily_total, agg_func)()
 
     series = pd.Series(results, name=f"MTD {agg_label}")
     series.index.name = "Year"
     return series
+
+
+def annual_mtd_revenue(
+    df: pd.DataFrame,
+    metadata_path,
+    agg: str | callable = "sum",
+    aggregate_parks: bool = False,
+    current_date: pd.Timestamp | str | None = None,
+    parks: list | tuple | None = None,
+    price_col: str = "price_euro_to_kwh",
+    park_id_col: str = "park_id",
+) -> pd.DataFrame | pd.Series:
+    """
+    Compute month-to-date revenue for each calendar year with per-park pricing.
+    
+    This function:
+    1. Calculates MTD energy aggregates per park (using annual_mtd_energy)
+    2. Loads per-park pricing from metadata
+    3. Multiplies energy by respective park price
+    4. Optionally aggregates revenue across all parks
+    
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Date-indexed DataFrame where each column represents a park/series.
+    metadata_path : Path or str
+        Path to park_metadata.csv containing pricing information
+    agg : str or callable, default "sum"
+        Energy aggregation to apply ('sum', 'mean', 'min', 'max', etc.)
+    aggregate_parks : bool, default False
+        If True, return a Series with total revenue across all parks per year.
+        If False, return a DataFrame with revenue per park per year.
+    current_date : pd.Timestamp, str, or None
+        Reference date (defaults to now). Defines the month/day for the MTD window.
+    parks : list/tuple or None
+        Optional subset of park/column names to include.
+    price_col : str, default "price_euro_to_kwh"
+        Column name for price in metadata
+    park_id_col : str, default "park_id"
+        Column name for park ID in metadata
+        
+    Returns
+    -------
+    pd.DataFrame
+        If aggregate_parks=False: index is Year, columns are parks, values are revenue
+    pd.Series
+        If aggregate_parks=True: index is Year with aggregated revenue across parks
+        
+    Examples
+    --------
+    >>> # Get per-park MTD revenue by year
+    >>> revenue_by_park = annual_mtd_revenue(wide, config.PARK_METADATA_CSV)
+    >>> 
+    >>> # Get total MTD revenue across all parks by year
+    >>> total_revenue = annual_mtd_revenue(wide, config.PARK_METADATA_CSV, aggregate_parks=True)
+    """
+    # Step 1: Calculate MTD energy per park
+    mtd_energy = annual_mtd_energy(
+        df=df,
+        agg=agg,
+        per_park=True,  # Always get per-park energy first
+        current_date=current_date,
+        parks=parks,
+    )
+    
+    # Step 2: Load per-park prices
+    prices = load_park_prices(metadata_path, price_col=price_col, park_id_col=park_id_col)
+    
+    # Step 3: Match prices to column names (handle MultiIndex columns)
+    if isinstance(mtd_energy.columns, pd.MultiIndex):
+        # Extract park_id from MultiIndex (assumes park_id is first level)
+        park_ids = [col[0] for col in mtd_energy.columns]
+    else:
+        # Flat columns: assume column names are park_ids
+        park_ids = mtd_energy.columns.tolist()
+    
+    # Step 4: Multiply each park's energy by its price
+    revenue_df = mtd_energy.copy()
+    for i, (col, park_id) in enumerate(zip(mtd_energy.columns, park_ids)):
+        if park_id in prices.index:
+            revenue_df[col] = mtd_energy[col] * prices.loc[park_id]
+        else:
+            # If price not found, set revenue to NaN
+            revenue_df[col] = np.nan
+    
+    # Step 5: Optionally aggregate across parks
+    if aggregate_parks:
+        # Sum revenue across all parks for each year
+        revenue_series = revenue_df.sum(axis=1)
+        revenue_series.name = f"MTD Revenue (Total)"
+        return revenue_series
+    
+    return revenue_df
 
 
 def aggregate_month_to_date_by_column(

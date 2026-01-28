@@ -671,53 +671,66 @@ def plot_mtd_revenue_by_year_grid(
             m = _re.search(r"\[(.*?)\]", str(col))
             return m.group(1) if m else str(col)
 
-    # Pre-compute MTD energy per park/year
-    mtd_energy_df = annual_mtd_energy(
-        daily_historical_df,
-        agg="sum",
-        per_park=True,
-        current_date=current_date,
-    )
+    # Pre-compute MTD revenue per park/year using annual_mtd_revenue
+    from src.metrics_calculator import annual_mtd_revenue
     
-    # Load or prepare per-park prices
-    from src.metrics_calculator import load_park_prices
+    # Prepare metadata_path for annual_mtd_revenue
+    if metadata_path is None and price_per_kwh is None:
+        raise ValueError("Either metadata_path or price_per_kwh must be provided")
     
-    if price_per_kwh is None:
-        # Auto-load from metadata
-        if metadata_path is None:
-            raise ValueError("metadata_path required when price_per_kwh=None")
-        price_series = load_park_prices(metadata_path)
-    elif isinstance(price_per_kwh, dict):
-        price_series = pd.Series(price_per_kwh)
-    elif isinstance(price_per_kwh, pd.Series):
-        price_series = price_per_kwh
-    elif isinstance(price_per_kwh, (int, float)):
-        # Single price - create series for all parks
-        price_series = pd.Series({park: price_per_kwh for park in parks})
+    if metadata_path is not None:
+        # Use annual_mtd_revenue with metadata path
+        mtd_revenue_df = annual_mtd_revenue(
+            daily_historical_df,
+            metadata_path=metadata_path,
+            agg="sum",
+            aggregate_parks=False,
+            current_date=current_date,
+        )
     else:
-        raise TypeError(f"Unsupported price_per_kwh type: {type(price_per_kwh)}")
+        # Fallback: compute manually if only price_per_kwh is given
+        from src.metrics_calculator import annual_mtd_energy
+        mtd_energy_df = annual_mtd_energy(
+            daily_historical_df,
+            agg="sum",
+            per_park=True,
+            current_date=current_date,
+        )
+        
+        # Convert energy to revenue
+        if isinstance(price_per_kwh, dict):
+            price_series = pd.Series(price_per_kwh)
+        elif isinstance(price_per_kwh, pd.Series):
+            price_series = price_per_kwh
+        elif isinstance(price_per_kwh, (int, float)):
+            price_series = pd.Series({park: price_per_kwh for park in parks})
+        else:
+            raise TypeError(f"Unsupported price_per_kwh type: {type(price_per_kwh)}")
+        
+        # Multiply energy by price for each park
+        mtd_revenue_df = mtd_energy_df.copy()
+        for park in mtd_energy_df.columns:
+            # Extract park_id from column
+            if isinstance(park, tuple):
+                park_id = str(park[0]).split('__')[0]
+            else:
+                park_id = str(park).split('__')[0]
+            
+            park_price = price_series.get(park_id, price_series.get(park, 0.2))
+            mtd_revenue_df[park] = mtd_energy_df[park] * park_price
 
     # Build each subplot
     for idx, park in enumerate(parks):
         ax = axes_list[idx]
-        # Month-to-date energy per year for this park
-        if isinstance(mtd_energy_df, pd.DataFrame) and park in mtd_energy_df.columns:
-            mtd_energy = mtd_energy_df[park].dropna()
+        # Month-to-date revenue per year for this park
+        if isinstance(mtd_revenue_df, pd.DataFrame) and park in mtd_revenue_df.columns:
+            mtd_revenue_raw = mtd_revenue_df[park].dropna()
         else:
-            mtd_energy = pd.Series(dtype=float)
+            mtd_revenue_raw = pd.Series(dtype=float)
 
-        # Get price for this park
-        # Extract park_id from column (format: park_id__signal__unit)
-        if isinstance(park, tuple):
-            park_id = str(park[0]).split('__')[0]  # Extract base park_id
-        else:
-            park_id = str(park).split('__')[0]
-        
-        park_price = price_series.get(park_id, price_series.get(park, 0.2))
-        
-        # Convert to revenue: (energy * price) / power_kwp
+        # Normalize by power_kwp: revenue per kWp
         power_kwp = power_kwp_dict.get(park, 100.0)
-        mtd_revenue = (mtd_energy * park_price) / power_kwp
+        mtd_revenue = mtd_revenue_raw / power_kwp
 
         # Compute average and colors
         avg_val = float(mtd_revenue.mean()) if len(mtd_revenue) else 0.0
