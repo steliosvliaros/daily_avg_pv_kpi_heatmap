@@ -53,35 +53,42 @@ def create_weekly_technical_report_for_all_parks(
 ) -> Path:
     """Create the weekly technical report with plots and markdown.
 
-    Saves plots under <plots>/weekly_analysis and writes markdown to <workspace>/docs.
+    Saves all files (markdown + plots) under /reports/report_tech_weekly_YYYYMMDD_vXXX/
     """
     warnings.filterwarnings("ignore")
 
-    if workspace_root is None or save_dir is None:
+    if workspace_root is None:
         from src.config import get_config
         config = get_config()
         ws_root = Path(workspace_root) if workspace_root else config.WORKSPACE_ROOT
-        plots_root = Path(save_dir) if save_dir else config.PLOTS_DIR
+        reports_root = config.REPORTS_DIR
     else:
         ws_root = Path(workspace_root)
-        plots_root = Path(save_dir)
-    weekly_dir = plots_root / "weekly_analysis"
-    weekly_dir.mkdir(exist_ok=True, parents=True)
+        reports_root = ws_root / "reports"
 
     report_date = pd.Timestamp.now() if report_date is None else pd.Timestamp(report_date)
     date_str = report_date.strftime("%Y%m%d")
-    month_start = pd.Timestamp(year=report_date.year, month=report_date.month, day=1)
+
+    # Create versioned report folder: report_tech_weekly_20260127_v001
+    base_name = f"report_tech_weekly_{date_str}"
+    report_folder = reports_root / generate_versioned_filename(
+        base_name=base_name,
+        save_dir=reports_root,
+        fmt="",  # No file extension for folder
+        add_date=False,  # Already have date in base_name
+    )
+    report_folder.mkdir(exist_ok=True, parents=True)
 
     _log("=" * 80, logger)
     _log("GENERATING WEEKLY TECHNICAL REPORT", logger)
     _log("=" * 80, logger)
     _log(f"Report Date: {report_date.strftime('%B %d, %Y')}", logger)
-    _log(f"Version: {version}", logger)
-    _log(f"Save Directory: {weekly_dir}", logger)
+    _log(f"Save Directory: {report_folder}", logger)
     _log("=" * 80, logger)
 
     # 1) Daily energy time series grid
     _log("1) Daily energy time series grid ...", logger)
+    month_start = pd.Timestamp(year=report_date.year, month=report_date.month, day=1)
     ts_path = lineplot_timeseries_per_column(
         daily_df,
         title_prefix="Daily Energy",
@@ -90,8 +97,8 @@ def create_weekly_technical_report_for_all_parks(
         sharex=True,
         sharey=False,
         save=True,
-        save_dir=weekly_dir,
-        base_filename=f"fig1_daily_energy_timeseries_{date_str}_{version}",
+        save_dir=report_folder,
+        base_filename=f"fig1_daily_energy_timeseries_{date_str}",
         dpi=dpi,
         fmt=fmt,
     )
@@ -102,8 +109,8 @@ def create_weekly_technical_report_for_all_parks(
         pi_df,
         "PI_PVGIS = Measured / PVGIS expected",
         save=True,
-        save_dir=weekly_dir,
-        base_filename=f"fig2_pi_heatmap_full_{date_str}_{version}",
+        save_dir=report_folder,
+        base_filename=f"fig2_pi_heatmap_full_{date_str}",
         dpi=dpi,
         fmt=fmt,
     )
@@ -116,8 +123,8 @@ def create_weekly_technical_report_for_all_parks(
         start_date=month_start,
         end_date=report_date,
         save=True,
-        save_dir=weekly_dir,
-        base_filename=f"fig3_pi_heatmap_mtd_{date_str}_{version}",
+        save_dir=report_folder,
+        base_filename=f"fig3_pi_heatmap_mtd_{date_str}",
         dpi=dpi,
         fmt=fmt,
     )
@@ -138,8 +145,8 @@ def create_weekly_technical_report_for_all_parks(
         price_per_kwh=price_per_kwh,
         currency=currency,
         save=True,
-        save_dir=weekly_dir,
-        base_filename=f"fig4_revenue_mtd_all_parks_{date_str}_{version}",
+        save_dir=report_folder,
+        base_filename=f"fig4_revenue_mtd_all_parks_{date_str}",
         dpi=dpi,
         fmt=fmt,
     )
@@ -153,40 +160,29 @@ def create_weekly_technical_report_for_all_parks(
         currency=currency,
         ncols=ncols_revenue_grid,
         save=True,
-        save_dir=weekly_dir,
-        base_filename=f"fig5_revenue_mtd_grid_{date_str}_{version}",
+        save_dir=report_folder,
+        base_filename=f"fig5_revenue_mtd_grid_{date_str}",
         dpi=dpi,
         fmt=fmt,
     )
 
-    # Markdown report with versioned filename
+    # Markdown report - use folder name for file
     _log("\nWriting markdown report ...", logger)
-    docs_dir = ws_root / "docs"
-    docs_dir.mkdir(parents=True, exist_ok=True)
     
-    # Use generate_versioned_filename for automatic v001, v002, etc.
-    versioned_name = generate_versioned_filename(
-        base_name="report_tech_weekly",
-        save_dir=docs_dir,
-        fmt="md",
-        add_date=True,
-    )
-    report_path = docs_dir / f"{versioned_name}.md"
+    report_filename = Path(report_folder).name + ".md"
+    report_path = report_folder / report_filename
 
-    rel = lambda p: Path("../plots/weekly_analysis") / Path(p).name if p else None
+    # Generate relative paths to plots (all in same folder)
+    rel = lambda p: Path(p).name if p else None
     rel_ts_path = rel(ts_path)
     rel_pi_full = rel(pi_full_path)
     rel_pi_mtd = rel(pi_mtd_path)
     rel_revenue_by_year = rel(revenue_by_year_path)
     rel_mtd_grid = rel(mtd_grid_path)
-    
-    # Extract version from generated filename (e.g., report_tech_weekly_20260127_v001)
-    version_from_filename = versioned_name.split("_")[-1] if "_v" in versioned_name else version
 
     with open(report_path, "w", encoding="utf-8") as f:
         f.write("# Weekly PV Technical Report\n")
-        f.write(f"**Report Date:** {report_date.strftime('%B %d, %Y')}\n")
-        f.write(f"**Version:** {version_from_filename}\n\n")
+        f.write(f"**Report Date:** {report_date.strftime('%B %d, %Y')}\n\n")
         f.write("---\n\n")
 
         f.write("## Executive Summary\n\n")
@@ -259,31 +255,34 @@ def create_weekly_stl_report(
 ) -> Path:
     """Create a weekly STL degradation report with plots and markdown summary.
 
-    Limits to ``max_parks`` series to keep runtime manageable. Uses versioned
-    filenames similar to technical/financial reports.
+    All files (markdown + plots) saved under /reports/report_weekly_stl_YYYYMMDD_vXXX/
     """
     import matplotlib.pyplot as plt
     import warnings
 
     warnings.filterwarnings("ignore")
 
-    if workspace_root is None or save_dir is None:
+    if workspace_root is None:
         from src.config import get_config
         config = get_config()
         ws_root = Path(workspace_root) if workspace_root else config.WORKSPACE_ROOT
-        plots_root = Path(save_dir) if save_dir else config.PLOTS_DIR
+        reports_root = config.REPORTS_DIR
     else:
         ws_root = Path(workspace_root)
-        plots_root = Path(save_dir)
+        reports_root = ws_root / "reports"
 
     report_date = pd.Timestamp.now() if report_date is None else pd.Timestamp(report_date)
     date_str = report_date.strftime("%Y%m%d")
 
-    stl_dir = plots_root / "weekly_analysis" / "stl"
-    stl_dir.mkdir(parents=True, exist_ok=True)
-
-    docs_dir = ws_root / "docs"
-    docs_dir.mkdir(parents=True, exist_ok=True)
+    # Create versioned report folder: report_weekly_stl_20260127_v001
+    base_name = f"report_weekly_stl_{date_str}"
+    report_folder = reports_root / generate_versioned_filename(
+        base_name=base_name,
+        save_dir=reports_root,
+        fmt="",  # No file extension for folder
+        add_date=False,  # Already have date in base_name
+    )
+    report_folder.mkdir(parents=True, exist_ok=True)
 
     selected_parks = list(parks) if parks else list(daily_df.columns)
     if max_parks and len(selected_parks) > max_parks:
@@ -295,7 +294,7 @@ def create_weekly_stl_report(
     _log("GENERATING WEEKLY STL REPORT", logger)
     _log("=" * 80, logger)
     _log(f"Report Date: {report_date.strftime('%B %d, %Y')}", logger)
-    _log(f"Save Directory: {stl_dir}", logger)
+    _log(f"Save Directory: {report_folder}", logger)
     _log(f"Parks included: {len(selected_parks)}", logger)
     _log("=" * 80, logger)
 
@@ -364,7 +363,7 @@ def create_weekly_stl_report(
         plt.tight_layout()
 
         safe_name = sanitize_filename(col)
-        fig_path = stl_dir / f"stl_{safe_name}_{date_str}.{fmt}"
+        fig_path = report_folder / f"stl_{safe_name}_{date_str}.{fmt}"
         fig.savefig(fig_path, dpi=dpi, bbox_inches="tight", facecolor="white", format=fmt)
         plt.close(fig)
 
@@ -392,13 +391,8 @@ def create_weekly_stl_report(
     if not summaries:
         raise ValueError("No STL results generated; check input data or parameters.")
 
-    versioned_name = generate_versioned_filename(
-        base_name="report_weekly_stl",
-        save_dir=docs_dir,
-        fmt="md",
-        add_date=True,
-    )
-    report_path = docs_dir / f"{versioned_name}.md"
+    report_filename = Path(report_folder).name + ".md"
+    report_path = report_folder / report_filename
 
     summaries_sorted = sorted(summaries, key=lambda x: x["annual_deg"])
 
@@ -412,7 +406,7 @@ def create_weekly_stl_report(
         f.write("| Park | Annual Deg (%/yr) | Monthly Deg (%/mo) | Anomalies | Persistent | Trend R² | Range | Points | Plot |\n")
         f.write("|------|-------------------|--------------------|----------|------------|---------|-------|--------|------|\n")
         for item in summaries_sorted:
-            rel_plot = Path("..") / "plots" / "weekly_analysis" / "stl" / Path(item["path"]).name
+            rel_plot = Path(item["path"]).name
             f.write(
                 f"| {item['label']} | {item['annual_deg']:+.2f} | {item['monthly_deg']:+.2f} | "
                 f"{item['anomalies']} | {item['persistent']} | {item['r2']:.3f} | {item['range']} | "
@@ -422,7 +416,7 @@ def create_weekly_stl_report(
         f.write("\n---\n\n")
         f.write("## Individual STL Plots\n\n")
         for item in summaries_sorted:
-            rel_plot = Path("..") / "plots" / "weekly_analysis" / "stl" / Path(item["path"]).name
+            rel_plot = Path(item["path"]).name
             f.write(f"### {item['label']} ({parse_kwp_from_header(item['park']):.0f} kWp)\n\n")
             f.write(f"- Date Range: {item['range']}\n")
             f.write(f"- Data Points: {item['points']:,}\n")
@@ -680,7 +674,10 @@ def create_financial_report_for_all_parks(
     dpi: int = 150,
     logger=None,
 ) -> Path:
-    """Generate economic analysis dashboard with plot and markdown report for a single park."""
+    """Generate economic analysis dashboard with plot and markdown report for a single park.
+    
+    Saves all files (markdown + plots) under /reports/report_financial_YYYYMMDD_vXXX/
+    """
     import matplotlib.pyplot as plt
     from scipy import stats
     from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
@@ -689,18 +686,27 @@ def create_financial_report_for_all_parks(
 
     warnings.filterwarnings("ignore")
 
-    if workspace_root is None or save_dir is None:
+    if workspace_root is None:
         from src.config import get_config
         config = get_config()
         ws_root = Path(workspace_root) if workspace_root else config.WORKSPACE_ROOT
-        plots_root = Path(save_dir) if save_dir else config.PLOTS_DIR
+        reports_root = config.REPORTS_DIR
     else:
         ws_root = Path(workspace_root)
-        plots_root = Path(save_dir)
-    financial_dir = plots_root / "financial_analysis"
-    financial_dir.mkdir(parents=True, exist_ok=True)
+        reports_root = ws_root / "reports"
 
     report_date = pd.Timestamp.now() if report_date is None else pd.Timestamp(report_date)
+    date_str = report_date.strftime("%Y%m%d")
+
+    # Create versioned report folder: report_financial_20260127_v001
+    base_name = f"report_financial_{date_str}"
+    report_folder = reports_root / generate_versioned_filename(
+        base_name=base_name,
+        save_dir=reports_root,
+        fmt="",  # No file extension for folder
+        add_date=False,  # Already have date in base_name
+    )
+    report_folder.mkdir(exist_ok=True, parents=True)
 
     if column not in df.columns:
         raise ValueError(f"Column '{column}' not found in dataframe. Available columns: {list(df.columns)}")
@@ -710,7 +716,7 @@ def create_financial_report_for_all_parks(
     _log("=" * 80, logger)
     _log(f"Report Date: {report_date.strftime('%B %d, %Y')}", logger)
     _log(f"Park to analyze: {column}", logger)
-    _log(f"Save Directory: {financial_dir}", logger)
+    _log(f"Save Directory: {report_folder}", logger)
     _log(f"Price: {price_per_kwh} {currency}/kWh", logger)
     _log("=" * 80, logger)
 
@@ -913,7 +919,8 @@ def create_financial_report_for_all_parks(
     plt.suptitle(f"Economic Analysis Dashboard - {short_label(column)} ({parse_kwp_from_header(column):.0f} kWp)", fontsize=16, fontweight="bold", y=0.995)
 
     safe_name = sanitize_filename(column)
-    plot_path = financial_dir / f"financial_analysis_{safe_name}.png"
+    safe_name = sanitize_filename(column)
+    plot_path = report_folder / f"financial_analysis_{safe_name}.png"
     fig.savefig(plot_path, dpi=dpi, bbox_inches="tight", facecolor="white")
     plt.close(fig)
 
@@ -924,19 +931,8 @@ def create_financial_report_for_all_parks(
     _log("GENERATING MARKDOWN REPORT", logger)
     _log(f"{'='*80}", logger)
 
-    # Generate versioned filename with YYYYMMDD format
-    docs_dir = ws_root / "docs"
-    docs_dir.mkdir(parents=True, exist_ok=True)
-    
-    report_base = "report_weekly_financial"
-    versioned_name = generate_versioned_filename(
-        base_name=report_base,
-        save_dir=docs_dir,
-        fmt="md",
-        add_date=True,
-    )
-    report_filename = f"{versioned_name}.md"
-    report_path = docs_dir / report_filename
+    report_filename = Path(report_folder).name + ".md"
+    report_path = report_folder / report_filename
 
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(f"# Financial Analysis Report - {short_label(column)}\n")
@@ -957,7 +953,7 @@ def create_financial_report_for_all_parks(
         f.write(f"- **Total Revenue:** {yearly_revenue.sum():,.2f} {currency}\n")
         f.write(f"- **Energy Price:** {price_per_kwh} {currency}/kWh\n\n")
 
-        rel_path = Path("..") / "plots" / "financial_analysis" / plot_path.name
+        rel_path = plot_path.name
         f.write(f"![Economic Analysis - {short_label(column)}]({rel_path})\n\n")
 
         f.write("### Key Financial Metrics\n\n")
@@ -1051,8 +1047,8 @@ def create_weekly_stl_report_for_all_parks(
         report_date=report_date,
         parks=parks,
         max_parks=max_parks,
-        save_dir=save_dir,
-        workspace_root=workspace_root,
+        save_dir=None,  # Uses config to get REPORTS_DIR
+        workspace_root=workspace_root,  # Pass through workspace_root
         dpi=dpi,
         fmt=fmt,
         apply_log=apply_log,

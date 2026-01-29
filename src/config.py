@@ -75,6 +75,9 @@ class WorkspaceConfig:
         self.DOCS_DIR = self.WORKSPACE_ROOT / "docs"
         self.OUTPUTS_DIR = self.WORKSPACE_ROOT / "outputs"
         self.UNIT_BENCHMARKS_CSV = self.OUTPUTS_DIR / "unit_sanity_benchmarks.csv"
+        
+        # Reports folder (contains markdown + plots for each report type)
+        self.REPORTS_DIR = self.WORKSPACE_ROOT / "reports"
 
         # Legacy file paths (for backward compatibility)
         self.DATA_XLSX = self.DATA_DIR / "daily_energy.xlsx"
@@ -112,6 +115,7 @@ class WorkspaceConfig:
             self.PLOTS_PVGIS_EDA,
             self.DOCS_DIR,
             self.OUTPUTS_DIR,
+            self.REPORTS_DIR,
         ]
 
     def setup_workspace(self, verbose: bool = True) -> int:

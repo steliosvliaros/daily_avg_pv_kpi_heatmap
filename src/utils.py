@@ -59,11 +59,8 @@ def generate_versioned_filename(
     existing_files = list(save_dir.glob(f"{pattern}*.{fmt}"))
     
     if not existing_files:
-        # First version
-        if add_date:
-            return f"{pattern}_v001"
-        else:
-            return pattern
+        # First version - always add version suffix
+        return f"{pattern}_v001"
     
     # Extract version numbers from existing files
     versions = []
