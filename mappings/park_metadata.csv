@@ -1,0 +1,52 @@
+park_name,country,number_of_tcps,type_of_plant,altitude,timezone,grid_connected,plant_installer,park_iso_name,park_id,longitude,latitude,capacity_kwp,status_effective,plant_designer,plant_operator,type_of_project,installation_date,nearest_meteo_station,nearest_meteo_station_lon,nearest_meteo_station_lat,notes,price_euro_to_kwh
+4E Energeiaki 176 KWp Likovouni,Greece,1,Grid-connected,183.0,Europe/Athens,Yes,AKTOR ATE SA,4EENER-AE-998808360_PV00p176-00_ΛΥΚΟΒΟΥΝΙ_ΘΗΒΑ,4e_energeiaki_176_kwp_likovouni,23.468772,38.387103,176.0,true,AKTOR ATE SA,AKTOR ATE SA,Production,10/04/2013 15:00:00,,,,,0.24
+4E Energeiaki 4472 KWp Lexaina,Greece,5,Grid-connected,5.0,Europe/Athens,Yes,BIOSAR ENERGY SA,4EENER-AE-998808360_PV04p499-00_ΣΠΕΝΤΖΑ_ΚΥΛΛΗΝΗ,4e_energeiaki_4472_kwp_lexaina,21.28805,37.948973,4472.0,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,28/12/2011 14:00:00,,,,,0.09195
+4E Energeiaki 805 KWp Darali,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar_Energy_SA,4EENER-AE-998808360_PV00p805-00_ΝΤΑΡΑΝΙ_ΘΗΒΑ,4e_energeiaki_805_kwp_darali,23.242315,38.305943,805.0,true,Biosar_Energy_SA,Biosar_Energy_SA,Production,28/06/2013 15:00:00,,,,,0.24
+Fragiatoula_Utilitas_4866kWp,Greece,4,Grid-connected,28.0,Europe/Athens,Yes,BIOSAR ENERGY SA,,fragiatoula_utilitas_4866kwp,21.3,37.9,4866.0,false,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,11/01/2012 14:00:00,,,,,0
+Hlektrogenesis 391 KWp Pelopio,Greece,1,Grid-connected,,Europe/Athens,Yes,ARS,,hlektrogenesis_391_kwp_pelopio,21.5671,37.67182,391.0,false,Extra Mile,ARS,Production,09/07/2012 15:00:00,,,,,0
+Hlektrogenesis 450 KWp Pelopio,Greece,1,Grid-connected,,Europe/Athens,Yes,ARS,,hlektrogenesis_450_kwp_pelopio,21.57071,37.6718,450.0,false,Extra Mile,ARS,Production,09/07/2012 15:00:00,,,,,0
+Hlektrogenesis 660 KWp Pelopio,Greece,1,Grid-connected,,Europe/Athens,Yes,ARS,,hlektrogenesis_660_kwp_pelopio,21.57053,37.67033,660.0,false,Extra Mile,ARS,Production,09/07/2012 15:00:00,,,,,0
+Hlektrogenesis 924 KWp Strefi,Greece,1,Grid-connected,,Europe/Athens,Yes,ARS,,hlektrogenesis_924_kwp_strefi,21.56242,37.64564,924.0,false,Extra Mile,ARS,Production,12/06/2012 15:00:00,,,,,0
+Hlektrogennisi 500 KWp Livanates,Greece,1,Grid-connected,25.0,Europe/Athens,Yes,ARS,,hlektrogennisi_500_kwp_livanates,23.054722,38.693056,500.0,false,Extra Mile,ARS,Production,04/07/2012 15:00:00,,,,,0
+Hliatoras 474kWp Andravida,Greece,1,Grid-connected,,Europe/Athens,Yes,BIOSAR ENERGY SA,ΣΥΝ-ΗΛΙΑΤΟΡΑΣ_PV00p474-00_ΣΑΛΗ-ΠΗΓΑΔΙ_ΚΥΛΛΗΝΗ,hliatoras_474kwp_andravida,21.29985,37.93786,474.0,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,03/09/2012 15:00:00,,,,,0
+Kalamata_Asproxoma_1575kWp,Greece,2,Grid-connected,0.0,Europe/Athens,Yes,BIOSAR ENERGY SA,,kalamata_asproxoma_1575kwp,22.056461,37.048426,1575.0,false,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,03/07/2012 15:00:00,,,,,0
+Kalamata_Asproxoma_2131kWp,Greece,2,Grid-connected,0.0,Europe/Athens,Yes,BIOSAR ENERGY SA,,kalamata_asproxoma_2131kwp,22.056211,37.046262,2131.0,false,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,03/07/2012 15:00:00,,,,,0.2
+Ntarali_Bonitas_0.45MW,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar Energy SA,BONITS-AE-998383734_PV00p449-00_ΝΤΑΡΑΝΙ_ΘΗΒΑ,ntarali_bonitas_0_45mw,23.240249,38.308052,450.0,true,Biosar Energy SA,Biosar Energy SA,Production,25/05/2015 15:00:00,,,,,0.091
+Ntarali_Concept_296KW,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar Energy SA,4EENER-AE-998808360_PV00p296-00_ΝΤΑΡΑΝΙ_ΘΗΒΑ,ntarali_concept_296kw,23.239782,38.308862,296.0,true,Biosar Energy SA,Biosar Energy SA,Production,21/05/2015 15:00:00,,,,,0.2
+Ntarali_Concept_320KW,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar Energy SA,4EENER-AE-998808360_PV00p320-00_ΝΤΑΡΑΝΙ_ΘΗΒΑ,ntarali_concept_320kw,23.24053,38.30951,320.0,true,Biosar Energy SA,Biosar Energy SA,Production,21/05/2015 15:00:00,,,,,0.091
+Ntarali_Concept_592KW,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar Energy SA,4EENER-AE-998808360_PV00p592-00_ΝΤΑΡΑΝΙ_ΘΗΒΑ,ntarali_concept_592kw,23.243918,38.306618,592.0,true,Biosar Energy SA,Biosar Energy SA,Production,21/05/2015 15:00:00,,,,,0.09195
+Ntarali_Konenergy_590KW,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar Energy SA,4EENER-AE-998808360_PV00p592-00_ΜΩΡΟΚΑΜΠΟΣ_ΘΗΒΑ,ntarali_konenergy_590kw,23.241979,38.307703,590.0,true,Biosar Energy SA,Biosar Energy SA,Production,25/05/2015 15:00:00,,,,,0.09195
+NyConTec 993 Kwp Giannopouleika,Greece,1,Grid-connected,,Europe/Athens,Yes,AKTOR_SA,4EENER-AE-998808360_PV00p996-00_ΓΙΑΝΟΠΟΥΛΕΙΚΑ_ΚΥΛΛΗΝΗ,nycontec_993_kwp_giannopouleika,21.400875,38.020731,993.0,true,AKTOR_SA,AKTOR_SA,Production,19/04/2013 15:00:00,,,,,0.24
+Palaionaziro_Iraio,Greece,3,Grid-connected,567.0,Europe/Athens,Yes,BIOSAR ENERGY SA,SPSOL2-AE-800341484_PV04p403-00_ΠΑΛΑΙΟΝΑΖΗΡΟ_ΓΟΡΤΥΝΙΑ,palaionaziro_iraio,21.8921972222222,37.6115777777778,4395.32,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,28/01/2015 14:00:00,,,,,0.09195
+Solar Concept 276 KWp Likovouni,Greece,1,Grid-connected,182.0,Europe/Athens,Yes,AKTOR ATE SA,4EENER-AE-998808360_PV00p276-00_ΛΥΚΟΒΟΥΝΙ_ΘΗΒΑ,solar_concept_276_kwp_likovouni,23.468332,38.387198,276.0,true,AKTOR ATE SA,AKTOR ATE SA,Production,10/04/2013 15:00:00,,,,,0.09195
+Solar Concept 3721 KWp Lexaina,Greece,3,Grid-connected,50.0,Europe/Athens,Yes,BIOSAR ENERGY SA,4EENER-AE-998808360_PV03p730-00_ΣΑΛΗ-ΠΗΓΑΔΙ_ΚΥΛΛΗΝΗ,solar_concept_3721_kwp_lexaina,21.29642,37.94302,3721.0,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,07/12/2011 14:00:00,,,,,0.2
+Solar Datum 2910 KWp Lexaina,Greece,3,Grid-connected,5.0,Europe/Athens,Yes,BIOSAR ENERGY SA,4EENER-AE-998808360_PV02p913-00_ΛΕΧΑΙΝΑ_ΚΥΛΛΗΝΗ,solar_datum_2910_kwp_lexaina,21.2904,37.94891,2910.0,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,28/12/2011 14:00:00,,,,,0.2
+Solar Datum 864 KWp Darali,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar Energy SA,4EENER-AE-998808360_PV00p864-00_ΝΤΑΡΑΝΙ_ΘΗΒΑ,solar_datum_864_kwp_darali,23.242315,38.305943,864.0,true,Biosar Energy SA,Biosar Energy SA,Production,09/09/2013 15:00:00,,,,,0.24
+Solar Factory 494kWp Andravida,Greece,1,Grid-connected,,Europe/Athens,Yes,BIOSAR ENERGY SA,SLFACT-EPE-99012590_PV00p497-00_ΣΑΛΗ-ΠΗΓΑΔΙ_ΗΛΙΕΙΑΣ,solar_factory_494kwp_andravida,21.29569,37.94048,494.0,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,03/09/2012 15:00:00,,,,,0.185
+Spes Solaris 1527 KWp Darali,Greece,1,Grid-connected,,Europe/Athens,Yes,Biosar Energy SA,4EENER-AE-998808360_PV01p527-00_ΝΤΑΡΑΝΙ_ΘΗΒΑ,spes_solaris_1527_kwp_darali,23.23829444444445,38.30646944444444,1527.0,true,Biosar Energy SA,Biosar Energy SA,Production,28/06/2013 15:00:00,,,,,0.205
+Spes Solaris 1986 KWp Lexaina,Greece,2,Grid-connected,6.0,Europe/Athens,Yes,BIOSAR ENERGY SA,4EENER-AE-998808360_PV01p990-00_ΛΕΧΑΙΝΑ_ΚΥΛΛΗΝΗ,spes_solaris_1986_kwp_lexaina,21.291324,37.950921,1986.0,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,28/12/2011 14:00:00,,,,,0.2
+Spes Solaris 201 KWp Konizos,Greece,1,Grid-connected,315.0,Europe/Athens,Yes,BIOSAR_ENERGY_SA,4EENER-AE-998808360_PV00p201-00_ΚΟΝΙΖΟΣ_ΘΗΒΑ,spes_solaris_201_kwp_konizos,23.289403,38.294228,201.0,true,BIOSAR_ENERGY_SA,BIOSAR_ENERGY_SA,Production,01/03/2013 14:00:00,,,,,0.24
+Spes Solaris 500 KWp Kavasila,Greece,1,Grid-connected,,Europe/Athens,Yes,AKTOR_SA,4EENER-AE-998808360_PV00p499-00_ΚΑΒΑΣΙΛΑ_ΠΗΝΕΙΟΣ,spes_solaris_500_kwp_kavasila,21.266397,37.888683,500.0,true,AKTOR_SA,AKTOR_SA,Production,10/04/2013 15:00:00,,,,,0.24
+Spes Solaris 805 KWp Konizos,Greece,1,Grid-connected,320.0,Europe/Athens,Yes,BIOSAR ENERGY SA,4EENER-AE-998808360_PV00p805-00_ΚΟΝΙΖΟΣ_ΘΗΒΑ,spes_solaris_805_kwp_konizos,23.284861,38.295803,805.0,true,BIOSAR ENERGY SA,BIOSAR ENERGY SA,Production,01/03/2013 14:00:00,,,,,0.24
+,,,,,,,,ADMOTE-AE-094459299_PV00p213-00_ADMOTEC_ΘΗΒΑ,,23.37,38.34,213,true,,,,,,,,,
+,,,,,,,,HABITA-AE-800341539_PV00p436-00_ΒΙΠΕ-ΠΑΤΡΩΝ-31_ΑΧΑΙΑ,,21.64,38.1,436,true,,,,,,,,,
+,,,,,,,,HABITA-AE-800341539_PV00p317-00_ΒΙΠΕ-ΠΑΤΡΩΝ-31_ΑΧΑΙΑ,,21.64,38.1,317,true,,,,,,,,,
+,,,,,,,,MINING-MIK-801360202_PV00p279-00_ΑΓΚΟΡΤΣΑ_ΛΙΒΑΔΙΑ,,22.87,38.43,279,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΣΟΦΤΑ_PV00p500-00_ΑΓΡΟΣ-290_ΦΑΡΚΑΔΩΝΑ,,21.97,39.56,290,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΝΙΚΚΙΚΕ_PV00p500-00_ΑΓΡΟΣ-34_ΦΑΡΚΑΔΩΝΑ,,21.94,39.57,500,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-SOLSTC2_PV00p500-00_ΑΓΡΟΣ-382_ΦΑΡΚΑΔΩΝΑ,,22.01,39.59,500,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-IPSOLAR_PV00p500-00_ΑΓΡΟΣ-74_ΦΑΡΚΑΔΩΝΑ,,21.95,39.56,500,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-AVLIDAEN_PV00p500-00_ΠΑΛΙΟΜΥΛΟΣ_ΧΑΛΚΙΔΑ,,23.54,38.41,500,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΗΛΕΚΤΡ_PV00p020-00_ΓΚΕΡΕΝΙΑ_ΘΕΣΣΑΛΙΩΤΙΔΑ,,22.26,39.2,20,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΗΛΕΚΤΡ_PV00p020-00_ΜΥΛΟΣ_ΓΟΡΓΟΠΟΤΑΜΟΣ,,22.41,38.82,20,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΗΛΕΚΤΡ_PV00p020-00_ΜΕΡΓΙΑΣ_ΘΕΣΣΑΛΙΩΤΙΔΑ,,22.24,39.21,20,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΗΛΕΚΤΡ_PV00p020-00_ΜΠΡΟΥΦΕΣ_ΘΕΣΣΑΛΙΩΤΙΔΑ,,22.21,39.2,20,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΥΠΕΡΙΩΝ_PV00p499-00_ΚΟΝΙΖΟΣ_ΘΗΒΑ,,23.24,38.31,499,true,,,,,,,,,
+,,,,,,,,ENELV3-MIK-801768674_PV00p500-00_ΛΙΒΑΔΙ_ΛΙΒΑΔΙΑ,,22.59,38.23,500,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-DRETTAS_PV01p968-00_ΒΙΠΕ_ΟΙΧΑΛΙΑΣ,,21.99,37.21,1968,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-DRETTAS_PV00p703-00_ΒΙΠΕ_ΟΙΧΑΛΙΑΣ,,21.99,37.21,703,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΡΑΧΑΝΑ_PV00p100-01_ΡΩΜΕΙΚΑ_ΜΕΓΑΛΟΠΟΛΗ,,22.03,37.37,100,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΡΑΧΑΝΤ_PV00p100-00_ΡΩΜΕΙΚΑ_ΜΕΓΑΛΟΠΟΛΗ,,22.03,37.37,100,true,,,,,,,,,
+,,,,,,,,ΣΥΝ-ΜΑΚΚ_PV00p500-00_ΑΓΡΟΣ-146-147_ΦΑΡΚΑΔΩΝΑ,,21.95,39.56,500,true,,,,,,,,,
+,,,,,,,,ΔΙΑΠΛΑΣΗ_PV500-00_ΣΤΕΓΗ_ΚΑΛΑΜΑΤΑ,,22.11,37.035,500,true,,,,,,,,,
+,,,,,,,,Ηλιακό Πάρκο Θεσσαλίας_PV936-00_ΛΑΡΙΣΑ,,22.42,39.639,936,true,,,,,,,,,

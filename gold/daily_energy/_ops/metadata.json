@@ -1,0 +1,46 @@
+{
+  "table_name": "daily_energy",
+  "description": "Daily aggregated energy (kWh) per park in wide format",
+  "schema": {
+    "index": {
+      "name": "date",
+      "type": "DatetimeIndex",
+      "description": "Daily timestamp (local timezone Europe/Athens), normalized to midnight"
+    },
+    "columns": {
+      "type": "park_id",
+      "description": "Each column represents a park_id, values are daily energy in kWh"
+    }
+  },
+  "source": {
+    "layer": "silver",
+    "location": "silver/year=*/month=*/part-*.parquet",
+    "transformation": "load_daily_energy_wide() - aggregates 15min power readings to daily energy"
+  },
+  "refresh_strategy": {
+    "type": "partition_based",
+    "logic": "Process silver partitions by month, track last processed date, append new days only"
+  },
+  "partitioning": {
+    "scheme": "none",
+    "description": "Single wide parquet file per refresh, partitioned implicitly by date in index"
+  },
+  "deduplication": {
+    "method": "watermark_based",
+    "watermark_file": "_ops/last_gold_committed.txt",
+    "logic": "Track last processed date to ensure no duplicate aggregations"
+  },
+  "unit_conversion": {
+    "W": "W → kW → kWh (with 15min interval scaling)",
+    "kW": "kW → kWh (with 15min interval scaling)",
+    "Wh": "Wh → kWh (no interval scaling)",
+    "kWh": "kWh (no scaling)",
+    "unknown": "Treated as kW with interval scaling"
+  },
+  "data_quality": {
+    "filters": "Excludes rows with flag_* set (only_valid=True)",
+    "status_filter": "Only parks with status_effective='true'"
+  },
+  "created_at": "2026-02-15T16:57:00Z",
+  "version": "1.0.0"
+}

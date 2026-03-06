@@ -1,0 +1,681 @@
+"""
+Metrics Calculation Utilities
+
+This module provides functions for calculating aggregated metrics and KPIs
+from time series energy data.
+"""
+
+import pandas as pd
+import numpy as np
+
+
+def annual_mtd_energy(
+    df: pd.DataFrame,
+    agg: str | callable = "sum",
+    per_park: bool = True,
+    current_date: pd.Timestamp | str | None = None,
+    parks: list | tuple | None = None,
+) -> pd.DataFrame | pd.Series:
+    """
+    Compute month-to-date (1..current day) aggregates for each calendar year.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Date-indexed DataFrame where each column represents a park/series.
+    agg : str or callable, default "sum"
+        Aggregation to apply. Strings support pandas aggregations
+        ('sum', 'mean'/'avg'/'average', 'min', 'max', 'median', 'std', 'count').
+        A callable receives a Series and must return a scalar.
+    per_park : bool, default True
+        If True, returns a DataFrame with one column per park.
+        If False, returns a Series aggregating across all parks per year.
+    current_date : pd.Timestamp, str, or None
+        Reference date (defaults to now). Defines the month/day for the MTD window.
+    parks : list/tuple or None
+        Optional subset of park/column names to include.
+
+    Returns
+    -------
+    pd.DataFrame
+        If per_park=True, index is Year and columns are parks.
+    pd.Series
+        If per_park=False, index is Year with aggregated values across parks.
+    """
+
+    # Normalize current_date and timezone alignment
+    current_date = pd.to_datetime(current_date) if current_date is not None else pd.Timestamp.now()
+    df_tz = df.index.tz
+    if df_tz is not None and current_date.tz is None:
+        current_date = current_date.tz_localize(df_tz)
+    elif df_tz is None and current_date.tz is not None:
+        current_date = current_date.tz_localize(None)
+
+    month = current_date.month
+    day = current_date.day
+
+    # Resolve aggregation
+    agg_alias = {"avg": "mean", "average": "mean"}
+    if isinstance(agg, str):
+        agg_name = agg_alias.get(agg.lower(), agg.lower())
+        valid_aggs = ["sum", "mean", "min", "max", "median", "std", "count"]
+        if agg_name not in valid_aggs:
+            raise ValueError(f"Invalid aggregation '{agg}'. Valid options: {valid_aggs} or a callable.")
+        agg_func = agg_name
+        agg_label = agg_name.capitalize()
+    elif callable(agg):
+        agg_func = agg
+        agg_label = getattr(agg, "__name__", "custom")
+    else:
+        raise TypeError("agg must be a string or callable")
+
+    cols = list(parks) if parks is not None else list(df.columns)
+    years = sorted(pd.unique(df.index.year))
+
+    if per_park:
+        rows = {}
+        for year in years:
+            start = pd.Timestamp(year=year, month=month, day=1)
+            end = pd.Timestamp(year=year, month=month, day=day)
+            if df_tz is not None:
+                start = start.tz_localize(df_tz)
+                end = end.tz_localize(df_tz)
+            mask = (df.index >= start) & (df.index <= end)
+            period_df = df.loc[mask, cols]
+            if period_df.empty:
+                continue
+            if callable(agg_func):
+                aggregated = period_df.apply(agg_func, axis=0)
+            else:
+                aggregated = period_df.agg(agg_func)
+            rows[year] = aggregated
+
+        result = pd.DataFrame.from_dict(rows, orient="index")
+        result.index.name = "Year"
+        result.columns.name = "Park"
+        return result
+
+    # Aggregate across all parks: first sum across parks per day, then aggregate MTD
+    results = {}
+    for year in years:
+        start = pd.Timestamp(year=year, month=month, day=1)
+        end = pd.Timestamp(year=year, month=month, day=day)
+        if df_tz is not None:
+            start = start.tz_localize(df_tz)
+            end = end.tz_localize(df_tz)
+        mask = (df.index >= start) & (df.index <= end)
+        period_df = df.loc[mask, cols]
+        if period_df.empty:
+            continue
+        
+        # First: sum across all parks per day (row-wise sum)
+        daily_total = period_df.sum(axis=1)  # One value per day summing all parks
+        
+        # Then: aggregate the daily totals over the MTD period
+        if callable(agg_func):
+            results[year] = agg_func(daily_total)
+        else:
+            # Apply aggregation to the daily totals
+            if agg_func == 'sum':
+                results[year] = daily_total.sum()
+            elif agg_func == 'mean':
+                results[year] = daily_total.mean()
+            elif agg_func == 'min':
+                results[year] = daily_total.min()
+            elif agg_func == 'max':
+                results[year] = daily_total.max()
+            elif agg_func == 'median':
+                results[year] = daily_total.median()
+            elif agg_func == 'std':
+                results[year] = daily_total.std()
+            elif agg_func == 'count':
+                results[year] = daily_total.count()
+            else:
+                # Fallback: use pandas method
+                results[year] = getattr(daily_total, agg_func)()
+
+    series = pd.Series(results, name=f"MTD {agg_label}")
+    series.index.name = "Year"
+    return series
+
+
+def annual_mtd_revenue(
+    df: pd.DataFrame,
+    metadata_path,
+    agg: str | callable = "sum",
+    aggregate_parks: bool = False,
+    current_date: pd.Timestamp | str | None = None,
+    parks: list | tuple | None = None,
+    price_col: str = "price_euro_to_kwh",
+    park_id_col: str = "park_id",
+) -> pd.DataFrame | pd.Series:
+    """
+    Compute month-to-date revenue for each calendar year with per-park pricing.
+    
+    This function:
+    1. Calculates MTD energy aggregates per park (using annual_mtd_energy)
+    2. Loads per-park pricing from metadata
+    3. Multiplies energy by respective park price
+    4. Optionally aggregates revenue across all parks
+    
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Date-indexed DataFrame where each column represents a park/series.
+    metadata_path : Path or str
+        Path to park_metadata.csv containing pricing information
+    agg : str or callable, default "sum"
+        Energy aggregation to apply ('sum', 'mean', 'min', 'max', etc.)
+    aggregate_parks : bool, default False
+        If True, return a Series with total revenue across all parks per year.
+        If False, return a DataFrame with revenue per park per year.
+    current_date : pd.Timestamp, str, or None
+        Reference date (defaults to now). Defines the month/day for the MTD window.
+    parks : list/tuple or None
+        Optional subset of park/column names to include.
+    price_col : str, default "price_euro_to_kwh"
+        Column name for price in metadata
+    park_id_col : str, default "park_id"
+        Column name for park ID in metadata
+        
+    Returns
+    -------
+    pd.DataFrame
+        If aggregate_parks=False: index is Year, columns are parks, values are revenue
+    pd.Series
+        If aggregate_parks=True: index is Year with aggregated revenue across parks
+        
+    Examples
+    --------
+    >>> # Get per-park MTD revenue by year
+    >>> revenue_by_park = annual_mtd_revenue(wide, config.PARK_METADATA_CSV)
+    >>> 
+    >>> # Get total MTD revenue across all parks by year
+    >>> total_revenue = annual_mtd_revenue(wide, config.PARK_METADATA_CSV, aggregate_parks=True)
+    """
+    # Step 1: Calculate MTD energy per park
+    mtd_energy = annual_mtd_energy(
+        df=df,
+        agg=agg,
+        per_park=True,  # Always get per-park energy first
+        current_date=current_date,
+        parks=parks,
+    )
+    
+    # Step 2: Load per-park prices
+    prices = load_park_prices(metadata_path, price_col=price_col, park_id_col=park_id_col)
+    
+    # Step 3: Match prices to column names (handle MultiIndex columns)
+    if isinstance(mtd_energy.columns, pd.MultiIndex):
+        # Extract park_id from MultiIndex (assumes park_id is first level)
+        park_ids = [col[0] for col in mtd_energy.columns]
+    else:
+        # Flat columns: assume column names are park_ids
+        park_ids = mtd_energy.columns.tolist()
+    
+    # Step 4: Multiply each park's energy by its price
+    revenue_df = mtd_energy.copy()
+    for i, (col, park_id) in enumerate(zip(mtd_energy.columns, park_ids)):
+        if park_id in prices.index:
+            revenue_df[col] = mtd_energy[col] * prices.loc[park_id]
+        else:
+            # If price not found, set revenue to NaN
+            revenue_df[col] = np.nan
+    
+    # Step 5: Optionally aggregate across parks
+    if aggregate_parks:
+        # Sum revenue across all parks for each year
+        revenue_series = revenue_df.sum(axis=1)
+        revenue_series.name = f"MTD Revenue (Total)"
+        return revenue_series
+    
+    return revenue_df
+
+
+def aggregate_month_to_date_by_column(
+    df: pd.DataFrame,
+    aggregation: str = 'sum',
+    current_date: pd.Timestamp | str | None = None,
+) -> pd.Series:
+    """
+    Return month-to-date aggregated values for each column.
+    
+    This computes the aggregation from the first day of the month up to `current_date`
+    for the year of `current_date` (default: today), returning a Series indexed by
+    column with one aggregated value per column.
+    
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Date-indexed DataFrame where each column represents a park/series
+    aggregation : str
+        One of: 'sum', 'mean'/'avg'/'average', 'min', 'max', 'median', 'std', 'count'
+    current_date : pd.Timestamp, str, or None
+        The reference date defining the month-to-date window. If None, uses today
+    
+    Returns
+    -------
+    pd.Series
+        Series indexed by column with the month-to-date aggregated value for each column
+    
+    Examples
+    --------
+    # Sum of kWh for each park for the current month-to-date
+    aggregate_month_to_date_by_column(daily_historical, aggregation='sum')
+    
+    # Mean kWh for each park month-to-date on a specific date
+    aggregate_month_to_date_by_column(daily_historical, aggregation='mean', current_date='2026-01-17')
+    """
+    # Normalize and validate current_date
+    if current_date is None:
+        current_date = pd.Timestamp.now()
+    else:
+        current_date = pd.to_datetime(current_date)
+    
+    # Ensure datetime index (naive)
+    idx = pd.to_datetime(df.index)
+    df = df.copy()
+    df.index = idx
+    
+    # Map aggregation aliases
+    agg_map = {
+        'avg': 'mean',
+        'average': 'mean',
+    }
+    agg = agg_map.get(str(aggregation).lower(), str(aggregation).lower())
+    
+    valid_aggs = ['sum', 'mean', 'min', 'max', 'median', 'std', 'count']
+    if agg not in valid_aggs:
+        raise ValueError(f"Invalid aggregation '{aggregation}'. Valid options: {valid_aggs}")
+    
+    # Build month-to-date window for the current year
+    year = int(current_date.year)
+    month = int(current_date.month)
+    day = int(current_date.day)
+    start_date = pd.Timestamp(year=year, month=month, day=1)
+    end_date = pd.Timestamp(year=year, month=month, day=day)
+    
+    # Match timezone if the index is timezone-aware
+    if df.index.tz is not None:
+        start_date = start_date.tz_localize(df.index.tz)
+        end_date = end_date.tz_localize(df.index.tz)
+    
+    # Slice the DataFrame for the period
+    mask = (df.index >= start_date) & (df.index <= end_date)
+    period_df = df.loc[mask]
+    
+    if period_df.empty:
+        # Return a Series of NaNs with the same columns if there is no data
+        return pd.Series([pd.NA] * len(df.columns), index=df.columns, name=f"MTD {agg.capitalize()}")
+    
+    # Compute aggregation per column
+    if agg == 'sum':
+        out = period_df.sum(axis=0, skipna=True)
+    elif agg == 'mean':
+        out = period_df.mean(axis=0, skipna=True)
+    elif agg == 'min':
+        out = period_df.min(axis=0, skipna=True)
+    elif agg == 'max':
+        out = period_df.max(axis=0, skipna=True)
+    elif agg == 'median':
+        out = period_df.median(axis=0, skipna=True)
+    elif agg == 'std':
+        out = period_df.std(axis=0, skipna=True)
+    elif agg == 'count':
+        out = period_df.count(axis=0)
+    
+    month_name = current_date.strftime('%B')
+    out.name = f"MTD {agg.capitalize()} ({month_name} 1-{day})"
+    return out
+
+
+def load_park_prices(metadata_path, price_col="price_euro_to_kwh", park_id_col="park_id"):
+    """
+    Load per-park pricing from metadata CSV.
+    
+    Parameters
+    ----------
+    metadata_path : Path or str
+        Path to park_metadata.csv
+    price_col : str
+        Column name for price (default: "price_euro_to_kwh")
+    park_id_col : str
+        Column name for park ID (default: "park_id")
+        
+    Returns
+    -------
+    pd.Series
+        Series indexed by park_id with price values
+    """
+    import pandas as pd
+    from pathlib import Path
+    
+    metadata_path = Path(metadata_path)
+    if not metadata_path.exists():
+        raise FileNotFoundError(f"Metadata file not found: {metadata_path}")
+    
+    df = pd.read_csv(metadata_path)
+
+    # Handle the common misalignment where prices were placed in the 'notes' column
+    # (CSV rows had one extra comma before status_effective). If the price column
+    # is entirely NaN but 'notes' contains numeric values, migrate them.
+    if price_col not in df.columns:
+        raise ValueError(f"Price column '{price_col}' not found in metadata")
+    if park_id_col not in df.columns:
+        raise ValueError(f"Park ID column '{park_id_col}' not found in metadata")
+
+    if df[price_col].isna().all() and "notes" in df.columns:
+        notes_numeric = pd.to_numeric(df["notes"], errors="coerce")
+        if notes_numeric.notna().any():
+            df[price_col] = notes_numeric
+            # Optional: could log a warning here if desired
+    
+    # Create series indexed by park_id
+    prices = df.set_index(park_id_col)[price_col]
+    prices = pd.to_numeric(prices, errors='coerce')
+    
+    return prices
+
+
+def calculate_revenue_from_energy(
+    energy_series: pd.Series | pd.DataFrame,
+    price_per_kwh: float | pd.Series | dict | None = 0.2,
+    currency: str = "EUR",
+    metadata_path = None,
+) -> pd.Series | pd.DataFrame:
+    """
+    Calculate revenue from energy data with support for per-park pricing.
+    
+    Parameters
+    ----------
+    energy_series : pd.Series or pd.DataFrame
+        Series/DataFrame with energy values (kWh).
+        If DataFrame, columns should be park IDs.
+    price_per_kwh : float, pd.Series, dict, or None
+        Price per kWh. Can be:
+        - float: Single price for all parks (default: 0.2)
+        - pd.Series: Indexed by park_id with per-park prices
+        - dict: Mapping park_id -> price
+        - None: Auto-load from metadata_path (requires metadata_path)
+    currency : str
+        Currency label (default: "EUR")
+    metadata_path : Path or str, optional
+        Path to park_metadata.csv for auto-loading prices when price_per_kwh=None
+        
+    Returns
+    -------
+    pd.Series or pd.DataFrame
+        Revenue with same structure as input, with updated name/column names
+        
+    Examples
+    --------
+    >>> # Single price for all parks
+    >>> revenue = calculate_revenue_from_energy(energy_df, price_per_kwh=0.2)
+    
+    >>> # Per-park pricing from Series
+    >>> prices = pd.Series({'park_1': 0.15, 'park_2': 0.25})
+    >>> revenue = calculate_revenue_from_energy(energy_df, price_per_kwh=prices)
+    
+    >>> # Auto-load from metadata
+    >>> revenue = calculate_revenue_from_energy(energy_df, price_per_kwh=None,
+    ...                                         metadata_path='mappings/park_metadata.csv')
+    """
+    def _align_prices_to_columns(columns, price_series: pd.Series) -> pd.Series:
+        """Align per-park prices to DataFrame columns (supports MultiIndex).
+
+        Tries two strategies:
+        1) Direct match on level-0 labels for MultiIndex (or full column for flat).
+        2) Fallback: extract park_id prefix before '__' and match on that.
+        Missing prices are filled with 0.0 to avoid NaNs/zeroing everything via multiplication.
+        """
+        if isinstance(columns, pd.MultiIndex):
+            base_cols = columns.get_level_values(0)
+            aligned = price_series.reindex(base_cols)
+            if aligned.isna().all():
+                # Fallback: try splitting on '__' to match park_id prefix
+                park_ids = [str(c).split('__')[0] for c in base_cols]
+                aligned = price_series.reindex(park_ids)
+            aligned.index = columns
+        else:
+            # Flat columns
+            aligned = price_series.reindex(columns)
+            if aligned.isna().all():
+                park_ids = [str(c).split('__')[0] for c in columns]
+                aligned = price_series.reindex(park_ids)
+                aligned.index = columns
+        return aligned.fillna(0.0)
+
+    import pandas as pd
+    
+    # Auto-load prices from metadata if requested
+    if price_per_kwh is None:
+        if metadata_path is None:
+            raise ValueError("metadata_path required when price_per_kwh=None")
+        price_per_kwh = load_park_prices(metadata_path)
+    
+    # Handle DataFrame (per-park energy)
+    if isinstance(energy_series, pd.DataFrame):
+        if isinstance(price_per_kwh, (int, float)):
+            # Single price for all parks
+            revenue = energy_series * price_per_kwh
+        elif isinstance(price_per_kwh, dict):
+            # Convert dict to Series for alignment
+            price_series = pd.Series(price_per_kwh)
+            aligned_prices = _align_prices_to_columns(energy_series.columns, price_series)
+            revenue = energy_series.multiply(aligned_prices, axis=1)
+        elif isinstance(price_per_kwh, pd.Series):
+            # Per-park pricing - align by column names (handle MultiIndex columns)
+            aligned_prices = _align_prices_to_columns(energy_series.columns, price_per_kwh)
+            revenue = energy_series.multiply(aligned_prices, axis=1)
+        else:
+            raise TypeError(f"Unsupported price_per_kwh type: {type(price_per_kwh)}")
+        
+        # Update column names to indicate revenue
+        try:
+            revenue.columns = [f"{col}_revenue" for col in revenue.columns]
+        except Exception:
+            # If columns are MultiIndex, keep original to avoid unintended coercion
+            pass
+        return revenue
+    
+    # Handle Series (aggregated energy)
+    else:
+        if isinstance(price_per_kwh, (int, float)):
+            # Simple scalar multiplication
+            revenue = energy_series * price_per_kwh
+        elif isinstance(price_per_kwh, (dict, pd.Series)):
+            # For Series input with per-park pricing, we need to know which parks are included
+            # This is ambiguous - raise informative error
+            raise ValueError(
+                "Per-park pricing (Series/dict) requires DataFrame input with park columns. "
+                "For aggregated energy (Series input), use a single scalar price."
+            )
+        else:
+            raise TypeError(f"Unsupported price_per_kwh type: {type(price_per_kwh)}")
+        
+        revenue.name = f"Revenue ({currency})"
+        return revenue
+
+
+def calculate_revenue_with_fuzzy_matching(
+    energy_df: pd.DataFrame,
+    metadata_path,
+    currency: str = "EUR",
+    min_word_overlap: int = 1,
+) -> pd.DataFrame:
+    """
+    Calculate revenue from energy data with fuzzy column-to-park_id matching.
+    
+    This function handles cases where energy DataFrame column names don't exactly
+    match the park_id values in metadata. It uses word-overlap matching to find
+    the best park_id for each column, then applies per-park pricing.
+    
+    Parameters
+    ----------
+    energy_df : pd.DataFrame
+        Energy data indexed by year (from annual_mtd_energy with per_park=True).
+        Columns are park identifiers (may be MultiIndex or strings that don't
+        exactly match metadata park_id format).
+    metadata_path : Path or str
+        Path to park_metadata.csv containing park_id, price, and status_effective
+    currency : str, default "EUR"
+        Currency label for revenue
+    min_word_overlap : int, default 1
+        Minimum number of matching words required between column name and park_id
+        
+    Returns
+    -------
+    pd.DataFrame
+        Revenue DataFrame with same shape as input, values in specified currency
+        
+    Examples
+    --------
+    >>> # Energy from annual_mtd_energy
+    >>> jan_energy = annual_mtd_energy(daily_historical, agg="sum", per_park=True)
+    >>> # Calculate revenue with fuzzy matching
+    >>> revenue = calculate_revenue_with_fuzzy_matching(
+    ...     jan_energy,
+    ...     metadata_path='mappings/park_metadata.csv'
+    ... )
+    """
+    import pandas as pd
+    from pathlib import Path
+    
+    def normalize_for_matching(text):
+        """Extract meaningful words for fuzzy matching."""
+        text = str(text).lower().replace('p_', '').replace('__', '_')
+        words = []
+        for part in text.split('_'):
+            # Skip numeric parts, capacity indicators, and empty strings
+            if part and not part.replace('.', '').replace(',', '').isdigit():
+                if 'kwp' not in part and 'kw' not in part and 'mw' not in part:
+                    words.append(part)
+        return set(words)
+    
+    # Load metadata and prices
+    from .silver_prepair import load_park_metadata
+    
+    meta = load_park_metadata(metadata_path)
+    if meta is None:
+        raise ValueError(f"Could not load metadata from {metadata_path}")
+    
+    # Filter to active parks only
+    if "status_effective" in meta.columns:
+        status_series = meta["status_effective"].astype("string").str.strip().str.lower()
+        active_meta = meta.loc[status_series == "true"].copy()
+    else:
+        active_meta = meta.copy()
+    
+    # Load prices
+    prices = load_park_prices(metadata_path)
+    
+    # Build column -> park_id mapping
+    col_to_park = {}
+    price_dict = {}
+    
+    for col in energy_df.columns:
+        # Extract column name string (handle MultiIndex)
+        col_str = str(col[0] if isinstance(col, tuple) else col)
+        col_words = normalize_for_matching(col_str)
+        
+        best_match = None
+        best_overlap = 0
+        
+        for _, row in active_meta.iterrows():
+            park_id = str(row['park_id']).lower()
+            park_words = normalize_for_matching(park_id)
+            overlap = len(col_words & park_words)
+            
+            if overlap > best_overlap:
+                best_overlap = overlap
+                best_match = park_id
+        
+        if best_match and best_overlap >= min_word_overlap:
+            col_to_park[col] = best_match
+            price = prices.get(best_match, 0.0)
+            price_dict[col] = price
+    
+    # Calculate revenue: Energy × Price per column
+    revenue_df = energy_df.copy()
+    
+    for col in revenue_df.columns:
+        if col in price_dict:
+            revenue_df[col] = revenue_df[col] * price_dict[col]
+        else:
+            # No match found - set to 0
+            revenue_df[col] = 0.0
+    
+    return revenue_df
+
+
+def calculate_anomaly_metrics(
+    power_ratio_pct: pd.DataFrame,
+    daily_historical: pd.DataFrame = None,
+) -> dict:
+    """
+    Calculate anomaly detection metrics from power ratio data.
+    
+    Creates three derived metrics:
+    - pi: Copy of power_ratio_pct (Performance Index)
+    - score: Robust z-score per park using median/MAD
+    - flag: Simple -1/0/+1 classification based on score thresholds
+    
+    Parameters
+    ----------
+    power_ratio_pct : pd.DataFrame
+        Power ratio percentage (measured/expected * 100)
+        Date-indexed with parks as columns
+    daily_historical : pd.DataFrame, optional
+        Historical daily generation data (kWh/day)
+        If None, uses power_ratio_pct index/columns
+        
+    Returns
+    -------
+    dict
+        Dictionary with keys:
+        - 'daily_historical': DataFrame of historical data
+        - 'pi': DataFrame of performance index (power ratio %)
+        - 'score': DataFrame of robust anomaly scores
+        - 'flag': DataFrame of -1/0/+1 flags
+    """
+    # PI is a copy of power ratio
+    pi = power_ratio_pct.copy()
+    
+    # Use provided historical data or create aligned placeholder
+    if daily_historical is None:
+        # Create aligned placeholder (not recommended for production)
+        daily_historical = pd.DataFrame(
+            index=power_ratio_pct.index,
+            columns=power_ratio_pct.columns,
+            dtype=float
+        )
+    
+    # Robust anomaly score per park (median/MAD z-score)
+    def _robust_score(series: pd.Series) -> pd.Series:
+        """Calculate robust z-score using median and MAD"""
+        med = series.median()
+        mad = (series - med).abs().median()
+        
+        # Return zeros if MAD is zero or NaN (no variation)
+        if mad == 0 or pd.isna(mad):
+            return pd.Series(0.0, index=series.index, dtype=float)
+        
+        # MAD to standard deviation conversion factor (1.4826)
+        # This makes MAD-based z-score comparable to standard z-score
+        return (series - med) / (mad * 1.4826)
+    
+    score = pi.apply(_robust_score, axis=0)
+    
+    # Simple flag: -1 under (score < -1.5), 0 neutral, +1 over (score > +1.5)
+    # -1 = underperforming, 0 = normal, +1 = overperforming (or anomalous high)
+    flag = score.copy()
+    flag = flag.mask(score > 1.5, 1)
+    flag = flag.mask(score < -1.5, -1)
+    flag = flag.fillna(0)
+    
+    return {
+        'daily_historical': daily_historical,
+        'pi': pi,
+        'score': score,
+        'flag': flag,
+    }

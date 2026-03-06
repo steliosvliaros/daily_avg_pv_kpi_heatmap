@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local data & outputs (exclude all data, keep only structure)
+data/**
+outputs/**
+pvgis_cache/**
+!data/.gitkeep
+!outputs/.gitkeep
+!pvgis_cache/.gitkeep
+
+# Parquet files (never track, they're generated during ingestion)
+*.parquet
+**/*.parquet
+
+# OS/editor
+.vscode/
+.DS_Store
+
+*.pdf
+
+*.jpg
+*.png
+*.jpeg
+*.gif
+*.svg
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip

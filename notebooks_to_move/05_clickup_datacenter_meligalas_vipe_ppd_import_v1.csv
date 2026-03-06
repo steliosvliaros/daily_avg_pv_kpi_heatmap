@@ -1,0 +1,213 @@
+﻿Task name,Tags,Time Estimate,Start date,Due date,Dependencies,Description,Comments,Custom Field [text] [WBS],Custom Field [drop_down] [Contractor]
+SUMMARY | 1 Project setup & data room,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup, Summary",,2026-02-02,2026-04-10,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 1.
+Estimated Time: 0d effort + 0d wait = 0d total",,1,
+Kick-off – governance – baseline Gantt v0 (DC Meligalas),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",40h,2026-02-02,2026-02-06,,"Στήσιμο έργου & fast-track στρατηγική για Datacenter εντός ΒΙΠΕ Μελιγαλά.
+• Deliverables:
+  - RACI/ρόλοι
+  - stakeholder map (ΒΙΠΕ, Δήμος, Περιφέρεια, ΔΕΔΔΗΕ/ΑΔΜΗΕ, Πυροσβεστική, ύδρευση/αποχέτευση)
+  - risk log
+  - baseline milestones
+Estimated Time: 5d effort + 0d wait = 5d total",,1.1,
+Data room – templates (PPD & Grid) – GIS basepack,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",32h,2026-02-09,2026-02-13,Kick-off – governance – baseline Gantt v0 (DC Meligalas),"Data room με δομή φακέλων και πρότυπα εγγράφων για ΠΠΔ & Grid. GIS basepack για το γήπεδο στη ΒΙΠΕ.
+• Deliverables:
+  - folder structure + naming
+  - όρια γηπέδου (EGSA87) + shapefiles/KML
+  - ορθοφωτοχάρτες/DEM
+  - χάρτες πρόσβασης/υποδομών ΒΙΠΕ
+Estimated Time: 4d effort + 1d wait = 5d total",,1.2,
+Land control – μίσθωση/παραχώρηση εντός ΒΙΠΕ – έλεγχος όρων ΒΙΠΕ,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",80h,2026-02-09,2026-03-20,Kick-off – governance – baseline Gantt v0 (DC Meligalas),"Ιδιοκτησιακό/μισθωτικό και ειδικοί όροι ΒΙΠΕ (κανονισμός, πρόσβαση, δίκτυα, περιορισμοί).
+• Deliverables:
+  - συμφωνητικό μίσθωσης/παραχώρησης
+  - βεβαίωση/όροι φορέα διαχείρισης ΒΙΠΕ
+  - πίνακας δικαιωμάτων/δουλειών
+  - πληρεξούσια/νομιμοποιητικά
+Estimated Time: 10d effort + 20d wait = 30d total",,1.3,
+Site constraints & permits map (ΒΙΠΕ) – preliminary screening,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",48h,2026-02-16,2026-02-27,Data room – templates (PPD & Grid) – GIS basepack,"Pre-screening περιορισμών (εντός ΒΙΠΕ) και list απαιτήσεων ΠΠΔ/λοιπών τεκμηριώσεων (θόρυβος, Η/Μ, δεξαμενές κ.λπ.).
+• Deliverables:
+  - constraints map
+  - λίστα απαιτούμενων τεκμηριώσεων για ΠΠΔ
+  - λίστα εμπλεκόμενων υπηρεσιών/παρόχων
+Estimated Time: 6d effort + 4d wait = 10d total",,1.4,
+Concept design v0 (civil – MEP – IT load – redundancy),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",96h,2026-03-02,2026-03-27,Site constraints & permits map (ΒΙΠΕ) – preliminary screening,"Concept σχεδιασμού Datacenter (χώροι, Η/Μ, ψύξη, εφεδρείες, κατανάλωση/φορτία).
+• Deliverables:
+  - block layout
+  - MEP concept (HVAC, UPS, generators)
+  - single line diagram concept
+  - IT load profile assumptions
+  - fuel storage concept (αν υπάρχει)
+Estimated Time: 12d effort + 8d wait = 20d total",,1.5,
+Topographic survey – boundaries & utilities tie-in points (ΒΙΠΕ),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",80h,2026-03-23,2026-04-10,Land control – μίσθωση/παραχώρηση εντός ΒΙΠΕ – έλεγχος όρων ΒΙΠΕ,"Τοπογραφικό & αποτύπωση σημείων σύνδεσης (Δίκτυα ΒΙΠΕ, πρόσβαση, παροχές).
+• Deliverables:
+  - τοπογραφικό διάγραμμα
+  - συντεταγμένες/ισοϋψείς
+  - αποτύπωση υφιστάμενων δικτύων/οδεύσεων στη ΒΙΠΕ
+  - as-built όπου διαθέσιμα
+Estimated Time: 10d effort + 5d wait = 15d total",,1.6,
+Geotechnical pre-investigation (foundation & drainage),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",80h,2026-03-23,2026-04-10,Land control – μίσθωση/παραχώρηση εντός ΒΙΠΕ – έλεγχος όρων ΒΙΠΕ,"Προκαταρκτική γεωτεχνική για θεμελιώσεις/αποστραγγίσεις/αντοχές.
+• Deliverables:
+  - γεωτεχνικό report
+  - δοκιμές/γεωτρήσεις (όπου απαιτείται)
+  - recommendations για θεμελίωση/earthworks
+Estimated Time: 10d effort + 5d wait = 15d total",,1.7,
+Load profile & growth plan (MW/MVA) – cooling strategy – resiliency targets,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",48h,2026-03-30,2026-04-10,Concept design v0 (civil – MEP – IT load – redundancy),"Ορισμός φορτίου (MW/MVA), προφίλ κατανάλωσης και επεκτασιμότητα (phasing).
+• Deliverables:
+  - load schedule (base/peak)
+  - phasing plan
+  - cooling strategy & assumptions
+  - availability targets (Tier concept)
+Estimated Time: 6d effort + 4d wait = 10d total",,1.8,
+Pre-consults – ΒΙΠΕ management – Δήμος/ΔΕΥΑ – Πυροσβεστική (early risk surfacing),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Setup",56h,2026-03-02,2026-03-20,Site constraints & permits map (ΒΙΠΕ) – preliminary screening,"Προκαταρκτικές επαφές για risk surfacing: ύδρευση/αποχέτευση, πυροπροστασία concept, λειτουργικοί περιορισμοί ΒΙΠΕ.
+• Deliverables:
+  - minutes/notes
+  - λίστα απαιτήσεων ανά φορέα
+  - risk register updates
+Estimated Time: 7d effort + 8d wait = 15d total",,1.9,
+SUMMARY | 2 Environmental – PPD (ΗΠΜ),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Summary",,2026-03-30,2026-07-06,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 2.
+Estimated Time: 0d effort + 0d wait = 0d total",,2,
+Environmental classification – Category B & PPD applicability (ΗΠΜ route),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental",24h,2026-03-30,2026-04-03,Concept design v0 (civil – MEP – IT load – redundancy),"Κατάταξη δραστηριότητας και επιβεβαίωση ότι υπάγεται σε ΠΠΔ (Κατηγορία Β) μέσω ΗΠΜ.
+• Deliverables:
+  - classification memo
+  - list of PPD commitments to apply
+  - HPM account/roles readiness
+• Legal/Regulatory basis (indicative): ν. 4014/2011 (Κατηγορίες Α/Β), ΗΠΜ ΥΠΕΝ – ψηφιακή διαδικασία για κατηγορία Β/ΠΠΔ
+Estimated Time: 3d effort + 2d wait = 5d total",,2.1,
+SUMMARY | 2.2 PPD dossier build (studies + package),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Summary",,2026-03-30,2026-05-01,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 2.2.
+Estimated Time: 0d effort + 0d wait = 0d total",,2.2,
+PPD supporting study – noise & vibroacoustics (baseline + mitigation),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Noise",64h,2026-03-30,2026-04-17,Concept design v0 (civil – MEP – IT load – redundancy),"Μελέτη θορύβου (HVAC, generators, chillers) με μέτρα μετριασμού εξ αρχής.
+• Deliverables:
+  - noise model & receptors map
+  - mitigation pack (enclosures/barriers)
+  - compliance table vs limits
+Estimated Time: 8d effort + 7d wait = 15d total",,2.2.1,
+PPD supporting study – air emissions (backup gensets) & fuel storage risk,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Emissions, Generators, Fuel",64h,2026-03-30,2026-04-17,Concept design v0 (civil – MEP – IT load – redundancy),"Τεκμηρίωση εκπομπών (εφεδρικές γεννήτριες) και risk δεξαμενών καυσίμου/διαρροών.
+• Deliverables:
+  - emissions assumptions & runtime
+  - stack arrangement concept
+  - spill prevention/secondary containment concept
+Estimated Time: 8d effort + 7d wait = 15d total",,2.2.2,
+PPD supporting study – water demand & wastewater (ΔΕΥΑ/ΒΙΠΕ interface),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Water, Wastewater",48h,2026-03-30,2026-04-10,Concept design v0 (civil – MEP – IT load – redundancy),"Υδροδότηση/αποχέτευση: απαιτήσεις, σύνδεση σε δίκτυα ΒΙΠΕ/ΔΕΥΑ, εκτιμώμενες παροχές.
+• Deliverables:
+  - water balance
+  - wastewater characterization (if any)
+  - connection points & notes
+Estimated Time: 6d effort + 4d wait = 10d total",,2.2.3,
+"PPD supporting study – waste management plan (WEEE, batteries, oils, packaging)","Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Waste",48h,2026-03-30,2026-04-10,Concept design v0 (civil – MEP – IT load – redundancy),"Σχέδιο διαχείρισης αποβλήτων (ιδίως μπαταρίες, λιπαντικά, WEEE, φίλτρα, συσκευασίες).
+• Deliverables:
+  - waste streams register
+  - contracts list (licensed collectors)
+  - storage/segregation plan
+Estimated Time: 6d effort + 4d wait = 10d total",,2.2.4,
+PPD package – Environmental Management Plan & commitments matrix,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental",48h,2026-04-06,2026-04-17,Environmental classification – Category B & PPD applicability (ΗΠΜ route),"Σύνθεση ΠΠΔ commitments και σχέδιο περιβαλλοντικής διαχείρισης (monitoring/logs).
+• Deliverables:
+  - PPD commitments matrix
+  - EMP (monitoring, training, incident response)
+  - HSE baseline procedures
+Estimated Time: 6d effort + 4d wait = 10d total",,2.2.5,
+Compile PPD dossier v1 – forms – drawings – attachments,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental",64h,2026-04-20,2026-05-01,"PPD supporting study – noise & vibroacoustics (baseline + mitigation); PPD supporting study – air emissions (backup gensets) & fuel storage risk; PPD supporting study – water demand & wastewater (ΔΕΥΑ/ΒΙΠΕ interface); PPD supporting study – waste management plan (WEEE, batteries, oils, packaging); PPD package – Environmental Management Plan & commitments matrix; Topographic survey – boundaries & utilities tie-in points (ΒΙΠΕ)","Συγκέντρωση φακέλου ΠΠΔ και τελικών συνημμένων για υποβολή στο ΗΠΜ.
+• Deliverables:
+  - έντυπα/υπεύθυνες δηλώσεις
+  - τεχνική περιγραφή δραστηριότητας
+  - site plan + layouts
+  - προμελέτη Η/Μ – SLD concept
+  - μελέτες (θόρυβος/εκπομπές/νερά/απόβλητα)
+  - GIS/τοπογραφικά αρχεία
+• Legal/Regulatory basis (indicative): ΗΠΜ ΥΠΕΝ (κατηγορία Β), ΠΠΔ κατά ν. 4014/2011
+Estimated Time: 8d effort + 2d wait = 10d total",,2.2.6,
+Submit PPD in ΗΠΜ – admin check (submission),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Milestone",8h,2026-05-04,2026-05-04,Compile PPD dossier v1 – forms – drawings – attachments,"Υποβολή φακέλου ΠΠΔ στο ΗΠΜ και έλεγχος σωστής ανάρτησης αρχείων.
+• Deliverables:
+  - submission ID/protocol
+  - export of submission package
+Estimated Time: 1d effort + 0d wait = 1d total",,2.3,
+PPD completeness check – authority wait (1st cycle),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental",16h,2026-05-05,2026-06-01,Submit PPD in ΗΠΜ – admin check (submission),"Παρακολούθηση ελέγχου πληρότητας – απαντήσεις σε ερωτήματα.
+• Deliverables:
+  - questions log
+  - requests for clarifications (if any)
+Estimated Time: 2d effort + 18d wait = 20d total",,2.4,
+PPD clarifications – revisions pack (rev.1),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental",64h,2026-06-02,2026-06-22,PPD completeness check – authority wait (1st cycle),"Διορθώσεις/συμπληρώσεις φακέλου ΠΠΔ – επανυποβολή.
+• Deliverables:
+  - revised drawings/notes
+  - updated commitments matrix
+  - reply letter
+Estimated Time: 8d effort + 7d wait = 15d total",,2.5,
+PPD completeness/registration confirmed – milestone,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Environmental, Milestone",8h,2026-06-23,2026-07-06,PPD clarifications – revisions pack (rev.1),"Milestone: επιβεβαίωση πληρότητας/καταχώρισης υπαγωγής σε ΠΠΔ στο ΗΠΜ.
+• Deliverables:
+  - confirmation in ΗΠΜ
+  - data room update
+Estimated Time: 1d effort + 9d wait = 10d total",,2.6,
+SUMMARY | 4 Grid connection (load) – offer & acceptance,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Summary",,2026-04-13,2027-03-02,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 4.
+Estimated Time: 0d effort + 0d wait = 0d total",,4,
+Grid strategy – choose operator (ΔΕΔΔΗΕ MV default) – voltage level – connection concept,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",48h,2026-04-13,2026-04-24,Load profile & growth plan (MW/MVA) – cooling strategy – resiliency targets,"Επιλογή Διαχειριστή/επιπέδου τάσης (default: ΔΕΔΔΗΕ ΜΤ) και concept σύνδεσης.
+• Deliverables:
+  - grid strategy memo
+  - connection one-line (concept)
+  - phasing notes
+  - required capacity statement
+Estimated Time: 6d effort + 4d wait = 10d total",,4.1,
+Pre-meeting with operator – capacity check – application path,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",40h,2026-04-27,2026-05-15,Grid strategy – choose operator (ΔΕΔΔΗΕ MV default) – voltage level – connection concept,"Προκαταρκτική τεχνική συνάντηση/αλληλογραφία για χωρητικότητα και format φακέλου.
+• Deliverables:
+  - minutes/email trail
+  - requested docs list
+  - queue position guidance (if any)
+Estimated Time: 5d effort + 10d wait = 15d total",,4.2,
+Prepare connection application dossier (load) – tech – legal – geo,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",96h,2026-05-18,2026-06-12,Pre-meeting with operator – capacity check – application path; Topographic survey – boundaries & utilities tie-in points (ΒΙΠΕ); Load profile & growth plan (MW/MVA) – cooling strategy – resiliency targets,"Σύνταξη φακέλου αίτησης σύνδεσης φορτίου (παροχή ΜΤ/ΥΤ ανά περίπτωση).
+• Deliverables:
+  - έντυπο αίτησης
+  - τεχνική περιγραφή φορτίου
+  - SLD/protection concept
+  - site plan + υποσταθμός concept
+  - τοπογραφικά/GIS
+  - νομιμοποιητικά εταιρίας
+  - έγγραφα γηπέδου/ΒΙΠΕ
+Estimated Time: 12d effort + 8d wait = 20d total",,4.3,
+Submit connection application (operator portal/protocol),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",8h,2026-06-15,2026-06-15,Prepare connection application dossier (load) – tech – legal – geo,"Υποβολή αίτησης σύνδεσης και λήψη πρωτοκόλλου.
+• Deliverables:
+  - protocol/ID
+  - submission export
+Estimated Time: 1d effort + 0d wait = 1d total",,4.4,
+Completeness check (operator) – 1st cycle,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",16h,2026-06-16,2026-07-13,Submit connection application (operator portal/protocol),"Έλεγχος πληρότητας από Διαχειριστή (1ος κύκλος).
+• Deliverables:
+  - questions/deficiencies log
+Estimated Time: 2d effort + 18d wait = 20d total",,4.5,
+Clarifications – revise connection dossier (rev.1),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",48h,2026-07-14,2026-07-27,Completeness check (operator) – 1st cycle,"Συμπληρώσεις/διορθώσεις στον φάκελο σύνδεσης.
+• Deliverables:
+  - updated SLD/notes
+  - reply letter
+  - additional documents
+Estimated Time: 6d effort + 4d wait = 10d total",,4.6,
+Completeness accepted (operator) – milestone,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid, Milestone",8h,2026-07-28,2026-08-10,Clarifications – revise connection dossier (rev.1),"Milestone: αποδοχή πληρότητας αιτήματος σύνδεσης από Διαχειριστή.
+• Deliverables:
+  - completeness confirmation
+Estimated Time: 1d effort + 9d wait = 10d total",,4.7,
+Operator queue management – formal requests & follow-ups (worst-case),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",48h,2026-08-11,2026-11-02,Completeness accepted (operator) – milestone,"Διαχείριση ουράς/επίσημων αιτημάτων και SLA follow-ups.
+• Deliverables:
+  - formal correspondence log
+  - escalation notes
+Estimated Time: 6d effort + 54d wait = 60d total",,4.8.1,
+Technical iterations with operator – protection – works definition (worst-case),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",48h,2026-11-03,2027-01-25,Operator queue management – formal requests & follow-ups (worst-case),"Κύκλοι διευκρινίσεων έως κλείδωμα όρων.
+• Deliverables:
+  - final SLD/protection notes
+  - works scope (operator & customer)
+  - cost assumptions
+Estimated Time: 6d effort + 54d wait = 60d total",,4.8.2,
+Issue connection offer (ΟΠΣ/Offer) – milestone,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid, Milestone",,2027-01-26,2027-01-26,Technical iterations with operator – protection – works definition (worst-case),"Milestone: έκδοση προσφοράς/όρων σύνδεσης (ΟΠΣ/Offer).
+• Deliverables:
+  - offer letter
+  - technical terms
+  - commercial terms
+Estimated Time: 0d effort + 1d wait = 1d total",,4.9,
+Internal review of offer – guarantees – readiness check (tie to PPD),"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",64h,2027-01-27,2027-02-23,Issue connection offer (ΟΠΣ/Offer) – milestone; PPD completeness/registration confirmed – milestone,"Εσωτερική αξιολόγηση όρων και προετοιμασία εγγυήσεων/πληρωμών. Δέσιμο με ΠΠΔ για de-risk.
+• Deliverables:
+  - internal memo
+  - board approvals (if needed)
+  - guarantee instruments prep
+Estimated Time: 8d effort + 12d wait = 20d total",,4.10,
+Accept connection offer (ΟΠΣ/Offer) – signature & guarantees,"Datacenter, Meligalas, ViPE, PPD, Permitting, Phase-Grid, Grid",24h,2027-02-24,2027-03-02,Internal review of offer – guarantees – readiness check (tie to PPD),"Αποδοχή προσφοράς/όρων σύνδεσης – υπογραφή/εγγυήσεις/τέλη.
+• Deliverables:
+  - acceptance letter
+  - signed agreement (if applicable)
+  - proof of guarantees/fees
+Estimated Time: 3d effort + 2d wait = 5d total",,4.11,

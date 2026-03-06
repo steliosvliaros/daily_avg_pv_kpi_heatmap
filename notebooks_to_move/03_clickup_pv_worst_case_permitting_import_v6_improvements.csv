@@ -1,0 +1,191 @@
+Task name,Tags,Time Estimate,Start date,Due date,Dependencies,Description,Comments,Custom Field [text] [WBS],Custom Field [drop_down] [Contractor]
+Kick-off – governance – baseline Gantt v0,PV; Permitting; WorstCase; Phase-Setup; Preparation,40h,2026-02-02,2026-02-06,,"Στήσιμο έργου & fast-track στρατηγική. • Outputs: RACI/ρόλοι, master risk log, stakeholder map/λίστα εμπλεκόμενων φορέων, baseline milestones.
+WBS: 1.1
+Dependencies (Task Name): nan
+Estimated Time: 5d effort + 0d wait = 5d total",,1.1,
+Data room (ΗΠΜ/e-ΠΜ & Grid) + GIS basepack,PV; Permitting; WorstCase; Phase-Setup; Preparation,32h,2026-02-09,2026-02-13,Kick-off – governance – baseline Gantt v0,"Data room + πρότυπα φακέλων για ΗΠΜ (e-ΠΜ) & Grid. • GIS basepack: όρια έργου (polygon), ΕΓΣΑ’87, orthos, DEM, layers Natura/δασικοί/ρέματα/χωροταξικά.
+WBS: 1.2
+Dependencies (Task Name): Kick-off – governance – baseline Gantt v0
+Estimated Time: 4d effort + 1d wait = 5d total",,1.2,
+Ιδιοκτησιακό/μισθώσεις/δουλείες & νομικός έλεγχος,PV; Permitting; WorstCase; Phase-Setup; Preparation; LandControl,160h,2026-02-09,2026-05-01,Kick-off – governance – baseline Gantt v0,"Ιδιοκτησιακό/νομικός έλεγχος (worst case: κατακερματισμός). • Docs: τίτλοι/Κτηματολόγιο, μισθωτήρια/δουλείες, πληρεξούσια, πίνακας ιδιοκτησιών, συμφωνίες πρόσβασης/διέλευσης.
+WBS: 1.3
+Dependencies (Task Name): Kick-off – governance – baseline Gantt v0
+Estimated Time: 20d effort + 40d wait = 60d total",,1.3,
+GIS constraints (Natura/δασικοί/ρέματα/ΖΟΕ/ΓΠΣ) + προκαταρκτική χωροθέτηση,PV; Permitting; WorstCase; Phase-Setup; Preparation,80h,2026-02-16,2026-03-06,Data room (ΗΠΜ/e-ΠΜ & Grid) + GIS basepack,"Χαρτογράφηση περιορισμών & προκαταρκτική χωροθέτηση. • Outputs: constraints map, screening (Natura, δασικό, ρέματα, ΖΟΕ/ΓΠΣ, αρχαιολογία), list of permits/opinions ανά φορέα.
+WBS: 1.4
+Dependencies (Task Name): Data room (ΗΠΜ/e-ΠΜ & Grid) + GIS basepack
+Estimated Time: 10d effort + 5d wait = 15d total",,1.4,
+Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept,PV; Permitting; WorstCase; Phase-Setup; Preparation,120h,2026-03-09,2026-04-03,GIS constraints (Natura/δασικοί/ρέματα/ΖΟΕ/ΓΠΣ) + προκαταρκτική χωροθέτηση,"Προκαταρκτικός τεχνικός σχεδιασμός. • Plans: layout (πάνελ/οδεύσεις), οριζοντιογραφία συνοδών (οδοποιία/Υ/Σ/γραμμή), SLD concept, εναλλακτικές όδευσης για ΜΠΕ/ΟΠΣ.
+WBS: 1.5
+Dependencies (Task Name): GIS constraints (Natura/δασικοί/ρέματα/ΖΟΕ/ΓΠΣ) + προκαταρκτική χωροθέτηση
+Estimated Time: 15d effort + 5d wait = 20d total",,1.5,
+Νέα τοπογραφικά (GNSS – οριοθέτηση πολυγώνου – όρια ιδιοκτησιών),PV; Permitting; WorstCase; Phase-Setup; Preparation; Surveys,120h,2026-05-04,2026-05-29,Ιδιοκτησιακό/μισθώσεις/δουλείες & νομικός έλεγχος,"Τοπογραφικά υψηλής ακρίβειας. • Deliverables: τοπογραφικό διάγραμμα, όρια ιδιοκτησιών, ισοϋψείς, συντεταγμένες κορυφών, shapefiles/KML.
+WBS: 1.6
+Dependencies (Task Name): Ιδιοκτησιακό/μισθώσεις/δουλείες & νομικός έλεγχος
+Estimated Time: 15d effort + 5d wait = 20d total",,1.6,
+Γεωτεχνική προκαταρκτική διερεύνηση (δοκιμές – report),PV; Permitting; WorstCase; Phase-Setup; Preparation; Surveys,120h,2026-05-04,2026-05-29,Ιδιοκτησιακό/μισθώσεις/δουλείες & νομικός έλεγχος,"Γεωτεχνική προκαταρκτική (για θεμελιώσεις/οδοποιία). • Deliverables: boreholes/tests, γεωτεχνικό report, προτάσεις βελτιώσεων/αποστράγγισης.
+WBS: 1.7
+Dependencies (Task Name): Ιδιοκτησιακό/μισθώσεις/δουλείες & νομικός έλεγχος
+Estimated Time: 15d effort + 5d wait = 20d total",,1.7,
+Οικολογικές/ορνιθολογικές καταγραφές 4 εποχών (Natura worst case),PV; Permitting; WorstCase; Phase-Setup; Preparation; Natura,480h,2026-03-09,2027-02-25,GIS constraints (Natura/δασικοί/ρέματα/ΖΟΕ/ΓΠΣ) + προκαταρκτική χωροθέτηση,"Καταγραφές 4 εποχών (Natura worst-case). • Deliverables: ορνιθοπανίδα/οικότοποι/είδη-στόχοι, χαρτογράφηση ευαίσθητων περιοχών, inputs για Δέουσα/ΕΟΑ.
+WBS: 1.8
+Dependencies (Task Name): GIS constraints (Natura/δασικοί/ρέματα/ΖΟΕ/ΓΠΣ) + προκαταρκτική χωροθέτηση
+Estimated Time: 60d effort + 192d wait = 252d total",,1.8,
+Natura baseline διαθέσιμο (2 εποχές) – milestone,PV; Permitting; WorstCase; Phase-Setup; Natura; Milestone,8h,2026-09-04,2026-09-04,Data room (ΗΠΜ/e-ΠΜ & Grid) + GIS basepack,"Milestone: διαθέσιμα προκαταρκτικά δεδομένα Natura (≥2 εποχές) ώστε να ξεκινήσει drafting ΜΠΕ.
+Estimated Time: 1d effort + 0d wait = 1d total",,1.8.1,
+Φάκελος Βεβαίωσης Παραγωγού (ΡΑΑΕΥ) – προετοιμασία,PV; Permitting; WorstCase; Phase-RAAEY; ProducerCertificate,96h,2026-06-01,2026-06-19,Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept; Ιδιοκτησιακό/μισθώσεις/δουλείες & νομικός έλεγχος,"Σύνταξη αίτησης Βεβαίωσης Παραγωγού. • Docs: εταιρικά/νομιμοποιητικά, Τεχνική Περιγραφή, χάρτες/πολύγωνο, ισχύς/τεχνολογία, στοιχεία γηπέδου/δικαιώματα, παράβολα/εγγυήσεις (όπου απαιτείται).
+WBS: 2.1
+Dependencies (Task Name): Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept; Ιδιοκτησιακό/μισθώσεις/δουλείες & νομικός έλεγχος
+Estimated Time: 12d effort + 3d wait = 15d total",,2.1,
+ΡΑΑΕΥ έλεγχος/ερωτήματα/συμπληρώσεις (worst-case κύκλοι),PV; Permitting; WorstCase; Phase-RAAEY; ProducerCertificate,160h,2026-06-22,2026-12-04,Φάκελος Βεβαίωσης Παραγωγού (ΡΑΑΕΥ) – προετοιμασία,"ΡΑΑΕΥ: κύκλοι ερωτημάτων/συμπληρώσεων (worst-case). • Outputs: απαντήσεις, διορθώσεις φακέλου, επικαιροποιήσεις χαρτών/τεχνικής περιγραφής.
+WBS: 2.2
+Dependencies (Task Name): Φάκελος Βεβαίωσης Παραγωγού (ΡΑΑΕΥ) – προετοιμασία
+Estimated Time: 20d effort + 100d wait = 120d total",,2.2,
+Έκδοση Βεβαίωσης Παραγωγού (τελική),PV; Permitting; WorstCase; Phase-RAAEY; ProducerCertificate,16h,2026-12-07,2026-12-31,ΡΑΑΕΥ έλεγχος/ερωτήματα/συμπληρώσεις (worst-case κύκλοι),"Έκδοση/ανάρτηση Βεβαίωσης Παραγωγού. • Outputs: απόφαση/κωδικός βεβαίωσης, ενημέρωση data room, επικαιροποίηση παραμέτρων για Grid/ΗΠΜ.
+WBS: 2.3
+Dependencies (Task Name): ΡΑΑΕΥ έλεγχος/ερωτήματα/συμπληρώσεις (worst-case κύκλοι)
+Estimated Time: 2d effort + 18d wait = 20d total",,2.3,
+Κατάταξη έργου & αρμόδια αρχή (Α1 λόγω Natura/ισχύος/γραμμής) + plan συμμόρφωσης,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO,64h,2026-04-06,2026-04-17,Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept,"Κατάταξη σε υποκατηγορία Α1 (worst-case: εντός Natura + μεγάλος σταθμός/όδευση). • Output: memo κατηγορίας/αρμόδιας αρχής (ΔΙΠΑ ΥΠΕΝ) + λίστα απαιτούμενων γνωμοδοτήσεων/μελετών.
+WBS: 3.1
+Dependencies (Task Name): Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept
+Estimated Time: 8d effort + 2d wait = 10d total",,3.1,
+Προ-διαβούλευση με ΔΙΠΑ/Αποκεντρωμένη/ΟΦΥΠΕΚΑ (risk surfacing),PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO,80h,2026-04-20,2026-05-15,Κατάταξη έργου & αρμόδια αρχή (Α1 λόγω Natura/ισχύος/γραμμής) + plan συμμόρφωσης,"Προ-διαβούλευση/συντονισμός με ΔΙΠΑ–Αποκεντρωμένη–ΟΦΥΠΕΚΑ/Μονάδα Διαχείρισης. • Outputs: πρακτικά, συμφωνία format/shapefiles, risk list για «κόκκινες» γνωμοδοτήσεις.
+WBS: 3.2
+Dependencies (Task Name): Προσφυγή/παραπομπή σε ΠΕΣΠΑ (λόγω αρνητικής/εκπρόθεσμης γνώμης) – συνεδριάσεις
+Estimated Time: 10d effort + 10d wait = 20d total",,3.2,
+SUMMARY | 3.3 ΜΠΕ (A1) – staged drafting,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO; Summary,,2026-09-07,2027-05-19,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 3.3.1 → 3.3.2
+Estimated Time: 0d effort + 0d wait = 0d total",,3.3,
+ΜΠΕ Draft v0 (scoping/εναλλακτικές/GIS skeleton) – staged fast-track,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO; Natura,160h,2026-09-07,2026-11-13,Προ-διαβούλευση με ΔΙΠΑ/Αποκεντρωμένη/ΟΦΥΠΕΚΑ (risk surfacing); Natura baseline διαθέσιμο (2 εποχές) – milestone; Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept; Νέα τοπογραφικά (GNSS – οριοθέτηση πολυγώνου – όρια ιδιοκτησιών); Γεωτεχνική προκαταρκτική διερεύνηση (δοκιμές – report),"Staged drafting ΜΠΕ: δομή, scoping, εναλλακτικές, αρχικά GIS layers, αρχικά mitigation measures.
+• Deliverables: skeleton ΜΠΕ, NTS draft, εναλλακτικές/όδευση corridor, GIS package draft.
+Estimated Time: 20d effort + 20d wait = 40d total",,3.3.1,
+ΜΠΕ Final v1 (με πλήρη 4-εποχών Natura + παραρτήματα),PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO; Natura,280h,2027-02-26,2027-05-19,ΜΠΕ Draft v0 (scoping/εναλλακτικές/GIS skeleton) – staged fast-track; Οικολογικές/ορνιθολογικές καταγραφές 4 εποχών (Natura worst case),"Οριστικοποίηση ΜΠΕ με πλήρη 4-εποχών Natura/ορνιθολογικά, τελικές τομές/χάρτες/πίνακες.
+• Deliverables: ΜΠΕ final, NTS final, ΕΟΑ/Δέουσα, χάρτες/τομές, τεχνικές περιγραφές, σχέδια χωροθέτησης/οριζοντιογραφίες.
+Estimated Time: 35d effort + 25d wait = 60d total",,3.3.2,
+Υποβολή ΜΠΕ στο ΗΠΜ (e-ΠΜ) + τυπικός έλεγχος ανάρτησης,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO,8h,2027-05-20,2027-05-20,ΜΠΕ Final v1 (με πλήρη 4-εποχών Natura + παραρτήματα),"Υποβολή στο ΗΠΜ (e-ΠΜ). • Outputs: αριθμός πρωτοκόλλου, ανάρτηση φακέλου, καταχώριση στοιχείων έργου/φορέα/μελετητών.
+WBS: 3.4
+Dependencies (Task Name): Σύνταξη ΜΠΕ (Α1) + παράρτημα Δέουσας/ΕΟΑ + εναλλακτικές + GIS
+Estimated Time: 1d effort + 0d wait = 1d total",,3.4,
+Έλεγχος πληρότητας ΜΠΕ (1ος) – ελλείψεις/αίτημα συμπληρώσεων,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO,16h,2027-05-21,2027-07-01,Υποβολή ΜΠΕ στο ΗΠΜ (e-ΠΜ) + τυπικός έλεγχος ανάρτησης,"Έλεγχος πληρότητας (1ος) από αρμόδια αρχή. • Outputs: κατάλογος ελλείψεων/αιτήματα συμπλήρωσης μέσω ΗΠΜ.
+WBS: 3.5
+Dependencies (Task Name): Υποβολή ΜΠΕ στο ΗΠΜ (e-ΠΜ) + τυπικός έλεγχος ανάρτησης
+Estimated Time: 2d effort + 28d wait = 30d total",,3.5,
+Συμπληρωματικός φάκελος για πληρότητα (rev.1),PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO,120h,2027-07-02,2027-07-29,Έλεγχος πληρότητας ΜΠΕ (1ος) – ελλείψεις/αίτημα συμπληρώσεων,"Συμπλήρωση για πληρότητα (rev.1). • Deliverables: διορθώσεις ΜΠΕ/χαρτών, πρόσθετα σχέδια (π.χ. όδευση), συμπληρωματικές ΥΔ/βεβαιώσεις, επανυποβολή.
+WBS: 3.6
+Dependencies (Task Name): Έλεγχος πληρότητας ΜΠΕ (1ος) – ελλείψεις/αίτημα συμπληρώσεων
+Estimated Time: 15d effort + 5d wait = 20d total",,3.6,
+Έλεγχος πληρότητας ΜΠΕ (2ος) – Λήψη πληρότητας φακέλου (milestone),PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO; Completeness,16h,2027-07-30,2027-08-26,Συμπληρωματικός φάκελος για πληρότητα (rev.1),"Έλεγχος πληρότητας (2ος) & «Λήψη πληρότητας φακέλου» (milestone). • Output: επίσημη αποδοχή πληρότητας στο ΗΠΜ.
+WBS: 3.7
+Dependencies (Task Name): Συμπληρωματικός φάκελος για πληρότητα (rev.1)
+Estimated Time: 2d effort + 18d wait = 20d total",,3.7,
+SUMMARY | 3.8 Διαβούλευση/Γνωμοδοτήσεις,PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation; Summary,,2027-08-27,2027-12-03,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 3.8.1 → 3.8.7
+Estimated Time: 0d effort + 0d wait = 0d total",,3.8,
+Διαβίβαση σε Δασαρχείο (δασικό) & παρακολούθηση προθεσμιών,PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation; Forest,40h,2027-08-27,2027-09-16,Έλεγχος πληρότητας ΜΠΕ (2ος) – Λήψη πληρότητας φακέλου (milestone),"Διαβίβαση φακέλου σε Δασαρχείο/αρμόδιες δασικές υπηρεσίες. Log προθεσμιών & follow-ups.
+Estimated Time: 5d effort + 10d wait = 15d total",,3.8.1,
+Διαβίβαση σε ΕΦΑ/Αρχαιολογία & παρακολούθηση προθεσμιών,PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation; Archaeology,40h,2027-08-27,2027-10-07,Έλεγχος πληρότητας ΜΠΕ (2ος) – Λήψη πληρότητας φακέλου (milestone),"Διαβίβαση φακέλου σε ΕΦΑ/Αρχαιολογία. Log προθεσμιών & follow-ups.
+Estimated Time: 5d effort + 25d wait = 30d total",,3.8.2,
+Διαβίβαση σε Δ/νση Υδάτων (ρέματα/υδραυλικά) & παρακολούθηση,PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation; Remata,40h,2027-08-27,2027-10-21,Έλεγχος πληρότητας ΜΠΕ (2ος) – Λήψη πληρότητας φακέλου (milestone),"Διαβίβαση φακέλου σε Δ/νση Υδάτων & σχετικές υπηρεσίες για ρέματα/υδραυλικά.
+Estimated Time: 5d effort + 35d wait = 40d total",,3.8.3,
+Διαβίβαση σε ΟΦΥΠΕΚΑ/Μονάδα Διαχείρισης Natura & παρακολούθηση,PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation; Natura,40h,2027-08-27,2027-10-21,Έλεγχος πληρότητας ΜΠΕ (2ος) – Λήψη πληρότητας φακέλου (milestone),"Διαβίβαση φακέλου σε ΟΦΥΠΕΚΑ/Μονάδα Διαχείρισης Natura για γνώμη.
+Estimated Time: 5d effort + 35d wait = 40d total",,3.8.4,
+Διαβίβαση σε Περιφέρεια/Δήμο/ΟΤΑ (χωροταξικά/πολεοδομικά) & παρακολούθηση,PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation; OTA,40h,2027-08-27,2027-10-07,Έλεγχος πληρότητας ΜΠΕ (2ος) – Λήψη πληρότητας φακέλου (milestone),"Διαβίβαση φακέλου σε Περιφέρεια/Δήμο/ΟΤΑ για χωροταξικά/τοπικά θέματα.
+Estimated Time: 5d effort + 25d wait = 30d total",,3.8.5,
+Δημόσια διαβούλευση: ανάρτηση/δημοσιότητα/portal & υποβολές κοινού,PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation,64h,2027-08-27,2027-12-02,Έλεγχος πληρότητας ΜΠΕ (2ος) – Λήψη πληρότητας φακέλου (milestone),"Δημόσια διαβούλευση: ανάρτηση/δημοσιότητα/portal, συλλογή υποβολών.
+Estimated Time: 8d effort + 60d wait = 68d total",,3.8.6,
+"Παράθυρο γνωμοδοτήσεων κλείνει (log προθεσμιών, συλλογή) – milestone",PV; Permitting; WorstCase; Phase-Environmental; PublicConsultation; Milestone,8h,2027-12-03,2027-12-03,Διαβίβαση σε Δασαρχείο (δασικό) & παρακολούθηση προθεσμιών; Διαβίβαση σε ΕΦΑ/Αρχαιολογία & παρακολούθηση προθεσμιών; Διαβίβαση σε Δ/νση Υδάτων (ρέματα/υδραυλικά) & παρακολούθηση; Διαβίβαση σε ΟΦΥΠΕΚΑ/Μονάδα Διαχείρισης Natura & παρακολούθηση; Διαβίβαση σε Περιφέρεια/Δήμο/ΟΤΑ (χωροταξικά/πολεοδομικά) & παρακολούθηση; Δημόσια διαβούλευση: ανάρτηση/δημοσιότητα/portal & υποβολές κοινού,"Milestone: ολοκλήρωση παραθύρου γνωμοδοτήσεων & κλείδωμα log προθεσμιών.
+Estimated Time: 1d effort + 0d wait = 1d total",,3.8.7,
+Απαντήσεις σε γνωμοδοτήσεις + αναθεώρηση ΜΠΕ (rev.2) & τεχνικά μέτρα μετριασμού,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO,280h,2028-05-07,2028-07-29,Αρνητικές γνωμοδοτήσεις → πρόσθετες εξειδικευμένες έρευνες/επικαιροποίηση (Natura/ρέματα/αρχ.),"Σύνταξη απαντήσεων σε γνωμοδοτήσεις & αναθεώρηση ΜΠΕ (rev.2). • Outputs: πίνακας συμμόρφωσης ανά φορέα, αναθεωρημένα σχέδια/όροι, τεκμηρίωση σωρευτικών.
+WBS: 3.9
+Dependencies (Task Name): Αρνητικές γνωμοδοτήσεις → πρόσθετες εξειδικευμένες έρευνες/επικαιροποίηση (Natura/ρέματα/αρχ.)
+Estimated Time: 35d effort + 25d wait = 60d total",,3.9,
+Προσφυγή/παραπομπή σε ΠΕΣΠΑ (λόγω αρνητικής/εκπρόθεσμης γνώμης) – συνεδριάσεις,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO,80h,2028-07-30,2028-10-22,Απαντήσεις σε γνωμοδοτήσεις + αναθεώρηση ΜΠΕ (rev.2) & τεχνικά μέτρα μετριασμού,"Παραπομπή/προσφυγή σε ΠΕΣΠΑ λόγω αρνητικής/εκπρόθεσμης γνωμοδότησης. • Docs: εισηγητικό, πλήρης φάκελος, πρακτικά συνεδριάσεων, απόφαση αποδοχής/μη αρνητικής γνώμης.
+WBS: 3.1
+Dependencies (Task Name): Απαντήσεις σε γνωμοδοτήσεις + αναθεώρηση ΜΠΕ (rev.2) & τεχνικά μέτρα μετριασμού
+Estimated Time: 10d effort + 50d wait = 60d total",,3.10,
+Κλιμάκωση σε ΚΕΣΠΑ (εφόσον επιμένει αρνητική γνώμη) – συνεδριάσεις,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO; KESPA,80h,2028-10-23,2029-01-10,Προσφυγή/παραπομπή σε ΠΕΣΠΑ (λόγω αρνητικής/εκπρόθεσμης γνώμης) – συνεδριάσεις,"Κλιμάκωση σε ΚΕΣΠΑ (τελευταίο στάδιο επίλυσης ενδοδιοικητικά). • Docs: επικαιροποιημένη εισήγηση, πλήρης φάκελος, πρακτικά & απόφαση Συμβουλίου.
+WBS: 3.11
+Dependencies (Task Name): Προσφυγή/παραπομπή σε ΠΕΣΠΑ (λόγω αρνητικής/εκπρόθεσμης γνώμης) – συνεδριάσεις
+Estimated Time: 10d effort + 50d wait = 60d total",,3.11,
+Έκδοση ΑΕΠΟ (Α1) – τελική απόφαση με όρους,PV; Permitting; WorstCase; Phase-Environmental; A1; MPE-AEPO; AEPO,40h,2029-01-11,2029-02-21,Κλιμάκωση σε ΚΕΣΠΑ (εφόσον επιμένει αρνητική γνώμη) – συνεδριάσεις,"Έκδοση ΑΕΠΟ (Α1). • Outputs: Απόφαση Έγκρισης Περιβαλλοντικών Όρων, τελικοί όροι/δεσμεύσεις, σχέδιο παρακολούθησης, δημοσίευση/ανάρτηση.
+WBS: 3.12
+Dependencies (Task Name): Κλιμάκωση σε ΚΕΣΠΑ (εφόσον επιμένει αρνητική γνώμη) – συνεδριάσεις
+Estimated Time: 5d effort + 25d wait = 30d total",,3.12,
+SUMMARY | 4.1 Δασικό (screening → πράξη χαρακτηρισμού),PV; Permitting; WorstCase; Phase-Consultations; Forest; Summary,,2026-03-09,2026-07-10,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 4.1.1 → 4.1.2
+Estimated Time: 0d effort + 0d wait = 0d total",,4.1,
+Δασικό: Screening/χαρτογράφηση & φάκελος (δασικοί χάρτες),PV; Permitting; WorstCase; Phase-Consultations; Forest,64h,2026-03-09,2026-04-17,GIS constraints (Natura/δασικοί/ρέματα/ΖΟΕ/ΓΠΣ) + προκαταρκτική χωροθέτηση,"Δασικό screening: έλεγχος δασικών χαρτών/χαρακτηρισμών, φωτοερμηνεία, χάραξη ορίων επέμβασης.
+• Deliverables: αίτηση, χάρτες, συντεταγμένες, φωτοερμηνεία, τεχνική περιγραφή επέμβασης.
+Estimated Time: 8d effort + 22d wait = 30d total",,4.1.1,
+Δασικό: Πράξη χαρακτηρισμού/γνωμοδότηση + (worst-case) διορθώσεις/αντιρρήσεις,PV; Permitting; WorstCase; Phase-Consultations; Forest,96h,2026-04-20,2026-07-10,Δασικό: Screening/χαρτογράφηση & φάκελος (δασικοί χάρτες),"Πράξη χαρακτηρισμού/γνωμοδότηση δασικής υπηρεσίας και (worst-case) κύκλοι διορθώσεων/αντιρρήσεων.
+• Deliverables: πράξη χαρακτηρισμού/γνωμοδότηση, συμπληρώσεις φακέλου, διορθωμένοι χάρτες.
+Estimated Time: 12d effort + 48d wait = 60d total",,4.1.2,
+SUMMARY | 4.2 Αρχαιολογία (αίτηση/γνωμοδότηση → τομές/report),PV; Permitting; WorstCase; Phase-Consultations; Archaeology; Summary,,2026-06-01,2026-11-13,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 4.2.1 → 4.2.2
+Estimated Time: 0d effort + 0d wait = 0d total",,4.2,
+Αρχαιολογία: Αίτηση + προκαταρκτική γνωμοδότηση (ΕΦΑ),PV; Permitting; WorstCase; Phase-Consultations; Archaeology,80h,2026-06-01,2026-08-07,Νέα τοπογραφικά (GNSS – οριοθέτηση πολυγώνου – όρια ιδιοκτησιών),"Υποβολή αίτησης σε ΕΦΑ/Αρχαιολογία, προκαταρκτικός έλεγχος & γνωμοδότηση.
+• Deliverables: αίτηση, χάρτες, τεχνική περιγραφή, πρόγραμμα εργασιών, πρωτόκολλα/επιστολές.
+Estimated Time: 10d effort + 40d wait = 50d total",,4.2.1,
+Αρχαιολογία: Σωστικές δοκιμές/τομές + report/ολοκλήρωση (worst-case),PV; Permitting; WorstCase; Phase-Consultations; Archaeology,240h,2026-08-10,2026-11-13,Αρχαιολογία: Αίτηση + προκαταρκτική γνωμοδότηση (ΕΦΑ),"Worst-case: σωστικές δοκιμές/τομές/παρακολούθηση, σύνταξη report και οριστικοποίηση όρων.
+• Deliverables: report τομών, μέτρα προστασίας/παρακολούθησης, τελική γνωμοδότηση/όροι.
+Estimated Time: 30d effort + 40d wait = 70d total",,4.2.2,
+SUMMARY | 4.3 Ρέματα (οριοθέτηση),PV; Permitting; WorstCase; Phase-Consultations; Remata; Summary,,2026-06-01,2027-02-05,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 4.3.1 → 4.3.3
+Estimated Time: 0d effort + 0d wait = 0d total",,4.3,
+Ρέματα: Υδρολογική-Υδραυλική (draft) + σχέδια οριοθέτησης,PV; Permitting; WorstCase; Phase-Consultations; Remata,200h,2026-06-01,2026-09-18,Νέα τοπογραφικά (GNSS – οριοθέτηση πολυγώνου – όρια ιδιοκτησιών),"Υδρολογική-υδραυλική μελέτη + σχέδια/διατομές/οριογραμμές.
+Estimated Time: 25d effort + 55d wait = 80d total",,4.3.1,
+Ρέματα: Υποβολή φακέλου οριοθέτησης + έλεγχος πληρότητας,PV; Permitting; WorstCase; Phase-Consultations; Remata; Completeness,64h,2026-09-21,2026-11-13,Ρέματα: Υδρολογική-Υδραυλική (draft) + σχέδια οριοθέτησης,"Υποβολή φακέλου οριοθέτησης & διαχείριση ελέγχου πληρότητας.
+Estimated Time: 8d effort + 30d wait = 38d total",,4.3.2,
+Ρέματα: Διορθώσεις/συμπληρώσεις + τελική έγκριση οριοθέτησης,PV; Permitting; WorstCase; Phase-Consultations; Remata,216h,2026-11-16,2027-02-05,Ρέματα: Υποβολή φακέλου οριοθέτησης + έλεγχος πληρότητας,"Διορθώσεις/συμπληρώσεις, τελική έγκριση οριοθέτησης.
+Estimated Time: 27d effort + 50d wait = 77d total",,4.3.3,
+Natura: Ειδική Οικολογική Αξιολόγηση/Δέουσα Εκτίμηση (τελική) + μέτρα,PV; Permitting; WorstCase; Phase-Consultations; Opinions; Natura,320h,2027-02-26,2027-05-20,Οικολογικές/ορνιθολογικές καταγραφές 4 εποχών (Natura worst case),"Natura: τελική Ειδική Οικολογική Αξιολόγηση/Δέουσα Εκτίμηση. • Deliverables: πίνακες ειδών/οικοτόπων, σωρευτικές επιπτώσεις, εναλλακτικές, μέτρα αποφυγής/μετριασμού/παρακολούθησης.
+WBS: 4.4
+Dependencies (Task Name): Οικολογικές/ορνιθολογικές καταγραφές 4 εποχών (Natura worst case)
+Estimated Time: 40d effort + 20d wait = 60d total",,4.4,
+Αρνητικές γνωμοδοτήσεις → πρόσθετες εξειδικευμένες έρευνες/επικαιροποίηση (Natura/ρέματα/αρχ.),PV; Permitting; WorstCase; Phase-Consultations; Opinions; NegativeOpinions,320h,2027-12-31,2028-05-06,"Παράθυρο γνωμοδοτήσεων κλείνει (log προθεσμιών, συλλογή) – milestone; Δασικό: Πράξη χαρακτηρισμού/γνωμοδότηση + (worst-case) διορθώσεις/αντιρρήσεις; Αρχαιολογία: Σωστικές δοκιμές/τομές + report/ολοκλήρωση (worst-case); Ρέματα: Διορθώσεις/συμπληρώσεις + τελική έγκριση οριοθέτησης; Natura: Ειδική Οικολογική Αξιολόγηση/Δέουσα Εκτίμηση (τελική) + μέτρα","Μετά από αρνητικές γνώμες/παρατηρήσεις: πρόσθετες έρευνες & επικαιροποίηση τεκμηρίωσης. • Deliverables: addenda (Natura, ρέματα, αρχαιολογία), redesign/mitigation pack, ενημέρωση GIS.
+WBS: 4.5
+Dependencies (Task Name): Διαβίβαση σε φορείς + δημόσια διαβούλευση (extended) & συλλογή γνωμοδοτήσεων; Δασικός έλεγχος/χαρτογράφηση + πράξη χαρακτηρισμού/γνωμοδότηση (worst case); Αρχαιολογία: προκαταρκτική γνωμοδότηση + σωστικές δοκιμές/τομές (worst case); Μελέτη οριοθέτησης ρέματος & υδραυλική + υποβολή/έγκριση (Ν.4258/2014) – worst case; Natura: Ειδική Οικολογική Αξιολόγηση/Δέουσα Εκτίμηση (τελική) + μέτρα
+Estimated Time: 40d effort + 50d wait = 90d total",,4.5,
+Grid: προ-αίτημα/τεχνική συνάντηση με ΑΔΜΗΕ + προκαταρκτικός έλεγχος,PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,80h,2026-04-06,2026-05-15,Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept,"Grid: προκαταρκτικός έλεγχος/συνάντηση με ΑΔΜΗΕ (επιλογή σημείου/επιπέδου τάσης). • Outputs: τεχνικό σημείωμα εναλλακτικών σύνδεσης, προκαταρκτικά όρια έργων διασύνδεσης.
+WBS: 5.1
+Dependencies (Task Name): Προκαταρκτικός σχεδιασμός έργου & διαδρομή διασύνδεσης (corridor) + SLD concept
+Estimated Time: 10d effort + 20d wait = 30d total",,5.1,
+Grid: φάκελος αίτησης ΟΠΣ (ΑΔΜΗΕ) – τεχνικά/νομικά/γεωχωρικά,PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,200h,2026-12-07,2027-01-15,Grid: προ-αίτημα/τεχνική συνάντηση με ΑΔΜΗΕ + προκαταρκτικός έλεγχος; Νέα τοπογραφικά (GNSS – οριοθέτηση πολυγώνου – όρια ιδιοκτησιών),"Grid: σύνταξη φακέλου αίτησης ΟΠΣ (ΑΔΜΗΕ). • Docs/Plans: έντυπο αίτησης, τεχνική περιγραφή, SLD, layout, όδευση γραμμής/Υ/Σ, τοπογραφικά, τίτλοι/δικαιώματα, Βεβαίωση Παραγωγού, οικονομικά στοιχεία/εγγυήσεις.
+WBS: 5.2
+Dependencies (Task Name): Αποδοχή ΟΠΣ στον Διαχειριστή (υπογραφή/εγγυήσεις/παράβολα); Νέα τοπογραφικά (GNSS – οριοθέτηση πολυγώνου – όρια ιδιοκτησιών); Έκδοση Βεβαίωσης Παραγωγού (τελική)
+Estimated Time: 25d effort + 5d wait = 30d total",,5.2,
+Υποβολή αίτησης ΟΠΣ στον ΑΔΜΗΕ,PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,8h,2027-01-18,2027-01-18,Grid: φάκελος αίτησης ΟΠΣ (ΑΔΜΗΕ) – τεχνικά/νομικά/γεωχωρικά; Έκδοση Βεβαίωσης Παραγωγού (τελική),"Υποβολή αίτησης ΟΠΣ στον ΑΔΜΗΕ. • Output: αριθμός πρωτοκόλλου/θέση σε ουρά.
+WBS: 5.3
+Dependencies (Task Name): Grid: φάκελος αίτησης ΟΠΣ (ΑΔΜΗΕ) – τεχνικά/νομικά/γεωχωρικά
+Estimated Time: 1d effort + 0d wait = 1d total",,5.3,
+ΑΔΜΗΕ έλεγχος πληρότητας (1ος) – ερωτήματα,PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,16h,2027-01-19,2027-03-01,Υποβολή αίτησης ΟΠΣ στον ΑΔΜΗΕ,"ΑΔΜΗΕ έλεγχος πληρότητας (1ος). • Outputs: ερωτήματα/αιτήματα διόρθωσης.
+WBS: 5.4
+Dependencies (Task Name): Υποβολή αίτησης ΟΠΣ στον ΑΔΜΗΕ
+Estimated Time: 2d effort + 28d wait = 30d total",,5.4,
+Απαντήσεις/συμπλήρωση φακέλου ΟΠΣ (rev.1),PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,120h,2027-03-02,2027-03-29,ΑΔΜΗΕ έλεγχος πληρότητας (1ος) – ερωτήματα,"Απαντήσεις/συμπλήρωση φακέλου (rev.1). • Deliverables: διορθωμένα σχέδια/SLD, πρόσθετα δικαιολογητικά, επικαιροποίηση ισχύος/όδευσης.
+WBS: 5.5
+Dependencies (Task Name): ΑΔΜΗΕ έλεγχος πληρότητας (1ος) – ερωτήματα
+Estimated Time: 15d effort + 5d wait = 20d total",,5.5,
+ΑΔΜΗΕ έλεγχος πληρότητας (2ος) – Λήψη πληρότητας αιτήματος,PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS; Completeness,16h,2027-03-30,2027-04-26,Απαντήσεις/συμπλήρωση φακέλου ΟΠΣ (rev.1),"ΑΔΜΗΕ έλεγχος πληρότητας (2ος) & «Λήψη πληρότητας αιτήματος» (milestone). • Output: επίσημη αποδοχή φακέλου.
+WBS: 5.6
+Dependencies (Task Name): Απαντήσεις/συμπλήρωση φακέλου ΟΠΣ (rev.1)
+Estimated Time: 2d effort + 18d wait = 20d total",,5.6,
+SUMMARY | 5.7 ΑΔΜΗΕ (μελέτες/όροι ΟΠΣ),PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS; Summary,,2029-02-22,2029-10-31,,"Summary task (ομαδοποίηση). Μην το χρησιμοποιείς για εκτέλεση — χρησιμεύει για καθαρό WBS/Gantt.
+Covers: 5.7.1 → 5.7.2
+Estimated Time: 0d effort + 0d wait = 0d total",,5.7,
+ΑΔΜΗΕ: Queue management & επίσημα αιτήματα/αλληλογραφία (worst-case),PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,80h,2029-02-22,2029-06-14,ΑΔΜΗΕ έλεγχος πληρότητας (2ος) – Λήψη πληρότητας αιτήματος; Έκδοση ΑΕΠΟ (Α1) – τελική απόφαση με όρους,"Διαχείριση ουράς & επίσημων αιτημάτων/επιστολών, προτεραιοποίηση, SLA follow-up.
+Estimated Time: 10d effort + 80d wait = 90d total",,5.7.1,
+ΑΔΜΗΕ: Τεχνικές διευκρινίσεις/iterations έως τελικούς όρους ΟΠΣ,PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,80h,2029-06-15,2029-10-31,ΑΔΜΗΕ: Queue management & επίσημα αιτήματα/αλληλογραφία (worst-case),"Τεχνικές διευκρινίσεις/iterations (SLD, όδευση, έργα δικτύου) έως κλείδωμα τελικών όρων.
+Estimated Time: 10d effort + 80d wait = 90d total",,5.7.2,
+Έκδοση Οριστικής Προσφοράς Σύνδεσης (ΟΠΣ),PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,,2029-11-01,2029-11-01,ΑΔΜΗΕ: Τεχνικές διευκρινίσεις/iterations έως τελικούς όρους ΟΠΣ,"Έκδοση ΟΠΣ. • Outputs: Οριστική Προσφορά Σύνδεσης, τεχνικο-οικονομικοί όροι, προθεσμίες/εγγυήσεις.
+WBS: 5.8
+Dependencies (Task Name): ΑΔΜΗΕ μελέτες συστήματος/χωρητικότητα/όροι (queue worst-case)
+Estimated Time: 0d effort + 1d wait = 1d total",,5.8,
+Εσωτερική αξιολόγηση ρίσκου/όρων ΟΠΣ + απόφαση αποδοχής (αναμονή για ΑΕΠΟ),PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,120h,2029-11-04,2030-01-24,Έκδοση Οριστικής Προσφοράς Σύνδεσης (ΟΠΣ); Έκδοση ΑΕΠΟ (Α1) – τελική απόφαση με όρους,"Εσωτερική αξιολόγηση ΟΠΣ + αναμονή ολοκλήρωσης ΑΕΠΟ πριν την αποδοχή (commercial de-risking). • Outputs: memo αποδοχής/μη, εγκρίσεις ΔΣ, προετοιμασία εγγυητικών/πληρωμών.
+WBS: 5.9
+Dependencies (Task Name): Έκδοση Οριστικής Προσφοράς Σύνδεσης (ΟΠΣ); Έκδοση ΑΕΠΟ (Α1) – τελική απόφαση με όρους
+Estimated Time: 15d effort + 45d wait = 60d total",,5.9,
+Αποδοχή ΟΠΣ στον Διαχειριστή (υπογραφή/εγγυήσεις/παράβολα),PV; Permitting; WorstCase; Phase-Grid; ADMIE; OPS,24h,2030-01-25,2030-01-31,Εσωτερική αξιολόγηση ρίσκου/όρων ΟΠΣ + απόφαση αποδοχής (αναμονή για ΑΕΠΟ),"Αποδοχή ΟΠΣ. • Docs: επιστολή αποδοχής, υπογραφή συμβατικών, κατάθεση εγγυητικών/παραβόλων (όπου απαιτείται), ενημέρωση project baseline.
+WBS: 5.1
+Dependencies (Task Name): Εσωτερική αξιολόγηση ρίσκου/όρων ΟΠΣ + απόφαση αποδοχής (αναμονή για ΑΕΠΟ)
+Estimated Time: 3d effort + 2d wait = 5d total",,5.10,

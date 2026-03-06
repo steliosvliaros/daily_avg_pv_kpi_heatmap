@@ -1,0 +1,39 @@
+{
+  "table_name": "pvgis_reference",
+  "description": "PVGIS typical meteorological year reference data for each park location in wide format",
+  "schema": {
+    "index": {
+      "name": "date",
+      "type": "DatetimeIndex",
+      "description": "Date within typical year (year replaced with reference year for alignment)"
+    },
+    "columns": {
+      "type": "park_id",
+      "description": "Each column represents a park_id, values are PVGIS reference metrics (power, irradiance, temperature)"
+    }
+  },
+  "source": {
+    "layer": "external",
+    "location": "pvgis/pvgis_typical_year/*.parquet",
+    "transformation": "load_pvgis_filtered_wide() - loads cached PVGIS data per park location"
+  },
+  "refresh_strategy": {
+    "type": "full_replace",
+    "logic": "Replace entire dataset when PVGIS data is updated or new parks added"
+  },
+  "partitioning": {
+    "scheme": "none",
+    "description": "Single wide parquet file, contains typical year data (365/366 days)"
+  },
+  "deduplication": {
+    "method": "hash_based",
+    "watermark_file": "_ops/pvgis_data_hash.txt",
+    "logic": "Track hash of source PVGIS files to detect changes"
+  },
+  "data_quality": {
+    "filters": "Uses metadata park coordinates and status_effective filter",
+    "status_filter": "Only parks with status_effective='true'"
+  },
+  "created_at": "2026-02-15T16:57:00Z",
+  "version": "1.0.0"
+}

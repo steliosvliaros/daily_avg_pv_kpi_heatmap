@@ -1,0 +1,1185 @@
+original,sanitized
+Timestamp,datetime
+[4E Energeiaki 176 KWp Likovouni] 4E Energeiaki 176 KWp Likovouni Average Irradiance (W*m^-2),p_4e_energeiaki_likovouni_176kwp__m_4e_energeiaki_176_kwp_likovouni_average_irradiance__w_m_2
+[4E Energeiaki 176 KWp Likovouni] PCC PCC Current THD-R of neutral (%),p_4e_energeiaki_likovouni_176kwp__pcc_current_thd_r_of_neutral__pct
+[4E Energeiaki 176 KWp Likovouni] PCC PCC Current THD-R of phase L1 (%),p_4e_energeiaki_likovouni_176kwp__pcc_current_thd_r_of_phase_l1__pct
+[4E Energeiaki 176 KWp Likovouni] PCC PCC Current THD-R of phase L2 (%),p_4e_energeiaki_likovouni_176kwp__pcc_current_thd_r_of_phase_l2__pct
+[4E Energeiaki 176 KWp Likovouni] PCC PCC Current THD-R of phase L3 (%),p_4e_energeiaki_likovouni_176kwp__pcc_current_thd_r_of_phase_l3__pct
+[4E Energeiaki 176 KWp Likovouni] PCC PCC active energy export (kWh),p_4e_energeiaki_likovouni_176kwp__pcc_active_energy_export__kwh
+[4E Energeiaki 176 KWp Likovouni] PCC PCC active energy import (kWh),p_4e_energeiaki_likovouni_176kwp__pcc_active_energy_import__kwh
+[4E Energeiaki 176 KWp Likovouni] PCC PCC apparent energy (kVAh),p_4e_energeiaki_likovouni_176kwp__pcc_apparent_energy__kvah
+[4E Energeiaki 176 KWp Likovouni] PCC PCC average current (A),p_4e_energeiaki_likovouni_176kwp__pcc_average_current__a
+[4E Energeiaki 176 KWp Likovouni] PCC PCC average line voltage (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_average_line_voltage__vac
+[4E Energeiaki 176 KWp Likovouni] PCC PCC average phase voltage (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_average_phase_voltage__vac
+[4E Energeiaki 176 KWp Likovouni] PCC PCC current of phase L1 (A),p_4e_energeiaki_likovouni_176kwp__pcc_current_of_phase_l1__a
+[4E Energeiaki 176 KWp Likovouni] PCC PCC current of phase L2 (A),p_4e_energeiaki_likovouni_176kwp__pcc_current_of_phase_l2__a
+[4E Energeiaki 176 KWp Likovouni] PCC PCC current of phase L3 (A),p_4e_energeiaki_likovouni_176kwp__pcc_current_of_phase_l3__a
+[4E Energeiaki 176 KWp Likovouni] PCC PCC current unbalance of phase L1 (%),p_4e_energeiaki_likovouni_176kwp__pcc_current_unbalance_of_phase_l1__pct
+[4E Energeiaki 176 KWp Likovouni] PCC PCC current unbalance of phase L2 (%),p_4e_energeiaki_likovouni_176kwp__pcc_current_unbalance_of_phase_l2__pct
+[4E Energeiaki 176 KWp Likovouni] PCC PCC current unbalance of phase L3 (%),p_4e_energeiaki_likovouni_176kwp__pcc_current_unbalance_of_phase_l3__pct
+[4E Energeiaki 176 KWp Likovouni] PCC PCC frequency (Hz),p_4e_energeiaki_likovouni_176kwp__pcc_frequency__hz
+[4E Energeiaki 176 KWp Likovouni] PCC PCC power factor of phase L1 (-),p_4e_energeiaki_likovouni_176kwp__pcc_power_factor_of_phase_l1
+[4E Energeiaki 176 KWp Likovouni] PCC PCC power factor of phase L2 (-),p_4e_energeiaki_likovouni_176kwp__pcc_power_factor_of_phase_l2
+[4E Energeiaki 176 KWp Likovouni] PCC PCC power factor of phase L3 (-),p_4e_energeiaki_likovouni_176kwp__pcc_power_factor_of_phase_l3
+[4E Energeiaki 176 KWp Likovouni] PCC PCC reactive energy export (kVArh),p_4e_energeiaki_likovouni_176kwp__pcc_reactive_energy_export__kvarh
+[4E Energeiaki 176 KWp Likovouni] PCC PCC reactive energy import (kVArh),p_4e_energeiaki_likovouni_176kwp__pcc_reactive_energy_import__kvarh
+[4E Energeiaki 176 KWp Likovouni] PCC PCC total power factor (-),p_4e_energeiaki_likovouni_176kwp__pcc_total_power_factor
+[4E Energeiaki 176 KWp Likovouni] PCC PCC voltage of L1-L2 (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_voltage_of_l1_l2__vac
+[4E Energeiaki 176 KWp Likovouni] PCC PCC voltage of L2-L3 (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_voltage_of_l2_l3__vac
+[4E Energeiaki 176 KWp Likovouni] PCC PCC voltage of L3-L1 (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_voltage_of_l3_l1__vac
+[4E Energeiaki 176 KWp Likovouni] PCC Production active energy export (kWh),p_4e_energeiaki_likovouni_176kwp__pcc_production_active_energy_export__kwh
+[4E Energeiaki 176 KWp Likovouni] PCC Production active energy import (kWh),p_4e_energeiaki_likovouni_176kwp__pcc_production_active_energy_import__kwh
+[4E Energeiaki 176 KWp Likovouni] PCC Production apparent energy (kVAh),p_4e_energeiaki_likovouni_176kwp__pcc_production_apparent_energy__kvah
+[4E Energeiaki 176 KWp Likovouni] PCC Production current of phase L1 (A),p_4e_energeiaki_likovouni_176kwp__pcc_production_current_of_phase_l1__a
+[4E Energeiaki 176 KWp Likovouni] PCC Production current of phase L2 (A),p_4e_energeiaki_likovouni_176kwp__pcc_production_current_of_phase_l2__a
+[4E Energeiaki 176 KWp Likovouni] PCC Production current of phase L3 (A),p_4e_energeiaki_likovouni_176kwp__pcc_production_current_of_phase_l3__a
+[4E Energeiaki 176 KWp Likovouni] PCC Production frequency (Hz),p_4e_energeiaki_likovouni_176kwp__pcc_production_frequency__hz
+[4E Energeiaki 176 KWp Likovouni] PCC Production reactive energy export (kVArh),p_4e_energeiaki_likovouni_176kwp__pcc_production_reactive_energy_export__kvarh
+[4E Energeiaki 176 KWp Likovouni] PCC Production reactive energy import (kVArh),p_4e_energeiaki_likovouni_176kwp__pcc_production_reactive_energy_import__kvarh
+[4E Energeiaki 176 KWp Likovouni] PCC Production total power factor (-),p_4e_energeiaki_likovouni_176kwp__pcc_production_total_power_factor
+[4E Energeiaki 176 KWp Likovouni] PCC Production voltage of L1-L2 (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_production_voltage_of_l1_l2__vac
+[4E Energeiaki 176 KWp Likovouni] PCC Production voltage of L2-L3 (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_production_voltage_of_l2_l3__vac
+[4E Energeiaki 176 KWp Likovouni] PCC Production voltage of L3-L1 (Vac),p_4e_energeiaki_likovouni_176kwp__pcc_production_voltage_of_l3_l1__vac
+[4E Energeiaki 176 KWp Likovouni] PCC Total Production active power (kW),p_4e_energeiaki_likovouni_176kwp__pcc_total_production_active_power__kw
+[4E Energeiaki 176 KWp Likovouni] PCC Total Production apparent power (kVA),p_4e_energeiaki_likovouni_176kwp__pcc_total_production_apparent_power__kva
+[4E Energeiaki 176 KWp Likovouni] PCC Total Production reactive power (kVAr),p_4e_energeiaki_likovouni_176kwp__pcc_total_production_reactive_power__kvar
+[4E Energeiaki 176 KWp Likovouni] Weather Station 1 Ambient temperature (C),p_4e_energeiaki_likovouni_176kwp__weather_station_1_ambient_temperature__c
+[4E Energeiaki 176 KWp Likovouni] Weather Station 1 Relative humidity (%),p_4e_energeiaki_likovouni_176kwp__weather_station_1_relative_humidity__pct
+[4E Energeiaki 176 KWp Likovouni] Weather Station 1 Wind speed (m*s^-1),p_4e_energeiaki_likovouni_176kwp__weather_station_1_wind_speed__m_s_1
+[4E Energeiaki 4472 KWp Lexaina] 4E Energeiaki 4472 KWp Lexaina Average Irradiance (W*m^-2),p_4e_energeiaki_lexaina_4472kwp__m_4e_energeiaki_4472_kwp_lexaina_average_irradiance__w_m_2
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC active energy export (kWh),p_4e_energeiaki_lexaina_4472kwp__pcc_active_energy_export__kwh
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC active energy import (kWh),p_4e_energeiaki_lexaina_4472kwp__pcc_active_energy_import__kwh
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC apparent energy (kVAh),p_4e_energeiaki_lexaina_4472kwp__pcc_apparent_energy__kvah
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC average current (A),p_4e_energeiaki_lexaina_4472kwp__pcc_average_current__a
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC average line voltage (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_average_line_voltage__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC average phase voltage (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_average_phase_voltage__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC current of phase L1 (A),p_4e_energeiaki_lexaina_4472kwp__pcc_current_of_phase_l1__a
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC current of phase L2 (A),p_4e_energeiaki_lexaina_4472kwp__pcc_current_of_phase_l2__a
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC current of phase L3 (A),p_4e_energeiaki_lexaina_4472kwp__pcc_current_of_phase_l3__a
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC frequency (Hz),p_4e_energeiaki_lexaina_4472kwp__pcc_frequency__hz
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC power factor of phase L1 (-),p_4e_energeiaki_lexaina_4472kwp__pcc_power_factor_of_phase_l1
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC power factor of phase L2 (-),p_4e_energeiaki_lexaina_4472kwp__pcc_power_factor_of_phase_l2
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC power factor of phase L3 (-),p_4e_energeiaki_lexaina_4472kwp__pcc_power_factor_of_phase_l3
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC reactive energy export (kVArh),p_4e_energeiaki_lexaina_4472kwp__pcc_reactive_energy_export__kvarh
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC reactive energy import (kVArh),p_4e_energeiaki_lexaina_4472kwp__pcc_reactive_energy_import__kvarh
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC total power factor (-),p_4e_energeiaki_lexaina_4472kwp__pcc_total_power_factor
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC voltage of L1-L2 (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_voltage_of_l1_l2__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC voltage of L2-L3 (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_voltage_of_l2_l3__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC PCC voltage of L3-L1 (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_voltage_of_l3_l1__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC Production active energy export (kWh),p_4e_energeiaki_lexaina_4472kwp__pcc_production_active_energy_export__kwh
+[4E Energeiaki 4472 KWp Lexaina] PCC Production active energy import (kWh),p_4e_energeiaki_lexaina_4472kwp__pcc_production_active_energy_import__kwh
+[4E Energeiaki 4472 KWp Lexaina] PCC Production apparent energy (kVAh),p_4e_energeiaki_lexaina_4472kwp__pcc_production_apparent_energy__kvah
+[4E Energeiaki 4472 KWp Lexaina] PCC Production current of phase L1 (A),p_4e_energeiaki_lexaina_4472kwp__pcc_production_current_of_phase_l1__a
+[4E Energeiaki 4472 KWp Lexaina] PCC Production current of phase L2 (A),p_4e_energeiaki_lexaina_4472kwp__pcc_production_current_of_phase_l2__a
+[4E Energeiaki 4472 KWp Lexaina] PCC Production current of phase L3 (A),p_4e_energeiaki_lexaina_4472kwp__pcc_production_current_of_phase_l3__a
+[4E Energeiaki 4472 KWp Lexaina] PCC Production frequency (Hz),p_4e_energeiaki_lexaina_4472kwp__pcc_production_frequency__hz
+[4E Energeiaki 4472 KWp Lexaina] PCC Production reactive energy export (kVArh),p_4e_energeiaki_lexaina_4472kwp__pcc_production_reactive_energy_export__kvarh
+[4E Energeiaki 4472 KWp Lexaina] PCC Production reactive energy import (kVArh),p_4e_energeiaki_lexaina_4472kwp__pcc_production_reactive_energy_import__kvarh
+[4E Energeiaki 4472 KWp Lexaina] PCC Production total power factor (-),p_4e_energeiaki_lexaina_4472kwp__pcc_production_total_power_factor
+[4E Energeiaki 4472 KWp Lexaina] PCC Production voltage of L1-L2 (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_production_voltage_of_l1_l2__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC Production voltage of L2-L3 (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_production_voltage_of_l2_l3__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC Production voltage of L3-L1 (Vac),p_4e_energeiaki_lexaina_4472kwp__pcc_production_voltage_of_l3_l1__vac
+[4E Energeiaki 4472 KWp Lexaina] PCC Total Production active power (kW),p_4e_energeiaki_lexaina_4472kwp__pcc_total_production_active_power__kw
+[4E Energeiaki 4472 KWp Lexaina] PCC Total Production apparent power (kVA),p_4e_energeiaki_lexaina_4472kwp__pcc_total_production_apparent_power__kva
+[4E Energeiaki 4472 KWp Lexaina] PCC Total Production reactive power (kVAr),p_4e_energeiaki_lexaina_4472kwp__pcc_total_production_reactive_power__kvar
+[4E Energeiaki 4472 KWp Lexaina] Weather Station 1 Ambient Temperature (C),p_4e_energeiaki_lexaina_4472kwp__weather_station_1_ambient_temperature__c
+[4E Energeiaki 4472 KWp Lexaina] Weather Station 1 Relative Humidity  (%),p_4e_energeiaki_lexaina_4472kwp__weather_station_1_relative_humidity__pct
+[4E Energeiaki 4472 KWp Lexaina] Weather Station 1 Wind Speed  (m*s^-1),p_4e_energeiaki_lexaina_4472kwp__weather_station_1_wind_speed__m_s_1
+[4E Energeiaki 805 KWp Darali] 4E Energeiaki 805 KWp Darali Average Irradiance (W*m^-2),p_4e_energeiaki_darali_805kwp__m_4e_energeiaki_805_kwp_darali_average_irradiance__w_m_2
+[4E Energeiaki 805 KWp Darali] Main Weather Station Ambient Temperature (C),p_4e_energeiaki_darali_805kwp__main_weather_station_ambient_temperature__c
+[4E Energeiaki 805 KWp Darali] Main Weather Station Diffuse irradiance (W*m^-2),p_4e_energeiaki_darali_805kwp__main_weather_station_diffuse_irradiance__w_m_2
+[4E Energeiaki 805 KWp Darali] Main Weather Station Relative Humidity  (%),p_4e_energeiaki_darali_805kwp__main_weather_station_relative_humidity__pct
+[4E Energeiaki 805 KWp Darali] Main Weather Station Wind Speed  (m*s^-1),p_4e_energeiaki_darali_805kwp__main_weather_station_wind_speed__m_s_1
+[4E Energeiaki 805 KWp Darali] PCC PCC Current THD-R of neutral (%),p_4e_energeiaki_darali_805kwp__pcc_current_thd_r_of_neutral__pct
+[4E Energeiaki 805 KWp Darali] PCC PCC Current THD-R of phase L1 (%),p_4e_energeiaki_darali_805kwp__pcc_current_thd_r_of_phase_l1__pct
+[4E Energeiaki 805 KWp Darali] PCC PCC Current THD-R of phase L2 (%),p_4e_energeiaki_darali_805kwp__pcc_current_thd_r_of_phase_l2__pct
+[4E Energeiaki 805 KWp Darali] PCC PCC Current THD-R of phase L3 (%),p_4e_energeiaki_darali_805kwp__pcc_current_thd_r_of_phase_l3__pct
+[4E Energeiaki 805 KWp Darali] PCC PCC active energy export (kWh),p_4e_energeiaki_darali_805kwp__pcc_active_energy_export__kwh
+[4E Energeiaki 805 KWp Darali] PCC PCC active energy import (kWh),p_4e_energeiaki_darali_805kwp__pcc_active_energy_import__kwh
+[4E Energeiaki 805 KWp Darali] PCC PCC apparent energy (kVAh),p_4e_energeiaki_darali_805kwp__pcc_apparent_energy__kvah
+[4E Energeiaki 805 KWp Darali] PCC PCC average current (A),p_4e_energeiaki_darali_805kwp__pcc_average_current__a
+[4E Energeiaki 805 KWp Darali] PCC PCC average line voltage (Vac),p_4e_energeiaki_darali_805kwp__pcc_average_line_voltage__vac
+[4E Energeiaki 805 KWp Darali] PCC PCC average phase voltage (Vac),p_4e_energeiaki_darali_805kwp__pcc_average_phase_voltage__vac
+[4E Energeiaki 805 KWp Darali] PCC PCC current of phase L1 (A),p_4e_energeiaki_darali_805kwp__pcc_current_of_phase_l1__a
+[4E Energeiaki 805 KWp Darali] PCC PCC current of phase L2 (A),p_4e_energeiaki_darali_805kwp__pcc_current_of_phase_l2__a
+[4E Energeiaki 805 KWp Darali] PCC PCC current of phase L3 (A),p_4e_energeiaki_darali_805kwp__pcc_current_of_phase_l3__a
+[4E Energeiaki 805 KWp Darali] PCC PCC current unbalance of phase L1 (%),p_4e_energeiaki_darali_805kwp__pcc_current_unbalance_of_phase_l1__pct
+[4E Energeiaki 805 KWp Darali] PCC PCC current unbalance of phase L2 (%),p_4e_energeiaki_darali_805kwp__pcc_current_unbalance_of_phase_l2__pct
+[4E Energeiaki 805 KWp Darali] PCC PCC current unbalance of phase L3 (%),p_4e_energeiaki_darali_805kwp__pcc_current_unbalance_of_phase_l3__pct
+[4E Energeiaki 805 KWp Darali] PCC PCC frequency (Hz),p_4e_energeiaki_darali_805kwp__pcc_frequency__hz
+[4E Energeiaki 805 KWp Darali] PCC PCC power factor of phase L1 (-),p_4e_energeiaki_darali_805kwp__pcc_power_factor_of_phase_l1
+[4E Energeiaki 805 KWp Darali] PCC PCC power factor of phase L2 (-),p_4e_energeiaki_darali_805kwp__pcc_power_factor_of_phase_l2
+[4E Energeiaki 805 KWp Darali] PCC PCC power factor of phase L3 (-),p_4e_energeiaki_darali_805kwp__pcc_power_factor_of_phase_l3
+[4E Energeiaki 805 KWp Darali] PCC PCC reactive energy export (kVArh),p_4e_energeiaki_darali_805kwp__pcc_reactive_energy_export__kvarh
+[4E Energeiaki 805 KWp Darali] PCC PCC reactive energy import (kVArh),p_4e_energeiaki_darali_805kwp__pcc_reactive_energy_import__kvarh
+[4E Energeiaki 805 KWp Darali] PCC PCC total power factor (-),p_4e_energeiaki_darali_805kwp__pcc_total_power_factor
+[4E Energeiaki 805 KWp Darali] PCC PCC voltage of L1-L2 (Vac),p_4e_energeiaki_darali_805kwp__pcc_voltage_of_l1_l2__vac
+[4E Energeiaki 805 KWp Darali] PCC PCC voltage of L2-L3 (Vac),p_4e_energeiaki_darali_805kwp__pcc_voltage_of_l2_l3__vac
+[4E Energeiaki 805 KWp Darali] PCC PCC voltage of L3-L1 (Vac),p_4e_energeiaki_darali_805kwp__pcc_voltage_of_l3_l1__vac
+[4E Energeiaki 805 KWp Darali] PCC Production active energy export (kWh),p_4e_energeiaki_darali_805kwp__pcc_production_active_energy_export__kwh
+[4E Energeiaki 805 KWp Darali] PCC Production active energy import (kWh),p_4e_energeiaki_darali_805kwp__pcc_production_active_energy_import__kwh
+[4E Energeiaki 805 KWp Darali] PCC Production apparent energy (kVAh),p_4e_energeiaki_darali_805kwp__pcc_production_apparent_energy__kvah
+[4E Energeiaki 805 KWp Darali] PCC Production current of phase L1 (A),p_4e_energeiaki_darali_805kwp__pcc_production_current_of_phase_l1__a
+[4E Energeiaki 805 KWp Darali] PCC Production current of phase L2 (A),p_4e_energeiaki_darali_805kwp__pcc_production_current_of_phase_l2__a
+[4E Energeiaki 805 KWp Darali] PCC Production current of phase L3 (A),p_4e_energeiaki_darali_805kwp__pcc_production_current_of_phase_l3__a
+[4E Energeiaki 805 KWp Darali] PCC Production frequency (Hz),p_4e_energeiaki_darali_805kwp__pcc_production_frequency__hz
+[4E Energeiaki 805 KWp Darali] PCC Production reactive energy export (kVArh),p_4e_energeiaki_darali_805kwp__pcc_production_reactive_energy_export__kvarh
+[4E Energeiaki 805 KWp Darali] PCC Production reactive energy import (kVArh),p_4e_energeiaki_darali_805kwp__pcc_production_reactive_energy_import__kvarh
+[4E Energeiaki 805 KWp Darali] PCC Production total power factor (-),p_4e_energeiaki_darali_805kwp__pcc_production_total_power_factor
+[4E Energeiaki 805 KWp Darali] PCC Production voltage of L1-L2 (Vac),p_4e_energeiaki_darali_805kwp__pcc_production_voltage_of_l1_l2__vac
+[4E Energeiaki 805 KWp Darali] PCC Production voltage of L2-L3 (Vac),p_4e_energeiaki_darali_805kwp__pcc_production_voltage_of_l2_l3__vac
+[4E Energeiaki 805 KWp Darali] PCC Production voltage of L3-L1 (Vac),p_4e_energeiaki_darali_805kwp__pcc_production_voltage_of_l3_l1__vac
+[4E Energeiaki 805 KWp Darali] PCC Total Production active power (kW),p_4e_energeiaki_darali_805kwp__pcc_total_production_active_power__kw
+[4E Energeiaki 805 KWp Darali] PCC Total Production apparent power (kVA),p_4e_energeiaki_darali_805kwp__pcc_total_production_apparent_power__kva
+[4E Energeiaki 805 KWp Darali] PCC Total Production reactive power (kVAr),p_4e_energeiaki_darali_805kwp__pcc_total_production_reactive_power__kvar
+[Fragiatoula_Utilitas_4866kWp] Fragiatoula_Utilitas_4866kWp Average Irradiance (W*m^-2),fragiatoula_utilitas_4866kwp__fragiatoula_utilitas_4866kwp_average_irradiance__w_m_2
+[Fragiatoula_Utilitas_4866kWp] PCC PCC Current THD-R of phase L1 (%),fragiatoula_utilitas_4866kwp__pcc_current_thd_r_of_phase_l1__pct
+[Fragiatoula_Utilitas_4866kWp] PCC PCC Current THD-R of phase L2 (%),fragiatoula_utilitas_4866kwp__pcc_current_thd_r_of_phase_l2__pct
+[Fragiatoula_Utilitas_4866kWp] PCC PCC Current THD-R of phase L3 (%),fragiatoula_utilitas_4866kwp__pcc_current_thd_r_of_phase_l3__pct
+[Fragiatoula_Utilitas_4866kWp] PCC PCC Voltage THD-R of phase L1 (%),fragiatoula_utilitas_4866kwp__pcc_voltage_thd_r_of_phase_l1__pct
+[Fragiatoula_Utilitas_4866kWp] PCC PCC Voltage THD-R of phase L2 (%),fragiatoula_utilitas_4866kwp__pcc_voltage_thd_r_of_phase_l2__pct
+[Fragiatoula_Utilitas_4866kWp] PCC PCC Voltage THD-R of phase L3 (%),fragiatoula_utilitas_4866kwp__pcc_voltage_thd_r_of_phase_l3__pct
+[Fragiatoula_Utilitas_4866kWp] PCC PCC active energy export (kWh),fragiatoula_utilitas_4866kwp__pcc_active_energy_export__kwh
+[Fragiatoula_Utilitas_4866kWp] PCC PCC active energy import (kWh),fragiatoula_utilitas_4866kwp__pcc_active_energy_import__kwh
+[Fragiatoula_Utilitas_4866kWp] PCC PCC apparent energy (kVAh),fragiatoula_utilitas_4866kwp__pcc_apparent_energy__kvah
+[Fragiatoula_Utilitas_4866kWp] PCC PCC average current (A),fragiatoula_utilitas_4866kwp__pcc_average_current__a
+[Fragiatoula_Utilitas_4866kWp] PCC PCC average line voltage (Vac),fragiatoula_utilitas_4866kwp__pcc_average_line_voltage__vac
+[Fragiatoula_Utilitas_4866kWp] PCC PCC average phase voltage (Vac),fragiatoula_utilitas_4866kwp__pcc_average_phase_voltage__vac
+[Fragiatoula_Utilitas_4866kWp] PCC PCC current of phase L1 (A),fragiatoula_utilitas_4866kwp__pcc_current_of_phase_l1__a
+[Fragiatoula_Utilitas_4866kWp] PCC PCC current of phase L2 (A),fragiatoula_utilitas_4866kwp__pcc_current_of_phase_l2__a
+[Fragiatoula_Utilitas_4866kWp] PCC PCC current of phase L3 (A),fragiatoula_utilitas_4866kwp__pcc_current_of_phase_l3__a
+[Fragiatoula_Utilitas_4866kWp] PCC PCC frequency (Hz),fragiatoula_utilitas_4866kwp__pcc_frequency__hz
+[Fragiatoula_Utilitas_4866kWp] PCC PCC power factor of phase L1 (-),fragiatoula_utilitas_4866kwp__pcc_power_factor_of_phase_l1
+[Fragiatoula_Utilitas_4866kWp] PCC PCC power factor of phase L2 (-),fragiatoula_utilitas_4866kwp__pcc_power_factor_of_phase_l2
+[Fragiatoula_Utilitas_4866kWp] PCC PCC power factor of phase L3 (-),fragiatoula_utilitas_4866kwp__pcc_power_factor_of_phase_l3
+[Fragiatoula_Utilitas_4866kWp] PCC PCC reactive energy export (kVArh),fragiatoula_utilitas_4866kwp__pcc_reactive_energy_export__kvarh
+[Fragiatoula_Utilitas_4866kWp] PCC PCC reactive energy import (kVArh),fragiatoula_utilitas_4866kwp__pcc_reactive_energy_import__kvarh
+[Fragiatoula_Utilitas_4866kWp] PCC PCC total power factor (-),fragiatoula_utilitas_4866kwp__pcc_total_power_factor
+[Fragiatoula_Utilitas_4866kWp] PCC PCC voltage of L1-L2 (Vac),fragiatoula_utilitas_4866kwp__pcc_voltage_of_l1_l2__vac
+[Fragiatoula_Utilitas_4866kWp] PCC PCC voltage of L2-L3 (Vac),fragiatoula_utilitas_4866kwp__pcc_voltage_of_l2_l3__vac
+[Fragiatoula_Utilitas_4866kWp] PCC PCC voltage of L3-L1 (Vac),fragiatoula_utilitas_4866kwp__pcc_voltage_of_l3_l1__vac
+[Fragiatoula_Utilitas_4866kWp] PCC Production active energy export (kWh),fragiatoula_utilitas_4866kwp__pcc_production_active_energy_export__kwh
+[Fragiatoula_Utilitas_4866kWp] PCC Production active energy import (kWh),fragiatoula_utilitas_4866kwp__pcc_production_active_energy_import__kwh
+[Fragiatoula_Utilitas_4866kWp] PCC Production current of phase L1 (A),fragiatoula_utilitas_4866kwp__pcc_production_current_of_phase_l1__a
+[Fragiatoula_Utilitas_4866kWp] PCC Production current of phase L2 (A),fragiatoula_utilitas_4866kwp__pcc_production_current_of_phase_l2__a
+[Fragiatoula_Utilitas_4866kWp] PCC Production current of phase L3 (A),fragiatoula_utilitas_4866kwp__pcc_production_current_of_phase_l3__a
+[Fragiatoula_Utilitas_4866kWp] PCC Production frequency (Hz),fragiatoula_utilitas_4866kwp__pcc_production_frequency__hz
+[Fragiatoula_Utilitas_4866kWp] PCC Production reactive energy export (kVArh),fragiatoula_utilitas_4866kwp__pcc_production_reactive_energy_export__kvarh
+[Fragiatoula_Utilitas_4866kWp] PCC Production reactive energy import (kVArh),fragiatoula_utilitas_4866kwp__pcc_production_reactive_energy_import__kvarh
+[Fragiatoula_Utilitas_4866kWp] PCC Production total power factor (-),fragiatoula_utilitas_4866kwp__pcc_production_total_power_factor
+[Fragiatoula_Utilitas_4866kWp] PCC Production voltage of L1-L2 (Vac),fragiatoula_utilitas_4866kwp__pcc_production_voltage_of_l1_l2__vac
+[Fragiatoula_Utilitas_4866kWp] PCC Production voltage of L2-L3 (Vac),fragiatoula_utilitas_4866kwp__pcc_production_voltage_of_l2_l3__vac
+[Fragiatoula_Utilitas_4866kWp] PCC Production voltage of L3-L1 (Vac),fragiatoula_utilitas_4866kwp__pcc_production_voltage_of_l3_l1__vac
+[Fragiatoula_Utilitas_4866kWp] PCC Total Production active power (kW),fragiatoula_utilitas_4866kwp__pcc_total_production_active_power__kw
+[Fragiatoula_Utilitas_4866kWp] PCC Total Production reactive power (kVAr),fragiatoula_utilitas_4866kwp__pcc_total_production_reactive_power__kvar
+[Fragiatoula_Utilitas_4866kWp] Weather Station 1 Ambient temperature (C),fragiatoula_utilitas_4866kwp__weather_station_1_ambient_temperature__c
+[Fragiatoula_Utilitas_4866kWp] Weather Station 1 Relative humidity (%),fragiatoula_utilitas_4866kwp__weather_station_1_relative_humidity__pct
+[Fragiatoula_Utilitas_4866kWp] Weather Station 1 Wind speed (m*s^-1),fragiatoula_utilitas_4866kwp__weather_station_1_wind_speed__m_s_1
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC Current THD-R of phase L1 (%),hlektrogenesis_pelopio_391kwp__pcc_current_thd_r_of_phase_l1__pct
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC Current THD-R of phase L2 (%),hlektrogenesis_pelopio_391kwp__pcc_current_thd_r_of_phase_l2__pct
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC Current THD-R of phase L3 (%),hlektrogenesis_pelopio_391kwp__pcc_current_thd_r_of_phase_l3__pct
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC Voltage THD-R of phase L1 (%),hlektrogenesis_pelopio_391kwp__pcc_voltage_thd_r_of_phase_l1__pct
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC Voltage THD-R of phase L2 (%),hlektrogenesis_pelopio_391kwp__pcc_voltage_thd_r_of_phase_l2__pct
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC Voltage THD-R of phase L3 (%),hlektrogenesis_pelopio_391kwp__pcc_voltage_thd_r_of_phase_l3__pct
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC active energy export (kWh),hlektrogenesis_pelopio_391kwp__pcc_active_energy_export__kwh
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC active energy import (kWh),hlektrogenesis_pelopio_391kwp__pcc_active_energy_import__kwh
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC apparent energy (kVAh),hlektrogenesis_pelopio_391kwp__pcc_apparent_energy__kvah
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC average current (A),hlektrogenesis_pelopio_391kwp__pcc_average_current__a
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC average line voltage (Vac),hlektrogenesis_pelopio_391kwp__pcc_average_line_voltage__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC average phase voltage (Vac),hlektrogenesis_pelopio_391kwp__pcc_average_phase_voltage__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC current of phase L1 (A),hlektrogenesis_pelopio_391kwp__pcc_current_of_phase_l1__a
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC current of phase L2 (A),hlektrogenesis_pelopio_391kwp__pcc_current_of_phase_l2__a
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC current of phase L3 (A),hlektrogenesis_pelopio_391kwp__pcc_current_of_phase_l3__a
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC frequency (Hz),hlektrogenesis_pelopio_391kwp__pcc_frequency__hz
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC power factor of phase L1 (-),hlektrogenesis_pelopio_391kwp__pcc_power_factor_of_phase_l1
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC power factor of phase L2 (-),hlektrogenesis_pelopio_391kwp__pcc_power_factor_of_phase_l2
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC power factor of phase L3 (-),hlektrogenesis_pelopio_391kwp__pcc_power_factor_of_phase_l3
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC reactive energy export (kVArh),hlektrogenesis_pelopio_391kwp__pcc_reactive_energy_export__kvarh
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC reactive energy import (kVArh),hlektrogenesis_pelopio_391kwp__pcc_reactive_energy_import__kvarh
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC total power factor (-),hlektrogenesis_pelopio_391kwp__pcc_total_power_factor
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC voltage of L1-L2 (Vac),hlektrogenesis_pelopio_391kwp__pcc_voltage_of_l1_l2__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC voltage of L2-L3 (Vac),hlektrogenesis_pelopio_391kwp__pcc_voltage_of_l2_l3__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC PCC voltage of L3-L1 (Vac),hlektrogenesis_pelopio_391kwp__pcc_voltage_of_l3_l1__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC Production active energy export (kWh),hlektrogenesis_pelopio_391kwp__pcc_production_active_energy_export__kwh
+[Hlektrogenesis 391 KWp Pelopio] PCC Production active energy import (kWh),hlektrogenesis_pelopio_391kwp__pcc_production_active_energy_import__kwh
+[Hlektrogenesis 391 KWp Pelopio] PCC Production current of phase L1 (A),hlektrogenesis_pelopio_391kwp__pcc_production_current_of_phase_l1__a
+[Hlektrogenesis 391 KWp Pelopio] PCC Production current of phase L2 (A),hlektrogenesis_pelopio_391kwp__pcc_production_current_of_phase_l2__a
+[Hlektrogenesis 391 KWp Pelopio] PCC Production current of phase L3 (A),hlektrogenesis_pelopio_391kwp__pcc_production_current_of_phase_l3__a
+[Hlektrogenesis 391 KWp Pelopio] PCC Production frequency (Hz),hlektrogenesis_pelopio_391kwp__pcc_production_frequency__hz
+[Hlektrogenesis 391 KWp Pelopio] PCC Production reactive energy export (kVArh),hlektrogenesis_pelopio_391kwp__pcc_production_reactive_energy_export__kvarh
+[Hlektrogenesis 391 KWp Pelopio] PCC Production reactive energy import (kVArh),hlektrogenesis_pelopio_391kwp__pcc_production_reactive_energy_import__kvarh
+[Hlektrogenesis 391 KWp Pelopio] PCC Production total power factor (-),hlektrogenesis_pelopio_391kwp__pcc_production_total_power_factor
+[Hlektrogenesis 391 KWp Pelopio] PCC Production voltage of L1-L2 (Vac),hlektrogenesis_pelopio_391kwp__pcc_production_voltage_of_l1_l2__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC Production voltage of L2-L3 (Vac),hlektrogenesis_pelopio_391kwp__pcc_production_voltage_of_l2_l3__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC Production voltage of L3-L1 (Vac),hlektrogenesis_pelopio_391kwp__pcc_production_voltage_of_l3_l1__vac
+[Hlektrogenesis 391 KWp Pelopio] PCC Total Production active power (kW),hlektrogenesis_pelopio_391kwp__pcc_total_production_active_power__kw
+[Hlektrogenesis 391 KWp Pelopio] PCC Total Production reactive power (kVAr),hlektrogenesis_pelopio_391kwp__pcc_total_production_reactive_power__kvar
+[Hlektrogenesis 391 KWp Pelopio] Weather Station Ambient Temperature (C),hlektrogenesis_pelopio_391kwp__weather_station_ambient_temperature__c
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC Current THD-R of phase L1 (%),hlektrogenesis_pelopio_450kwp__pcc_current_thd_r_of_phase_l1__pct
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC Current THD-R of phase L2 (%),hlektrogenesis_pelopio_450kwp__pcc_current_thd_r_of_phase_l2__pct
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC Current THD-R of phase L3 (%),hlektrogenesis_pelopio_450kwp__pcc_current_thd_r_of_phase_l3__pct
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC Voltage THD-R of phase L1 (%),hlektrogenesis_pelopio_450kwp__pcc_voltage_thd_r_of_phase_l1__pct
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC Voltage THD-R of phase L2 (%),hlektrogenesis_pelopio_450kwp__pcc_voltage_thd_r_of_phase_l2__pct
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC Voltage THD-R of phase L3 (%),hlektrogenesis_pelopio_450kwp__pcc_voltage_thd_r_of_phase_l3__pct
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC active energy export (kWh),hlektrogenesis_pelopio_450kwp__pcc_active_energy_export__kwh
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC active energy import (kWh),hlektrogenesis_pelopio_450kwp__pcc_active_energy_import__kwh
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC apparent energy (kVAh),hlektrogenesis_pelopio_450kwp__pcc_apparent_energy__kvah
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC average current (A),hlektrogenesis_pelopio_450kwp__pcc_average_current__a
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC average line voltage (Vac),hlektrogenesis_pelopio_450kwp__pcc_average_line_voltage__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC average phase voltage (Vac),hlektrogenesis_pelopio_450kwp__pcc_average_phase_voltage__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC current of phase L1 (A),hlektrogenesis_pelopio_450kwp__pcc_current_of_phase_l1__a
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC current of phase L2 (A),hlektrogenesis_pelopio_450kwp__pcc_current_of_phase_l2__a
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC current of phase L3 (A),hlektrogenesis_pelopio_450kwp__pcc_current_of_phase_l3__a
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC frequency (Hz),hlektrogenesis_pelopio_450kwp__pcc_frequency__hz
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC power factor of phase L1 (-),hlektrogenesis_pelopio_450kwp__pcc_power_factor_of_phase_l1
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC power factor of phase L2 (-),hlektrogenesis_pelopio_450kwp__pcc_power_factor_of_phase_l2
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC power factor of phase L3 (-),hlektrogenesis_pelopio_450kwp__pcc_power_factor_of_phase_l3
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC reactive energy export (kVArh),hlektrogenesis_pelopio_450kwp__pcc_reactive_energy_export__kvarh
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC reactive energy import (kVArh),hlektrogenesis_pelopio_450kwp__pcc_reactive_energy_import__kvarh
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC total power factor (-),hlektrogenesis_pelopio_450kwp__pcc_total_power_factor
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC voltage of L1-L2 (Vac),hlektrogenesis_pelopio_450kwp__pcc_voltage_of_l1_l2__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC voltage of L2-L3 (Vac),hlektrogenesis_pelopio_450kwp__pcc_voltage_of_l2_l3__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC PCC voltage of L3-L1 (Vac),hlektrogenesis_pelopio_450kwp__pcc_voltage_of_l3_l1__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC Production active energy export (kWh),hlektrogenesis_pelopio_450kwp__pcc_production_active_energy_export__kwh
+[Hlektrogenesis 450 KWp Pelopio] PCC Production active energy import (kWh),hlektrogenesis_pelopio_450kwp__pcc_production_active_energy_import__kwh
+[Hlektrogenesis 450 KWp Pelopio] PCC Production current of phase L1 (A),hlektrogenesis_pelopio_450kwp__pcc_production_current_of_phase_l1__a
+[Hlektrogenesis 450 KWp Pelopio] PCC Production current of phase L2 (A),hlektrogenesis_pelopio_450kwp__pcc_production_current_of_phase_l2__a
+[Hlektrogenesis 450 KWp Pelopio] PCC Production current of phase L3 (A),hlektrogenesis_pelopio_450kwp__pcc_production_current_of_phase_l3__a
+[Hlektrogenesis 450 KWp Pelopio] PCC Production frequency (Hz),hlektrogenesis_pelopio_450kwp__pcc_production_frequency__hz
+[Hlektrogenesis 450 KWp Pelopio] PCC Production reactive energy export (kVArh),hlektrogenesis_pelopio_450kwp__pcc_production_reactive_energy_export__kvarh
+[Hlektrogenesis 450 KWp Pelopio] PCC Production reactive energy import (kVArh),hlektrogenesis_pelopio_450kwp__pcc_production_reactive_energy_import__kvarh
+[Hlektrogenesis 450 KWp Pelopio] PCC Production total power factor (-),hlektrogenesis_pelopio_450kwp__pcc_production_total_power_factor
+[Hlektrogenesis 450 KWp Pelopio] PCC Production voltage of L1-L2 (Vac),hlektrogenesis_pelopio_450kwp__pcc_production_voltage_of_l1_l2__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC Production voltage of L2-L3 (Vac),hlektrogenesis_pelopio_450kwp__pcc_production_voltage_of_l2_l3__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC Production voltage of L3-L1 (Vac),hlektrogenesis_pelopio_450kwp__pcc_production_voltage_of_l3_l1__vac
+[Hlektrogenesis 450 KWp Pelopio] PCC Total Production active power (kW),hlektrogenesis_pelopio_450kwp__pcc_total_production_active_power__kw
+[Hlektrogenesis 450 KWp Pelopio] PCC Total Production reactive power (kVAr),hlektrogenesis_pelopio_450kwp__pcc_total_production_reactive_power__kvar
+[Hlektrogenesis 450 KWp Pelopio] Weather Station Ambient Temperature (C),hlektrogenesis_pelopio_450kwp__weather_station_ambient_temperature__c
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC Current THD-R of phase L1 (%),hlektrogenesis_pelopio_660kwp__pcc_current_thd_r_of_phase_l1__pct
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC Current THD-R of phase L2 (%),hlektrogenesis_pelopio_660kwp__pcc_current_thd_r_of_phase_l2__pct
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC Current THD-R of phase L3 (%),hlektrogenesis_pelopio_660kwp__pcc_current_thd_r_of_phase_l3__pct
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC Voltage THD-R of phase L1 (%),hlektrogenesis_pelopio_660kwp__pcc_voltage_thd_r_of_phase_l1__pct
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC Voltage THD-R of phase L2 (%),hlektrogenesis_pelopio_660kwp__pcc_voltage_thd_r_of_phase_l2__pct
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC Voltage THD-R of phase L3 (%),hlektrogenesis_pelopio_660kwp__pcc_voltage_thd_r_of_phase_l3__pct
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC active energy export (kWh),hlektrogenesis_pelopio_660kwp__pcc_active_energy_export__kwh
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC active energy import (kWh),hlektrogenesis_pelopio_660kwp__pcc_active_energy_import__kwh
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC apparent energy (kVAh),hlektrogenesis_pelopio_660kwp__pcc_apparent_energy__kvah
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC average current (A),hlektrogenesis_pelopio_660kwp__pcc_average_current__a
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC average line voltage (Vac),hlektrogenesis_pelopio_660kwp__pcc_average_line_voltage__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC average phase voltage (Vac),hlektrogenesis_pelopio_660kwp__pcc_average_phase_voltage__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC current of phase L1 (A),hlektrogenesis_pelopio_660kwp__pcc_current_of_phase_l1__a
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC current of phase L2 (A),hlektrogenesis_pelopio_660kwp__pcc_current_of_phase_l2__a
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC current of phase L3 (A),hlektrogenesis_pelopio_660kwp__pcc_current_of_phase_l3__a
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC frequency (Hz),hlektrogenesis_pelopio_660kwp__pcc_frequency__hz
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC power factor of phase L1 (-),hlektrogenesis_pelopio_660kwp__pcc_power_factor_of_phase_l1
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC power factor of phase L2 (-),hlektrogenesis_pelopio_660kwp__pcc_power_factor_of_phase_l2
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC power factor of phase L3 (-),hlektrogenesis_pelopio_660kwp__pcc_power_factor_of_phase_l3
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC reactive energy export (kVArh),hlektrogenesis_pelopio_660kwp__pcc_reactive_energy_export__kvarh
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC reactive energy import (kVArh),hlektrogenesis_pelopio_660kwp__pcc_reactive_energy_import__kvarh
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC total power factor (-),hlektrogenesis_pelopio_660kwp__pcc_total_power_factor
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC voltage of L1-L2 (Vac),hlektrogenesis_pelopio_660kwp__pcc_voltage_of_l1_l2__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC voltage of L2-L3 (Vac),hlektrogenesis_pelopio_660kwp__pcc_voltage_of_l2_l3__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC PCC voltage of L3-L1 (Vac),hlektrogenesis_pelopio_660kwp__pcc_voltage_of_l3_l1__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC Production active energy export (kWh),hlektrogenesis_pelopio_660kwp__pcc_production_active_energy_export__kwh
+[Hlektrogenesis 660 KWp Pelopio] PCC Production active energy import (kWh),hlektrogenesis_pelopio_660kwp__pcc_production_active_energy_import__kwh
+[Hlektrogenesis 660 KWp Pelopio] PCC Production current of phase L1 (A),hlektrogenesis_pelopio_660kwp__pcc_production_current_of_phase_l1__a
+[Hlektrogenesis 660 KWp Pelopio] PCC Production current of phase L2 (A),hlektrogenesis_pelopio_660kwp__pcc_production_current_of_phase_l2__a
+[Hlektrogenesis 660 KWp Pelopio] PCC Production current of phase L3 (A),hlektrogenesis_pelopio_660kwp__pcc_production_current_of_phase_l3__a
+[Hlektrogenesis 660 KWp Pelopio] PCC Production frequency (Hz),hlektrogenesis_pelopio_660kwp__pcc_production_frequency__hz
+[Hlektrogenesis 660 KWp Pelopio] PCC Production reactive energy export (kVArh),hlektrogenesis_pelopio_660kwp__pcc_production_reactive_energy_export__kvarh
+[Hlektrogenesis 660 KWp Pelopio] PCC Production reactive energy import (kVArh),hlektrogenesis_pelopio_660kwp__pcc_production_reactive_energy_import__kvarh
+[Hlektrogenesis 660 KWp Pelopio] PCC Production total power factor (-),hlektrogenesis_pelopio_660kwp__pcc_production_total_power_factor
+[Hlektrogenesis 660 KWp Pelopio] PCC Production voltage of L1-L2 (Vac),hlektrogenesis_pelopio_660kwp__pcc_production_voltage_of_l1_l2__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC Production voltage of L2-L3 (Vac),hlektrogenesis_pelopio_660kwp__pcc_production_voltage_of_l2_l3__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC Production voltage of L3-L1 (Vac),hlektrogenesis_pelopio_660kwp__pcc_production_voltage_of_l3_l1__vac
+[Hlektrogenesis 660 KWp Pelopio] PCC Total Production active power (kW),hlektrogenesis_pelopio_660kwp__pcc_total_production_active_power__kw
+[Hlektrogenesis 660 KWp Pelopio] PCC Total Production reactive power (kVAr),hlektrogenesis_pelopio_660kwp__pcc_total_production_reactive_power__kvar
+[Hlektrogenesis 660 KWp Pelopio] Weather station Ambient Temperature (C),hlektrogenesis_pelopio_660kwp__weather_station_ambient_temperature__c
+[Hlektrogenesis 924 KWp Strefi] PCC PCC Current THD-R of phase L1 (%),hlektrogenesis_strefi_924kwp__pcc_current_thd_r_of_phase_l1__pct
+[Hlektrogenesis 924 KWp Strefi] PCC PCC Current THD-R of phase L2 (%),hlektrogenesis_strefi_924kwp__pcc_current_thd_r_of_phase_l2__pct
+[Hlektrogenesis 924 KWp Strefi] PCC PCC Current THD-R of phase L3 (%),hlektrogenesis_strefi_924kwp__pcc_current_thd_r_of_phase_l3__pct
+[Hlektrogenesis 924 KWp Strefi] PCC PCC Voltage THD-R of phase L1 (%),hlektrogenesis_strefi_924kwp__pcc_voltage_thd_r_of_phase_l1__pct
+[Hlektrogenesis 924 KWp Strefi] PCC PCC Voltage THD-R of phase L2 (%),hlektrogenesis_strefi_924kwp__pcc_voltage_thd_r_of_phase_l2__pct
+[Hlektrogenesis 924 KWp Strefi] PCC PCC Voltage THD-R of phase L3 (%),hlektrogenesis_strefi_924kwp__pcc_voltage_thd_r_of_phase_l3__pct
+[Hlektrogenesis 924 KWp Strefi] PCC PCC active energy export (kWh),hlektrogenesis_strefi_924kwp__pcc_active_energy_export__kwh
+[Hlektrogenesis 924 KWp Strefi] PCC PCC active energy import (kWh),hlektrogenesis_strefi_924kwp__pcc_active_energy_import__kwh
+[Hlektrogenesis 924 KWp Strefi] PCC PCC apparent energy (kVAh),hlektrogenesis_strefi_924kwp__pcc_apparent_energy__kvah
+[Hlektrogenesis 924 KWp Strefi] PCC PCC average current (A),hlektrogenesis_strefi_924kwp__pcc_average_current__a
+[Hlektrogenesis 924 KWp Strefi] PCC PCC average line voltage (Vac),hlektrogenesis_strefi_924kwp__pcc_average_line_voltage__vac
+[Hlektrogenesis 924 KWp Strefi] PCC PCC average phase voltage (Vac),hlektrogenesis_strefi_924kwp__pcc_average_phase_voltage__vac
+[Hlektrogenesis 924 KWp Strefi] PCC PCC current of phase L1 (A),hlektrogenesis_strefi_924kwp__pcc_current_of_phase_l1__a
+[Hlektrogenesis 924 KWp Strefi] PCC PCC current of phase L2 (A),hlektrogenesis_strefi_924kwp__pcc_current_of_phase_l2__a
+[Hlektrogenesis 924 KWp Strefi] PCC PCC current of phase L3 (A),hlektrogenesis_strefi_924kwp__pcc_current_of_phase_l3__a
+[Hlektrogenesis 924 KWp Strefi] PCC PCC frequency (Hz),hlektrogenesis_strefi_924kwp__pcc_frequency__hz
+[Hlektrogenesis 924 KWp Strefi] PCC PCC power factor of phase L1 (-),hlektrogenesis_strefi_924kwp__pcc_power_factor_of_phase_l1
+[Hlektrogenesis 924 KWp Strefi] PCC PCC power factor of phase L2 (-),hlektrogenesis_strefi_924kwp__pcc_power_factor_of_phase_l2
+[Hlektrogenesis 924 KWp Strefi] PCC PCC power factor of phase L3 (-),hlektrogenesis_strefi_924kwp__pcc_power_factor_of_phase_l3
+[Hlektrogenesis 924 KWp Strefi] PCC PCC reactive energy export (kVArh),hlektrogenesis_strefi_924kwp__pcc_reactive_energy_export__kvarh
+[Hlektrogenesis 924 KWp Strefi] PCC PCC reactive energy import (kVArh),hlektrogenesis_strefi_924kwp__pcc_reactive_energy_import__kvarh
+[Hlektrogenesis 924 KWp Strefi] PCC PCC total power factor (-),hlektrogenesis_strefi_924kwp__pcc_total_power_factor
+[Hlektrogenesis 924 KWp Strefi] PCC PCC voltage of L1-L2 (Vac),hlektrogenesis_strefi_924kwp__pcc_voltage_of_l1_l2__vac
+[Hlektrogenesis 924 KWp Strefi] PCC PCC voltage of L2-L3 (Vac),hlektrogenesis_strefi_924kwp__pcc_voltage_of_l2_l3__vac
+[Hlektrogenesis 924 KWp Strefi] PCC PCC voltage of L3-L1 (Vac),hlektrogenesis_strefi_924kwp__pcc_voltage_of_l3_l1__vac
+[Hlektrogenesis 924 KWp Strefi] PCC Production active energy export (kWh),hlektrogenesis_strefi_924kwp__pcc_production_active_energy_export__kwh
+[Hlektrogenesis 924 KWp Strefi] PCC Production active energy import (kWh),hlektrogenesis_strefi_924kwp__pcc_production_active_energy_import__kwh
+[Hlektrogenesis 924 KWp Strefi] PCC Production current of phase L1 (A),hlektrogenesis_strefi_924kwp__pcc_production_current_of_phase_l1__a
+[Hlektrogenesis 924 KWp Strefi] PCC Production current of phase L2 (A),hlektrogenesis_strefi_924kwp__pcc_production_current_of_phase_l2__a
+[Hlektrogenesis 924 KWp Strefi] PCC Production current of phase L3 (A),hlektrogenesis_strefi_924kwp__pcc_production_current_of_phase_l3__a
+[Hlektrogenesis 924 KWp Strefi] PCC Production frequency (Hz),hlektrogenesis_strefi_924kwp__pcc_production_frequency__hz
+[Hlektrogenesis 924 KWp Strefi] PCC Production reactive energy export (kVArh),hlektrogenesis_strefi_924kwp__pcc_production_reactive_energy_export__kvarh
+[Hlektrogenesis 924 KWp Strefi] PCC Production reactive energy import (kVArh),hlektrogenesis_strefi_924kwp__pcc_production_reactive_energy_import__kvarh
+[Hlektrogenesis 924 KWp Strefi] PCC Production total power factor (-),hlektrogenesis_strefi_924kwp__pcc_production_total_power_factor
+[Hlektrogenesis 924 KWp Strefi] PCC Production voltage of L1-L2 (Vac),hlektrogenesis_strefi_924kwp__pcc_production_voltage_of_l1_l2__vac
+[Hlektrogenesis 924 KWp Strefi] PCC Production voltage of L2-L3 (Vac),hlektrogenesis_strefi_924kwp__pcc_production_voltage_of_l2_l3__vac
+[Hlektrogenesis 924 KWp Strefi] PCC Production voltage of L3-L1 (Vac),hlektrogenesis_strefi_924kwp__pcc_production_voltage_of_l3_l1__vac
+[Hlektrogenesis 924 KWp Strefi] PCC Total Production active power (kW),hlektrogenesis_strefi_924kwp__pcc_total_production_active_power__kw
+[Hlektrogenesis 924 KWp Strefi] PCC Total Production reactive power (kVAr),hlektrogenesis_strefi_924kwp__pcc_total_production_reactive_power__kvar
+[Hlektrogenesis 924 KWp Strefi] Weather station Ambient Temperature (C),hlektrogenesis_strefi_924kwp__weather_station_ambient_temperature__c
+[Hlektrogennisi 500 KWp Livanates] PCC PCC active energy export (kWh),hlektrogennisi_livanates_500kwp__pcc_active_energy_export__kwh
+[Hlektrogennisi 500 KWp Livanates] PCC PCC active energy import (kWh),hlektrogennisi_livanates_500kwp__pcc_active_energy_import__kwh
+[Hlektrogennisi 500 KWp Livanates] PCC PCC apparent energy (kVAh),hlektrogennisi_livanates_500kwp__pcc_apparent_energy__kvah
+[Hlektrogennisi 500 KWp Livanates] PCC PCC current of phase L1 (A),hlektrogennisi_livanates_500kwp__pcc_current_of_phase_l1__a
+[Hlektrogennisi 500 KWp Livanates] PCC PCC current of phase L2 (A),hlektrogennisi_livanates_500kwp__pcc_current_of_phase_l2__a
+[Hlektrogennisi 500 KWp Livanates] PCC PCC current of phase L3 (A),hlektrogennisi_livanates_500kwp__pcc_current_of_phase_l3__a
+[Hlektrogennisi 500 KWp Livanates] PCC PCC frequency (Hz),hlektrogennisi_livanates_500kwp__pcc_frequency__hz
+[Hlektrogennisi 500 KWp Livanates] PCC PCC reactive energy export (kVArh),hlektrogennisi_livanates_500kwp__pcc_reactive_energy_export__kvarh
+[Hlektrogennisi 500 KWp Livanates] PCC PCC reactive energy import (kVArh),hlektrogennisi_livanates_500kwp__pcc_reactive_energy_import__kvarh
+[Hlektrogennisi 500 KWp Livanates] PCC PCC total power factor (-),hlektrogennisi_livanates_500kwp__pcc_total_power_factor
+[Hlektrogennisi 500 KWp Livanates] PCC PCC voltage of L1-L2 (Vac),hlektrogennisi_livanates_500kwp__pcc_voltage_of_l1_l2__vac
+[Hlektrogennisi 500 KWp Livanates] PCC PCC voltage of L2-L3 (Vac),hlektrogennisi_livanates_500kwp__pcc_voltage_of_l2_l3__vac
+[Hlektrogennisi 500 KWp Livanates] PCC PCC voltage of L3-L1 (Vac),hlektrogennisi_livanates_500kwp__pcc_voltage_of_l3_l1__vac
+[Hlektrogennisi 500 KWp Livanates] PCC Production active energy export (kWh),hlektrogennisi_livanates_500kwp__pcc_production_active_energy_export__kwh
+[Hlektrogennisi 500 KWp Livanates] PCC Production active energy import (kWh),hlektrogennisi_livanates_500kwp__pcc_production_active_energy_import__kwh
+[Hlektrogennisi 500 KWp Livanates] PCC Production current of phase L1 (A),hlektrogennisi_livanates_500kwp__pcc_production_current_of_phase_l1__a
+[Hlektrogennisi 500 KWp Livanates] PCC Production current of phase L2 (A),hlektrogennisi_livanates_500kwp__pcc_production_current_of_phase_l2__a
+[Hlektrogennisi 500 KWp Livanates] PCC Production current of phase L3 (A),hlektrogennisi_livanates_500kwp__pcc_production_current_of_phase_l3__a
+[Hlektrogennisi 500 KWp Livanates] PCC Production frequency (Hz),hlektrogennisi_livanates_500kwp__pcc_production_frequency__hz
+[Hlektrogennisi 500 KWp Livanates] PCC Production reactive energy export (kVArh),hlektrogennisi_livanates_500kwp__pcc_production_reactive_energy_export__kvarh
+[Hlektrogennisi 500 KWp Livanates] PCC Production reactive energy import (kVArh),hlektrogennisi_livanates_500kwp__pcc_production_reactive_energy_import__kvarh
+[Hlektrogennisi 500 KWp Livanates] PCC Production total power factor (-),hlektrogennisi_livanates_500kwp__pcc_production_total_power_factor
+[Hlektrogennisi 500 KWp Livanates] PCC Production voltage of L1-L2 (Vac),hlektrogennisi_livanates_500kwp__pcc_production_voltage_of_l1_l2__vac
+[Hlektrogennisi 500 KWp Livanates] PCC Production voltage of L2-L3 (Vac),hlektrogennisi_livanates_500kwp__pcc_production_voltage_of_l2_l3__vac
+[Hlektrogennisi 500 KWp Livanates] PCC Production voltage of L3-L1 (Vac),hlektrogennisi_livanates_500kwp__pcc_production_voltage_of_l3_l1__vac
+[Hlektrogennisi 500 KWp Livanates] PCC Total Production active power (kW),hlektrogennisi_livanates_500kwp__pcc_total_production_active_power__kw
+[Hlektrogennisi 500 KWp Livanates] PCC Total Production reactive power (kVAr),hlektrogennisi_livanates_500kwp__pcc_total_production_reactive_power__kvar
+[Hliatoras 474kWp Andravida] Hliatoras 474kWp Andravida Average Irradiance (W*m^-2),hliatoras_andravida_474kwp__hliatoras_474kwp_andravida_average_irradiance__w_m_2
+[Hliatoras 474kWp Andravida] PCC PCC Current THD-R of neutral (%),hliatoras_andravida_474kwp__pcc_current_thd_r_of_neutral__pct
+[Hliatoras 474kWp Andravida] PCC PCC Current THD-R of phase L1 (%),hliatoras_andravida_474kwp__pcc_current_thd_r_of_phase_l1__pct
+[Hliatoras 474kWp Andravida] PCC PCC Current THD-R of phase L2 (%),hliatoras_andravida_474kwp__pcc_current_thd_r_of_phase_l2__pct
+[Hliatoras 474kWp Andravida] PCC PCC Current THD-R of phase L3 (%),hliatoras_andravida_474kwp__pcc_current_thd_r_of_phase_l3__pct
+[Hliatoras 474kWp Andravida] PCC PCC active energy export (kWh),hliatoras_andravida_474kwp__pcc_active_energy_export__kwh
+[Hliatoras 474kWp Andravida] PCC PCC active energy import (kWh),hliatoras_andravida_474kwp__pcc_active_energy_import__kwh
+[Hliatoras 474kWp Andravida] PCC PCC apparent energy (kVAh),hliatoras_andravida_474kwp__pcc_apparent_energy__kvah
+[Hliatoras 474kWp Andravida] PCC PCC average current (A),hliatoras_andravida_474kwp__pcc_average_current__a
+[Hliatoras 474kWp Andravida] PCC PCC average line voltage (Vac),hliatoras_andravida_474kwp__pcc_average_line_voltage__vac
+[Hliatoras 474kWp Andravida] PCC PCC average phase voltage (Vac),hliatoras_andravida_474kwp__pcc_average_phase_voltage__vac
+[Hliatoras 474kWp Andravida] PCC PCC current of phase L1 (A),hliatoras_andravida_474kwp__pcc_current_of_phase_l1__a
+[Hliatoras 474kWp Andravida] PCC PCC current of phase L2 (A),hliatoras_andravida_474kwp__pcc_current_of_phase_l2__a
+[Hliatoras 474kWp Andravida] PCC PCC current of phase L3 (A),hliatoras_andravida_474kwp__pcc_current_of_phase_l3__a
+[Hliatoras 474kWp Andravida] PCC PCC current unbalance of phase L1 (%),hliatoras_andravida_474kwp__pcc_current_unbalance_of_phase_l1__pct
+[Hliatoras 474kWp Andravida] PCC PCC current unbalance of phase L2 (%),hliatoras_andravida_474kwp__pcc_current_unbalance_of_phase_l2__pct
+[Hliatoras 474kWp Andravida] PCC PCC current unbalance of phase L3 (%),hliatoras_andravida_474kwp__pcc_current_unbalance_of_phase_l3__pct
+[Hliatoras 474kWp Andravida] PCC PCC frequency (Hz),hliatoras_andravida_474kwp__pcc_frequency__hz
+[Hliatoras 474kWp Andravida] PCC PCC power factor of phase L1 (-),hliatoras_andravida_474kwp__pcc_power_factor_of_phase_l1
+[Hliatoras 474kWp Andravida] PCC PCC power factor of phase L2 (-),hliatoras_andravida_474kwp__pcc_power_factor_of_phase_l2
+[Hliatoras 474kWp Andravida] PCC PCC power factor of phase L3 (-),hliatoras_andravida_474kwp__pcc_power_factor_of_phase_l3
+[Hliatoras 474kWp Andravida] PCC PCC reactive energy export (kVArh),hliatoras_andravida_474kwp__pcc_reactive_energy_export__kvarh
+[Hliatoras 474kWp Andravida] PCC PCC reactive energy import (kVArh),hliatoras_andravida_474kwp__pcc_reactive_energy_import__kvarh
+[Hliatoras 474kWp Andravida] PCC PCC total power factor (-),hliatoras_andravida_474kwp__pcc_total_power_factor
+[Hliatoras 474kWp Andravida] PCC PCC voltage of L1-L2 (Vac),hliatoras_andravida_474kwp__pcc_voltage_of_l1_l2__vac
+[Hliatoras 474kWp Andravida] PCC PCC voltage of L2-L3 (Vac),hliatoras_andravida_474kwp__pcc_voltage_of_l2_l3__vac
+[Hliatoras 474kWp Andravida] PCC PCC voltage of L3-L1 (Vac),hliatoras_andravida_474kwp__pcc_voltage_of_l3_l1__vac
+[Hliatoras 474kWp Andravida] PCC Production active energy export (kWh),hliatoras_andravida_474kwp__pcc_production_active_energy_export__kwh
+[Hliatoras 474kWp Andravida] PCC Production active energy import (kWh),hliatoras_andravida_474kwp__pcc_production_active_energy_import__kwh
+[Hliatoras 474kWp Andravida] PCC Production apparent energy (kVAh),hliatoras_andravida_474kwp__pcc_production_apparent_energy__kvah
+[Hliatoras 474kWp Andravida] PCC Production current of phase L1 (A),hliatoras_andravida_474kwp__pcc_production_current_of_phase_l1__a
+[Hliatoras 474kWp Andravida] PCC Production current of phase L2 (A),hliatoras_andravida_474kwp__pcc_production_current_of_phase_l2__a
+[Hliatoras 474kWp Andravida] PCC Production current of phase L3 (A),hliatoras_andravida_474kwp__pcc_production_current_of_phase_l3__a
+[Hliatoras 474kWp Andravida] PCC Production frequency (Hz),hliatoras_andravida_474kwp__pcc_production_frequency__hz
+[Hliatoras 474kWp Andravida] PCC Production reactive energy export (kVArh),hliatoras_andravida_474kwp__pcc_production_reactive_energy_export__kvarh
+[Hliatoras 474kWp Andravida] PCC Production reactive energy import (kVArh),hliatoras_andravida_474kwp__pcc_production_reactive_energy_import__kvarh
+[Hliatoras 474kWp Andravida] PCC Production total power factor (-),hliatoras_andravida_474kwp__pcc_production_total_power_factor
+[Hliatoras 474kWp Andravida] PCC Production voltage of L1-L2 (Vac),hliatoras_andravida_474kwp__pcc_production_voltage_of_l1_l2__vac
+[Hliatoras 474kWp Andravida] PCC Production voltage of L2-L3 (Vac),hliatoras_andravida_474kwp__pcc_production_voltage_of_l2_l3__vac
+[Hliatoras 474kWp Andravida] PCC Production voltage of L3-L1 (Vac),hliatoras_andravida_474kwp__pcc_production_voltage_of_l3_l1__vac
+[Hliatoras 474kWp Andravida] PCC Total Production active power (kW),hliatoras_andravida_474kwp__pcc_total_production_active_power__kw
+[Hliatoras 474kWp Andravida] PCC Total Production apparent power (kVA),hliatoras_andravida_474kwp__pcc_total_production_apparent_power__kva
+[Hliatoras 474kWp Andravida] PCC Total Production reactive power (kVAr),hliatoras_andravida_474kwp__pcc_total_production_reactive_power__kvar
+[Hliatoras 474kWp Andravida] Weather Station Ambient Temperature (C),hliatoras_andravida_474kwp__weather_station_ambient_temperature__c
+[Hliatoras 474kWp Andravida] Weather Station Wind Speed  (m*s^-1),hliatoras_andravida_474kwp__weather_station_wind_speed__m_s_1
+[Kalamata_Asproxoma_1575kWp] PCC PCC Current THD-R of neutral (%),kalamata_asproxoma_1575kwp__pcc_current_thd_r_of_neutral__pct
+[Kalamata_Asproxoma_1575kWp] PCC PCC Current THD-R of phase L1 (%),kalamata_asproxoma_1575kwp__pcc_current_thd_r_of_phase_l1__pct
+[Kalamata_Asproxoma_1575kWp] PCC PCC Current THD-R of phase L2 (%),kalamata_asproxoma_1575kwp__pcc_current_thd_r_of_phase_l2__pct
+[Kalamata_Asproxoma_1575kWp] PCC PCC Current THD-R of phase L3 (%),kalamata_asproxoma_1575kwp__pcc_current_thd_r_of_phase_l3__pct
+[Kalamata_Asproxoma_1575kWp] PCC PCC active energy export (kWh),kalamata_asproxoma_1575kwp__pcc_active_energy_export__kwh
+[Kalamata_Asproxoma_1575kWp] PCC PCC active energy import (kWh),kalamata_asproxoma_1575kwp__pcc_active_energy_import__kwh
+[Kalamata_Asproxoma_1575kWp] PCC PCC apparent energy (kVAh),kalamata_asproxoma_1575kwp__pcc_apparent_energy__kvah
+[Kalamata_Asproxoma_1575kWp] PCC PCC average current (A),kalamata_asproxoma_1575kwp__pcc_average_current__a
+[Kalamata_Asproxoma_1575kWp] PCC PCC average line voltage (Vac),kalamata_asproxoma_1575kwp__pcc_average_line_voltage__vac
+[Kalamata_Asproxoma_1575kWp] PCC PCC average phase voltage (Vac),kalamata_asproxoma_1575kwp__pcc_average_phase_voltage__vac
+[Kalamata_Asproxoma_1575kWp] PCC PCC current of phase L1 (A),kalamata_asproxoma_1575kwp__pcc_current_of_phase_l1__a
+[Kalamata_Asproxoma_1575kWp] PCC PCC current of phase L2 (A),kalamata_asproxoma_1575kwp__pcc_current_of_phase_l2__a
+[Kalamata_Asproxoma_1575kWp] PCC PCC current of phase L3 (A),kalamata_asproxoma_1575kwp__pcc_current_of_phase_l3__a
+[Kalamata_Asproxoma_1575kWp] PCC PCC current unbalance of phase L1 (%),kalamata_asproxoma_1575kwp__pcc_current_unbalance_of_phase_l1__pct
+[Kalamata_Asproxoma_1575kWp] PCC PCC current unbalance of phase L2 (%),kalamata_asproxoma_1575kwp__pcc_current_unbalance_of_phase_l2__pct
+[Kalamata_Asproxoma_1575kWp] PCC PCC current unbalance of phase L3 (%),kalamata_asproxoma_1575kwp__pcc_current_unbalance_of_phase_l3__pct
+[Kalamata_Asproxoma_1575kWp] PCC PCC frequency (Hz),kalamata_asproxoma_1575kwp__pcc_frequency__hz
+[Kalamata_Asproxoma_1575kWp] PCC PCC power factor of phase L1 (-),kalamata_asproxoma_1575kwp__pcc_power_factor_of_phase_l1
+[Kalamata_Asproxoma_1575kWp] PCC PCC power factor of phase L2 (-),kalamata_asproxoma_1575kwp__pcc_power_factor_of_phase_l2
+[Kalamata_Asproxoma_1575kWp] PCC PCC power factor of phase L3 (-),kalamata_asproxoma_1575kwp__pcc_power_factor_of_phase_l3
+[Kalamata_Asproxoma_1575kWp] PCC PCC reactive energy export (kVArh),kalamata_asproxoma_1575kwp__pcc_reactive_energy_export__kvarh
+[Kalamata_Asproxoma_1575kWp] PCC PCC reactive energy import (kVArh),kalamata_asproxoma_1575kwp__pcc_reactive_energy_import__kvarh
+[Kalamata_Asproxoma_1575kWp] PCC PCC total power factor (-),kalamata_asproxoma_1575kwp__pcc_total_power_factor
+[Kalamata_Asproxoma_1575kWp] PCC PCC voltage of L1-L2 (Vac),kalamata_asproxoma_1575kwp__pcc_voltage_of_l1_l2__vac
+[Kalamata_Asproxoma_1575kWp] PCC PCC voltage of L2-L3 (Vac),kalamata_asproxoma_1575kwp__pcc_voltage_of_l2_l3__vac
+[Kalamata_Asproxoma_1575kWp] PCC PCC voltage of L3-L1 (Vac),kalamata_asproxoma_1575kwp__pcc_voltage_of_l3_l1__vac
+[Kalamata_Asproxoma_1575kWp] PCC Production active energy export (kWh),kalamata_asproxoma_1575kwp__pcc_production_active_energy_export__kwh
+[Kalamata_Asproxoma_1575kWp] PCC Production active energy import (kWh),kalamata_asproxoma_1575kwp__pcc_production_active_energy_import__kwh
+[Kalamata_Asproxoma_1575kWp] PCC Production apparent energy (kVAh),kalamata_asproxoma_1575kwp__pcc_production_apparent_energy__kvah
+[Kalamata_Asproxoma_1575kWp] PCC Production current of phase L1 (A),kalamata_asproxoma_1575kwp__pcc_production_current_of_phase_l1__a
+[Kalamata_Asproxoma_1575kWp] PCC Production current of phase L2 (A),kalamata_asproxoma_1575kwp__pcc_production_current_of_phase_l2__a
+[Kalamata_Asproxoma_1575kWp] PCC Production current of phase L3 (A),kalamata_asproxoma_1575kwp__pcc_production_current_of_phase_l3__a
+[Kalamata_Asproxoma_1575kWp] PCC Production frequency (Hz),kalamata_asproxoma_1575kwp__pcc_production_frequency__hz
+[Kalamata_Asproxoma_1575kWp] PCC Production reactive energy export (kVArh),kalamata_asproxoma_1575kwp__pcc_production_reactive_energy_export__kvarh
+[Kalamata_Asproxoma_1575kWp] PCC Production reactive energy import (kVArh),kalamata_asproxoma_1575kwp__pcc_production_reactive_energy_import__kvarh
+[Kalamata_Asproxoma_1575kWp] PCC Production total power factor (-),kalamata_asproxoma_1575kwp__pcc_production_total_power_factor
+[Kalamata_Asproxoma_1575kWp] PCC Total Production active power (kW),kalamata_asproxoma_1575kwp__pcc_total_production_active_power__kw
+[Kalamata_Asproxoma_1575kWp] PCC Total Production apparent power (kVA),kalamata_asproxoma_1575kwp__pcc_total_production_apparent_power__kva
+[Kalamata_Asproxoma_1575kWp] PCC Total Production reactive power (kVAr),kalamata_asproxoma_1575kwp__pcc_total_production_reactive_power__kvar
+[Kalamata_Asproxoma_1575kWp] Weather Station 1 Ambient Temperature (C),kalamata_asproxoma_1575kwp__weather_station_1_ambient_temperature__c
+[Kalamata_Asproxoma_1575kWp] Weather Station 1 Relative Humidity  (%),kalamata_asproxoma_1575kwp__weather_station_1_relative_humidity__pct
+[Kalamata_Asproxoma_1575kWp] Weather Station 1 Wind Speed  (m*s^-1),kalamata_asproxoma_1575kwp__weather_station_1_wind_speed__m_s_1
+[Kalamata_Asproxoma_2131kWp] PCC PCC Current THD-R of neutral (%),kalamata_asproxoma_2131kwp__pcc_current_thd_r_of_neutral__pct
+[Kalamata_Asproxoma_2131kWp] PCC PCC Current THD-R of phase L1 (%),kalamata_asproxoma_2131kwp__pcc_current_thd_r_of_phase_l1__pct
+[Kalamata_Asproxoma_2131kWp] PCC PCC Current THD-R of phase L2 (%),kalamata_asproxoma_2131kwp__pcc_current_thd_r_of_phase_l2__pct
+[Kalamata_Asproxoma_2131kWp] PCC PCC Current THD-R of phase L3 (%),kalamata_asproxoma_2131kwp__pcc_current_thd_r_of_phase_l3__pct
+[Kalamata_Asproxoma_2131kWp] PCC PCC active energy export (kWh),kalamata_asproxoma_2131kwp__pcc_active_energy_export__kwh
+[Kalamata_Asproxoma_2131kWp] PCC PCC active energy import (kWh),kalamata_asproxoma_2131kwp__pcc_active_energy_import__kwh
+[Kalamata_Asproxoma_2131kWp] PCC PCC apparent energy (kVAh),kalamata_asproxoma_2131kwp__pcc_apparent_energy__kvah
+[Kalamata_Asproxoma_2131kWp] PCC PCC average current (A),kalamata_asproxoma_2131kwp__pcc_average_current__a
+[Kalamata_Asproxoma_2131kWp] PCC PCC average line voltage (Vac),kalamata_asproxoma_2131kwp__pcc_average_line_voltage__vac
+[Kalamata_Asproxoma_2131kWp] PCC PCC average phase voltage (Vac),kalamata_asproxoma_2131kwp__pcc_average_phase_voltage__vac
+[Kalamata_Asproxoma_2131kWp] PCC PCC current of phase L1 (A),kalamata_asproxoma_2131kwp__pcc_current_of_phase_l1__a
+[Kalamata_Asproxoma_2131kWp] PCC PCC current of phase L2 (A),kalamata_asproxoma_2131kwp__pcc_current_of_phase_l2__a
+[Kalamata_Asproxoma_2131kWp] PCC PCC current of phase L3 (A),kalamata_asproxoma_2131kwp__pcc_current_of_phase_l3__a
+[Kalamata_Asproxoma_2131kWp] PCC PCC current unbalance of phase L1 (%),kalamata_asproxoma_2131kwp__pcc_current_unbalance_of_phase_l1__pct
+[Kalamata_Asproxoma_2131kWp] PCC PCC current unbalance of phase L2 (%),kalamata_asproxoma_2131kwp__pcc_current_unbalance_of_phase_l2__pct
+[Kalamata_Asproxoma_2131kWp] PCC PCC current unbalance of phase L3 (%),kalamata_asproxoma_2131kwp__pcc_current_unbalance_of_phase_l3__pct
+[Kalamata_Asproxoma_2131kWp] PCC PCC frequency (Hz),kalamata_asproxoma_2131kwp__pcc_frequency__hz
+[Kalamata_Asproxoma_2131kWp] PCC PCC power factor of phase L1 (-),kalamata_asproxoma_2131kwp__pcc_power_factor_of_phase_l1
+[Kalamata_Asproxoma_2131kWp] PCC PCC power factor of phase L2 (-),kalamata_asproxoma_2131kwp__pcc_power_factor_of_phase_l2
+[Kalamata_Asproxoma_2131kWp] PCC PCC power factor of phase L3 (-),kalamata_asproxoma_2131kwp__pcc_power_factor_of_phase_l3
+[Kalamata_Asproxoma_2131kWp] PCC PCC reactive energy export (kVArh),kalamata_asproxoma_2131kwp__pcc_reactive_energy_export__kvarh
+[Kalamata_Asproxoma_2131kWp] PCC PCC reactive energy import (kVArh),kalamata_asproxoma_2131kwp__pcc_reactive_energy_import__kvarh
+[Kalamata_Asproxoma_2131kWp] PCC PCC total power factor (-),kalamata_asproxoma_2131kwp__pcc_total_power_factor
+[Kalamata_Asproxoma_2131kWp] PCC PCC voltage of L1-L2 (Vac),kalamata_asproxoma_2131kwp__pcc_voltage_of_l1_l2__vac
+[Kalamata_Asproxoma_2131kWp] PCC PCC voltage of L2-L3 (Vac),kalamata_asproxoma_2131kwp__pcc_voltage_of_l2_l3__vac
+[Kalamata_Asproxoma_2131kWp] PCC PCC voltage of L3-L1 (Vac),kalamata_asproxoma_2131kwp__pcc_voltage_of_l3_l1__vac
+[Kalamata_Asproxoma_2131kWp] PCC Production active energy export (kWh),kalamata_asproxoma_2131kwp__pcc_production_active_energy_export__kwh
+[Kalamata_Asproxoma_2131kWp] PCC Production active energy import (kWh),kalamata_asproxoma_2131kwp__pcc_production_active_energy_import__kwh
+[Kalamata_Asproxoma_2131kWp] PCC Production current of phase L1 (A),kalamata_asproxoma_2131kwp__pcc_production_current_of_phase_l1__a
+[Kalamata_Asproxoma_2131kWp] PCC Production current of phase L2 (A),kalamata_asproxoma_2131kwp__pcc_production_current_of_phase_l2__a
+[Kalamata_Asproxoma_2131kWp] PCC Production current of phase L3 (A),kalamata_asproxoma_2131kwp__pcc_production_current_of_phase_l3__a
+[Kalamata_Asproxoma_2131kWp] PCC Production frequency (Hz),kalamata_asproxoma_2131kwp__pcc_production_frequency__hz
+[Kalamata_Asproxoma_2131kWp] PCC Production reactive energy export (kVArh),kalamata_asproxoma_2131kwp__pcc_production_reactive_energy_export__kvarh
+[Kalamata_Asproxoma_2131kWp] PCC Production reactive energy import (kVArh),kalamata_asproxoma_2131kwp__pcc_production_reactive_energy_import__kvarh
+[Kalamata_Asproxoma_2131kWp] PCC Production total power factor (-),kalamata_asproxoma_2131kwp__pcc_production_total_power_factor
+[Kalamata_Asproxoma_2131kWp] PCC Production voltage of L1-L2 (Vac),kalamata_asproxoma_2131kwp__pcc_production_voltage_of_l1_l2__vac
+[Kalamata_Asproxoma_2131kWp] PCC Production voltage of L2-L3 (Vac),kalamata_asproxoma_2131kwp__pcc_production_voltage_of_l2_l3__vac
+[Kalamata_Asproxoma_2131kWp] PCC Production voltage of L3-L1 (Vac),kalamata_asproxoma_2131kwp__pcc_production_voltage_of_l3_l1__vac
+[Kalamata_Asproxoma_2131kWp] PCC Total Production active power (kW),kalamata_asproxoma_2131kwp__pcc_total_production_active_power__kw
+[Kalamata_Asproxoma_2131kWp] PCC Total Production reactive power (kVAr),kalamata_asproxoma_2131kwp__pcc_total_production_reactive_power__kvar
+[Kalamata_Asproxoma_2131kWp] Weather Station 1 Ambient temperature (C),kalamata_asproxoma_2131kwp__weather_station_1_ambient_temperature__c
+[Kalamata_Asproxoma_2131kWp] Weather Station 1 Relative humidity (%),kalamata_asproxoma_2131kwp__weather_station_1_relative_humidity__pct
+[Kalamata_Asproxoma_2131kWp] Weather Station 1 Wind speed (m*s^-1),kalamata_asproxoma_2131kwp__weather_station_1_wind_speed__m_s_1
+"[Ntarali_Bonitas_0,45MW] Ntarali_Bonitas_0,45MW Average Irradiance (W*m^-2)",ntarali_bonitas_450kwp__ntarali_bonitas_0_45mw_average_irradiance__w_m_2
+"[Ntarali_Bonitas_0,45MW] PCC PCC Current THD-R of neutral (%)",ntarali_bonitas_450kwp__pcc_current_thd_r_of_neutral__pct
+"[Ntarali_Bonitas_0,45MW] PCC PCC Current THD-R of phase L1 (%)",ntarali_bonitas_450kwp__pcc_current_thd_r_of_phase_l1__pct
+"[Ntarali_Bonitas_0,45MW] PCC PCC Current THD-R of phase L2 (%)",ntarali_bonitas_450kwp__pcc_current_thd_r_of_phase_l2__pct
+"[Ntarali_Bonitas_0,45MW] PCC PCC Current THD-R of phase L3 (%)",ntarali_bonitas_450kwp__pcc_current_thd_r_of_phase_l3__pct
+"[Ntarali_Bonitas_0,45MW] PCC PCC active energy export (kWh)",ntarali_bonitas_450kwp__pcc_active_energy_export__kwh
+"[Ntarali_Bonitas_0,45MW] PCC PCC active energy import (kWh)",ntarali_bonitas_450kwp__pcc_active_energy_import__kwh
+"[Ntarali_Bonitas_0,45MW] PCC PCC apparent energy (kVAh)",ntarali_bonitas_450kwp__pcc_apparent_energy__kvah
+"[Ntarali_Bonitas_0,45MW] PCC PCC current of phase L1 (A)",ntarali_bonitas_450kwp__pcc_current_of_phase_l1__a
+"[Ntarali_Bonitas_0,45MW] PCC PCC current of phase L2 (A)",ntarali_bonitas_450kwp__pcc_current_of_phase_l2__a
+"[Ntarali_Bonitas_0,45MW] PCC PCC current of phase L3 (A)",ntarali_bonitas_450kwp__pcc_current_of_phase_l3__a
+"[Ntarali_Bonitas_0,45MW] PCC PCC current unbalance of phase L1 (%)",ntarali_bonitas_450kwp__pcc_current_unbalance_of_phase_l1__pct
+"[Ntarali_Bonitas_0,45MW] PCC PCC current unbalance of phase L2 (%)",ntarali_bonitas_450kwp__pcc_current_unbalance_of_phase_l2__pct
+"[Ntarali_Bonitas_0,45MW] PCC PCC current unbalance of phase L3 (%)",ntarali_bonitas_450kwp__pcc_current_unbalance_of_phase_l3__pct
+"[Ntarali_Bonitas_0,45MW] PCC PCC frequency (Hz)",ntarali_bonitas_450kwp__pcc_frequency__hz
+"[Ntarali_Bonitas_0,45MW] PCC PCC power factor of phase L1 (-)",ntarali_bonitas_450kwp__pcc_power_factor_of_phase_l1
+"[Ntarali_Bonitas_0,45MW] PCC PCC power factor of phase L2 (-)",ntarali_bonitas_450kwp__pcc_power_factor_of_phase_l2
+"[Ntarali_Bonitas_0,45MW] PCC PCC power factor of phase L3 (-)",ntarali_bonitas_450kwp__pcc_power_factor_of_phase_l3
+"[Ntarali_Bonitas_0,45MW] PCC PCC reactive energy export (kVArh)",ntarali_bonitas_450kwp__pcc_reactive_energy_export__kvarh
+"[Ntarali_Bonitas_0,45MW] PCC PCC reactive energy import (kVArh)",ntarali_bonitas_450kwp__pcc_reactive_energy_import__kvarh
+"[Ntarali_Bonitas_0,45MW] PCC PCC total power factor (-)",ntarali_bonitas_450kwp__pcc_total_power_factor
+"[Ntarali_Bonitas_0,45MW] PCC PCC voltage of L1-L2 (Vac)",ntarali_bonitas_450kwp__pcc_voltage_of_l1_l2__vac
+"[Ntarali_Bonitas_0,45MW] PCC PCC voltage of L2-L3 (Vac)",ntarali_bonitas_450kwp__pcc_voltage_of_l2_l3__vac
+"[Ntarali_Bonitas_0,45MW] PCC PCC voltage of L3-L1 (Vac)",ntarali_bonitas_450kwp__pcc_voltage_of_l3_l1__vac
+"[Ntarali_Bonitas_0,45MW] PCC Production active energy export (kWh)",ntarali_bonitas_450kwp__pcc_production_active_energy_export__kwh
+"[Ntarali_Bonitas_0,45MW] PCC Production active energy import (kWh)",ntarali_bonitas_450kwp__pcc_production_active_energy_import__kwh
+"[Ntarali_Bonitas_0,45MW] PCC Production apparent energy (kVAh)",ntarali_bonitas_450kwp__pcc_production_apparent_energy__kvah
+"[Ntarali_Bonitas_0,45MW] PCC Production current of phase L1 (A)",ntarali_bonitas_450kwp__pcc_production_current_of_phase_l1__a
+"[Ntarali_Bonitas_0,45MW] PCC Production current of phase L2 (A)",ntarali_bonitas_450kwp__pcc_production_current_of_phase_l2__a
+"[Ntarali_Bonitas_0,45MW] PCC Production current of phase L3 (A)",ntarali_bonitas_450kwp__pcc_production_current_of_phase_l3__a
+"[Ntarali_Bonitas_0,45MW] PCC Production frequency (Hz)",ntarali_bonitas_450kwp__pcc_production_frequency__hz
+"[Ntarali_Bonitas_0,45MW] PCC Production reactive energy export (kVArh)",ntarali_bonitas_450kwp__pcc_production_reactive_energy_export__kvarh
+"[Ntarali_Bonitas_0,45MW] PCC Production reactive energy import (kVArh)",ntarali_bonitas_450kwp__pcc_production_reactive_energy_import__kvarh
+"[Ntarali_Bonitas_0,45MW] PCC Production total power factor (-)",ntarali_bonitas_450kwp__pcc_production_total_power_factor
+"[Ntarali_Bonitas_0,45MW] PCC Production voltage of L1-L2 (Vac)",ntarali_bonitas_450kwp__pcc_production_voltage_of_l1_l2__vac
+"[Ntarali_Bonitas_0,45MW] PCC Production voltage of L2-L3 (Vac)",ntarali_bonitas_450kwp__pcc_production_voltage_of_l2_l3__vac
+"[Ntarali_Bonitas_0,45MW] PCC Production voltage of L3-L1 (Vac)",ntarali_bonitas_450kwp__pcc_production_voltage_of_l3_l1__vac
+"[Ntarali_Bonitas_0,45MW] PCC Total Production active power (kW)",ntarali_bonitas_450kwp__pcc_total_production_active_power__kw
+"[Ntarali_Bonitas_0,45MW] PCC Total Production apparent power (kVA)",ntarali_bonitas_450kwp__pcc_total_production_apparent_power__kva
+"[Ntarali_Bonitas_0,45MW] PCC Total Production reactive power (kVAr)",ntarali_bonitas_450kwp__pcc_total_production_reactive_power__kvar
+[Ntarali_Concept_296KW] Ntarali_Concept_296KW Average Irradiance (W*m^-2),ntarali_concept_296kwp__ntarali_concept_296kw_average_irradiance__w_m_2
+[Ntarali_Concept_296KW] PCC PCC Current THD-R of neutral (%),ntarali_concept_296kwp__pcc_current_thd_r_of_neutral__pct
+[Ntarali_Concept_296KW] PCC PCC Current THD-R of phase L1 (%),ntarali_concept_296kwp__pcc_current_thd_r_of_phase_l1__pct
+[Ntarali_Concept_296KW] PCC PCC Current THD-R of phase L2 (%),ntarali_concept_296kwp__pcc_current_thd_r_of_phase_l2__pct
+[Ntarali_Concept_296KW] PCC PCC Current THD-R of phase L3 (%),ntarali_concept_296kwp__pcc_current_thd_r_of_phase_l3__pct
+[Ntarali_Concept_296KW] PCC PCC active energy export (kWh),ntarali_concept_296kwp__pcc_active_energy_export__kwh
+[Ntarali_Concept_296KW] PCC PCC active energy import (kWh),ntarali_concept_296kwp__pcc_active_energy_import__kwh
+[Ntarali_Concept_296KW] PCC PCC apparent energy (kVAh),ntarali_concept_296kwp__pcc_apparent_energy__kvah
+[Ntarali_Concept_296KW] PCC PCC average current (A),ntarali_concept_296kwp__pcc_average_current__a
+[Ntarali_Concept_296KW] PCC PCC average line voltage (Vac),ntarali_concept_296kwp__pcc_average_line_voltage__vac
+[Ntarali_Concept_296KW] PCC PCC average phase voltage (Vac),ntarali_concept_296kwp__pcc_average_phase_voltage__vac
+[Ntarali_Concept_296KW] PCC PCC current of phase L1 (A),ntarali_concept_296kwp__pcc_current_of_phase_l1__a
+[Ntarali_Concept_296KW] PCC PCC current of phase L2 (A),ntarali_concept_296kwp__pcc_current_of_phase_l2__a
+[Ntarali_Concept_296KW] PCC PCC current of phase L3 (A),ntarali_concept_296kwp__pcc_current_of_phase_l3__a
+[Ntarali_Concept_296KW] PCC PCC current unbalance of phase L1 (%),ntarali_concept_296kwp__pcc_current_unbalance_of_phase_l1__pct
+[Ntarali_Concept_296KW] PCC PCC current unbalance of phase L2 (%),ntarali_concept_296kwp__pcc_current_unbalance_of_phase_l2__pct
+[Ntarali_Concept_296KW] PCC PCC current unbalance of phase L3 (%),ntarali_concept_296kwp__pcc_current_unbalance_of_phase_l3__pct
+[Ntarali_Concept_296KW] PCC PCC frequency (Hz),ntarali_concept_296kwp__pcc_frequency__hz
+[Ntarali_Concept_296KW] PCC PCC power factor of phase L1 (-),ntarali_concept_296kwp__pcc_power_factor_of_phase_l1
+[Ntarali_Concept_296KW] PCC PCC power factor of phase L2 (-),ntarali_concept_296kwp__pcc_power_factor_of_phase_l2
+[Ntarali_Concept_296KW] PCC PCC power factor of phase L3 (-),ntarali_concept_296kwp__pcc_power_factor_of_phase_l3
+[Ntarali_Concept_296KW] PCC PCC reactive energy export (kVArh),ntarali_concept_296kwp__pcc_reactive_energy_export__kvarh
+[Ntarali_Concept_296KW] PCC PCC reactive energy import (kVArh),ntarali_concept_296kwp__pcc_reactive_energy_import__kvarh
+[Ntarali_Concept_296KW] PCC PCC total power factor (-),ntarali_concept_296kwp__pcc_total_power_factor
+[Ntarali_Concept_296KW] PCC PCC voltage of L1-L2 (Vac),ntarali_concept_296kwp__pcc_voltage_of_l1_l2__vac
+[Ntarali_Concept_296KW] PCC PCC voltage of L2-L3 (Vac),ntarali_concept_296kwp__pcc_voltage_of_l2_l3__vac
+[Ntarali_Concept_296KW] PCC PCC voltage of L3-L1 (Vac),ntarali_concept_296kwp__pcc_voltage_of_l3_l1__vac
+[Ntarali_Concept_296KW] PCC Production active energy export (kWh),ntarali_concept_296kwp__pcc_production_active_energy_export__kwh
+[Ntarali_Concept_296KW] PCC Production active energy import (kWh),ntarali_concept_296kwp__pcc_production_active_energy_import__kwh
+[Ntarali_Concept_296KW] PCC Production apparent energy (kVAh),ntarali_concept_296kwp__pcc_production_apparent_energy__kvah
+[Ntarali_Concept_296KW] PCC Production current of phase L1 (A),ntarali_concept_296kwp__pcc_production_current_of_phase_l1__a
+[Ntarali_Concept_296KW] PCC Production current of phase L2 (A),ntarali_concept_296kwp__pcc_production_current_of_phase_l2__a
+[Ntarali_Concept_296KW] PCC Production current of phase L3 (A),ntarali_concept_296kwp__pcc_production_current_of_phase_l3__a
+[Ntarali_Concept_296KW] PCC Production frequency (Hz),ntarali_concept_296kwp__pcc_production_frequency__hz
+[Ntarali_Concept_296KW] PCC Production reactive energy export (kVArh),ntarali_concept_296kwp__pcc_production_reactive_energy_export__kvarh
+[Ntarali_Concept_296KW] PCC Production reactive energy import (kVArh),ntarali_concept_296kwp__pcc_production_reactive_energy_import__kvarh
+[Ntarali_Concept_296KW] PCC Production total power factor (-),ntarali_concept_296kwp__pcc_production_total_power_factor
+[Ntarali_Concept_296KW] PCC Production voltage of L1-L2 (Vac),ntarali_concept_296kwp__pcc_production_voltage_of_l1_l2__vac
+[Ntarali_Concept_296KW] PCC Production voltage of L2-L3 (Vac),ntarali_concept_296kwp__pcc_production_voltage_of_l2_l3__vac
+[Ntarali_Concept_296KW] PCC Production voltage of L3-L1 (Vac),ntarali_concept_296kwp__pcc_production_voltage_of_l3_l1__vac
+[Ntarali_Concept_296KW] PCC Total Production active power (kW),ntarali_concept_296kwp__pcc_total_production_active_power__kw
+[Ntarali_Concept_296KW] PCC Total Production apparent power (kVA),ntarali_concept_296kwp__pcc_total_production_apparent_power__kva
+[Ntarali_Concept_296KW] PCC Total Production reactive power (kVAr),ntarali_concept_296kwp__pcc_total_production_reactive_power__kvar
+[Ntarali_Concept_296KW] Weather Station Ambient temperature (C),ntarali_concept_296kwp__weather_station_ambient_temperature__c
+[Ntarali_Concept_296KW] Weather Station Relative humidity (%),ntarali_concept_296kwp__weather_station_relative_humidity__pct
+[Ntarali_Concept_320KW] Ntarali_Concept_320KW Average Irradiance (W*m^-2),ntarali_concept_320kwp__ntarali_concept_320kw_average_irradiance__w_m_2
+[Ntarali_Concept_320KW] PCC PCC active energy export (kWh),ntarali_concept_320kwp__pcc_active_energy_export__kwh
+[Ntarali_Concept_320KW] PCC PCC active energy import (kWh),ntarali_concept_320kwp__pcc_active_energy_import__kwh
+[Ntarali_Concept_320KW] PCC PCC apparent energy (kVAh),ntarali_concept_320kwp__pcc_apparent_energy__kvah
+[Ntarali_Concept_320KW] PCC PCC average line voltage (Vac),ntarali_concept_320kwp__pcc_average_line_voltage__vac
+[Ntarali_Concept_320KW] PCC PCC current of phase L1 (A),ntarali_concept_320kwp__pcc_current_of_phase_l1__a
+[Ntarali_Concept_320KW] PCC PCC current of phase L2 (A),ntarali_concept_320kwp__pcc_current_of_phase_l2__a
+[Ntarali_Concept_320KW] PCC PCC current of phase L3 (A),ntarali_concept_320kwp__pcc_current_of_phase_l3__a
+[Ntarali_Concept_320KW] PCC PCC frequency (Hz),ntarali_concept_320kwp__pcc_frequency__hz
+[Ntarali_Concept_320KW] PCC PCC reactive energy export (kVArh),ntarali_concept_320kwp__pcc_reactive_energy_export__kvarh
+[Ntarali_Concept_320KW] PCC PCC reactive energy import (kVArh),ntarali_concept_320kwp__pcc_reactive_energy_import__kvarh
+[Ntarali_Concept_320KW] PCC PCC total power factor (-),ntarali_concept_320kwp__pcc_total_power_factor
+[Ntarali_Concept_320KW] PCC PCC voltage of L1-L2 (Vac),ntarali_concept_320kwp__pcc_voltage_of_l1_l2__vac
+[Ntarali_Concept_320KW] PCC PCC voltage of L2-L3 (Vac),ntarali_concept_320kwp__pcc_voltage_of_l2_l3__vac
+[Ntarali_Concept_320KW] PCC PCC voltage of L3-L1 (Vac),ntarali_concept_320kwp__pcc_voltage_of_l3_l1__vac
+[Ntarali_Concept_320KW] PCC Production active energy export (kWh),ntarali_concept_320kwp__pcc_production_active_energy_export__kwh
+[Ntarali_Concept_320KW] PCC Production active energy import (kWh),ntarali_concept_320kwp__pcc_production_active_energy_import__kwh
+[Ntarali_Concept_320KW] PCC Production apparent energy (kVAh),ntarali_concept_320kwp__pcc_production_apparent_energy__kvah
+[Ntarali_Concept_320KW] PCC Production current of phase L1 (A),ntarali_concept_320kwp__pcc_production_current_of_phase_l1__a
+[Ntarali_Concept_320KW] PCC Production current of phase L2 (A),ntarali_concept_320kwp__pcc_production_current_of_phase_l2__a
+[Ntarali_Concept_320KW] PCC Production current of phase L3 (A),ntarali_concept_320kwp__pcc_production_current_of_phase_l3__a
+[Ntarali_Concept_320KW] PCC Production frequency (Hz),ntarali_concept_320kwp__pcc_production_frequency__hz
+[Ntarali_Concept_320KW] PCC Production reactive energy export (kVArh),ntarali_concept_320kwp__pcc_production_reactive_energy_export__kvarh
+[Ntarali_Concept_320KW] PCC Production reactive energy import (kVArh),ntarali_concept_320kwp__pcc_production_reactive_energy_import__kvarh
+[Ntarali_Concept_320KW] PCC Production total power factor (-),ntarali_concept_320kwp__pcc_production_total_power_factor
+[Ntarali_Concept_320KW] PCC Production voltage of L1-L2 (Vac),ntarali_concept_320kwp__pcc_production_voltage_of_l1_l2__vac
+[Ntarali_Concept_320KW] PCC Production voltage of L2-L3 (Vac),ntarali_concept_320kwp__pcc_production_voltage_of_l2_l3__vac
+[Ntarali_Concept_320KW] PCC Production voltage of L3-L1 (Vac),ntarali_concept_320kwp__pcc_production_voltage_of_l3_l1__vac
+[Ntarali_Concept_320KW] PCC Total Production active power (kW),ntarali_concept_320kwp__pcc_total_production_active_power__kw
+[Ntarali_Concept_320KW] PCC Total Production apparent power (kVA),ntarali_concept_320kwp__pcc_total_production_apparent_power__kva
+[Ntarali_Concept_320KW] PCC Total Production reactive power (kVAr),ntarali_concept_320kwp__pcc_total_production_reactive_power__kvar
+[Ntarali_Concept_320KW] Weather Station Ambient Temperature (C),ntarali_concept_320kwp__weather_station_ambient_temperature__c
+[Ntarali_Concept_320KW] Weather Station Relative Humidity  (%),ntarali_concept_320kwp__weather_station_relative_humidity__pct
+[Ntarali_Concept_592KW] Ntarali_Concept_592KW Average Irradiance (W*m^-2),ntarali_concept_592kwp__ntarali_concept_592kw_average_irradiance__w_m_2
+[Ntarali_Concept_592KW] PCC PCC Current THD-R of neutral (%),ntarali_concept_592kwp__pcc_current_thd_r_of_neutral__pct
+[Ntarali_Concept_592KW] PCC PCC Current THD-R of phase L1 (%),ntarali_concept_592kwp__pcc_current_thd_r_of_phase_l1__pct
+[Ntarali_Concept_592KW] PCC PCC Current THD-R of phase L2 (%),ntarali_concept_592kwp__pcc_current_thd_r_of_phase_l2__pct
+[Ntarali_Concept_592KW] PCC PCC Current THD-R of phase L3 (%),ntarali_concept_592kwp__pcc_current_thd_r_of_phase_l3__pct
+[Ntarali_Concept_592KW] PCC PCC active energy export (kWh),ntarali_concept_592kwp__pcc_active_energy_export__kwh
+[Ntarali_Concept_592KW] PCC PCC active energy import (kWh),ntarali_concept_592kwp__pcc_active_energy_import__kwh
+[Ntarali_Concept_592KW] PCC PCC apparent energy (kVAh),ntarali_concept_592kwp__pcc_apparent_energy__kvah
+[Ntarali_Concept_592KW] PCC PCC average current (A),ntarali_concept_592kwp__pcc_average_current__a
+[Ntarali_Concept_592KW] PCC PCC average line voltage (Vac),ntarali_concept_592kwp__pcc_average_line_voltage__vac
+[Ntarali_Concept_592KW] PCC PCC average phase voltage (Vac),ntarali_concept_592kwp__pcc_average_phase_voltage__vac
+[Ntarali_Concept_592KW] PCC PCC current of phase L1 (A),ntarali_concept_592kwp__pcc_current_of_phase_l1__a
+[Ntarali_Concept_592KW] PCC PCC current of phase L2 (A),ntarali_concept_592kwp__pcc_current_of_phase_l2__a
+[Ntarali_Concept_592KW] PCC PCC current of phase L3 (A),ntarali_concept_592kwp__pcc_current_of_phase_l3__a
+[Ntarali_Concept_592KW] PCC PCC current unbalance of phase L1 (%),ntarali_concept_592kwp__pcc_current_unbalance_of_phase_l1__pct
+[Ntarali_Concept_592KW] PCC PCC current unbalance of phase L2 (%),ntarali_concept_592kwp__pcc_current_unbalance_of_phase_l2__pct
+[Ntarali_Concept_592KW] PCC PCC current unbalance of phase L3 (%),ntarali_concept_592kwp__pcc_current_unbalance_of_phase_l3__pct
+[Ntarali_Concept_592KW] PCC PCC frequency (Hz),ntarali_concept_592kwp__pcc_frequency__hz
+[Ntarali_Concept_592KW] PCC PCC power factor of phase L1 (-),ntarali_concept_592kwp__pcc_power_factor_of_phase_l1
+[Ntarali_Concept_592KW] PCC PCC power factor of phase L2 (-),ntarali_concept_592kwp__pcc_power_factor_of_phase_l2
+[Ntarali_Concept_592KW] PCC PCC power factor of phase L3 (-),ntarali_concept_592kwp__pcc_power_factor_of_phase_l3
+[Ntarali_Concept_592KW] PCC PCC reactive energy export (kVArh),ntarali_concept_592kwp__pcc_reactive_energy_export__kvarh
+[Ntarali_Concept_592KW] PCC PCC reactive energy import (kVArh),ntarali_concept_592kwp__pcc_reactive_energy_import__kvarh
+[Ntarali_Concept_592KW] PCC PCC total power factor (-),ntarali_concept_592kwp__pcc_total_power_factor
+[Ntarali_Concept_592KW] PCC PCC voltage of L1-L2 (Vac),ntarali_concept_592kwp__pcc_voltage_of_l1_l2__vac
+[Ntarali_Concept_592KW] PCC PCC voltage of L2-L3 (Vac),ntarali_concept_592kwp__pcc_voltage_of_l2_l3__vac
+[Ntarali_Concept_592KW] PCC PCC voltage of L3-L1 (Vac),ntarali_concept_592kwp__pcc_voltage_of_l3_l1__vac
+[Ntarali_Concept_592KW] PCC Production active energy export (kWh),ntarali_concept_592kwp__pcc_production_active_energy_export__kwh
+[Ntarali_Concept_592KW] PCC Production active energy import (kWh),ntarali_concept_592kwp__pcc_production_active_energy_import__kwh
+[Ntarali_Concept_592KW] PCC Production apparent energy (kVAh),ntarali_concept_592kwp__pcc_production_apparent_energy__kvah
+[Ntarali_Concept_592KW] PCC Production current of phase L1 (A),ntarali_concept_592kwp__pcc_production_current_of_phase_l1__a
+[Ntarali_Concept_592KW] PCC Production current of phase L2 (A),ntarali_concept_592kwp__pcc_production_current_of_phase_l2__a
+[Ntarali_Concept_592KW] PCC Production current of phase L3 (A),ntarali_concept_592kwp__pcc_production_current_of_phase_l3__a
+[Ntarali_Concept_592KW] PCC Production frequency (Hz),ntarali_concept_592kwp__pcc_production_frequency__hz
+[Ntarali_Concept_592KW] PCC Production reactive energy export (kVArh),ntarali_concept_592kwp__pcc_production_reactive_energy_export__kvarh
+[Ntarali_Concept_592KW] PCC Production reactive energy import (kVArh),ntarali_concept_592kwp__pcc_production_reactive_energy_import__kvarh
+[Ntarali_Concept_592KW] PCC Production total power factor (-),ntarali_concept_592kwp__pcc_production_total_power_factor
+[Ntarali_Concept_592KW] PCC Production voltage of L1-L2 (Vac),ntarali_concept_592kwp__pcc_production_voltage_of_l1_l2__vac
+[Ntarali_Concept_592KW] PCC Production voltage of L2-L3 (Vac),ntarali_concept_592kwp__pcc_production_voltage_of_l2_l3__vac
+[Ntarali_Concept_592KW] PCC Production voltage of L3-L1 (Vac),ntarali_concept_592kwp__pcc_production_voltage_of_l3_l1__vac
+[Ntarali_Concept_592KW] PCC Total Production active power (kW),ntarali_concept_592kwp__pcc_total_production_active_power__kw
+[Ntarali_Concept_592KW] PCC Total Production apparent power (kVA),ntarali_concept_592kwp__pcc_total_production_apparent_power__kva
+[Ntarali_Concept_592KW] PCC Total Production reactive power (kVAr),ntarali_concept_592kwp__pcc_total_production_reactive_power__kvar
+[Ntarali_Konenergy_590KW] Ntarali_Konenergy_590KW Average Irradiance (W*m^-2),ntarali_konenergy_590kwp__ntarali_konenergy_590kw_average_irradiance__w_m_2
+[Ntarali_Konenergy_590KW] PCC PCC Current THD-R of neutral (%),ntarali_konenergy_590kwp__pcc_current_thd_r_of_neutral__pct
+[Ntarali_Konenergy_590KW] PCC PCC Current THD-R of phase L1 (%),ntarali_konenergy_590kwp__pcc_current_thd_r_of_phase_l1__pct
+[Ntarali_Konenergy_590KW] PCC PCC Current THD-R of phase L2 (%),ntarali_konenergy_590kwp__pcc_current_thd_r_of_phase_l2__pct
+[Ntarali_Konenergy_590KW] PCC PCC Current THD-R of phase L3 (%),ntarali_konenergy_590kwp__pcc_current_thd_r_of_phase_l3__pct
+[Ntarali_Konenergy_590KW] PCC PCC active energy export (kWh),ntarali_konenergy_590kwp__pcc_active_energy_export__kwh
+[Ntarali_Konenergy_590KW] PCC PCC active energy import (kWh),ntarali_konenergy_590kwp__pcc_active_energy_import__kwh
+[Ntarali_Konenergy_590KW] PCC PCC apparent energy (kVAh),ntarali_konenergy_590kwp__pcc_apparent_energy__kvah
+[Ntarali_Konenergy_590KW] PCC PCC average current (A),ntarali_konenergy_590kwp__pcc_average_current__a
+[Ntarali_Konenergy_590KW] PCC PCC average line voltage (Vac),ntarali_konenergy_590kwp__pcc_average_line_voltage__vac
+[Ntarali_Konenergy_590KW] PCC PCC average phase voltage (Vac),ntarali_konenergy_590kwp__pcc_average_phase_voltage__vac
+[Ntarali_Konenergy_590KW] PCC PCC current of phase L1 (A),ntarali_konenergy_590kwp__pcc_current_of_phase_l1__a
+[Ntarali_Konenergy_590KW] PCC PCC current of phase L2 (A),ntarali_konenergy_590kwp__pcc_current_of_phase_l2__a
+[Ntarali_Konenergy_590KW] PCC PCC current of phase L3 (A),ntarali_konenergy_590kwp__pcc_current_of_phase_l3__a
+[Ntarali_Konenergy_590KW] PCC PCC current unbalance of phase L1 (%),ntarali_konenergy_590kwp__pcc_current_unbalance_of_phase_l1__pct
+[Ntarali_Konenergy_590KW] PCC PCC current unbalance of phase L2 (%),ntarali_konenergy_590kwp__pcc_current_unbalance_of_phase_l2__pct
+[Ntarali_Konenergy_590KW] PCC PCC current unbalance of phase L3 (%),ntarali_konenergy_590kwp__pcc_current_unbalance_of_phase_l3__pct
+[Ntarali_Konenergy_590KW] PCC PCC frequency (Hz),ntarali_konenergy_590kwp__pcc_frequency__hz
+[Ntarali_Konenergy_590KW] PCC PCC power factor of phase L1 (-),ntarali_konenergy_590kwp__pcc_power_factor_of_phase_l1
+[Ntarali_Konenergy_590KW] PCC PCC power factor of phase L2 (-),ntarali_konenergy_590kwp__pcc_power_factor_of_phase_l2
+[Ntarali_Konenergy_590KW] PCC PCC power factor of phase L3 (-),ntarali_konenergy_590kwp__pcc_power_factor_of_phase_l3
+[Ntarali_Konenergy_590KW] PCC PCC reactive energy export (kVArh),ntarali_konenergy_590kwp__pcc_reactive_energy_export__kvarh
+[Ntarali_Konenergy_590KW] PCC PCC reactive energy import (kVArh),ntarali_konenergy_590kwp__pcc_reactive_energy_import__kvarh
+[Ntarali_Konenergy_590KW] PCC PCC total power factor (-),ntarali_konenergy_590kwp__pcc_total_power_factor
+[Ntarali_Konenergy_590KW] PCC PCC voltage of L1-L2 (Vac),ntarali_konenergy_590kwp__pcc_voltage_of_l1_l2__vac
+[Ntarali_Konenergy_590KW] PCC PCC voltage of L2-L3 (Vac),ntarali_konenergy_590kwp__pcc_voltage_of_l2_l3__vac
+[Ntarali_Konenergy_590KW] PCC PCC voltage of L3-L1 (Vac),ntarali_konenergy_590kwp__pcc_voltage_of_l3_l1__vac
+[Ntarali_Konenergy_590KW] PCC Production active energy export (kWh),ntarali_konenergy_590kwp__pcc_production_active_energy_export__kwh
+[Ntarali_Konenergy_590KW] PCC Production active energy import (kWh),ntarali_konenergy_590kwp__pcc_production_active_energy_import__kwh
+[Ntarali_Konenergy_590KW] PCC Production apparent energy (kVAh),ntarali_konenergy_590kwp__pcc_production_apparent_energy__kvah
+[Ntarali_Konenergy_590KW] PCC Production current of phase L1 (A),ntarali_konenergy_590kwp__pcc_production_current_of_phase_l1__a
+[Ntarali_Konenergy_590KW] PCC Production current of phase L2 (A),ntarali_konenergy_590kwp__pcc_production_current_of_phase_l2__a
+[Ntarali_Konenergy_590KW] PCC Production current of phase L3 (A),ntarali_konenergy_590kwp__pcc_production_current_of_phase_l3__a
+[Ntarali_Konenergy_590KW] PCC Production frequency (Hz),ntarali_konenergy_590kwp__pcc_production_frequency__hz
+[Ntarali_Konenergy_590KW] PCC Production reactive energy export (kVArh),ntarali_konenergy_590kwp__pcc_production_reactive_energy_export__kvarh
+[Ntarali_Konenergy_590KW] PCC Production reactive energy import (kVArh),ntarali_konenergy_590kwp__pcc_production_reactive_energy_import__kvarh
+[Ntarali_Konenergy_590KW] PCC Production total power factor (-),ntarali_konenergy_590kwp__pcc_production_total_power_factor
+[Ntarali_Konenergy_590KW] PCC Production voltage of L1-L2 (Vac),ntarali_konenergy_590kwp__pcc_production_voltage_of_l1_l2__vac
+[Ntarali_Konenergy_590KW] PCC Production voltage of L2-L3 (Vac),ntarali_konenergy_590kwp__pcc_production_voltage_of_l2_l3__vac
+[Ntarali_Konenergy_590KW] PCC Production voltage of L3-L1 (Vac),ntarali_konenergy_590kwp__pcc_production_voltage_of_l3_l1__vac
+[Ntarali_Konenergy_590KW] PCC Total Production active power (kW),ntarali_konenergy_590kwp__pcc_total_production_active_power__kw
+[Ntarali_Konenergy_590KW] PCC Total Production apparent power (kVA),ntarali_konenergy_590kwp__pcc_total_production_apparent_power__kva
+[Ntarali_Konenergy_590KW] PCC Total Production reactive power (kVAr),ntarali_konenergy_590kwp__pcc_total_production_reactive_power__kvar
+[NyConTec 993 Kwp Giannopouleika] NyConTec 993 Kwp Giannopouleika Average Irradiance (W*m^-2),nycontec_giannopouleika_993kwp__nycontec_993_kwp_giannopouleika_average_irradiance__w_m_2
+[NyConTec 993 Kwp Giannopouleika] PCC PCC Current THD-R of neutral (%),nycontec_giannopouleika_993kwp__pcc_current_thd_r_of_neutral__pct
+[NyConTec 993 Kwp Giannopouleika] PCC PCC Current THD-R of phase L1 (%),nycontec_giannopouleika_993kwp__pcc_current_thd_r_of_phase_l1__pct
+[NyConTec 993 Kwp Giannopouleika] PCC PCC Current THD-R of phase L2 (%),nycontec_giannopouleika_993kwp__pcc_current_thd_r_of_phase_l2__pct
+[NyConTec 993 Kwp Giannopouleika] PCC PCC Current THD-R of phase L3 (%),nycontec_giannopouleika_993kwp__pcc_current_thd_r_of_phase_l3__pct
+[NyConTec 993 Kwp Giannopouleika] PCC PCC active energy export (kWh),nycontec_giannopouleika_993kwp__pcc_active_energy_export__kwh
+[NyConTec 993 Kwp Giannopouleika] PCC PCC active energy import (kWh),nycontec_giannopouleika_993kwp__pcc_active_energy_import__kwh
+[NyConTec 993 Kwp Giannopouleika] PCC PCC apparent energy (kVAh),nycontec_giannopouleika_993kwp__pcc_apparent_energy__kvah
+[NyConTec 993 Kwp Giannopouleika] PCC PCC average current (A),nycontec_giannopouleika_993kwp__pcc_average_current__a
+[NyConTec 993 Kwp Giannopouleika] PCC PCC average line voltage (Vac),nycontec_giannopouleika_993kwp__pcc_average_line_voltage__vac
+[NyConTec 993 Kwp Giannopouleika] PCC PCC average phase voltage (Vac),nycontec_giannopouleika_993kwp__pcc_average_phase_voltage__vac
+[NyConTec 993 Kwp Giannopouleika] PCC PCC current of phase L1 (A),nycontec_giannopouleika_993kwp__pcc_current_of_phase_l1__a
+[NyConTec 993 Kwp Giannopouleika] PCC PCC current of phase L2 (A),nycontec_giannopouleika_993kwp__pcc_current_of_phase_l2__a
+[NyConTec 993 Kwp Giannopouleika] PCC PCC current of phase L3 (A),nycontec_giannopouleika_993kwp__pcc_current_of_phase_l3__a
+[NyConTec 993 Kwp Giannopouleika] PCC PCC current unbalance of phase L1 (%),nycontec_giannopouleika_993kwp__pcc_current_unbalance_of_phase_l1__pct
+[NyConTec 993 Kwp Giannopouleika] PCC PCC current unbalance of phase L2 (%),nycontec_giannopouleika_993kwp__pcc_current_unbalance_of_phase_l2__pct
+[NyConTec 993 Kwp Giannopouleika] PCC PCC current unbalance of phase L3 (%),nycontec_giannopouleika_993kwp__pcc_current_unbalance_of_phase_l3__pct
+[NyConTec 993 Kwp Giannopouleika] PCC PCC frequency (Hz),nycontec_giannopouleika_993kwp__pcc_frequency__hz
+[NyConTec 993 Kwp Giannopouleika] PCC PCC power factor of phase L1 (-),nycontec_giannopouleika_993kwp__pcc_power_factor_of_phase_l1
+[NyConTec 993 Kwp Giannopouleika] PCC PCC power factor of phase L2 (-),nycontec_giannopouleika_993kwp__pcc_power_factor_of_phase_l2
+[NyConTec 993 Kwp Giannopouleika] PCC PCC power factor of phase L3 (-),nycontec_giannopouleika_993kwp__pcc_power_factor_of_phase_l3
+[NyConTec 993 Kwp Giannopouleika] PCC PCC reactive energy export (kVArh),nycontec_giannopouleika_993kwp__pcc_reactive_energy_export__kvarh
+[NyConTec 993 Kwp Giannopouleika] PCC PCC reactive energy import (kVArh),nycontec_giannopouleika_993kwp__pcc_reactive_energy_import__kvarh
+[NyConTec 993 Kwp Giannopouleika] PCC PCC total power factor (-),nycontec_giannopouleika_993kwp__pcc_total_power_factor
+[NyConTec 993 Kwp Giannopouleika] PCC PCC voltage of L1-L2 (Vac),nycontec_giannopouleika_993kwp__pcc_voltage_of_l1_l2__vac
+[NyConTec 993 Kwp Giannopouleika] PCC PCC voltage of L2-L3 (Vac),nycontec_giannopouleika_993kwp__pcc_voltage_of_l2_l3__vac
+[NyConTec 993 Kwp Giannopouleika] PCC PCC voltage of L3-L1 (Vac),nycontec_giannopouleika_993kwp__pcc_voltage_of_l3_l1__vac
+[NyConTec 993 Kwp Giannopouleika] PCC Production active energy export (kWh),nycontec_giannopouleika_993kwp__pcc_production_active_energy_export__kwh
+[NyConTec 993 Kwp Giannopouleika] PCC Production active energy import (kWh),nycontec_giannopouleika_993kwp__pcc_production_active_energy_import__kwh
+[NyConTec 993 Kwp Giannopouleika] PCC Production apparent energy (kVAh),nycontec_giannopouleika_993kwp__pcc_production_apparent_energy__kvah
+[NyConTec 993 Kwp Giannopouleika] PCC Production current of phase L1 (A),nycontec_giannopouleika_993kwp__pcc_production_current_of_phase_l1__a
+[NyConTec 993 Kwp Giannopouleika] PCC Production current of phase L2 (A),nycontec_giannopouleika_993kwp__pcc_production_current_of_phase_l2__a
+[NyConTec 993 Kwp Giannopouleika] PCC Production current of phase L3 (A),nycontec_giannopouleika_993kwp__pcc_production_current_of_phase_l3__a
+[NyConTec 993 Kwp Giannopouleika] PCC Production frequency (Hz),nycontec_giannopouleika_993kwp__pcc_production_frequency__hz
+[NyConTec 993 Kwp Giannopouleika] PCC Production reactive energy export (kVArh),nycontec_giannopouleika_993kwp__pcc_production_reactive_energy_export__kvarh
+[NyConTec 993 Kwp Giannopouleika] PCC Production reactive energy import (kVArh),nycontec_giannopouleika_993kwp__pcc_production_reactive_energy_import__kvarh
+[NyConTec 993 Kwp Giannopouleika] PCC Production total power factor (-),nycontec_giannopouleika_993kwp__pcc_production_total_power_factor
+[NyConTec 993 Kwp Giannopouleika] PCC Production voltage of L1-L2 (Vac),nycontec_giannopouleika_993kwp__pcc_production_voltage_of_l1_l2__vac
+[NyConTec 993 Kwp Giannopouleika] PCC Production voltage of L2-L3 (Vac),nycontec_giannopouleika_993kwp__pcc_production_voltage_of_l2_l3__vac
+[NyConTec 993 Kwp Giannopouleika] PCC Production voltage of L3-L1 (Vac),nycontec_giannopouleika_993kwp__pcc_production_voltage_of_l3_l1__vac
+[NyConTec 993 Kwp Giannopouleika] PCC Total Production active power (kW),nycontec_giannopouleika_993kwp__pcc_total_production_active_power__kw
+[NyConTec 993 Kwp Giannopouleika] PCC Total Production apparent power (kVA),nycontec_giannopouleika_993kwp__pcc_total_production_apparent_power__kva
+[NyConTec 993 Kwp Giannopouleika] PCC Total Production reactive power (kVAr),nycontec_giannopouleika_993kwp__pcc_total_production_reactive_power__kvar
+[NyConTec 993 Kwp Giannopouleika] Weather Station Ambient Temperature (C),nycontec_giannopouleika_993kwp__weather_station_ambient_temperature__c
+[NyConTec 993 Kwp Giannopouleika] Weather Station Relative Humidity  (%),nycontec_giannopouleika_993kwp__weather_station_relative_humidity__pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of neutral (%),palaionaziro_iraio_1kwp__pcc_current_thd_r_of_neutral__pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L1 (%),palaionaziro_iraio_1kwp__pcc_current_thd_r_of_phase_l1__pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L2 (%),palaionaziro_iraio_1kwp__pcc_current_thd_r_of_phase_l2__pct
+[Palaionaziro_Iraio] PCC PCC Current THD-R of phase L3 (%),palaionaziro_iraio_1kwp__pcc_current_thd_r_of_phase_l3__pct
+[Palaionaziro_Iraio] PCC PCC active energy export (kWh),palaionaziro_iraio_1kwp__pcc_active_energy_export__kwh
+[Palaionaziro_Iraio] PCC PCC active energy import (kWh),palaionaziro_iraio_1kwp__pcc_active_energy_import__kwh
+[Palaionaziro_Iraio] PCC PCC apparent energy (kVAh),palaionaziro_iraio_1kwp__pcc_apparent_energy__kvah
+[Palaionaziro_Iraio] PCC PCC average current (A),palaionaziro_iraio_1kwp__pcc_average_current__a
+[Palaionaziro_Iraio] PCC PCC average line voltage (Vac),palaionaziro_iraio_1kwp__pcc_average_line_voltage__vac
+[Palaionaziro_Iraio] PCC PCC average phase voltage (Vac),palaionaziro_iraio_1kwp__pcc_average_phase_voltage__vac
+[Palaionaziro_Iraio] PCC PCC current of phase L1 (A),palaionaziro_iraio_1kwp__pcc_current_of_phase_l1__a
+[Palaionaziro_Iraio] PCC PCC current of phase L2 (A),palaionaziro_iraio_1kwp__pcc_current_of_phase_l2__a
+[Palaionaziro_Iraio] PCC PCC current of phase L3 (A),palaionaziro_iraio_1kwp__pcc_current_of_phase_l3__a
+[Palaionaziro_Iraio] PCC PCC current unbalance of phase L1 (%),palaionaziro_iraio_1kwp__pcc_current_unbalance_of_phase_l1__pct
+[Palaionaziro_Iraio] PCC PCC current unbalance of phase L2 (%),palaionaziro_iraio_1kwp__pcc_current_unbalance_of_phase_l2__pct
+[Palaionaziro_Iraio] PCC PCC current unbalance of phase L3 (%),palaionaziro_iraio_1kwp__pcc_current_unbalance_of_phase_l3__pct
+[Palaionaziro_Iraio] PCC PCC frequency (Hz),palaionaziro_iraio_1kwp__pcc_frequency__hz
+[Palaionaziro_Iraio] PCC PCC power factor of phase L1 (-),palaionaziro_iraio_1kwp__pcc_power_factor_of_phase_l1
+[Palaionaziro_Iraio] PCC PCC power factor of phase L2 (-),palaionaziro_iraio_1kwp__pcc_power_factor_of_phase_l2
+[Palaionaziro_Iraio] PCC PCC power factor of phase L3 (-),palaionaziro_iraio_1kwp__pcc_power_factor_of_phase_l3
+[Palaionaziro_Iraio] PCC PCC reactive energy export (kVArh),palaionaziro_iraio_1kwp__pcc_reactive_energy_export__kvarh
+[Palaionaziro_Iraio] PCC PCC reactive energy import (kVArh),palaionaziro_iraio_1kwp__pcc_reactive_energy_import__kvarh
+[Palaionaziro_Iraio] PCC PCC total power factor (-),palaionaziro_iraio_1kwp__pcc_total_power_factor
+[Palaionaziro_Iraio] PCC PCC voltage of L1-L2 (Vac),palaionaziro_iraio_1kwp__pcc_voltage_of_l1_l2__vac
+[Palaionaziro_Iraio] PCC PCC voltage of L2-L3 (Vac),palaionaziro_iraio_1kwp__pcc_voltage_of_l2_l3__vac
+[Palaionaziro_Iraio] PCC PCC voltage of L3-L1 (Vac),palaionaziro_iraio_1kwp__pcc_voltage_of_l3_l1__vac
+[Palaionaziro_Iraio] PCC Production active energy export (kWh),palaionaziro_iraio_1kwp__pcc_production_active_energy_export__kwh
+[Palaionaziro_Iraio] PCC Production active energy import (kWh),palaionaziro_iraio_1kwp__pcc_production_active_energy_import__kwh
+[Palaionaziro_Iraio] PCC Production apparent energy (kVAh),palaionaziro_iraio_1kwp__pcc_production_apparent_energy__kvah
+[Palaionaziro_Iraio] PCC Production current of phase L1 (A),palaionaziro_iraio_1kwp__pcc_production_current_of_phase_l1__a
+[Palaionaziro_Iraio] PCC Production current of phase L2 (A),palaionaziro_iraio_1kwp__pcc_production_current_of_phase_l2__a
+[Palaionaziro_Iraio] PCC Production current of phase L3 (A),palaionaziro_iraio_1kwp__pcc_production_current_of_phase_l3__a
+[Palaionaziro_Iraio] PCC Production frequency (Hz),palaionaziro_iraio_1kwp__pcc_production_frequency__hz
+[Palaionaziro_Iraio] PCC Production reactive energy export (kVArh),palaionaziro_iraio_1kwp__pcc_production_reactive_energy_export__kvarh
+[Palaionaziro_Iraio] PCC Production reactive energy import (kVArh),palaionaziro_iraio_1kwp__pcc_production_reactive_energy_import__kvarh
+[Palaionaziro_Iraio] PCC Production total power factor (-),palaionaziro_iraio_1kwp__pcc_production_total_power_factor
+[Palaionaziro_Iraio] PCC Production voltage of L1-L2 (Vac),palaionaziro_iraio_1kwp__pcc_production_voltage_of_l1_l2__vac
+[Palaionaziro_Iraio] PCC Production voltage of L2-L3 (Vac),palaionaziro_iraio_1kwp__pcc_production_voltage_of_l2_l3__vac
+[Palaionaziro_Iraio] PCC Production voltage of L3-L1 (Vac),palaionaziro_iraio_1kwp__pcc_production_voltage_of_l3_l1__vac
+[Palaionaziro_Iraio] PCC Total Production active power (kW),palaionaziro_iraio_1kwp__pcc_total_production_active_power__kw
+[Palaionaziro_Iraio] PCC Total Production apparent power (kVA),palaionaziro_iraio_1kwp__pcc_total_production_apparent_power__kva
+[Palaionaziro_Iraio] PCC Total Production reactive power (kVAr),palaionaziro_iraio_1kwp__pcc_total_production_reactive_power__kvar
+[Palaionaziro_Iraio] Palaionaziro_Iraio Average Irradiance (W*m^-2),palaionaziro_iraio_1kwp__palaionaziro_iraio_average_irradiance__w_m_2
+[Palaionaziro_Iraio] Weather Station Ambient temperature (C),palaionaziro_iraio_1kwp__weather_station_ambient_temperature__c
+[Palaionaziro_Iraio] Weather Station Relative humidity (%),palaionaziro_iraio_1kwp__weather_station_relative_humidity__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of neutral (%),solar_concept_likovouni_276kwp__pcc_current_thd_r_of_neutral__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of phase L1 (%),solar_concept_likovouni_276kwp__pcc_current_thd_r_of_phase_l1__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of phase L2 (%),solar_concept_likovouni_276kwp__pcc_current_thd_r_of_phase_l2__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC Current THD-R of phase L3 (%),solar_concept_likovouni_276kwp__pcc_current_thd_r_of_phase_l3__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC active energy export (kWh),solar_concept_likovouni_276kwp__pcc_active_energy_export__kwh
+[Solar Concept 276 KWp Likovouni] PCC PCC active energy import (kWh),solar_concept_likovouni_276kwp__pcc_active_energy_import__kwh
+[Solar Concept 276 KWp Likovouni] PCC PCC apparent energy (kVAh),solar_concept_likovouni_276kwp__pcc_apparent_energy__kvah
+[Solar Concept 276 KWp Likovouni] PCC PCC current of phase L1 (A),solar_concept_likovouni_276kwp__pcc_current_of_phase_l1__a
+[Solar Concept 276 KWp Likovouni] PCC PCC current of phase L2 (A),solar_concept_likovouni_276kwp__pcc_current_of_phase_l2__a
+[Solar Concept 276 KWp Likovouni] PCC PCC current of phase L3 (A),solar_concept_likovouni_276kwp__pcc_current_of_phase_l3__a
+[Solar Concept 276 KWp Likovouni] PCC PCC current unbalance of phase L1 (%),solar_concept_likovouni_276kwp__pcc_current_unbalance_of_phase_l1__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC current unbalance of phase L2 (%),solar_concept_likovouni_276kwp__pcc_current_unbalance_of_phase_l2__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC current unbalance of phase L3 (%),solar_concept_likovouni_276kwp__pcc_current_unbalance_of_phase_l3__pct
+[Solar Concept 276 KWp Likovouni] PCC PCC frequency (Hz),solar_concept_likovouni_276kwp__pcc_frequency__hz
+[Solar Concept 276 KWp Likovouni] PCC PCC power factor of phase L1 (-),solar_concept_likovouni_276kwp__pcc_power_factor_of_phase_l1
+[Solar Concept 276 KWp Likovouni] PCC PCC power factor of phase L2 (-),solar_concept_likovouni_276kwp__pcc_power_factor_of_phase_l2
+[Solar Concept 276 KWp Likovouni] PCC PCC power factor of phase L3 (-),solar_concept_likovouni_276kwp__pcc_power_factor_of_phase_l3
+[Solar Concept 276 KWp Likovouni] PCC PCC reactive energy export (kVArh),solar_concept_likovouni_276kwp__pcc_reactive_energy_export__kvarh
+[Solar Concept 276 KWp Likovouni] PCC PCC reactive energy import (kVArh),solar_concept_likovouni_276kwp__pcc_reactive_energy_import__kvarh
+[Solar Concept 276 KWp Likovouni] PCC PCC total power factor (-),solar_concept_likovouni_276kwp__pcc_total_power_factor
+[Solar Concept 276 KWp Likovouni] PCC PCC voltage of L1-L2 (Vac),solar_concept_likovouni_276kwp__pcc_voltage_of_l1_l2__vac
+[Solar Concept 276 KWp Likovouni] PCC PCC voltage of L2-L3 (Vac),solar_concept_likovouni_276kwp__pcc_voltage_of_l2_l3__vac
+[Solar Concept 276 KWp Likovouni] PCC PCC voltage of L3-L1 (Vac),solar_concept_likovouni_276kwp__pcc_voltage_of_l3_l1__vac
+[Solar Concept 276 KWp Likovouni] PCC Production active energy export (kWh),solar_concept_likovouni_276kwp__pcc_production_active_energy_export__kwh
+[Solar Concept 276 KWp Likovouni] PCC Production active energy import (kWh),solar_concept_likovouni_276kwp__pcc_production_active_energy_import__kwh
+[Solar Concept 276 KWp Likovouni] PCC Production apparent energy (kVAh),solar_concept_likovouni_276kwp__pcc_production_apparent_energy__kvah
+[Solar Concept 276 KWp Likovouni] PCC Production current of phase L1 (A),solar_concept_likovouni_276kwp__pcc_production_current_of_phase_l1__a
+[Solar Concept 276 KWp Likovouni] PCC Production current of phase L2 (A),solar_concept_likovouni_276kwp__pcc_production_current_of_phase_l2__a
+[Solar Concept 276 KWp Likovouni] PCC Production current of phase L3 (A),solar_concept_likovouni_276kwp__pcc_production_current_of_phase_l3__a
+[Solar Concept 276 KWp Likovouni] PCC Production frequency (Hz),solar_concept_likovouni_276kwp__pcc_production_frequency__hz
+[Solar Concept 276 KWp Likovouni] PCC Production reactive energy export (kVArh),solar_concept_likovouni_276kwp__pcc_production_reactive_energy_export__kvarh
+[Solar Concept 276 KWp Likovouni] PCC Production reactive energy import (kVArh),solar_concept_likovouni_276kwp__pcc_production_reactive_energy_import__kvarh
+[Solar Concept 276 KWp Likovouni] PCC Production total power factor (-),solar_concept_likovouni_276kwp__pcc_production_total_power_factor
+[Solar Concept 276 KWp Likovouni] PCC Production voltage of L1-L2 (Vac),solar_concept_likovouni_276kwp__pcc_production_voltage_of_l1_l2__vac
+[Solar Concept 276 KWp Likovouni] PCC Production voltage of L2-L3 (Vac),solar_concept_likovouni_276kwp__pcc_production_voltage_of_l2_l3__vac
+[Solar Concept 276 KWp Likovouni] PCC Production voltage of L3-L1 (Vac),solar_concept_likovouni_276kwp__pcc_production_voltage_of_l3_l1__vac
+[Solar Concept 276 KWp Likovouni] PCC Total Production active power (kW),solar_concept_likovouni_276kwp__pcc_total_production_active_power__kw
+[Solar Concept 276 KWp Likovouni] PCC Total Production apparent power (kVA),solar_concept_likovouni_276kwp__pcc_total_production_apparent_power__kva
+[Solar Concept 276 KWp Likovouni] PCC Total Production reactive power (kVAr),solar_concept_likovouni_276kwp__pcc_total_production_reactive_power__kvar
+[Solar Concept 276 KWp Likovouni] Solar Concept 276 KWp Likovouni Average Irradiance (W*m^-2),solar_concept_likovouni_276kwp__solar_concept_276_kwp_likovouni_average_irradiance__w_m_2
+[Solar Concept 3721 KWp Lexaina] PCC PCC Current THD-R of phase L1 (%),solar_concept_lexaina_3721kwp__pcc_current_thd_r_of_phase_l1__pct
+[Solar Concept 3721 KWp Lexaina] PCC PCC Current THD-R of phase L2 (%),solar_concept_lexaina_3721kwp__pcc_current_thd_r_of_phase_l2__pct
+[Solar Concept 3721 KWp Lexaina] PCC PCC Current THD-R of phase L3 (%),solar_concept_lexaina_3721kwp__pcc_current_thd_r_of_phase_l3__pct
+[Solar Concept 3721 KWp Lexaina] PCC PCC active energy export (kWh),solar_concept_lexaina_3721kwp__pcc_active_energy_export__kwh
+[Solar Concept 3721 KWp Lexaina] PCC PCC active energy import (kWh),solar_concept_lexaina_3721kwp__pcc_active_energy_import__kwh
+[Solar Concept 3721 KWp Lexaina] PCC PCC apparent energy (kVAh),solar_concept_lexaina_3721kwp__pcc_apparent_energy__kvah
+[Solar Concept 3721 KWp Lexaina] PCC PCC current of phase L1 (A),solar_concept_lexaina_3721kwp__pcc_current_of_phase_l1__a
+[Solar Concept 3721 KWp Lexaina] PCC PCC current of phase L2 (A),solar_concept_lexaina_3721kwp__pcc_current_of_phase_l2__a
+[Solar Concept 3721 KWp Lexaina] PCC PCC current of phase L3 (A),solar_concept_lexaina_3721kwp__pcc_current_of_phase_l3__a
+[Solar Concept 3721 KWp Lexaina] PCC PCC frequency (Hz),solar_concept_lexaina_3721kwp__pcc_frequency__hz
+[Solar Concept 3721 KWp Lexaina] PCC PCC power factor of phase L1 (-),solar_concept_lexaina_3721kwp__pcc_power_factor_of_phase_l1
+[Solar Concept 3721 KWp Lexaina] PCC PCC power factor of phase L2 (-),solar_concept_lexaina_3721kwp__pcc_power_factor_of_phase_l2
+[Solar Concept 3721 KWp Lexaina] PCC PCC power factor of phase L3 (-),solar_concept_lexaina_3721kwp__pcc_power_factor_of_phase_l3
+[Solar Concept 3721 KWp Lexaina] PCC PCC reactive energy export (kVArh),solar_concept_lexaina_3721kwp__pcc_reactive_energy_export__kvarh
+[Solar Concept 3721 KWp Lexaina] PCC PCC reactive energy import (kVArh),solar_concept_lexaina_3721kwp__pcc_reactive_energy_import__kvarh
+[Solar Concept 3721 KWp Lexaina] PCC PCC total power factor (-),solar_concept_lexaina_3721kwp__pcc_total_power_factor
+[Solar Concept 3721 KWp Lexaina] PCC PCC voltage of L1-L2 (Vac),solar_concept_lexaina_3721kwp__pcc_voltage_of_l1_l2__vac
+[Solar Concept 3721 KWp Lexaina] PCC PCC voltage of L2-L3 (Vac),solar_concept_lexaina_3721kwp__pcc_voltage_of_l2_l3__vac
+[Solar Concept 3721 KWp Lexaina] PCC PCC voltage of L3-L1 (Vac),solar_concept_lexaina_3721kwp__pcc_voltage_of_l3_l1__vac
+[Solar Concept 3721 KWp Lexaina] PCC Production active energy export (kWh),solar_concept_lexaina_3721kwp__pcc_production_active_energy_export__kwh
+[Solar Concept 3721 KWp Lexaina] PCC Production active energy import (kWh),solar_concept_lexaina_3721kwp__pcc_production_active_energy_import__kwh
+[Solar Concept 3721 KWp Lexaina] PCC Production current of phase L1 (A),solar_concept_lexaina_3721kwp__pcc_production_current_of_phase_l1__a
+[Solar Concept 3721 KWp Lexaina] PCC Production current of phase L2 (A),solar_concept_lexaina_3721kwp__pcc_production_current_of_phase_l2__a
+[Solar Concept 3721 KWp Lexaina] PCC Production current of phase L3 (A),solar_concept_lexaina_3721kwp__pcc_production_current_of_phase_l3__a
+[Solar Concept 3721 KWp Lexaina] PCC Production frequency (Hz),solar_concept_lexaina_3721kwp__pcc_production_frequency__hz
+[Solar Concept 3721 KWp Lexaina] PCC Production reactive energy export (kVArh),solar_concept_lexaina_3721kwp__pcc_production_reactive_energy_export__kvarh
+[Solar Concept 3721 KWp Lexaina] PCC Production reactive energy import (kVArh),solar_concept_lexaina_3721kwp__pcc_production_reactive_energy_import__kvarh
+[Solar Concept 3721 KWp Lexaina] PCC Production total power factor (-),solar_concept_lexaina_3721kwp__pcc_production_total_power_factor
+[Solar Concept 3721 KWp Lexaina] PCC Production voltage of L1-L2 (Vac),solar_concept_lexaina_3721kwp__pcc_production_voltage_of_l1_l2__vac
+[Solar Concept 3721 KWp Lexaina] PCC Production voltage of L2-L3 (Vac),solar_concept_lexaina_3721kwp__pcc_production_voltage_of_l2_l3__vac
+[Solar Concept 3721 KWp Lexaina] PCC Production voltage of L3-L1 (Vac),solar_concept_lexaina_3721kwp__pcc_production_voltage_of_l3_l1__vac
+[Solar Concept 3721 KWp Lexaina] PCC Total Production active power (kW),solar_concept_lexaina_3721kwp__pcc_total_production_active_power__kw
+[Solar Concept 3721 KWp Lexaina] PCC Total Production reactive power (kVAr),solar_concept_lexaina_3721kwp__pcc_total_production_reactive_power__kvar
+[Solar Concept 3721 KWp Lexaina] Solar Concept 3721 KWp Lexaina Average Irradiance (W*m^-2),solar_concept_lexaina_3721kwp__solar_concept_3721_kwp_lexaina_average_irradiance__w_m_2
+[Solar Datum 2910 KWp Lexaina] PCC PCC Current THD-R of phase L1 (%),solar_datum_lexaina_2910kwp__pcc_current_thd_r_of_phase_l1__pct
+[Solar Datum 2910 KWp Lexaina] PCC PCC Current THD-R of phase L2 (%),solar_datum_lexaina_2910kwp__pcc_current_thd_r_of_phase_l2__pct
+[Solar Datum 2910 KWp Lexaina] PCC PCC Current THD-R of phase L3 (%),solar_datum_lexaina_2910kwp__pcc_current_thd_r_of_phase_l3__pct
+[Solar Datum 2910 KWp Lexaina] PCC PCC active energy export (kWh),solar_datum_lexaina_2910kwp__pcc_active_energy_export__kwh
+[Solar Datum 2910 KWp Lexaina] PCC PCC active energy import (kWh),solar_datum_lexaina_2910kwp__pcc_active_energy_import__kwh
+[Solar Datum 2910 KWp Lexaina] PCC PCC apparent energy (kVAh),solar_datum_lexaina_2910kwp__pcc_apparent_energy__kvah
+[Solar Datum 2910 KWp Lexaina] PCC PCC current of phase L1 (A),solar_datum_lexaina_2910kwp__pcc_current_of_phase_l1__a
+[Solar Datum 2910 KWp Lexaina] PCC PCC current of phase L2 (A),solar_datum_lexaina_2910kwp__pcc_current_of_phase_l2__a
+[Solar Datum 2910 KWp Lexaina] PCC PCC current of phase L3 (A),solar_datum_lexaina_2910kwp__pcc_current_of_phase_l3__a
+[Solar Datum 2910 KWp Lexaina] PCC PCC frequency (Hz),solar_datum_lexaina_2910kwp__pcc_frequency__hz
+[Solar Datum 2910 KWp Lexaina] PCC PCC power factor of phase L1 (-),solar_datum_lexaina_2910kwp__pcc_power_factor_of_phase_l1
+[Solar Datum 2910 KWp Lexaina] PCC PCC power factor of phase L2 (-),solar_datum_lexaina_2910kwp__pcc_power_factor_of_phase_l2
+[Solar Datum 2910 KWp Lexaina] PCC PCC power factor of phase L3 (-),solar_datum_lexaina_2910kwp__pcc_power_factor_of_phase_l3
+[Solar Datum 2910 KWp Lexaina] PCC PCC reactive energy export (kVArh),solar_datum_lexaina_2910kwp__pcc_reactive_energy_export__kvarh
+[Solar Datum 2910 KWp Lexaina] PCC PCC reactive energy import (kVArh),solar_datum_lexaina_2910kwp__pcc_reactive_energy_import__kvarh
+[Solar Datum 2910 KWp Lexaina] PCC PCC total power factor (-),solar_datum_lexaina_2910kwp__pcc_total_power_factor
+[Solar Datum 2910 KWp Lexaina] PCC PCC voltage of L1-L2 (Vac),solar_datum_lexaina_2910kwp__pcc_voltage_of_l1_l2__vac
+[Solar Datum 2910 KWp Lexaina] PCC PCC voltage of L2-L3 (Vac),solar_datum_lexaina_2910kwp__pcc_voltage_of_l2_l3__vac
+[Solar Datum 2910 KWp Lexaina] PCC PCC voltage of L3-L1 (Vac),solar_datum_lexaina_2910kwp__pcc_voltage_of_l3_l1__vac
+[Solar Datum 2910 KWp Lexaina] PCC Production active energy export (kWh),solar_datum_lexaina_2910kwp__pcc_production_active_energy_export__kwh
+[Solar Datum 2910 KWp Lexaina] PCC Production active energy import (kWh),solar_datum_lexaina_2910kwp__pcc_production_active_energy_import__kwh
+[Solar Datum 2910 KWp Lexaina] PCC Production apparent energy (kVAh),solar_datum_lexaina_2910kwp__pcc_production_apparent_energy__kvah
+[Solar Datum 2910 KWp Lexaina] PCC Production current of phase L1 (A),solar_datum_lexaina_2910kwp__pcc_production_current_of_phase_l1__a
+[Solar Datum 2910 KWp Lexaina] PCC Production current of phase L2 (A),solar_datum_lexaina_2910kwp__pcc_production_current_of_phase_l2__a
+[Solar Datum 2910 KWp Lexaina] PCC Production current of phase L3 (A),solar_datum_lexaina_2910kwp__pcc_production_current_of_phase_l3__a
+[Solar Datum 2910 KWp Lexaina] PCC Production frequency (Hz),solar_datum_lexaina_2910kwp__pcc_production_frequency__hz
+[Solar Datum 2910 KWp Lexaina] PCC Production reactive energy export (kVArh),solar_datum_lexaina_2910kwp__pcc_production_reactive_energy_export__kvarh
+[Solar Datum 2910 KWp Lexaina] PCC Production reactive energy import (kVArh),solar_datum_lexaina_2910kwp__pcc_production_reactive_energy_import__kvarh
+[Solar Datum 2910 KWp Lexaina] PCC Production total power factor (-),solar_datum_lexaina_2910kwp__pcc_production_total_power_factor
+[Solar Datum 2910 KWp Lexaina] PCC Production voltage of L1-L2 (Vac),solar_datum_lexaina_2910kwp__pcc_production_voltage_of_l1_l2__vac
+[Solar Datum 2910 KWp Lexaina] PCC Production voltage of L2-L3 (Vac),solar_datum_lexaina_2910kwp__pcc_production_voltage_of_l2_l3__vac
+[Solar Datum 2910 KWp Lexaina] PCC Production voltage of L3-L1 (Vac),solar_datum_lexaina_2910kwp__pcc_production_voltage_of_l3_l1__vac
+[Solar Datum 2910 KWp Lexaina] PCC Total Production active power (kW),solar_datum_lexaina_2910kwp__pcc_total_production_active_power__kw
+[Solar Datum 2910 KWp Lexaina] PCC Total Production apparent power (kVA),solar_datum_lexaina_2910kwp__pcc_total_production_apparent_power__kva
+[Solar Datum 2910 KWp Lexaina] PCC Total Production reactive power (kVAr),solar_datum_lexaina_2910kwp__pcc_total_production_reactive_power__kvar
+[Solar Datum 2910 KWp Lexaina] Solar Datum 2910 KWp Lexaina Average Irradiance (W*m^-2),solar_datum_lexaina_2910kwp__solar_datum_2910_kwp_lexaina_average_irradiance__w_m_2
+[Solar Datum 864 KWp Darali] Main Weather Station Ambient Temperature (C),solar_datum_darali_864kwp__main_weather_station_ambient_temperature__c
+[Solar Datum 864 KWp Darali] Main Weather Station Relative Humidity  (%),solar_datum_darali_864kwp__main_weather_station_relative_humidity__pct
+[Solar Datum 864 KWp Darali] PCC PCC Current THD-R of neutral (%),solar_datum_darali_864kwp__pcc_current_thd_r_of_neutral__pct
+[Solar Datum 864 KWp Darali] PCC PCC Current THD-R of phase L1 (%),solar_datum_darali_864kwp__pcc_current_thd_r_of_phase_l1__pct
+[Solar Datum 864 KWp Darali] PCC PCC Current THD-R of phase L2 (%),solar_datum_darali_864kwp__pcc_current_thd_r_of_phase_l2__pct
+[Solar Datum 864 KWp Darali] PCC PCC Current THD-R of phase L3 (%),solar_datum_darali_864kwp__pcc_current_thd_r_of_phase_l3__pct
+[Solar Datum 864 KWp Darali] PCC PCC active energy export (kWh),solar_datum_darali_864kwp__pcc_active_energy_export__kwh
+[Solar Datum 864 KWp Darali] PCC PCC active energy import (kWh),solar_datum_darali_864kwp__pcc_active_energy_import__kwh
+[Solar Datum 864 KWp Darali] PCC PCC apparent energy (kVAh),solar_datum_darali_864kwp__pcc_apparent_energy__kvah
+[Solar Datum 864 KWp Darali] PCC PCC average current (A),solar_datum_darali_864kwp__pcc_average_current__a
+[Solar Datum 864 KWp Darali] PCC PCC average line voltage (Vac),solar_datum_darali_864kwp__pcc_average_line_voltage__vac
+[Solar Datum 864 KWp Darali] PCC PCC average phase voltage (Vac),solar_datum_darali_864kwp__pcc_average_phase_voltage__vac
+[Solar Datum 864 KWp Darali] PCC PCC current of phase L1 (A),solar_datum_darali_864kwp__pcc_current_of_phase_l1__a
+[Solar Datum 864 KWp Darali] PCC PCC current of phase L2 (A),solar_datum_darali_864kwp__pcc_current_of_phase_l2__a
+[Solar Datum 864 KWp Darali] PCC PCC current of phase L3 (A),solar_datum_darali_864kwp__pcc_current_of_phase_l3__a
+[Solar Datum 864 KWp Darali] PCC PCC current unbalance of phase L1 (%),solar_datum_darali_864kwp__pcc_current_unbalance_of_phase_l1__pct
+[Solar Datum 864 KWp Darali] PCC PCC current unbalance of phase L2 (%),solar_datum_darali_864kwp__pcc_current_unbalance_of_phase_l2__pct
+[Solar Datum 864 KWp Darali] PCC PCC current unbalance of phase L3 (%),solar_datum_darali_864kwp__pcc_current_unbalance_of_phase_l3__pct
+[Solar Datum 864 KWp Darali] PCC PCC frequency (Hz),solar_datum_darali_864kwp__pcc_frequency__hz
+[Solar Datum 864 KWp Darali] PCC PCC power factor of phase L1 (-),solar_datum_darali_864kwp__pcc_power_factor_of_phase_l1
+[Solar Datum 864 KWp Darali] PCC PCC power factor of phase L2 (-),solar_datum_darali_864kwp__pcc_power_factor_of_phase_l2
+[Solar Datum 864 KWp Darali] PCC PCC power factor of phase L3 (-),solar_datum_darali_864kwp__pcc_power_factor_of_phase_l3
+[Solar Datum 864 KWp Darali] PCC PCC reactive energy export (kVArh),solar_datum_darali_864kwp__pcc_reactive_energy_export__kvarh
+[Solar Datum 864 KWp Darali] PCC PCC reactive energy import (kVArh),solar_datum_darali_864kwp__pcc_reactive_energy_import__kvarh
+[Solar Datum 864 KWp Darali] PCC PCC total power factor (-),solar_datum_darali_864kwp__pcc_total_power_factor
+[Solar Datum 864 KWp Darali] PCC PCC voltage of L1-L2 (Vac),solar_datum_darali_864kwp__pcc_voltage_of_l1_l2__vac
+[Solar Datum 864 KWp Darali] PCC PCC voltage of L2-L3 (Vac),solar_datum_darali_864kwp__pcc_voltage_of_l2_l3__vac
+[Solar Datum 864 KWp Darali] PCC PCC voltage of L3-L1 (Vac),solar_datum_darali_864kwp__pcc_voltage_of_l3_l1__vac
+[Solar Datum 864 KWp Darali] PCC Production active energy export (kWh),solar_datum_darali_864kwp__pcc_production_active_energy_export__kwh
+[Solar Datum 864 KWp Darali] PCC Production active energy import (kWh),solar_datum_darali_864kwp__pcc_production_active_energy_import__kwh
+[Solar Datum 864 KWp Darali] PCC Production apparent energy (kVAh),solar_datum_darali_864kwp__pcc_production_apparent_energy__kvah
+[Solar Datum 864 KWp Darali] PCC Production current of phase L1 (A),solar_datum_darali_864kwp__pcc_production_current_of_phase_l1__a
+[Solar Datum 864 KWp Darali] PCC Production current of phase L2 (A),solar_datum_darali_864kwp__pcc_production_current_of_phase_l2__a
+[Solar Datum 864 KWp Darali] PCC Production current of phase L3 (A),solar_datum_darali_864kwp__pcc_production_current_of_phase_l3__a
+[Solar Datum 864 KWp Darali] PCC Production frequency (Hz),solar_datum_darali_864kwp__pcc_production_frequency__hz
+[Solar Datum 864 KWp Darali] PCC Production reactive energy export (kVArh),solar_datum_darali_864kwp__pcc_production_reactive_energy_export__kvarh
+[Solar Datum 864 KWp Darali] PCC Production reactive energy import (kVArh),solar_datum_darali_864kwp__pcc_production_reactive_energy_import__kvarh
+[Solar Datum 864 KWp Darali] PCC Production total power factor (-),solar_datum_darali_864kwp__pcc_production_total_power_factor
+[Solar Datum 864 KWp Darali] PCC Production voltage of L1-L2 (Vac),solar_datum_darali_864kwp__pcc_production_voltage_of_l1_l2__vac
+[Solar Datum 864 KWp Darali] PCC Production voltage of L2-L3 (Vac),solar_datum_darali_864kwp__pcc_production_voltage_of_l2_l3__vac
+[Solar Datum 864 KWp Darali] PCC Production voltage of L3-L1 (Vac),solar_datum_darali_864kwp__pcc_production_voltage_of_l3_l1__vac
+[Solar Datum 864 KWp Darali] PCC Total Production active power (kW),solar_datum_darali_864kwp__pcc_total_production_active_power__kw
+[Solar Datum 864 KWp Darali] PCC Total Production apparent power (kVA),solar_datum_darali_864kwp__pcc_total_production_apparent_power__kva
+[Solar Datum 864 KWp Darali] PCC Total Production reactive power (kVAr),solar_datum_darali_864kwp__pcc_total_production_reactive_power__kvar
+[Solar Datum 864 KWp Darali] Solar Datum 864 KWp Darali Average Irradiance (W*m^-2),solar_datum_darali_864kwp__solar_datum_864_kwp_darali_average_irradiance__w_m_2
+[Solar Factory 494kWp Andravida] PCC PCC Current THD-R of neutral (%),solar_factory_andravida_494kwp__pcc_current_thd_r_of_neutral__pct
+[Solar Factory 494kWp Andravida] PCC PCC Current THD-R of phase L1 (%),solar_factory_andravida_494kwp__pcc_current_thd_r_of_phase_l1__pct
+[Solar Factory 494kWp Andravida] PCC PCC Current THD-R of phase L2 (%),solar_factory_andravida_494kwp__pcc_current_thd_r_of_phase_l2__pct
+[Solar Factory 494kWp Andravida] PCC PCC Current THD-R of phase L3 (%),solar_factory_andravida_494kwp__pcc_current_thd_r_of_phase_l3__pct
+[Solar Factory 494kWp Andravida] PCC PCC active energy export (kWh),solar_factory_andravida_494kwp__pcc_active_energy_export__kwh
+[Solar Factory 494kWp Andravida] PCC PCC active energy import (kWh),solar_factory_andravida_494kwp__pcc_active_energy_import__kwh
+[Solar Factory 494kWp Andravida] PCC PCC apparent energy (kVAh),solar_factory_andravida_494kwp__pcc_apparent_energy__kvah
+[Solar Factory 494kWp Andravida] PCC PCC average current (A),solar_factory_andravida_494kwp__pcc_average_current__a
+[Solar Factory 494kWp Andravida] PCC PCC average line voltage (Vac),solar_factory_andravida_494kwp__pcc_average_line_voltage__vac
+[Solar Factory 494kWp Andravida] PCC PCC average phase voltage (Vac),solar_factory_andravida_494kwp__pcc_average_phase_voltage__vac
+[Solar Factory 494kWp Andravida] PCC PCC current of phase L1 (A),solar_factory_andravida_494kwp__pcc_current_of_phase_l1__a
+[Solar Factory 494kWp Andravida] PCC PCC current of phase L2 (A),solar_factory_andravida_494kwp__pcc_current_of_phase_l2__a
+[Solar Factory 494kWp Andravida] PCC PCC current of phase L3 (A),solar_factory_andravida_494kwp__pcc_current_of_phase_l3__a
+[Solar Factory 494kWp Andravida] PCC PCC current unbalance of phase L1 (%),solar_factory_andravida_494kwp__pcc_current_unbalance_of_phase_l1__pct
+[Solar Factory 494kWp Andravida] PCC PCC current unbalance of phase L2 (%),solar_factory_andravida_494kwp__pcc_current_unbalance_of_phase_l2__pct
+[Solar Factory 494kWp Andravida] PCC PCC current unbalance of phase L3 (%),solar_factory_andravida_494kwp__pcc_current_unbalance_of_phase_l3__pct
+[Solar Factory 494kWp Andravida] PCC PCC frequency (Hz),solar_factory_andravida_494kwp__pcc_frequency__hz
+[Solar Factory 494kWp Andravida] PCC PCC power factor of phase L1 (-),solar_factory_andravida_494kwp__pcc_power_factor_of_phase_l1
+[Solar Factory 494kWp Andravida] PCC PCC power factor of phase L2 (-),solar_factory_andravida_494kwp__pcc_power_factor_of_phase_l2
+[Solar Factory 494kWp Andravida] PCC PCC power factor of phase L3 (-),solar_factory_andravida_494kwp__pcc_power_factor_of_phase_l3
+[Solar Factory 494kWp Andravida] PCC PCC reactive energy export (kVArh),solar_factory_andravida_494kwp__pcc_reactive_energy_export__kvarh
+[Solar Factory 494kWp Andravida] PCC PCC reactive energy import (kVArh),solar_factory_andravida_494kwp__pcc_reactive_energy_import__kvarh
+[Solar Factory 494kWp Andravida] PCC PCC total power factor (-),solar_factory_andravida_494kwp__pcc_total_power_factor
+[Solar Factory 494kWp Andravida] PCC PCC voltage of L1-L2 (Vac),solar_factory_andravida_494kwp__pcc_voltage_of_l1_l2__vac
+[Solar Factory 494kWp Andravida] PCC PCC voltage of L2-L3 (Vac),solar_factory_andravida_494kwp__pcc_voltage_of_l2_l3__vac
+[Solar Factory 494kWp Andravida] PCC PCC voltage of L3-L1 (Vac),solar_factory_andravida_494kwp__pcc_voltage_of_l3_l1__vac
+[Solar Factory 494kWp Andravida] PCC Production active energy export (kWh),solar_factory_andravida_494kwp__pcc_production_active_energy_export__kwh
+[Solar Factory 494kWp Andravida] PCC Production active energy import (kWh),solar_factory_andravida_494kwp__pcc_production_active_energy_import__kwh
+[Solar Factory 494kWp Andravida] PCC Production apparent energy (kVAh),solar_factory_andravida_494kwp__pcc_production_apparent_energy__kvah
+[Solar Factory 494kWp Andravida] PCC Production current of phase L1 (A),solar_factory_andravida_494kwp__pcc_production_current_of_phase_l1__a
+[Solar Factory 494kWp Andravida] PCC Production current of phase L2 (A),solar_factory_andravida_494kwp__pcc_production_current_of_phase_l2__a
+[Solar Factory 494kWp Andravida] PCC Production current of phase L3 (A),solar_factory_andravida_494kwp__pcc_production_current_of_phase_l3__a
+[Solar Factory 494kWp Andravida] PCC Production frequency (Hz),solar_factory_andravida_494kwp__pcc_production_frequency__hz
+[Solar Factory 494kWp Andravida] PCC Production reactive energy export (kVArh),solar_factory_andravida_494kwp__pcc_production_reactive_energy_export__kvarh
+[Solar Factory 494kWp Andravida] PCC Production reactive energy import (kVArh),solar_factory_andravida_494kwp__pcc_production_reactive_energy_import__kvarh
+[Solar Factory 494kWp Andravida] PCC Production total power factor (-),solar_factory_andravida_494kwp__pcc_production_total_power_factor
+[Solar Factory 494kWp Andravida] PCC Production voltage of L1-L2 (Vac),solar_factory_andravida_494kwp__pcc_production_voltage_of_l1_l2__vac
+[Solar Factory 494kWp Andravida] PCC Production voltage of L2-L3 (Vac),solar_factory_andravida_494kwp__pcc_production_voltage_of_l2_l3__vac
+[Solar Factory 494kWp Andravida] PCC Production voltage of L3-L1 (Vac),solar_factory_andravida_494kwp__pcc_production_voltage_of_l3_l1__vac
+[Solar Factory 494kWp Andravida] PCC Total Production active power (kW),solar_factory_andravida_494kwp__pcc_total_production_active_power__kw
+[Solar Factory 494kWp Andravida] PCC Total Production apparent power (kVA),solar_factory_andravida_494kwp__pcc_total_production_apparent_power__kva
+[Solar Factory 494kWp Andravida] PCC Total Production reactive power (kVAr),solar_factory_andravida_494kwp__pcc_total_production_reactive_power__kvar
+[Solar Factory 494kWp Andravida] Solar Factory 494kWp Andravida Average Irradiance (W*m^-2),solar_factory_andravida_494kwp__solar_factory_494kwp_andravida_average_irradiance__w_m_2
+[Solar Factory 494kWp Andravida] Weather Station Ambient temperature (C),solar_factory_andravida_494kwp__weather_station_ambient_temperature__c
+[Solar Factory 494kWp Andravida] Weather Station Wind speed (m*s^-1),solar_factory_andravida_494kwp__weather_station_wind_speed__m_s_1
+[Spes Solaris 1527 KWp Darali] PCC PCC Current THD-R of neutral (%),spes_solaris_darali_1527kwp__pcc_current_thd_r_of_neutral__pct
+[Spes Solaris 1527 KWp Darali] PCC PCC Current THD-R of phase L1 (%),spes_solaris_darali_1527kwp__pcc_current_thd_r_of_phase_l1__pct
+[Spes Solaris 1527 KWp Darali] PCC PCC Current THD-R of phase L2 (%),spes_solaris_darali_1527kwp__pcc_current_thd_r_of_phase_l2__pct
+[Spes Solaris 1527 KWp Darali] PCC PCC Current THD-R of phase L3 (%),spes_solaris_darali_1527kwp__pcc_current_thd_r_of_phase_l3__pct
+[Spes Solaris 1527 KWp Darali] PCC PCC active energy export (kWh),spes_solaris_darali_1527kwp__pcc_active_energy_export__kwh
+[Spes Solaris 1527 KWp Darali] PCC PCC active energy import (kWh),spes_solaris_darali_1527kwp__pcc_active_energy_import__kwh
+[Spes Solaris 1527 KWp Darali] PCC PCC apparent energy (kVAh),spes_solaris_darali_1527kwp__pcc_apparent_energy__kvah
+[Spes Solaris 1527 KWp Darali] PCC PCC average current (A),spes_solaris_darali_1527kwp__pcc_average_current__a
+[Spes Solaris 1527 KWp Darali] PCC PCC average line voltage (Vac),spes_solaris_darali_1527kwp__pcc_average_line_voltage__vac
+[Spes Solaris 1527 KWp Darali] PCC PCC average phase voltage (Vac),spes_solaris_darali_1527kwp__pcc_average_phase_voltage__vac
+[Spes Solaris 1527 KWp Darali] PCC PCC current of phase L1 (A),spes_solaris_darali_1527kwp__pcc_current_of_phase_l1__a
+[Spes Solaris 1527 KWp Darali] PCC PCC current of phase L2 (A),spes_solaris_darali_1527kwp__pcc_current_of_phase_l2__a
+[Spes Solaris 1527 KWp Darali] PCC PCC current of phase L3 (A),spes_solaris_darali_1527kwp__pcc_current_of_phase_l3__a
+[Spes Solaris 1527 KWp Darali] PCC PCC current unbalance of phase L1 (%),spes_solaris_darali_1527kwp__pcc_current_unbalance_of_phase_l1__pct
+[Spes Solaris 1527 KWp Darali] PCC PCC current unbalance of phase L2 (%),spes_solaris_darali_1527kwp__pcc_current_unbalance_of_phase_l2__pct
+[Spes Solaris 1527 KWp Darali] PCC PCC current unbalance of phase L3 (%),spes_solaris_darali_1527kwp__pcc_current_unbalance_of_phase_l3__pct
+[Spes Solaris 1527 KWp Darali] PCC PCC frequency (Hz),spes_solaris_darali_1527kwp__pcc_frequency__hz
+[Spes Solaris 1527 KWp Darali] PCC PCC power factor of phase L1 (-),spes_solaris_darali_1527kwp__pcc_power_factor_of_phase_l1
+[Spes Solaris 1527 KWp Darali] PCC PCC power factor of phase L2 (-),spes_solaris_darali_1527kwp__pcc_power_factor_of_phase_l2
+[Spes Solaris 1527 KWp Darali] PCC PCC power factor of phase L3 (-),spes_solaris_darali_1527kwp__pcc_power_factor_of_phase_l3
+[Spes Solaris 1527 KWp Darali] PCC PCC reactive energy export (kVArh),spes_solaris_darali_1527kwp__pcc_reactive_energy_export__kvarh
+[Spes Solaris 1527 KWp Darali] PCC PCC reactive energy import (kVArh),spes_solaris_darali_1527kwp__pcc_reactive_energy_import__kvarh
+[Spes Solaris 1527 KWp Darali] PCC PCC total power factor (-),spes_solaris_darali_1527kwp__pcc_total_power_factor
+[Spes Solaris 1527 KWp Darali] PCC PCC voltage of L1-L2 (Vac),spes_solaris_darali_1527kwp__pcc_voltage_of_l1_l2__vac
+[Spes Solaris 1527 KWp Darali] PCC PCC voltage of L2-L3 (Vac),spes_solaris_darali_1527kwp__pcc_voltage_of_l2_l3__vac
+[Spes Solaris 1527 KWp Darali] PCC PCC voltage of L3-L1 (Vac),spes_solaris_darali_1527kwp__pcc_voltage_of_l3_l1__vac
+[Spes Solaris 1527 KWp Darali] PCC Production active energy export (kWh),spes_solaris_darali_1527kwp__pcc_production_active_energy_export__kwh
+[Spes Solaris 1527 KWp Darali] PCC Production active energy import (kWh),spes_solaris_darali_1527kwp__pcc_production_active_energy_import__kwh
+[Spes Solaris 1527 KWp Darali] PCC Production apparent energy (kVAh),spes_solaris_darali_1527kwp__pcc_production_apparent_energy__kvah
+[Spes Solaris 1527 KWp Darali] PCC Production current of phase L1 (A),spes_solaris_darali_1527kwp__pcc_production_current_of_phase_l1__a
+[Spes Solaris 1527 KWp Darali] PCC Production current of phase L2 (A),spes_solaris_darali_1527kwp__pcc_production_current_of_phase_l2__a
+[Spes Solaris 1527 KWp Darali] PCC Production current of phase L3 (A),spes_solaris_darali_1527kwp__pcc_production_current_of_phase_l3__a
+[Spes Solaris 1527 KWp Darali] PCC Production frequency (Hz),spes_solaris_darali_1527kwp__pcc_production_frequency__hz
+[Spes Solaris 1527 KWp Darali] PCC Production reactive energy export (kVArh),spes_solaris_darali_1527kwp__pcc_production_reactive_energy_export__kvarh
+[Spes Solaris 1527 KWp Darali] PCC Production reactive energy import (kVArh),spes_solaris_darali_1527kwp__pcc_production_reactive_energy_import__kvarh
+[Spes Solaris 1527 KWp Darali] PCC Production total power factor (-),spes_solaris_darali_1527kwp__pcc_production_total_power_factor
+[Spes Solaris 1527 KWp Darali] PCC Production voltage of L1-L2 (Vac),spes_solaris_darali_1527kwp__pcc_production_voltage_of_l1_l2__vac
+[Spes Solaris 1527 KWp Darali] PCC Production voltage of L2-L3 (Vac),spes_solaris_darali_1527kwp__pcc_production_voltage_of_l2_l3__vac
+[Spes Solaris 1527 KWp Darali] PCC Production voltage of L3-L1 (Vac),spes_solaris_darali_1527kwp__pcc_production_voltage_of_l3_l1__vac
+[Spes Solaris 1527 KWp Darali] PCC Total Production active power (kW),spes_solaris_darali_1527kwp__pcc_total_production_active_power__kw
+[Spes Solaris 1527 KWp Darali] PCC Total Production apparent power (kVA),spes_solaris_darali_1527kwp__pcc_total_production_apparent_power__kva
+[Spes Solaris 1527 KWp Darali] PCC Total Production reactive power (kVAr),spes_solaris_darali_1527kwp__pcc_total_production_reactive_power__kvar
+[Spes Solaris 1527 KWp Darali] Spes Solaris 1527 KWp Darali Average Irradiance (W*m^-2),spes_solaris_darali_1527kwp__spes_solaris_1527_kwp_darali_average_irradiance__w_m_2
+[Spes Solaris 1986 KWp Lexaina] PCC PCC Current THD-R of phase L1 (%),spes_solaris_lexaina_1986kwp__pcc_current_thd_r_of_phase_l1__pct
+[Spes Solaris 1986 KWp Lexaina] PCC PCC Current THD-R of phase L2 (%),spes_solaris_lexaina_1986kwp__pcc_current_thd_r_of_phase_l2__pct
+[Spes Solaris 1986 KWp Lexaina] PCC PCC Current THD-R of phase L3 (%),spes_solaris_lexaina_1986kwp__pcc_current_thd_r_of_phase_l3__pct
+[Spes Solaris 1986 KWp Lexaina] PCC PCC active energy export (kWh),spes_solaris_lexaina_1986kwp__pcc_active_energy_export__kwh
+[Spes Solaris 1986 KWp Lexaina] PCC PCC active energy import (kWh),spes_solaris_lexaina_1986kwp__pcc_active_energy_import__kwh
+[Spes Solaris 1986 KWp Lexaina] PCC PCC apparent energy (kVAh),spes_solaris_lexaina_1986kwp__pcc_apparent_energy__kvah
+[Spes Solaris 1986 KWp Lexaina] PCC PCC current of phase L1 (A),spes_solaris_lexaina_1986kwp__pcc_current_of_phase_l1__a
+[Spes Solaris 1986 KWp Lexaina] PCC PCC current of phase L2 (A),spes_solaris_lexaina_1986kwp__pcc_current_of_phase_l2__a
+[Spes Solaris 1986 KWp Lexaina] PCC PCC current of phase L3 (A),spes_solaris_lexaina_1986kwp__pcc_current_of_phase_l3__a
+[Spes Solaris 1986 KWp Lexaina] PCC PCC frequency (Hz),spes_solaris_lexaina_1986kwp__pcc_frequency__hz
+[Spes Solaris 1986 KWp Lexaina] PCC PCC power factor of phase L1 (-),spes_solaris_lexaina_1986kwp__pcc_power_factor_of_phase_l1
+[Spes Solaris 1986 KWp Lexaina] PCC PCC power factor of phase L2 (-),spes_solaris_lexaina_1986kwp__pcc_power_factor_of_phase_l2
+[Spes Solaris 1986 KWp Lexaina] PCC PCC power factor of phase L3 (-),spes_solaris_lexaina_1986kwp__pcc_power_factor_of_phase_l3
+[Spes Solaris 1986 KWp Lexaina] PCC PCC reactive energy export (kVArh),spes_solaris_lexaina_1986kwp__pcc_reactive_energy_export__kvarh
+[Spes Solaris 1986 KWp Lexaina] PCC PCC reactive energy import (kVArh),spes_solaris_lexaina_1986kwp__pcc_reactive_energy_import__kvarh
+[Spes Solaris 1986 KWp Lexaina] PCC PCC total power factor (-),spes_solaris_lexaina_1986kwp__pcc_total_power_factor
+[Spes Solaris 1986 KWp Lexaina] PCC PCC voltage of L1-L2 (Vac),spes_solaris_lexaina_1986kwp__pcc_voltage_of_l1_l2__vac
+[Spes Solaris 1986 KWp Lexaina] PCC PCC voltage of L2-L3 (Vac),spes_solaris_lexaina_1986kwp__pcc_voltage_of_l2_l3__vac
+[Spes Solaris 1986 KWp Lexaina] PCC PCC voltage of L3-L1 (Vac),spes_solaris_lexaina_1986kwp__pcc_voltage_of_l3_l1__vac
+[Spes Solaris 1986 KWp Lexaina] PCC Production active energy export (kWh),spes_solaris_lexaina_1986kwp__pcc_production_active_energy_export__kwh
+[Spes Solaris 1986 KWp Lexaina] PCC Production active energy import (kWh),spes_solaris_lexaina_1986kwp__pcc_production_active_energy_import__kwh
+[Spes Solaris 1986 KWp Lexaina] PCC Production apparent energy (kVAh),spes_solaris_lexaina_1986kwp__pcc_production_apparent_energy__kvah
+[Spes Solaris 1986 KWp Lexaina] PCC Production current of phase L1 (A),spes_solaris_lexaina_1986kwp__pcc_production_current_of_phase_l1__a
+[Spes Solaris 1986 KWp Lexaina] PCC Production current of phase L2 (A),spes_solaris_lexaina_1986kwp__pcc_production_current_of_phase_l2__a
+[Spes Solaris 1986 KWp Lexaina] PCC Production current of phase L3 (A),spes_solaris_lexaina_1986kwp__pcc_production_current_of_phase_l3__a
+[Spes Solaris 1986 KWp Lexaina] PCC Production frequency (Hz),spes_solaris_lexaina_1986kwp__pcc_production_frequency__hz
+[Spes Solaris 1986 KWp Lexaina] PCC Production reactive energy export (kVArh),spes_solaris_lexaina_1986kwp__pcc_production_reactive_energy_export__kvarh
+[Spes Solaris 1986 KWp Lexaina] PCC Production reactive energy import (kVArh),spes_solaris_lexaina_1986kwp__pcc_production_reactive_energy_import__kvarh
+[Spes Solaris 1986 KWp Lexaina] PCC Production total power factor (-),spes_solaris_lexaina_1986kwp__pcc_production_total_power_factor
+[Spes Solaris 1986 KWp Lexaina] PCC Production voltage of L1-L2 (Vac),spes_solaris_lexaina_1986kwp__pcc_production_voltage_of_l1_l2__vac
+[Spes Solaris 1986 KWp Lexaina] PCC Production voltage of L2-L3 (Vac),spes_solaris_lexaina_1986kwp__pcc_production_voltage_of_l2_l3__vac
+[Spes Solaris 1986 KWp Lexaina] PCC Production voltage of L3-L1 (Vac),spes_solaris_lexaina_1986kwp__pcc_production_voltage_of_l3_l1__vac
+[Spes Solaris 1986 KWp Lexaina] PCC Total Production active power (kW),spes_solaris_lexaina_1986kwp__pcc_total_production_active_power__kw
+[Spes Solaris 1986 KWp Lexaina] PCC Total Production apparent power (kVA),spes_solaris_lexaina_1986kwp__pcc_total_production_apparent_power__kva
+[Spes Solaris 1986 KWp Lexaina] PCC Total Production reactive power (kVAr),spes_solaris_lexaina_1986kwp__pcc_total_production_reactive_power__kvar
+[Spes Solaris 1986 KWp Lexaina] Spes Solaris 1986 KWp Lexaina Average Irradiance (W*m^-2),spes_solaris_lexaina_1986kwp__spes_solaris_1986_kwp_lexaina_average_irradiance__w_m_2
+[Spes Solaris 201 KWp Konizos] PCC PCC Current THD-R of neutral (%),spes_solaris_konizos_201kwp__pcc_current_thd_r_of_neutral__pct
+[Spes Solaris 201 KWp Konizos] PCC PCC Current THD-R of phase L1 (%),spes_solaris_konizos_201kwp__pcc_current_thd_r_of_phase_l1__pct
+[Spes Solaris 201 KWp Konizos] PCC PCC Current THD-R of phase L2 (%),spes_solaris_konizos_201kwp__pcc_current_thd_r_of_phase_l2__pct
+[Spes Solaris 201 KWp Konizos] PCC PCC Current THD-R of phase L3 (%),spes_solaris_konizos_201kwp__pcc_current_thd_r_of_phase_l3__pct
+[Spes Solaris 201 KWp Konizos] PCC PCC active energy export (kWh),spes_solaris_konizos_201kwp__pcc_active_energy_export__kwh
+[Spes Solaris 201 KWp Konizos] PCC PCC active energy import (kWh),spes_solaris_konizos_201kwp__pcc_active_energy_import__kwh
+[Spes Solaris 201 KWp Konizos] PCC PCC apparent energy (kVAh),spes_solaris_konizos_201kwp__pcc_apparent_energy__kvah
+[Spes Solaris 201 KWp Konizos] PCC PCC current of phase L1 (A),spes_solaris_konizos_201kwp__pcc_current_of_phase_l1__a
+[Spes Solaris 201 KWp Konizos] PCC PCC current of phase L2 (A),spes_solaris_konizos_201kwp__pcc_current_of_phase_l2__a
+[Spes Solaris 201 KWp Konizos] PCC PCC current of phase L3 (A),spes_solaris_konizos_201kwp__pcc_current_of_phase_l3__a
+[Spes Solaris 201 KWp Konizos] PCC PCC current unbalance of phase L1 (%),spes_solaris_konizos_201kwp__pcc_current_unbalance_of_phase_l1__pct
+[Spes Solaris 201 KWp Konizos] PCC PCC current unbalance of phase L2 (%),spes_solaris_konizos_201kwp__pcc_current_unbalance_of_phase_l2__pct
+[Spes Solaris 201 KWp Konizos] PCC PCC current unbalance of phase L3 (%),spes_solaris_konizos_201kwp__pcc_current_unbalance_of_phase_l3__pct
+[Spes Solaris 201 KWp Konizos] PCC PCC frequency (Hz),spes_solaris_konizos_201kwp__pcc_frequency__hz
+[Spes Solaris 201 KWp Konizos] PCC PCC power factor of phase L1 (-),spes_solaris_konizos_201kwp__pcc_power_factor_of_phase_l1
+[Spes Solaris 201 KWp Konizos] PCC PCC power factor of phase L2 (-),spes_solaris_konizos_201kwp__pcc_power_factor_of_phase_l2
+[Spes Solaris 201 KWp Konizos] PCC PCC power factor of phase L3 (-),spes_solaris_konizos_201kwp__pcc_power_factor_of_phase_l3
+[Spes Solaris 201 KWp Konizos] PCC PCC reactive energy export (kVArh),spes_solaris_konizos_201kwp__pcc_reactive_energy_export__kvarh
+[Spes Solaris 201 KWp Konizos] PCC PCC reactive energy import (kVArh),spes_solaris_konizos_201kwp__pcc_reactive_energy_import__kvarh
+[Spes Solaris 201 KWp Konizos] PCC PCC total power factor (-),spes_solaris_konizos_201kwp__pcc_total_power_factor
+[Spes Solaris 201 KWp Konizos] PCC PCC voltage of L1-L2 (Vac),spes_solaris_konizos_201kwp__pcc_voltage_of_l1_l2__vac
+[Spes Solaris 201 KWp Konizos] PCC PCC voltage of L2-L3 (Vac),spes_solaris_konizos_201kwp__pcc_voltage_of_l2_l3__vac
+[Spes Solaris 201 KWp Konizos] PCC PCC voltage of L3-L1 (Vac),spes_solaris_konizos_201kwp__pcc_voltage_of_l3_l1__vac
+[Spes Solaris 201 KWp Konizos] PCC Production active energy export (kWh),spes_solaris_konizos_201kwp__pcc_production_active_energy_export__kwh
+[Spes Solaris 201 KWp Konizos] PCC Production active energy import (kWh),spes_solaris_konizos_201kwp__pcc_production_active_energy_import__kwh
+[Spes Solaris 201 KWp Konizos] PCC Production apparent energy (kVAh),spes_solaris_konizos_201kwp__pcc_production_apparent_energy__kvah
+[Spes Solaris 201 KWp Konizos] PCC Production current of phase L1 (A),spes_solaris_konizos_201kwp__pcc_production_current_of_phase_l1__a
+[Spes Solaris 201 KWp Konizos] PCC Production current of phase L2 (A),spes_solaris_konizos_201kwp__pcc_production_current_of_phase_l2__a
+[Spes Solaris 201 KWp Konizos] PCC Production current of phase L3 (A),spes_solaris_konizos_201kwp__pcc_production_current_of_phase_l3__a
+[Spes Solaris 201 KWp Konizos] PCC Production frequency (Hz),spes_solaris_konizos_201kwp__pcc_production_frequency__hz
+[Spes Solaris 201 KWp Konizos] PCC Production reactive energy export (kVArh),spes_solaris_konizos_201kwp__pcc_production_reactive_energy_export__kvarh
+[Spes Solaris 201 KWp Konizos] PCC Production reactive energy import (kVArh),spes_solaris_konizos_201kwp__pcc_production_reactive_energy_import__kvarh
+[Spes Solaris 201 KWp Konizos] PCC Production total power factor (-),spes_solaris_konizos_201kwp__pcc_production_total_power_factor
+[Spes Solaris 201 KWp Konizos] PCC Production voltage of L1-L2 (Vac),spes_solaris_konizos_201kwp__pcc_production_voltage_of_l1_l2__vac
+[Spes Solaris 201 KWp Konizos] PCC Production voltage of L2-L3 (Vac),spes_solaris_konizos_201kwp__pcc_production_voltage_of_l2_l3__vac
+[Spes Solaris 201 KWp Konizos] PCC Production voltage of L3-L1 (Vac),spes_solaris_konizos_201kwp__pcc_production_voltage_of_l3_l1__vac
+[Spes Solaris 201 KWp Konizos] PCC Total Production active power (kW),spes_solaris_konizos_201kwp__pcc_total_production_active_power__kw
+[Spes Solaris 201 KWp Konizos] PCC Total Production apparent power (kVA),spes_solaris_konizos_201kwp__pcc_total_production_apparent_power__kva
+[Spes Solaris 201 KWp Konizos] PCC Total Production reactive power (kVAr),spes_solaris_konizos_201kwp__pcc_total_production_reactive_power__kvar
+[Spes Solaris 201 KWp Konizos] Spes Solaris 201 KWp Konizos Average Irradiance (W*m^-2),spes_solaris_konizos_201kwp__spes_solaris_201_kwp_konizos_average_irradiance__w_m_2
+[Spes Solaris 500 KWp Kavasila] PCC PCC active energy export (kWh),spes_solaris_kavasila_500kwp__pcc_active_energy_export__kwh
+[Spes Solaris 500 KWp Kavasila] PCC PCC active energy import (kWh),spes_solaris_kavasila_500kwp__pcc_active_energy_import__kwh
+[Spes Solaris 500 KWp Kavasila] PCC PCC apparent energy (kVAh),spes_solaris_kavasila_500kwp__pcc_apparent_energy__kvah
+[Spes Solaris 500 KWp Kavasila] PCC PCC current of phase L1 (A),spes_solaris_kavasila_500kwp__pcc_current_of_phase_l1__a
+[Spes Solaris 500 KWp Kavasila] PCC PCC current of phase L2 (A),spes_solaris_kavasila_500kwp__pcc_current_of_phase_l2__a
+[Spes Solaris 500 KWp Kavasila] PCC PCC current of phase L3 (A),spes_solaris_kavasila_500kwp__pcc_current_of_phase_l3__a
+[Spes Solaris 500 KWp Kavasila] PCC PCC frequency (Hz),spes_solaris_kavasila_500kwp__pcc_frequency__hz
+[Spes Solaris 500 KWp Kavasila] PCC PCC reactive energy export (kVArh),spes_solaris_kavasila_500kwp__pcc_reactive_energy_export__kvarh
+[Spes Solaris 500 KWp Kavasila] PCC PCC reactive energy import (kVArh),spes_solaris_kavasila_500kwp__pcc_reactive_energy_import__kvarh
+[Spes Solaris 500 KWp Kavasila] PCC PCC total power factor (-),spes_solaris_kavasila_500kwp__pcc_total_power_factor
+[Spes Solaris 500 KWp Kavasila] PCC PCC voltage of L1-L2 (Vac),spes_solaris_kavasila_500kwp__pcc_voltage_of_l1_l2__vac
+[Spes Solaris 500 KWp Kavasila] PCC PCC voltage of L2-L3 (Vac),spes_solaris_kavasila_500kwp__pcc_voltage_of_l2_l3__vac
+[Spes Solaris 500 KWp Kavasila] PCC PCC voltage of L3-L1 (Vac),spes_solaris_kavasila_500kwp__pcc_voltage_of_l3_l1__vac
+[Spes Solaris 500 KWp Kavasila] PCC Production active energy export (kWh),spes_solaris_kavasila_500kwp__pcc_production_active_energy_export__kwh
+[Spes Solaris 500 KWp Kavasila] PCC Production active energy import (kWh),spes_solaris_kavasila_500kwp__pcc_production_active_energy_import__kwh
+[Spes Solaris 500 KWp Kavasila] PCC Production apparent energy (kVAh),spes_solaris_kavasila_500kwp__pcc_production_apparent_energy__kvah
+[Spes Solaris 500 KWp Kavasila] PCC Production current of phase L1 (A),spes_solaris_kavasila_500kwp__pcc_production_current_of_phase_l1__a
+[Spes Solaris 500 KWp Kavasila] PCC Production current of phase L2 (A),spes_solaris_kavasila_500kwp__pcc_production_current_of_phase_l2__a
+[Spes Solaris 500 KWp Kavasila] PCC Production current of phase L3 (A),spes_solaris_kavasila_500kwp__pcc_production_current_of_phase_l3__a
+[Spes Solaris 500 KWp Kavasila] PCC Production frequency (Hz),spes_solaris_kavasila_500kwp__pcc_production_frequency__hz
+[Spes Solaris 500 KWp Kavasila] PCC Production reactive energy export (kVArh),spes_solaris_kavasila_500kwp__pcc_production_reactive_energy_export__kvarh
+[Spes Solaris 500 KWp Kavasila] PCC Production reactive energy import (kVArh),spes_solaris_kavasila_500kwp__pcc_production_reactive_energy_import__kvarh
+[Spes Solaris 500 KWp Kavasila] PCC Production total power factor (-),spes_solaris_kavasila_500kwp__pcc_production_total_power_factor
+[Spes Solaris 500 KWp Kavasila] PCC Production voltage of L1-L2 (Vac),spes_solaris_kavasila_500kwp__pcc_production_voltage_of_l1_l2__vac
+[Spes Solaris 500 KWp Kavasila] PCC Production voltage of L2-L3 (Vac),spes_solaris_kavasila_500kwp__pcc_production_voltage_of_l2_l3__vac
+[Spes Solaris 500 KWp Kavasila] PCC Production voltage of L3-L1 (Vac),spes_solaris_kavasila_500kwp__pcc_production_voltage_of_l3_l1__vac
+[Spes Solaris 500 KWp Kavasila] PCC Total Production active power (kW),spes_solaris_kavasila_500kwp__pcc_total_production_active_power__kw
+[Spes Solaris 500 KWp Kavasila] PCC Total Production apparent power (kVA),spes_solaris_kavasila_500kwp__pcc_total_production_apparent_power__kva
+[Spes Solaris 500 KWp Kavasila] PCC Total Production reactive power (kVAr),spes_solaris_kavasila_500kwp__pcc_total_production_reactive_power__kvar
+[Spes Solaris 500 KWp Kavasila] Spes Solaris 500 KWp Kavasila Average Irradiance (W*m^-2),spes_solaris_kavasila_500kwp__spes_solaris_500_kwp_kavasila_average_irradiance__w_m_2
+[Spes Solaris 500 KWp Kavasila] Weather Station Ambient Temperature (C),spes_solaris_kavasila_500kwp__weather_station_ambient_temperature__c
+[Spes Solaris 500 KWp Kavasila] Weather Station Relative Humidity  (%),spes_solaris_kavasila_500kwp__weather_station_relative_humidity__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC Current THD-R of neutral (%),spes_solaris_konizos_805kwp__pcc_current_thd_r_of_neutral__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC Current THD-R of phase L1 (%),spes_solaris_konizos_805kwp__pcc_current_thd_r_of_phase_l1__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC Current THD-R of phase L2 (%),spes_solaris_konizos_805kwp__pcc_current_thd_r_of_phase_l2__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC Current THD-R of phase L3 (%),spes_solaris_konizos_805kwp__pcc_current_thd_r_of_phase_l3__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC active energy export (kWh),spes_solaris_konizos_805kwp__pcc_active_energy_export__kwh
+[Spes Solaris 805 KWp Konizos] PCC PCC active energy import (kWh),spes_solaris_konizos_805kwp__pcc_active_energy_import__kwh
+[Spes Solaris 805 KWp Konizos] PCC PCC apparent energy (kVAh),spes_solaris_konizos_805kwp__pcc_apparent_energy__kvah
+[Spes Solaris 805 KWp Konizos] PCC PCC average current (A),spes_solaris_konizos_805kwp__pcc_average_current__a
+[Spes Solaris 805 KWp Konizos] PCC PCC average line voltage (Vac),spes_solaris_konizos_805kwp__pcc_average_line_voltage__vac
+[Spes Solaris 805 KWp Konizos] PCC PCC average phase voltage (Vac),spes_solaris_konizos_805kwp__pcc_average_phase_voltage__vac
+[Spes Solaris 805 KWp Konizos] PCC PCC current of phase L1 (A),spes_solaris_konizos_805kwp__pcc_current_of_phase_l1__a
+[Spes Solaris 805 KWp Konizos] PCC PCC current of phase L2 (A),spes_solaris_konizos_805kwp__pcc_current_of_phase_l2__a
+[Spes Solaris 805 KWp Konizos] PCC PCC current of phase L3 (A),spes_solaris_konizos_805kwp__pcc_current_of_phase_l3__a
+[Spes Solaris 805 KWp Konizos] PCC PCC current unbalance of phase L1 (%),spes_solaris_konizos_805kwp__pcc_current_unbalance_of_phase_l1__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC current unbalance of phase L2 (%),spes_solaris_konizos_805kwp__pcc_current_unbalance_of_phase_l2__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC current unbalance of phase L3 (%),spes_solaris_konizos_805kwp__pcc_current_unbalance_of_phase_l3__pct
+[Spes Solaris 805 KWp Konizos] PCC PCC frequency (Hz),spes_solaris_konizos_805kwp__pcc_frequency__hz
+[Spes Solaris 805 KWp Konizos] PCC PCC power factor of phase L1 (-),spes_solaris_konizos_805kwp__pcc_power_factor_of_phase_l1
+[Spes Solaris 805 KWp Konizos] PCC PCC power factor of phase L2 (-),spes_solaris_konizos_805kwp__pcc_power_factor_of_phase_l2
+[Spes Solaris 805 KWp Konizos] PCC PCC power factor of phase L3 (-),spes_solaris_konizos_805kwp__pcc_power_factor_of_phase_l3
+[Spes Solaris 805 KWp Konizos] PCC PCC reactive energy export (kVArh),spes_solaris_konizos_805kwp__pcc_reactive_energy_export__kvarh
+[Spes Solaris 805 KWp Konizos] PCC PCC reactive energy import (kVArh),spes_solaris_konizos_805kwp__pcc_reactive_energy_import__kvarh
+[Spes Solaris 805 KWp Konizos] PCC PCC total power factor (-),spes_solaris_konizos_805kwp__pcc_total_power_factor
+[Spes Solaris 805 KWp Konizos] PCC PCC voltage of L1-L2 (Vac),spes_solaris_konizos_805kwp__pcc_voltage_of_l1_l2__vac
+[Spes Solaris 805 KWp Konizos] PCC PCC voltage of L2-L3 (Vac),spes_solaris_konizos_805kwp__pcc_voltage_of_l2_l3__vac
+[Spes Solaris 805 KWp Konizos] PCC PCC voltage of L3-L1 (Vac),spes_solaris_konizos_805kwp__pcc_voltage_of_l3_l1__vac
+[Spes Solaris 805 KWp Konizos] PCC Production active energy export (kWh),spes_solaris_konizos_805kwp__pcc_production_active_energy_export__kwh
+[Spes Solaris 805 KWp Konizos] PCC Production active energy import (kWh),spes_solaris_konizos_805kwp__pcc_production_active_energy_import__kwh
+[Spes Solaris 805 KWp Konizos] PCC Production apparent energy (kVAh),spes_solaris_konizos_805kwp__pcc_production_apparent_energy__kvah
+[Spes Solaris 805 KWp Konizos] PCC Production current of phase L1 (A),spes_solaris_konizos_805kwp__pcc_production_current_of_phase_l1__a
+[Spes Solaris 805 KWp Konizos] PCC Production current of phase L2 (A),spes_solaris_konizos_805kwp__pcc_production_current_of_phase_l2__a
+[Spes Solaris 805 KWp Konizos] PCC Production current of phase L3 (A),spes_solaris_konizos_805kwp__pcc_production_current_of_phase_l3__a
+[Spes Solaris 805 KWp Konizos] PCC Production frequency (Hz),spes_solaris_konizos_805kwp__pcc_production_frequency__hz
+[Spes Solaris 805 KWp Konizos] PCC Production reactive energy export (kVArh),spes_solaris_konizos_805kwp__pcc_production_reactive_energy_export__kvarh
+[Spes Solaris 805 KWp Konizos] PCC Production reactive energy import (kVArh),spes_solaris_konizos_805kwp__pcc_production_reactive_energy_import__kvarh
+[Spes Solaris 805 KWp Konizos] PCC Production total power factor (-),spes_solaris_konizos_805kwp__pcc_production_total_power_factor
+[Spes Solaris 805 KWp Konizos] PCC Production voltage of L1-L2 (Vac),spes_solaris_konizos_805kwp__pcc_production_voltage_of_l1_l2__vac
+[Spes Solaris 805 KWp Konizos] PCC Production voltage of L2-L3 (Vac),spes_solaris_konizos_805kwp__pcc_production_voltage_of_l2_l3__vac
+[Spes Solaris 805 KWp Konizos] PCC Production voltage of L3-L1 (Vac),spes_solaris_konizos_805kwp__pcc_production_voltage_of_l3_l1__vac
+[Spes Solaris 805 KWp Konizos] PCC Total Production active power (kW),spes_solaris_konizos_805kwp__pcc_total_production_active_power__kw
+[Spes Solaris 805 KWp Konizos] PCC Total Production apparent power (kVA),spes_solaris_konizos_805kwp__pcc_total_production_apparent_power__kva
+[Spes Solaris 805 KWp Konizos] PCC Total Production reactive power (kVAr),spes_solaris_konizos_805kwp__pcc_total_production_reactive_power__kvar
+[Spes Solaris 805 KWp Konizos] Spes Solaris 805 KWp Konizos Average Irradiance (W*m^-2),spes_solaris_konizos_805kwp__spes_solaris_805_kwp_konizos_average_irradiance__w_m_2
+[Spes Solaris 805 KWp Konizos] Weather Station Ambient temperature (C),spes_solaris_konizos_805kwp__weather_station_ambient_temperature__c
+[Spes Solaris 805 KWp Konizos] Weather Station Relative humidity (%),spes_solaris_konizos_805kwp__weather_station_relative_humidity__pct
+[Spes Solaris 805 KWp Konizos] Weather Station Wind speed (m*s^-1),spes_solaris_konizos_805kwp__weather_station_wind_speed__m_s_1

@@ -1,0 +1,12 @@
+{
+  "run_id": "20260214T123854Z",
+  "dataset": "scada_1d_signal",
+  "input_file_processing_path": "C:\\00_Developement\\daily_avg_pv_kpi_heatmap\\data\\processing\\prebronze_processed_data_20260214_v005_READY.parquet",
+  "archived_path": "C:\\00_Developement\\daily_avg_pv_kpi_heatmap\\data\\archived\\year=2026\\month=02\\day=14\\prebronze_processed_data_20260214_v005_READY__hash=53a57f1b504e.parquet",
+  "source_file_hash": "53a57f1b504e5ccc0c31e624fccef9d04bd5b044aa4b6a50206c667fd34543cf",
+  "mapping_filename": "park_power_mapping_v014.csv",
+  "mapping_file_hash": "23e68d3bdc5ca766333d0688949625151d39ba67c1b95c3e191b4b673b8c4916",
+  "rows_long": 38568024,
+  "files_written": 142,
+  "message": "parquet chunked ingestion ok"
+}
