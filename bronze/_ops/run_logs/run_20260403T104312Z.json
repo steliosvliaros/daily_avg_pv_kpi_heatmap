@@ -1,0 +1,18 @@
+{
+  "run_id": "20260403T104312Z",
+  "dataset": "scada_1d_signal",
+  "input_file_processing_path": "C:\\00_dev\\daily_avg_pv_kpi_heatmap\\data\\processing\\Exported Data-20260301T000000.xlsx",
+  "archived_path": "C:\\00_dev\\daily_avg_pv_kpi_heatmap\\data\\archived\\year=2026\\month=04\\day=03\\Exported Data-20260301T000000__hash=c891dc7a4105.xlsx",
+  "source_file_hash": "c891dc7a410525ef2a635f169d33ef00e5588d7819b163910bac9ece45612bb2",
+  "mapping_filename": "park_power_mapping_v014.csv",
+  "mapping_file_hash": "23e68d3bdc5ca766333d0688949625151d39ba67c1b95c3e191b4b673b8c4916",
+  "rows_long": 244481,
+  "files_written": [
+    "C:\\00_dev\\daily_avg_pv_kpi_heatmap\\bronze\\scada_1d_signal\\year=2026\\month=02\\part-run=20260403T104312Z-hash=c891dc7a4105.parquet",
+    "C:\\00_dev\\daily_avg_pv_kpi_heatmap\\bronze\\scada_1d_signal\\year=2026\\month=03\\part-run=20260403T104312Z-hash=c891dc7a4105.parquet"
+  ],
+  "ingested_at_utc": "2026-04-03T10:43:17.912110+00:00",
+  "duplicate_seen": false,
+  "allow_duplicates": false,
+  "status_note": "ok"
+}
