@@ -354,7 +354,7 @@ def load_park_prices(metadata_path, price_col="price_euro_to_kwh", park_id_col="
     if not metadata_path.exists():
         raise FileNotFoundError(f"Metadata file not found: {metadata_path}")
     
-    df = pd.read_csv(metadata_path)
+    df = pd.read_csv(metadata_path).copy()
 
     # Handle the common misalignment where prices were placed in the 'notes' column
     # (CSV rows had one extra comma before status_effective). If the price column
@@ -370,10 +370,16 @@ def load_park_prices(metadata_path, price_col="price_euro_to_kwh", park_id_col="
             df[price_col] = notes_numeric
             # Optional: could log a warning here if desired
     
-    # Create series indexed by park_id
-    prices = df.set_index(park_id_col)[price_col]
+    # Drop blank park IDs first; they are not valid price keys and create
+    # duplicate NaN labels when the metadata file contains empty rows.
+    df = df.dropna(subset=[park_id_col]).copy()
+    df[park_id_col] = df[park_id_col].astype(str).str.strip()
+    df = df[df[park_id_col].ne("")].copy()
+
+    # Create a unique price series indexed by park_id.
+    prices = df.groupby(park_id_col, sort=False)[price_col].mean()
     prices = pd.to_numeric(prices, errors='coerce')
-    
+
     return prices
 
 
@@ -428,6 +434,9 @@ def calculate_revenue_from_energy(
         2) Fallback: extract park_id prefix before '__' and match on that.
         Missing prices are filled with 0.0 to avoid NaNs/zeroing everything via multiplication.
         """
+        if not price_series.index.is_unique:
+            price_series = price_series.groupby(level=0, sort=False).mean()
+
         if isinstance(columns, pd.MultiIndex):
             base_cols = columns.get_level_values(0)
             aligned = price_series.reindex(base_cols)
